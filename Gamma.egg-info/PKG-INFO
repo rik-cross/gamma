@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: Gamma
+Version: 0.1
+Summary: A simple ECS game engine for Python, with an emphasis on ease of use.
+Home-page: https://github.com/rik-cross/gamma
+Author: Rik Cross
+Author-email: rik@rikcross.net
+License: MIT License
+Keywords: Python,Pygame,ECS,Game Engine
+Platform: UNKNOWN
+
+UNKNOWN
+
