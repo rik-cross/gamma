@@ -1,0 +1,9 @@
+__pycache__/
+__pycache__/*
+engine/__pycache__/
+engine/__pycache__/*
+*.pyc
+venv
+venv/*
+Gamma.egg-info
+Gamma.egg-info/*
