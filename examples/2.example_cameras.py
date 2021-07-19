@@ -70,7 +70,7 @@ playerCameraEntity.getComponent('camera').trackEntity(playerEntity)
 playerCameraEntity.getComponent('camera').setZoom(3)
 
 #
-# add entities to world
+# add entities to scene's world
 #
 
 # game entities

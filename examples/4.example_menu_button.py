@@ -10,11 +10,8 @@ def changeTextColour():
     else:
         mainScene.textColour = gamma.WHITE
 
-def changeBackgroundColour():
-    if mainScene.backgroundColour == gamma.BLUE:
-        mainScene.backgroundColour = gamma.DARK_GREY
-    else:
-        mainScene.backgroundColour = gamma.BLUE
+def changeBackgroundColour(colour):
+    mainScene.backgroundColour = colour
 
 #
 # create a main scene
@@ -28,7 +25,8 @@ class MainScene(gamma.Scene):
         self.setMenu(gamma.Menu(300,150,
             [
                 gamma.ButtonUI('Change text colour', actionListener=gamma.ActionListener(changeTextColour)),
-                gamma.ButtonUI('Change background colour', actionListener=gamma.ActionListener(changeBackgroundColour))
+                gamma.ButtonUI('Change background to Blue', actionListener=gamma.ActionListener(changeBackgroundColour, gamma.BLUE)),
+                gamma.ButtonUI('Change background to Dark Grey', actionListener=gamma.ActionListener(changeBackgroundColour, gamma.DARK_GREY))
             ]
         ), self)
 

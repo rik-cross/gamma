@@ -25,7 +25,6 @@ from .system_text import *
 from .component import *
 from .component_camera import *
 from .component_collider import *
-from .component_imagegroup import *
 from .component_imagegroups import *
 from .component_input import *
 from .component_intention import *
@@ -38,6 +37,8 @@ from .component_transform import *
 from .component_motion import *
 
 from .component_tags import *
+
+from .imagegroup import *
 
 from .soundmanager import *
 from .inputmanager import *

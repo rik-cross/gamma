@@ -21,7 +21,7 @@ gamma.Tile.addTile('grass', gamma.Tile(gamma.resourceManager.getImage('tile_gras
 gamma.Tile.addTile('water', gamma.Tile(gamma.resourceManager.getImage('tile_water'), False))
 
 #
-# create a map
+# create a map and add to scene
 #
 
 map = gamma.Map(map=[ ['grass' for i in range(10)] for j in range(10) ])

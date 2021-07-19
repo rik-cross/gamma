@@ -52,7 +52,7 @@ cameraEntity = gamma.Entity(
 cameraEntity.getComponent('camera').setPosition(300, 200)
 
 #
-# add entities to world
+# add entities to scene's world
 #
 
 mainScene.world.entities.append(heartEntity)

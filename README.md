@@ -19,7 +19,7 @@ virtualenv venv
 source venv/bin/activate
 ```
 
-## Progress
+## Changelog
 
 |Version|Description|
 |---|---|
