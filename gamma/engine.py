@@ -31,6 +31,7 @@ inputManager = InputManager()
 soundManager = SoundManager()
 resourceManager = ResourceManager()
 resourceManager.addFont('munro24', ROOT_DIR + '/fonts/munro.ttf')
+resourceManager.addImage('default_icon', ROOT_DIR + '/images/icon.png')
 
 # add core game systems
 System.addSystem(AnimationSystem())
@@ -49,10 +50,11 @@ clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((1200,800))
 
-def init(size, caption=''):
+def init(size, caption='', icon=resourceManager.getImage('default_icon')):
     global screen
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption(caption)
+    pygame.display.set_icon(icon)
 
 def run(fps=60):
     running = True
