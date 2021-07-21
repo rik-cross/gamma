@@ -18,9 +18,10 @@ class Entity:
         Entity.ID += 1
 
         # create component dictionary
+        # format = {componentKey : component}
         self.components = {}
 
-        # set up default components
+        # add entity default components
         self.addComponent(ImageGroups())
         self.addComponent(TransformComponent())
         self.addComponent(TagsComponent())
@@ -30,19 +31,20 @@ class Entity:
         for component in componentList:
             self.addComponent(component)
 
-        self.state = 'idle'
-        self.type = 'normal'
-        self.direction = 'right'
-        self.on_ground = False
+        self.state = 'idle'         # TODO - remove
+        self.direction = 'right'    # TODO - remove?
+        self.on_ground = False      # TODO - remove?
         self.reset = resetEntity
         self.trauma = 0
         self.transform = TransformComponent()
         self.tags = TagsComponent()
         self.owner = self
     
+    # removes all components from the entity
     def clear(self):
         self.components = {}
     
+    # used to reset an entity to an initial state
     def reset(self):
         self.reset()
 
