@@ -1,6 +1,8 @@
 import pygame
 from .component import Component
 
+# TODO - make position its own class, with .left, .right, .middle, etc. as properties
+
 class TransformComponent(Component):
 
     def __init__(self, position=pygame.math.Vector2(), rotation=90):

@@ -22,6 +22,7 @@ from .entity_factory import *
 
 from .world import *
 
+# stores the path of this file
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 pygame.init()

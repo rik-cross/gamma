@@ -1,8 +1,13 @@
+import os
+import pickle
+
 class World:
 
     def __init__(self):
         self.entities = []
         self.map = None
+
+    # entity methods
 
     def addEntity(self, entity):
         self.entities.append(entity)
@@ -33,3 +38,19 @@ class World:
     def clear(self):
         self.entities = []
         self.map = None
+    
+    # map methods
+
+    def setMap(self, map):
+        self.map = map
+    
+    def loadMap(self, filename, mapImages=[]):
+        filename = os.path.abspath(filename)
+        map =  pickle.load( open( filename, "rb" ) )
+        for img in mapImages:
+            map.mapImages.append(img)
+        return map
+
+    def saveMap(self, map, filename):
+        filename = os.path.abspath(filename)
+        pickle.dump( map, open( filename, "wb" ) )

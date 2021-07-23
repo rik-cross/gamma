@@ -1,76 +1,61 @@
-import pygame
 import math
-from .tiles import *
-from .map_image import *
-import pickle
-
-MAPSIZE = 256
-
-def loadMap(filename, mapImages=[]):
-    filename = 'levels/' + filename + '.lvl'
-    map =  pickle.load( open( filename, "rb" ) )
-    for img in mapImages:
-        map.mapImages.append(img)
-    return map
-
-def saveMap(map, filename):
-    filename = 'levels/' + filename + '.lvl'
-    pickle.dump( map, open( filename, "wb" ) )
+from .tiles import Tile
+from .map_image import MapImage
 
 class Map:
 
-    def __init__(self, map=None, tileSize=32):
+    def __init__(self, tiles=None, tileSize=32):
+        self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
         self.mapImages = []
-        if map is None:
-            self.map = [ [ 'none' for w in range(MAPSIZE) ] for h in range(MAPSIZE) ]
-        elif isinstance(map, str):
-            self.loadFromFile(map)
+        # 'tiles' is a 2D array of strings, which are keys to Tile.tiles
+        if tiles is None:
+            self.tiles = [ [ 'none' for w in range(self.MAX_MAPSIZE) ] for h in range(self.MAX_MAPSIZE) ]
         else:
-            self.map = map
+            self.tiles = tiles
         self.setDimensions() 
 
     def setDimensions(self):
 
         # calculate height
         lastNonEmptyRow = 0
-        for row in range(len(self.map)):
-            for column in self.map[row]:
+        for row in range(len(self.tiles)):
+            for column in self.tiles[row]:
                 if column != 'none':
                     lastNonEmptyRow = row + 1
                     break
 
         # calculate width
         longestRow = 0
-        for row in self.map:
+        for row in self.tiles:
             for tileNumber in range(len(row)):
                 if row[tileNumber] != 'none':
                     if tileNumber + 1 > longestRow:
                         longestRow = tileNumber + 1
 
         # set dimensions
+        # h_map and w_map store the dimension in tile numbers
         self.h_map = lastNonEmptyRow
         self.w_map = longestRow
+        # h_real and w_real store the dimension in pixel numbers
         self.h_real = self.h_map * self.tileSize
         self.w_real = self.w_map * self.tileSize
     
     def setTile(self, x, y, tileString):
-        self.map[y][x] = tileString
+        self.tiles[y][x] = tileString
 
     def getTileAtPosition(self, x, y):
         xTile = int(x // self.tileSize)
         yTile = int(y // self.tileSize)
-        return Tile.tiles[self.map[yTile][xTile]]
+        return Tile.tiles[self.tiles[yTile][xTile]]
 
     def getAllTilesOfType(self, type):
         tilePos = []
-
         for r in range(self.h_map):
             for c in range(self.w_map):
-                tile = self.map[r][c]
+                tile = self.tiles[r][c]
                 if tile == type:
                     tilePos.append((c*self.tileSize, r*self.tileSize))       
-
         return tilePos
 
     def getMapCenter(self):
@@ -79,7 +64,7 @@ class Map:
     def draw(self, screen, x, y, z):
         for r in range(self.h_map):
             for c in range(self.w_map):
-                tile = self.map[r][c]
+                tile = self.tiles[r][c]
                 if Tile.tiles[tile].image is not None: 
                     newX = x + c*(self.tileSize*z)
                     newY = y + r*(self.tileSize*z)

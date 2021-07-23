@@ -24,9 +24,9 @@ gamma.Tile.addTile('water', gamma.Tile(gamma.resourceManager.getImage('tile_wate
 # create a map and add to scene
 #
 
-map = gamma.Map(map=[ ['grass' for i in range(10)] for j in range(10) ])
-map.setTile(3,3,'water')
-mainScene.world.map = map
+mainScene.world.setMap(gamma.Map(tiles=[ ['grass' for i in range(10)] for j in range(10) ]))
+#map = mainScene.world.loadMap('filename.extension')
+mainScene.world.map.setTile(3,3,'water')
 
 #
 # create a camera
@@ -49,4 +49,5 @@ mainScene.world.entities.append(worldCameraEntity)
 
 gamma.init((600, 400), caption='Gamma // Map Example')
 gamma.sceneManager.push(mainScene)
+#mainScene.world.saveMap(map, 'filename.extension')
 gamma.run()
