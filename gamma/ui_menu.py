@@ -1,6 +1,6 @@
-from gamma.colours import *
-import gamma as engine
-from .inputmanager import *
+from .colours import *
+from .engine import inputManager
+from .inputmanager import keys
 
 class Menu:
     
@@ -42,13 +42,13 @@ class Menu:
 
     def update(self):
         # update active button based on input
-        if engine.inputManager.isPressed(keys.w):
+        if inputManager.isPressed(keys.w):
             self.activeButtonIndex = max(0, self.activeButtonIndex - 1)
-        if engine.inputManager.isPressed(keys.s):
+        if inputManager.isPressed(keys.s):
             self.activeButtonIndex = min(len(self.buttons)-1, self.activeButtonIndex + 1)
         # update buttons in the button group    
         for i in range(len(self.buttons)):
-            self.buttons[i].update(self.activeButtonIndex == i, self.activeButtonIndex == i and engine.inputManager.isPressed(keys.enter))
+            self.buttons[i].update(self.activeButtonIndex == i, self.activeButtonIndex == i and inputManager.isPressed(keys.enter))
 
     def draw(self):
         bX = self.x
