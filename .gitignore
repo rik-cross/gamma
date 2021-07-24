@@ -7,3 +7,5 @@ venv
 venv/*
 Gamma.egg-info
 Gamma.egg-info/*
+platformer
+platformer/*

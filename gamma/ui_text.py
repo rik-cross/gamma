@@ -14,8 +14,9 @@ def blit_alpha(target, source, location, opacity):
     temp.set_alpha(opacity)        
     target.blit(temp, location)
 
-def drawText(s, t, x, y, fg, alpha, align='left', fontTag='munro24'):
+def drawText(s, t, x, y, fg, alpha, align='left', underline=False, fontTag='munro24'):
     font = engine.resourceManager.getFont(fontTag)
+    font.set_underline(underline)
     t = str(t)
     text = font.render(t, True, fg)
     text_rectangle = text.get_rect()

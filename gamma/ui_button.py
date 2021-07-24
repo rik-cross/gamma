@@ -80,4 +80,4 @@ class ButtonUI:
             self.colour = self.normalColour
         
     def draw(self, x, y, scene):
-        drawText(scene.surface, self.text, x, y, self.colour, 255, align='center')
+        drawText(scene.surface, self.text, x, y, self.colour, 255, align='center', underline=self.colour is not self.normalColour)
