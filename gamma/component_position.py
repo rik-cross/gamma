@@ -36,7 +36,7 @@ class Position(Component):
 
     @property
     def center(self):
-        pass
+        return self.rect.x + (self.rect.w/2)
 
     @center.setter
     def center(self, value):
@@ -46,7 +46,7 @@ class Position(Component):
 
     @property
     def right(self):
-        pass
+        return self.rect.x + self.rect.w
 
     @right.setter
     def right(self, value):
@@ -56,7 +56,7 @@ class Position(Component):
 
     @property
     def middle(self):
-        pass
+        return self.rect.y + (self.rect.h/2)
 
     @middle.setter
     def middle(self, value):
@@ -66,7 +66,7 @@ class Position(Component):
 
     @property
     def bottom(self):
-        pass
+        return self.rect.y + self.rect.h
 
     @bottom.setter
     def bottom(self, value):
