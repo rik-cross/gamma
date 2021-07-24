@@ -1,4 +1,3 @@
-import pygame
 import gamma as engine
 from .inputmanager import *
 

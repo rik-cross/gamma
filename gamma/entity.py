@@ -2,6 +2,7 @@ import pygame
 from .component_transform import TransformComponent
 from .component_tags import TagsComponent
 from .component_imagegroups import ImageGroups
+from .component_intention import Intention
 
 def resetEntity(entity):
     pass
@@ -25,6 +26,7 @@ class Entity:
         self.addComponent(ImageGroups())
         self.addComponent(TransformComponent())
         self.addComponent(TagsComponent())
+        self.addComponent(Intention())
 
         # populate component dictionary from passed componenets
         # (this will overwrite existing default components)

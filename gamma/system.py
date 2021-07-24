@@ -25,7 +25,7 @@ class System():
     # meet the requirements of the system
     def _checkRequirements(self, entity):
         if len(self.requiredComponents) == 0:
-            return False
+            return True
         return entity.hasComponent(*self.requiredComponents) and entity.getComponent('tags').has(*self.requiredTags)
 
     # runs the 'updateEntity() method on all systems that
