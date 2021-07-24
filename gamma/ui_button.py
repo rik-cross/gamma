@@ -2,8 +2,6 @@ from .ui_action_listener import *
 from .ui_text import *
 from .colours import *
 
-import pygame
-
 class ButtonUI:
 
     def __init__(self, text, actionListener=None):

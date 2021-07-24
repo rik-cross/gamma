@@ -1,14 +1,23 @@
+from gamma.colours import *
 import gamma as engine
 from .inputmanager import *
 
 class Menu:
     
-    def __init__(self, x, y, buttons=None, direction='vertical', spacing=50):
+    def __init__(self, x, y, buttons=None, direction='vertical', spacing=50, normalColour=LIGHT_GREY, activeColour=WHITE, pressedColour=GREEN):
         
+        self.normalColour = normalColour
+        self.activeColour = activeColour
+        self.pressedColour = pressedColour
+
         if buttons is None:
             self.buttons = []
         else:
             self.buttons = buttons
+        
+        for b in self.buttons:
+            self.setButtonColour(b)
+
         self.activeButtonIndex = 0
         self.x = x
         self.y = y
@@ -17,7 +26,13 @@ class Menu:
 
     def addButton(self, button):
         self.buttons.append(button)
+        self.setButtonColour(button)
     
+    def setButtonColour(self, button):
+        button.normalColour = self.normalColour
+        button.activeColour = self.activeColour
+        button.pressedColour = self.pressedColour
+
     def reset(self):
         self.activeButtonIndex = 0
         for b in self.buttons:
