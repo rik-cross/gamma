@@ -13,6 +13,6 @@ class Position(Component):
         self.rect = deepcopy(self.initialRect)
 
     def touching(self, otherEntity):
-        if self.rect is None or otherEntity.rect is None:
+        if not otherEntity.hasComponent('position'):
             return False
-        return self.rect.colliderect(otherEntity.rect)
+        return self.rect.colliderect(otherEntity.getComponent('position').rect)

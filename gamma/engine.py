@@ -73,11 +73,16 @@ def run(fps=60):
         if sceneManager.isEmpty():
             running = False
 
+        # input
         sceneManager.input()
+        # update
         sceneManager.update()
+        # draw
         screen.fill((0,0,0))
         sceneManager.draw() 
+        pygame.display.flip()
 
+        # set maximum framerate
         clock.tick(fps)
 
     # quit
