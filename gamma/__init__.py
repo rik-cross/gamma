@@ -27,7 +27,6 @@ from .component_camera import *
 from .component_collider import *
 from .component_imagegroups import *
 from .component_input import *
-from .component_intention import *
 from .component_emote import *
 from .component_text import *
 from .component_triggers import *

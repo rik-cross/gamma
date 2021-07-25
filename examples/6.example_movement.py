@@ -29,7 +29,7 @@ def heartMovement(heart):
     if heart.getComponent('position').rect.x < 550:
         heart.getComponent('position').rect.x += 2
 
-heartEntity.addComponent(gamma.Input(None, None, None, None, None, None,heartMovement))
+heartEntity.addComponent(gamma.Input(None, None, None, None, None, None, heartMovement))
 
 #
 # create a player entity that moves using WASD

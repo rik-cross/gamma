@@ -1,6 +1,5 @@
 from .component_tags import TagsComponent
 from .component_imagegroups import ImageGroups
-from .component_intention import Intention
 
 def resetEntity(entity):
     pass
@@ -23,7 +22,6 @@ class Entity:
         # add entity default components
         self.addComponent(ImageGroups())
         self.addComponent(TagsComponent())
-        self.addComponent(Intention())
 
         # populate component dictionary from passed componenets
         # (this will overwrite existing default components)
