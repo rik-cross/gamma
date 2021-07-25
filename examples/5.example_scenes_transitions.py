@@ -98,7 +98,7 @@ class FirstScene(gamma.Scene):
 
     def draw(self):
         self.surface.fill(gamma.BLUE)
-        gamma.drawText(self.surface, 'First scene. Move to second scene using...', 25, 25, gamma.WHITE, 255)
+        gamma.drawText(self.surface, 'First scene. Move to second scene using...', 25, 25, gamma.WHITE)
 
 class SecondScene(gamma.Scene):
 
@@ -121,7 +121,7 @@ class SecondScene(gamma.Scene):
     
     def draw(self):
         self.surface.fill(gamma.RED)
-        gamma.drawText(self.surface, 'Second scene. Back to first scene using...', 25, 25, gamma.WHITE, 255)
+        gamma.drawText(self.surface, 'Second scene. Back to first scene using...', 25, 25, gamma.WHITE)
  
 firstScene = FirstScene()
 secondScene = SecondScene()

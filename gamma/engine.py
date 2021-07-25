@@ -51,7 +51,7 @@ clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((1200,800))
 
-def init(size, caption='', icon=resourceManager.getImage('default_icon')):
+def init(size=(1200,800), caption='', icon=resourceManager.getImage('default_icon')):
     global screen
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption(caption)
@@ -70,7 +70,7 @@ def run(fps=60):
         inputManager.processInput()
         soundManager.update()
 
-        if sceneManager.isEmpty():
+        if sceneManager.isEmpty() and sceneManager.transition is None:
             running = False
 
         # input

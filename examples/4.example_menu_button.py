@@ -32,7 +32,7 @@ class MainScene(gamma.Scene):
 
     def draw(self):
         self.surface.fill(self.backgroundColour)
-        gamma.drawText(self.surface, 'Choose an option:', 25, 25, self.textColour, 255)
+        gamma.drawText(self.surface, 'Choose an option:', 25, 25, self.textColour)
 
 #
 # add scene to the engine and start

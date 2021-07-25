@@ -1,6 +1,5 @@
 import pygame
 import math
-from .engine import sceneManager
 from .engine import screen
 from .engine import World
 from .engine import System

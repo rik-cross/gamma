@@ -1,5 +1,7 @@
+from math import gamma
 import pygame
 import gamma as engine
+from .colours import *
 
 pygame.font.init()
 
@@ -14,7 +16,7 @@ def blit_alpha(target, source, location, opacity):
     temp.set_alpha(opacity)        
     target.blit(temp, location)
 
-def drawText(s, t, x, y, fg, alpha, align='left', underline=False, fontTag='munro24'):
+def drawText(s, t, x, y, fg=WHITE, alpha=255, align='left', underline=False, fontTag='munro24'):
     font = engine.resourceManager.getFont(fontTag)
     font.set_underline(underline)
     t = str(t)
