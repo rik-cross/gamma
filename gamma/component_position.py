@@ -39,6 +39,8 @@ class Position(Component):
     
     # getters and setters for position
 
+    # x
+
     @property
     def x(self):
         return self.rect.x
@@ -47,6 +49,8 @@ class Position(Component):
     def x(self, value):
         self.rect.x = value
 
+    # y
+
     @property
     def y(self):
         return self.rect.y
@@ -54,8 +58,28 @@ class Position(Component):
     @y.setter
     def y(self, value):
         self.rect.y = value
+    
+    # w
 
-    # setters for anchor points
+    @property
+    def w(self):
+        return self.rect.w
+    
+    @w.setter
+    def w(self, value):
+        self.rect.w = value
+
+    # h
+
+    @property
+    def h(self):
+        return self.rect.h
+    
+    @h.setter
+    def h(self, value):
+        self.rect.h = value    
+
+    # getters and setters for anchor points
 
     # center
 
