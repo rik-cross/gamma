@@ -1,5 +1,3 @@
-import pygame
-from .component_transform import TransformComponent
 from .component_tags import TagsComponent
 from .component_imagegroups import ImageGroups
 from .component_intention import Intention
@@ -24,7 +22,6 @@ class Entity:
 
         # add entity default components
         self.addComponent(ImageGroups())
-        self.addComponent(TransformComponent())
         self.addComponent(TagsComponent())
         self.addComponent(Intention())
 
@@ -38,7 +35,6 @@ class Entity:
         self.on_ground = False      # TODO - remove?
         self.reset = resetEntity
         self.trauma = 0
-        self.transform = TransformComponent()
         self.tags = TagsComponent()
         self.owner = self
     

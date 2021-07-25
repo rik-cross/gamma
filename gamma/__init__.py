@@ -33,7 +33,6 @@ from .component_text import *
 from .component_triggers import *
 
 from .component_position import *
-from .component_transform import *
 from .component_motion import *
 
 from .component_tags import *
