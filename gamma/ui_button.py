@@ -69,7 +69,12 @@ class ButtonUI:
             self.colour = self.pressedColour
             self.pressedTimer = max(0, self.pressedTimer - 1)
             if self.pressedTimer == 0:
-                self.colour = self.activeColour
+                if pressed:
+                    self.colour = self.pressedColour
+                elif active:
+                    self.colour = self.activeColour
+                else:
+                    self.colour = self.normalColour
 
         if activatedThisFrame:
             self.colour = self.activeColour
