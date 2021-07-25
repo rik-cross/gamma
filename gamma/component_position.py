@@ -4,7 +4,7 @@ from .component import Component
 
 class Position(Component):
 
-    def __init__(self, x, y, w, h, xAnchor='left', yAnchor='top'):
+    def __init__(self, x, y, w, h, xAnchor='left', yAnchor='top', angle=90, rotationStyle='none'):
 
         self.key = 'position'
         self.rect = pygame.Rect(x, y, w, h)
@@ -14,6 +14,9 @@ class Position(Component):
         self.xAnchor = xAnchor
         self.yAnchor = yAnchor
         self.calculatePositionUsingAnchors()
+
+        self.angle = angle
+        self.rotationStyle = rotationStyle
 
     def calculatePositionUsingAnchors(self):
 

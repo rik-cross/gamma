@@ -80,10 +80,18 @@ class CameraSystem(System):
                 if e.state in igComp.animationList:
                     s = e.state
                     a = igComp.animationList[s]
+
+                    # use position angle to work out image flips
+                    hFlip = False
+                    vFlip = False
+                    if p.rotationStyle == 'leftRight':
+                        if p.angle == 270:
+                            hFlip = True
+
                     a.draw(scene.surface,
                         (p.rect.x * cameraComponent.zoomLevel) + offsetX,
                         (p.rect.y * cameraComponent.zoomLevel) + offsetY,
-                        e.direction == 'left', False, cameraComponent.zoomLevel, igComp.alpha, igComp.hue)
+                        hFlip, vFlip, cameraComponent.zoomLevel, igComp.alpha, igComp.hue)
 
         # render emotes
         for e in scene.world.entities:

@@ -29,11 +29,8 @@ class Entity:
             self.addComponent(component)
 
         self.state = 'idle'         # TODO - remove
-        self.direction = 'right'    # TODO - remove?
-        self.on_ground = False      # TODO - remove?
         self.reset = resetEntity
         self.trauma = 0
-        self.tags = TagsComponent()
         self.owner = self
     
     # removes all components from the entity
