@@ -22,7 +22,7 @@ heartEntity = gamma.Entity(
     gamma.Position(50, 50, 27, 30)
 )
 heartImage = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
-heartEntity.getComponent('imagegroups').add('idle', heartImage)
+heartEntity.getComponent('imagegroups').add('default', heartImage)
 
 # heart movement = AI
 def heartMovement(heart):
@@ -39,7 +39,7 @@ playerEntity = gamma.Entity(
     gamma.Position(300, 200, 45, 51, xAnchor='center', yAnchor='middle')
 )
 playerImage = gamma.ImageGroup(gamma.resourceManager.getImage('player'))
-playerEntity.getComponent('imagegroups').add('idle', playerImage)
+playerEntity.getComponent('imagegroups').add('default', playerImage)
 
 # player movement = WASD keys
 def playerMovement(player):

@@ -25,7 +25,7 @@ heartEntity = gamma.Entity(
     gamma.Position(100, 100, 27, 30)
 )
 heartImage = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
-heartEntity.getComponent('imagegroups').add('idle', heartImage)
+heartEntity.getComponent('imagegroups').add('default', heartImage)
 
 #
 # create an animated player

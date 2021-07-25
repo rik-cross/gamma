@@ -28,7 +28,6 @@ class Entity:
         for component in componentList:
             self.addComponent(component)
 
-        self.state = 'idle'         # TODO - remove
         self.reset = resetEntity
         self.trauma = 0
         self.owner = self

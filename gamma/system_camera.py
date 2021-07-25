@@ -77,8 +77,8 @@ class CameraSystem(System):
             if e.hasComponent('imagegroups'):
                 igComp = e.getComponent('imagegroups')
                 p = e.getComponent('position')
-                if e.state in igComp.animationList:
-                    s = e.state
+                if igComp.current is not None:
+                    s = igComp.current
                     a = igComp.animationList[s]
 
                     # use position angle to work out image flips
