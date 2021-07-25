@@ -24,26 +24,33 @@ heartEntity = gamma.Entity(
 heartImage = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
 heartEntity.getComponent('imagegroups').add('idle', heartImage)
 
+# heart movement = AI
+def heartMovement(heart):
+    if heart.getComponent('position').rect.x < 550:
+        heart.getComponent('position').rect.x += 2
+
+heartEntity.addComponent(gamma.Input(None, None, None, None, None, None,heartMovement))
+
 #
 # create a player entity that moves using WASD
 #
 
 playerEntity = gamma.Entity(
-    gamma.Position(300, 300, 45, 51)
+    gamma.Position(300, 200, 45, 51, xAnchor='center', yAnchor='middle')
 )
 playerImage = gamma.ImageGroup(gamma.resourceManager.getImage('player'))
 playerEntity.getComponent('imagegroups').add('idle', playerImage)
 
+# player movement = WASD keys
 def playerMovement(player):
     if gamma.inputManager.isDown(player.getComponent('input').up):
-        print('up')
-        player.getComponent('transform')
+        player.getComponent('position').y -= 2
     if gamma.inputManager.isDown(player.getComponent('input').down):
-        print('down')
+        player.getComponent('position').y += 2
     if gamma.inputManager.isDown(player.getComponent('input').left):
-        print('left')
+        player.getComponent('position').x -= 2
     if gamma.inputManager.isDown(player.getComponent('input').right):
-        print('right')
+        player.getComponent('position').x += 2
 
 playerEntity.addComponent(gamma.Input(gamma.keys.w, gamma.keys.s, gamma.keys.a, gamma.keys.d, None, None, playerMovement))
 
