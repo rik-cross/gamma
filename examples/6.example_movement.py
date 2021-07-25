@@ -55,13 +55,28 @@ def playerMovement(player):
 playerEntity.addComponent(gamma.Input(gamma.keys.w, gamma.keys.s, gamma.keys.a, gamma.keys.d, None, None, playerMovement))
 
 #
-# create a camera
+# create a camera that has zoom functionality
 #
 
 cameraEntity = gamma.Entity(
     gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE)
 )
 cameraEntity.getComponent('camera').setPosition(300, 200)
+
+# camera movement = arrow keys up/down to zoom, left/right to pan
+def cameraMovement(camera):
+    # zoom
+    if gamma.inputManager.isDown(camera.getComponent('input').up):
+        camera.getComponent('camera').zoomLevel += 0.02
+    if gamma.inputManager.isDown(camera.getComponent('input').down):
+        camera.getComponent('camera').zoomLevel = max(camera.getComponent('camera').zoomLevel - 0.02, 0.1)
+    # pan
+    if gamma.inputManager.isDown(camera.getComponent('input').left):
+        camera.getComponent('camera').worldX -= 2
+    if gamma.inputManager.isDown(camera.getComponent('input').right):
+        camera.getComponent('camera').worldX += 2
+
+cameraEntity.addComponent(gamma.Input(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, None, None, cameraMovement))
 
 #
 # add entities to scene's world

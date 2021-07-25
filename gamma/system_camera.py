@@ -11,24 +11,11 @@ class CameraSystem(System):
 
     def updateEntity(self, entity, scene):
 
-        #todo -- update to use scene surface...
-
         # set clipping rectangle
         cameraComponent = entity.getComponent('camera')
         cameraRect = cameraComponent.rect
         clipRect = pygame.Rect(cameraRect.x, cameraRect.y, cameraRect.w, cameraRect.h)
         scene.surface.set_clip(clipRect)
-
-        # zoom
-        if entity.hasComponent('intention'):
-            intentionComponent = entity.getComponent('intention')
-            if intentionComponent.zoomIn:
-                cameraComponent.zoomLevel = min(4, cameraComponent.zoomLevel+0.01)
-            if intentionComponent.zoomOut:
-                # only zoom out if there's more of the world to see
-                newZoomLevel = cameraComponent.zoomLevel-0.01
-                if (scene.world.map.w_real * newZoomLevel >= cameraRect.w - 10) or (scene.world.map.h_real * newZoomLevel >= cameraRect.h - 10):
-                    cameraComponent.zoomLevel = newZoomLevel
 
         # update camera if tracking an entity
         if cameraComponent.entityToTrack is not None:

@@ -62,6 +62,11 @@ class KeyInput:
         self.enter = PlayerInput(0,pygame.K_RETURN,'key',1)
         self.esc = PlayerInput(0,pygame.K_ESCAPE,'key',1)
 
+        self.up = PlayerInput(0,pygame.K_UP,'key',1)
+        self.down = PlayerInput(0,pygame.K_DOWN,'key',1)
+        self.left = PlayerInput(0,pygame.K_LEFT,'key',1)
+        self.right = PlayerInput(0,pygame.K_RIGHT,'key',1)
+
         self.w = PlayerInput(0,pygame.K_w,'key',1)
         self.a = PlayerInput(0,pygame.K_a,'key',1)
         self.s = PlayerInput(0,pygame.K_s,'key',1)
