@@ -7,6 +7,7 @@ from .engine import System
 class Scene:
     
     def __init__(self, world=World(), menu=None):
+        self.frame = 0
         self.world = world
         self.menu = menu
         self.maxAlpha = 255
@@ -46,6 +47,7 @@ class Scene:
 
     def _update(self):
 
+        self.frame += 1
         self.update()
     
         for sys in System.systems:
