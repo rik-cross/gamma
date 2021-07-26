@@ -1,8 +1,15 @@
 class SceneManager:
     
     def __init__(self):
+        self.storedScenes = {}
         self.scenes = []
         self.transition = None
+
+    def storeScene(self, key, scene):
+        self.storedScenes[key] = scene
+    
+    def getStoredScene(self, key):
+        return self.storedScenes[key]
 
     def isEmpty(self):
         return len(self.scenes) == 0

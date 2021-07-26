@@ -7,8 +7,6 @@ from .scenemanager import *
 from .resourcemanager import *
 from .systemmanager import *
 
-from .system import System
-
 from .system_animation import *
 from .system_camera import *
 from .system_emote import *

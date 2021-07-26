@@ -1,6 +1,7 @@
 import pygame
 import math
-from .gamma import screen, World, systemManager
+from .gamma import screen, systemManager
+from .world import World
 
 class Scene:
     
