@@ -1,8 +1,6 @@
 import pygame
 import math
-from .engine import screen
-from .engine import World
-from .engine import System
+from .gamma import screen, World, systemManager
 
 class Scene:
     
@@ -50,7 +48,7 @@ class Scene:
         self.frame += 1
         self.update()
     
-        for sys in System.systems:
+        for sys in systemManager.systems:
             if not sys.requiresDraw:
                 sys.update(self)
 
@@ -68,7 +66,7 @@ class Scene:
         self.draw()
 
         # update systems that require a draw call
-        for sys in System.systems:
+        for sys in systemManager.systems:
             if sys.requiresDraw:
                 sys.update(self)
         

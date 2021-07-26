@@ -57,7 +57,8 @@ class ButtonUI:
 
         if self.execNextFrame:
             self.execNextFrame = False
-            self.actionListener.execute()
+            if self.actionListener is not None:
+                self.actionListener.execute()
 
         if pressed:
             self.pressedTimer = self.activeLength
@@ -83,4 +84,4 @@ class ButtonUI:
             self.colour = self.normalColour
         
     def draw(self, x, y, scene):
-        drawText(scene.surface, self.text, x, y, self.colour, align='center', underline=self.colour is not self.normalColour)
+        drawText(scene.surface, self.text, x, y, self.colour, hAlign='center', underline=self.colour is not self.normalColour)

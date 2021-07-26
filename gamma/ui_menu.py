@@ -1,5 +1,5 @@
 from .colours import *
-from .engine import inputManager
+from .gamma import inputManager
 from .inputmanager import keys
 
 class Menu:

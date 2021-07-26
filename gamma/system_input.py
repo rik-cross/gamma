@@ -1,7 +1,5 @@
-import pygame
 from .system import *
 from .colours import *
-import random
 
 class InputSystem(System):
 

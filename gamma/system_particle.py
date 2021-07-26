@@ -1,5 +1,4 @@
 from .system import *
-#from .engine import world
 
 class ParticleSystem(System):
 

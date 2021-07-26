@@ -1,5 +1,3 @@
-import pygame
-
 class Particle:
     
     def __init__(self, pos, velocity, size, colour):

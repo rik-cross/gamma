@@ -1,11 +1,4 @@
 class System():
-
-    # TODO - create a SystemManager class instead
-    systems = []
-
-    @classmethod
-    def addSystem(cls, system):
-        cls.systems.append(system)
     
     def __init__(self):
         self.requiredComponents = []
@@ -39,7 +32,3 @@ class System():
     # this method processes each entity in a given scene
     def updateEntity(self, entity, scene):
         pass
-
-    @classmethod
-    def swap(cls, s1, s2):
-        cls.systems[s1], cls.systems[s2] = cls.systems[s2], cls.systems[s1]

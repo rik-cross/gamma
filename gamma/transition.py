@@ -1,6 +1,6 @@
 import pygame
 from .colours import *
-from .engine import sceneManager, screen
+from .gamma import sceneManager, screen
 
 class Transition:
 

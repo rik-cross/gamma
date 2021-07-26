@@ -5,6 +5,7 @@ from .soundmanager import *
 from .inputmanager import *
 from .scenemanager import *
 from .resourcemanager import *
+from .systemmanager import *
 
 from .system import System
 
@@ -35,25 +36,32 @@ resourceManager.addFont('munro24', ROOT_DIR + '/fonts/munro.ttf')
 resourceManager.addImage('default_icon', ROOT_DIR + '/images/icon.png')
 
 # add core game systems
-System.addSystem(AnimationSystem())
-System.addSystem(EmoteSystem())
-System.addSystem(InputSystem())
-System.addSystem(PhysicsSystem())
-System.addSystem(TextSystem())
-System.addSystem(TraumaSystem())
-System.addSystem(TriggerSystem())
-System.addSystem(ParticleSystem())
-System.addSystem(CameraSystem())
+systemManager = SystemManager()
+systemManager.addSystem(
+    AnimationSystem(),
+    EmoteSystem(),
+    InputSystem(),
+    PhysicsSystem(),
+    TextSystem(),
+    TraumaSystem(),
+    TriggerSystem(),
+    ParticleSystem(),
+    CameraSystem()
+)
 
 entityFactory = EntityFactory()
 
 clock = pygame.time.Clock()
 
-screen = pygame.display.set_mode((1200,800))
+windowSize = pygame.Rect(0,0,1200,800)
+screen = pygame.display.set_mode((windowSize.w, windowSize.h))
 
 def init(size=(1200,800), caption='', icon=resourceManager.getImage('default_icon')):
     global screen
-    screen = pygame.display.set_mode(size)
+    global windowSize
+    windowSize.w = size[0]
+    windowSize.h = size[1]
+    screen = pygame.display.set_mode((windowSize.w, windowSize.h))
     pygame.display.set_caption(caption)
     pygame.display.set_icon(icon)
 

@@ -1,4 +1,3 @@
-import pygame
 from .system import *
 from .colours import *
 

@@ -1,7 +1,7 @@
 __pycache__/
 __pycache__/*
-engine/__pycache__/
-engine/__pycache__/*
+gamma/__pycache__/
+gamma/__pycache__/*
 *.pyc
 venv
 venv/*

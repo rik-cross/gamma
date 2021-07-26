@@ -1,5 +1,5 @@
 from .system import *
-from .engine import *
+from .gamma import *
 
 class TriggerSystem(System):
 
@@ -25,7 +25,7 @@ class TriggerSystem(System):
                     trigger.boundingBox.h
                 )
 
-                for otherEntity in engine.world.entities:
+                for otherEntity in scene.world.entities:
 
                     if otherEntity.hasComponent('position') and otherEntity.hasComponent('collider'): #position is not None and otherEntity.collider is not None:
                         op = otherEntity.getComponent('position')
