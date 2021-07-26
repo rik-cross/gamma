@@ -119,5 +119,5 @@ class ControllerInput:
         self.rightDir_up = PlayerInput(number,4,'axis',-0.2)
         self.rightDir_down = PlayerInput(number,4,'axis',0.2)
 
-controller = [ ControllerInput(i) for i in range(4)]
+controller = [ControllerInput(i) for i in range(4)]
 

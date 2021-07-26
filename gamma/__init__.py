@@ -41,6 +41,7 @@ from .inputmanager import *
 from .scenemanager import *
 from .resourcemanager import *
 from .systemmanager import *
+from .entitymanager import *
 
 from .colours import *
 from .tiles import *

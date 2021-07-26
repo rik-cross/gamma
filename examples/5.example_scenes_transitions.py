@@ -1,4 +1,15 @@
+from gamma import entitymanager
 import gamma
+
+#
+# create a player entity to control the menu
+#
+
+playerEntity = gamma.Entity()
+playerEntity.addComponent(gamma.Input(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, gamma.keys.enter, None))
+# optionally store the entity in the entityManager
+playerEntity.getComponent('tags').add('player')
+gamma.entityManager.addEntity(playerEntity)
 
 #
 # create some functions to attach to the menu buttons
@@ -94,7 +105,7 @@ class FirstScene(gamma.Scene):
                 gamma.ButtonUI('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionSecond)),
                 gamma.ButtonUI('Quit', actionListener=gamma.ActionListener(popScene))
             ]
-        , spacing=25), self)
+        , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
 
     def draw(self):
         self.surface.fill(gamma.BLUE)
@@ -117,7 +128,7 @@ class SecondScene(gamma.Scene):
                 gamma.ButtonUI('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionFirst)),
                 gamma.ButtonUI('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionFirst))
             ]
-        , spacing=25), self)
+        , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
     
     def draw(self):
         self.surface.fill(gamma.RED)

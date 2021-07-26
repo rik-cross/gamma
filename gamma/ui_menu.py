@@ -3,8 +3,8 @@ from .gamma import inputManager
 from .inputmanager import keys
 
 class Menu:
-    
-    def __init__(self, x, y, buttons=None, direction='vertical', spacing=50, normalColour=LIGHT_GREY, activeColour=WHITE, pressedColour=GREEN):
+
+    def __init__(self, x, y, buttons=None, direction='vertical', spacing=50, entities=[], normalColour=LIGHT_GREY, activeColour=WHITE, pressedColour=GREEN):
         
         self.normalColour = normalColour
         self.activeColour = activeColour
@@ -24,6 +24,8 @@ class Menu:
         self.direction = direction
         self.spacing = spacing
 
+        self.entities = entities
+
     def addButton(self, button):
         self.buttons.append(button)
         self.setButtonColour(button)
@@ -41,14 +43,30 @@ class Menu:
             self.buttons[0].update(True, False)
 
     def update(self):
-        # update active button based on input
-        if inputManager.isPressed(keys.w):
-            self.activeButtonIndex = max(0, self.activeButtonIndex - 1)
-        if inputManager.isPressed(keys.s):
-            self.activeButtonIndex = min(len(self.buttons)-1, self.activeButtonIndex + 1)
-        # update buttons in the button group    
+
+        for e in self.entities:
+            if e.hasComponent('input'):
+                if self.direction == 'vertical':
+                    if inputManager.isPressed(e.getComponent('input').up):
+                        self.activeButtonIndex = max(0, self.activeButtonIndex - 1)
+                    if inputManager.isPressed(e.getComponent('input').down):
+                        self.activeButtonIndex = min(len(self.buttons)-1, self.activeButtonIndex + 1)
+                elif self.direction == 'horizontal':
+                    if inputManager.isPressed(e.getComponent('input').left):
+                        self.activeButtonIndex = max(0, self.activeButtonIndex - 1)
+                    if inputManager.isPressed(e.getComponent('input').right):
+                        self.activeButtonIndex = min(len(self.buttons)-1, self.activeButtonIndex + 1)
+
+        # update buttons in the button group
+        pressed = False
+        for e in self.entities:
+            if e.hasComponent('input'):
+                if inputManager.isPressed(e.getComponent('input').b1):
+                    pressed = True
+                    break
+
         for i in range(len(self.buttons)):
-            self.buttons[i].update(self.activeButtonIndex == i, self.activeButtonIndex == i and inputManager.isPressed(keys.enter))
+            self.buttons[i].update(self.activeButtonIndex == i, self.activeButtonIndex == i and pressed)
 
     def draw(self):
         bX = self.x

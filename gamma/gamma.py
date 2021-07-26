@@ -1,3 +1,4 @@
+from gamma.entitymanager import EntityManager
 import pygame
 import os
 
@@ -17,6 +18,7 @@ from .system_text import *
 from .system_trauma import *
 from .system_trigger import *
 
+from .entitymanager import *
 from .entity_factory import *
 
 from .world import *
@@ -47,6 +49,7 @@ systemManager.addSystem(
     CameraSystem()
 )
 
+entityManager = EntityManager()
 entityFactory = EntityFactory()
 
 clock = pygame.time.Clock()

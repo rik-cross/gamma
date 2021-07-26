@@ -1,6 +1,13 @@
 import gamma
 
 #
+# create a player entity to control the menu
+#
+
+playerEntity = gamma.Entity()
+playerEntity.addComponent(gamma.Input(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, gamma.keys.enter, None))
+
+#
 # create some functions to attach to the menu buttons
 #
 
@@ -28,7 +35,7 @@ class MainScene(gamma.Scene):
                 gamma.ButtonUI('Change background to Blue', actionListener=gamma.ActionListener(changeBackgroundColour, gamma.BLUE)),
                 gamma.ButtonUI('Change background to Dark Grey', actionListener=gamma.ActionListener(changeBackgroundColour, gamma.DARK_GREY))
             ]
-        ), self)
+        , entities=[playerEntity]), self)
 
     def draw(self):
         self.surface.fill(self.backgroundColour)
