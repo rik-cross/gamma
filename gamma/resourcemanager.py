@@ -8,20 +8,20 @@ class ResourceManager:
 
     # images
 
-    def addImage(self, tag, url):
-        self.images[tag] = pygame.image.load(url)
+    def addImage(self, key, url):
+        self.images[key] = pygame.image.load(url)
 
-    def getImage(self, tag):
-        if tag not in self.images.keys():
+    def getImage(self, key):
+        if key not in self.images.keys():
             return None
-        return self.images[tag]
+        return self.images[key]
 
     # fonts
 
-    def addFont(self, tag, url, size=24):
-        self.fonts[tag] = pygame.font.Font(url, size)
+    def addFont(self, key, url, size=24):
+        self.fonts[key] = pygame.font.Font(url, size)
     
-    def getFont(self, tag):
-        if tag not in self.fonts.keys():
+    def getFont(self, key):
+        if key not in self.fonts.keys():
             return None
-        return self.fonts[tag]
+        return self.fonts[key]

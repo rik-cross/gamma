@@ -5,11 +5,11 @@ class SceneManager:
         self.scenes = []
         self.transition = None
 
-    def storeScene(self, key, scene):
-        self.storedScenes[key] = scene
+    def storeScene(self, tag, scene):
+        self.storedScenes[tag] = scene
     
-    def getStoredScene(self, key):
-        return self.storedScenes[key]
+    def getStoredScene(self, tag):
+        return self.storedScenes[tag]
 
     def isEmpty(self):
         return len(self.scenes) == 0
