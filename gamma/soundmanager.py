@@ -20,7 +20,6 @@ class SoundManager:
         self.sounds[soundName].set_volume(volume)
         self.sounds[soundName].play()
     def playMusic(self, musicName):
-
         # don't play the music if already playing
         if musicName is self.currentMusic:
             return
