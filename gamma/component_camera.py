@@ -1,6 +1,5 @@
 import pygame
 from .component import Component
-#from .engine import *
 from .colours import *
 
 class CameraComponent(Component):

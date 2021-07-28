@@ -7,7 +7,12 @@ class System():
         # but those tagged as 'requiresDraw' instead run as part
         # of the scene draw() method
         self.requiresDraw = False
-        self.setRequirements()        
+        self.setRequirements()
+        self.init()
+
+    # allow systems to initialise themselves
+    def init(self):
+        pass    
 
     # all systems have a set of requirements, and only act on
     # entities with the required set of tags and components

@@ -31,7 +31,7 @@ class MainScene(gamma.Scene):
         self.backgroundColour = gamma.BLUE
         self.setMenu(gamma.Menu(300,150,
             [
-                gamma.ButtonUI('Change text colour', actionListener=gamma.ActionListener(changeTextColour)),
+                gamma.ButtonUI('Change title text colour', actionListener=gamma.ActionListener(changeTextColour)),
                 gamma.ButtonUI('Change background to Blue', actionListener=gamma.ActionListener(changeBackgroundColour, gamma.BLUE)),
                 gamma.ButtonUI('Change background to Dark Grey', actionListener=gamma.ActionListener(changeBackgroundColour, gamma.DARK_GREY))
             ]
