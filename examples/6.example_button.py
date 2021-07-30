@@ -1,5 +1,3 @@
-from gamma.ui_text import drawText
-from gamma import controller
 import gamma
 
 #
@@ -22,8 +20,6 @@ gamma.resourceManager.addImage('x_pressed2', 'images/x_y2.png')
 class MainScene(gamma.Scene):
 
     def init(self):
-        self.textColour = gamma.WHITE
-        self.backgroundColour = gamma.BLUE
 
         # create a button
 
@@ -34,15 +30,11 @@ class MainScene(gamma.Scene):
         # button linked to:
         # -- controller[0] x button
         # -- player entity 'button 1' (set as 'enter' above)
-        self.button = gamma.UIButton(200, 150, defaultImageGroup, pressedImageGroup, controlledBy=[gamma.controller[0].x, playerEntity.getComponent('input').b1], text='press me!')
-        
-    def update(self):
-        self.button.update()
+        self.addButton(gamma.UIButton(200, 150, defaultImageGroup, pressedImageGroup, controlledBy=[gamma.controller[0].x, playerEntity.getComponent('input').b1], text='press me!'))
 
     def draw(self):
-        self.surface.fill(self.backgroundColour)
-        self.button.draw(self.surface)
-        gamma.drawText(self.surface, 'Press keyboard [enter] or controller [x] to activate.', 25, 25, self.textColour)
+        self.surface.fill(gamma.BLUE)
+        gamma.drawText(self.surface, 'Press keyboard [enter] or controller [x] to activate.', 25, 25, gamma.WHITE)
 
 #
 # add scene to the engine and start

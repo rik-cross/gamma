@@ -9,6 +9,7 @@ class Scene:
         self.frame = 0
         self.world = world
         self.menu = menu
+        self.buttons = []
         self.maxAlpha = 255
         self.resetEffects()
         self.init()
@@ -27,6 +28,9 @@ class Scene:
         self.menu = menu
         self.menu.scene = scene
     
+    def addButton(self, button):
+        self.buttons.append(button)
+
     def _onEnter(self):
         self.onEnter()
 
@@ -56,6 +60,9 @@ class Scene:
         if self.menu is not None:
             self.menu.update()
 
+        for b in self.buttons:
+            b.update()
+
     def _draw(self):
 
         # calculate the scene size
@@ -74,6 +81,10 @@ class Scene:
         # draw the menu
         if self.menu is not None:
             self.menu.draw()
+
+        # draw buttons
+        for b in self.buttons:
+            b.draw(self.surface)
 
         # calculate the scene position and transparency
         a = math.ceil(self.maxAlpha / 100 * self.currentAlphaPercentage)
