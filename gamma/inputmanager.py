@@ -13,7 +13,6 @@ class InputManager:
     def __init__(self):
         self.keyboard = Keyboard()
         pygame.joystick.init()
-        joystick_count = pygame.joystick.get_count()
         self.controllers = [Controller(n) for n in range(4)]
     def processInput(self):
         self.keyboard.processInput()

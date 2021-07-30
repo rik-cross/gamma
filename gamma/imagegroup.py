@@ -9,13 +9,17 @@ def changeColour(image, colour):
     return finalImage
     
 class ImageGroup:
-    def __init__(self, image, *additionalImages, delay=8):
+    def __init__(self, image, *additionalImages, delay=8, loop=True):
         self.imageList = [image]
         for i in additionalImages:
             self.imageList.append(i)
         self.imageIndex = 0
         self.animationTimer = 0
         self.animationDelay = delay
+        self.loop = loop
+    def reset(self):
+        self.animationTimer = 0
+        self.imageIndex = 0
     def update(self):
         # increment the timer
         self.animationTimer += 1
@@ -28,8 +32,12 @@ class ImageGroup:
             # loop back to the first image in the list
             # once the index gets too high
             if self.imageIndex > len(self.imageList) - 1:
-                self.imageIndex = 0
-    def draw(self, screen, x, y, flipX, flipY, zoomLevel, alpha, hue=None):
+                if self.loop:
+                    self.imageIndex = 0
+                else:
+                    self.imageIndex = len(self.imageList) - 1
+
+    def draw(self, screen, x, y, flipX=False, flipY=False, zoomLevel=1, alpha=255, hue=None):
         image = self.imageList[self.imageIndex]
         if hue is not None:
             colour = pygame.Color(0)

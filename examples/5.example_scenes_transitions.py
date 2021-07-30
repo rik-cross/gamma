@@ -92,18 +92,18 @@ class FirstScene(gamma.Scene):
     def init(self):
         self.setMenu(gamma.Menu(300,70,
             [
-                gamma.ButtonUI('No transition', actionListener=gamma.ActionListener(pushSecond)),
-                gamma.ButtonUI('Black transition', actionListener=gamma.ActionListener(blackTransitionSecond)),
-                gamma.ButtonUI('Fade transition', actionListener=gamma.ActionListener(fadeTransitionSecond)),
-                gamma.ButtonUI('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionSecond)),
-                gamma.ButtonUI('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionSecond)),
-                gamma.ButtonUI('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionSecond)),
-                gamma.ButtonUI('Fly out right transition', actionListener=gamma.ActionListener(flyOutRightTransitionSecond)),
-                gamma.ButtonUI('Fly in left transition', actionListener=gamma.ActionListener(flyInLeftTransitionSecond)),
-                gamma.ButtonUI('Fly in right transition', actionListener=gamma.ActionListener(flyInRightTransitionSecond)),
-                gamma.ButtonUI('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionSecond)),
-                gamma.ButtonUI('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionSecond)),
-                gamma.ButtonUI('Quit', actionListener=gamma.ActionListener(popScene))
+                gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(pushSecond)),
+                gamma.UITextMenuItem('Black transition', actionListener=gamma.ActionListener(blackTransitionSecond)),
+                gamma.UITextMenuItem('Fade transition', actionListener=gamma.ActionListener(fadeTransitionSecond)),
+                gamma.UITextMenuItem('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionSecond)),
+                gamma.UITextMenuItem('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionSecond)),
+                gamma.UITextMenuItem('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionSecond)),
+                gamma.UITextMenuItem('Fly out right transition', actionListener=gamma.ActionListener(flyOutRightTransitionSecond)),
+                gamma.UITextMenuItem('Fly in left transition', actionListener=gamma.ActionListener(flyInLeftTransitionSecond)),
+                gamma.UITextMenuItem('Fly in right transition', actionListener=gamma.ActionListener(flyInRightTransitionSecond)),
+                gamma.UITextMenuItem('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionSecond)),
+                gamma.UITextMenuItem('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionSecond)),
+                gamma.UITextMenuItem('Quit', actionListener=gamma.ActionListener(popScene))
             ]
         , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
 
@@ -116,17 +116,17 @@ class SecondScene(gamma.Scene):
     def init(self):
         self.setMenu(gamma.Menu(300,70,
             [
-                gamma.ButtonUI('No transition', actionListener=gamma.ActionListener(popScene)),
-                gamma.ButtonUI('Black transition', actionListener=gamma.ActionListener(blackTransitionFirst)),
-                gamma.ButtonUI('Fade transition', actionListener=gamma.ActionListener(fadeTransitionFirst)),
-                gamma.ButtonUI('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionFirst)),
-                gamma.ButtonUI('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionFirst)),
-                gamma.ButtonUI('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionFirst)),
-                gamma.ButtonUI('Fly out right transition', actionListener=gamma.ActionListener(flyOutRightTransitionFirst)),
-                gamma.ButtonUI('Fly in left transition', actionListener=gamma.ActionListener(flyInLeftTransitionFirst)),
-                gamma.ButtonUI('Fly in right transition', actionListener=gamma.ActionListener(flyInRightTransitionFirst)),
-                gamma.ButtonUI('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionFirst)),
-                gamma.ButtonUI('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionFirst))
+                gamma.ui_text_menu_item('No transition', actionListener=gamma.ActionListener(popScene)),
+                gamma.ui_text_menu_item('Black transition', actionListener=gamma.ActionListener(blackTransitionFirst)),
+                gamma.ui_text_menu_item('Fade transition', actionListener=gamma.ActionListener(fadeTransitionFirst)),
+                gamma.ui_text_menu_item('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionFirst)),
+                gamma.ui_text_menu_item('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionFirst)),
+                gamma.ui_text_menu_item('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionFirst)),
+                gamma.ui_text_menu_item('Fly out right transition', actionListener=gamma.ActionListener(flyOutRightTransitionFirst)),
+                gamma.ui_text_menu_item('Fly in left transition', actionListener=gamma.ActionListener(flyInLeftTransitionFirst)),
+                gamma.ui_text_menu_item('Fly in right transition', actionListener=gamma.ActionListener(flyInRightTransitionFirst)),
+                gamma.ui_text_menu_item('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionFirst)),
+                gamma.ui_text_menu_item('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionFirst))
             ]
         , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
     
