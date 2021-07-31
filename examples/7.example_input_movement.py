@@ -1,4 +1,3 @@
-from gamma import inputmanager
 import gamma
 
 #

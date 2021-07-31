@@ -1,12 +1,11 @@
-from gamma.entitymanager import EntityManager
 import pygame
 import os
 
-from .soundmanager import *
-from .inputmanager import *
-from .scenemanager import *
-from .resourcemanager import *
-from .systemmanager import *
+from .manager_sound import *
+from .manager_input import *
+from .manager_scene import *
+from .manager_resource import *
+from .manager_system import *
 
 from .system_animation import *
 from .system_camera import *
@@ -18,7 +17,7 @@ from .system_text import *
 from .system_trauma import *
 from .system_trigger import *
 
-from .entitymanager import *
+from .manager_entity import *
 from .entity_factory import *
 
 from .world import *

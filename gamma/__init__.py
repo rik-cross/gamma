@@ -36,12 +36,12 @@ from .component_tags import *
 
 from .imagegroup import *
 
-from .soundmanager import *
-from .inputmanager import *
-from .scenemanager import *
-from .resourcemanager import *
-from .systemmanager import *
-from .entitymanager import *
+from .manager_sound import *
+from .manager_input import *
+from .manager_scene import *
+from .manager_resource import *
+from .manager_system import *
+from .manager_entity import *
 
 from .colours import *
 from .tiles import *
