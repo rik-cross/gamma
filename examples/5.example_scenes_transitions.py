@@ -1,4 +1,3 @@
-from gamma import entitymanager
 import gamma
 
 #
@@ -116,17 +115,17 @@ class SecondScene(gamma.Scene):
     def init(self):
         self.setMenu(gamma.Menu(300,70,
             [
-                gamma.ui_text_menu_item('No transition', actionListener=gamma.ActionListener(popScene)),
-                gamma.ui_text_menu_item('Black transition', actionListener=gamma.ActionListener(blackTransitionFirst)),
-                gamma.ui_text_menu_item('Fade transition', actionListener=gamma.ActionListener(fadeTransitionFirst)),
-                gamma.ui_text_menu_item('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionFirst)),
-                gamma.ui_text_menu_item('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionFirst)),
-                gamma.ui_text_menu_item('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionFirst)),
-                gamma.ui_text_menu_item('Fly out right transition', actionListener=gamma.ActionListener(flyOutRightTransitionFirst)),
-                gamma.ui_text_menu_item('Fly in left transition', actionListener=gamma.ActionListener(flyInLeftTransitionFirst)),
-                gamma.ui_text_menu_item('Fly in right transition', actionListener=gamma.ActionListener(flyInRightTransitionFirst)),
-                gamma.ui_text_menu_item('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionFirst)),
-                gamma.ui_text_menu_item('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionFirst))
+                gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(popScene)),
+                gamma.UITextMenuItem('Black transition', actionListener=gamma.ActionListener(blackTransitionFirst)),
+                gamma.UITextMenuItem('Fade transition', actionListener=gamma.ActionListener(fadeTransitionFirst)),
+                gamma.UITextMenuItem('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionFirst)),
+                gamma.UITextMenuItem('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionFirst)),
+                gamma.UITextMenuItem('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionFirst)),
+                gamma.UITextMenuItem('Fly out right transition', actionListener=gamma.ActionListener(flyOutRightTransitionFirst)),
+                gamma.UITextMenuItem('Fly in left transition', actionListener=gamma.ActionListener(flyInLeftTransitionFirst)),
+                gamma.UITextMenuItem('Fly in right transition', actionListener=gamma.ActionListener(flyInRightTransitionFirst)),
+                gamma.UITextMenuItem('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionFirst)),
+                gamma.UITextMenuItem('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionFirst))
             ]
         , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
     
