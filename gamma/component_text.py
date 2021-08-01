@@ -1,43 +1,64 @@
+import gamma
 from .ui_text import *
 from .colours import *
-import gamma as engine
-import pygame
 from .colours import *
 
 class Text:
 
-    def __init__(self, text):
+    def __init__(self, text,
+        colour = WHITE,
+        # minimum text character width
+        width = 20,
+        # spacing between rows of text
+        spacing = 30,
+        # display above the entity, or at bottom of scene
+        # (not yet implemented)
+        overhead = True,
+        # how long to display the text
+        # options are 'always', 'timed', or 'press'
+        lifetime = 'always',
+        # how the text appears
+        # options are 'appear', 'fade' or 'tick'
+        type = 'appear',
+        # display a new character every [x] frames
+        tick_delay = 5,
+        # sound to play when advancing tick animation
+        tick_sound = None,
+        # display time before fading out (if lifetime='fade')
+        final_display_time = 300,
+        # inputs that can control the text (if lifetime='press')
+        input_list = None
+        ):
+
         self.key = 'text'
+
+        # store component attributes
+        
         self.text = text
+        self.colour = colour
+        self.width = width
+        self.spacing = spacing
+        self.overhead = overhead
+        self.lifetime = lifetime
+        self.tick_delay = tick_delay
+        self.tick_sound = tick_sound
+        self.final_display_time = final_display_time
+        self.input_list = input_list
+        self.setType(type)
 
-        # lifetimes are 'timed', 'always' and 'press'
-        self.lifetime = 'always'
-        
-        # delay used for 'tick' appearance
-        self.delay = 5
-        # fade used for 'fade' type
-        self.fadeAmount = 255 # 0 to 255
+        # attributes to store current state
 
-        self.delayTimer = self.delay
-
-        self.colour = WHITE
-
-        # for 'timed'
-        self.finalTimer = 300
-        # for 'press'
-        self.button = None
-        
-        self.width = 20
-
-        self.sound = None
-
-        # internal variables
+        # timer used to tick the text forward
+        self.delayTimer = self.tick_delay
+        # stores the text, divided into rows
         self.textList = []
+        # lets the TextSystem know when to delete the component
         self.destroy = False
-
-        self.overhead = True
-
+        # keeps track of fade direction (in or out)
         self.enterOrExit = 'enter'
+
+        # split the text into multiple rows,
+        # using self.width as a minimum characher width
 
         row = ''
         for char in self.text:
@@ -48,9 +69,6 @@ class Text:
         if len(row) > 0:
             self.textList.append(row)
 
-        # set for 'appear' initially
-        self.setType('appear')
-    
     def startExit(self):
         self.enterOrExit = 'exit'
 
@@ -85,22 +103,18 @@ class Text:
             if not self.finished:
                 self.delayTimer -= 1
                 if self.delayTimer <= 0:
-                    self.delayTimer = self.delay
+                    self.delayTimer = self.tick_delay
                     self.index += 1
-                    if self.sound:
-                        engine.soundManager.playSound(self.sound, engine.soundManager.soundVolume / 2)
+                    if self.tick_sound:
+                        gamma.soundManager.playSound(self.tick_sound, gamma.soundManager.soundVolume / 2)
                     if self.index >= len(self.textList[self.row]):
                         self.index = 0
                         self.row += 1
                         if self.row >= len(self.textList):
-                            #if self.autoFinish:
                             self.finished = True
-                            #else:
-                            #    # if button pressed for entity:
-                            #    pass
 
         if self.type == 'fade' and self.enterOrExit == 'enter':
-            self.fadeAmount = min(self.fadeAmount+2, 255)
+            self.fadeAmount = min(self.fadeAmount+4, 255)
             if self.fadeAmount == 255:
                 self.finished = True
 
@@ -110,32 +124,28 @@ class Text:
                 pass
 
             if self.lifetime == 'timed':
-                #if self.autoFinish is True:
-                self.finalTimer -= 1
-                if self.finalTimer <= 0:
-                    
-                    #todo -- don't destroy, instead should fade out again! -- use inOut var?
-                    #self.destroy = True
+                self.final_display_time -= 1
+                if self.final_display_time <= 0:
                     self.enterOrExit = 'exit'
 
         # can press regardless of progress
         if self.lifetime == 'press':
-            if self.button is not None:
-                if engine.inputManager.isPressed(self.button):
-                    #self.destroy = True
-                    self.enterOrExit = 'exit'
+            if self.input_list is not None:
+                for input in self.input_list:
+                    if gamma.inputManager.isPressed(input):
+                        self.enterOrExit = 'exit'
                         
         if self.enterOrExit == 'exit':
 
-            self.fadeAmount = max(self.fadeAmount - 2, 0)
+            self.fadeAmount = max(self.fadeAmount - 4, 0)
             if self.fadeAmount == 0:
                 self.destroy = True
 
     def draw(self, screen, x, y):        
-        rows = 30 * len(self.textList)
+        rows = self.spacing * len(self.textList)
 
         for i,l in enumerate(self.textList):
             if i == self.row:
-                drawText(l[0:self.index], x, y-10-rows+(i*30), self.colour, self.fadeAmount)
+                drawText(screen, l[0:self.index], x, y-10-rows+(i*self.spacing), self.colour, self.fadeAmount)
             elif i < self.row:
-                drawText(l, x, y-10-rows+(i*30), self.colour, self.fadeAmount)
+                drawText(screen, l, x, y-10-rows+(i*self.spacing), self.colour, self.fadeAmount)
