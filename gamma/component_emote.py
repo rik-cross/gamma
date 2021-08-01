@@ -5,17 +5,23 @@ from .colours import *
 
 class EmoteComponent(Component):
 
-    def __init__(self, image, timed=True, timer=200, backgroundColour=WHITE):
+    def __init__(self, image,
+        timed=True,
+        timer=200,
+        backgroundColour=WHITE):
+
         self.key = 'emote'
+        
         self.image = image
-        self.backgroundColour = backgroundColour
         self.timed = timed
         self.timer = timer
+        self.backgroundColour = backgroundColour
+
         self.bottomMargin = 10
-        self.imagePadding = 10
-        self.pointerWidth = 10
-        self.pointerHeight = 10
-        self.destroy = False
+        self.imagePadding = 2
+        self.pointerWidth = 4
+        self.pointerHeight = 4
+        self.destroy = Falsegamma.resourceManager.getImage('player')
     
     def update(self):
         # decrement timer
