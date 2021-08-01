@@ -5,7 +5,7 @@ import gamma
 #
 
 playerEntity = gamma.Entity()
-playerEntity.addComponent(gamma.Input(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, gamma.keys.enter, None))
+playerEntity.addComponent(gamma.InputComponent(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, gamma.keys.enter, None))
 # optionally store the entity in the entityManager
 playerEntity.getComponent('tags').add('player')
 gamma.entityManager.addEntity(playerEntity)

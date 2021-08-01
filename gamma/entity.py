@@ -1,5 +1,5 @@
 from .component_tags import TagsComponent
-from .component_imagegroups import ImageGroups
+from .component_imagegroups import ImageGroupsComponent
 
 def resetEntity(entity):
     pass
@@ -20,7 +20,7 @@ class Entity:
         self.components = {}
 
         # add entity default components
-        self.addComponent(ImageGroups())
+        self.addComponent(ImageGroupsComponent())
         self.addComponent(TagsComponent())
 
         # populate component dictionary from passed componenets
@@ -29,6 +29,7 @@ class Entity:
             self.addComponent(component)
 
         self.reset = resetEntity
+        # trauma level % between 0 and 100
         self.trauma = 0
         self.owner = self
     

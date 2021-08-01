@@ -1,7 +1,7 @@
 import pygame
 from .component import Component
 
-class Collider(Component):
+class ColliderComponent(Component):
 
     def __init__(self, offsetX, offsetY, w, h, collisionResponse=None):
         

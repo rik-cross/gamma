@@ -1,9 +1,10 @@
+from gamma.component import Component
 import gamma
 from .ui_text import *
 from .colours import *
 from .colours import *
 
-class Text:
+class TextComponent(Component):
 
     def __init__(self, text,
         colour = WHITE,

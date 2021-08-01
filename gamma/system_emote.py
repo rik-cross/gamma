@@ -9,4 +9,4 @@ class EmoteSystem(System):
         em = entity.getComponent('emote')
         em.update()
         if em.destroy:
-            em = None
+            entity.removeComponent('emote')

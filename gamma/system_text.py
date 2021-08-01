@@ -9,4 +9,4 @@ class TextSystem(System):
         txt = entity.getComponent('text')
         txt.update()
         if txt.destroy:
-            txt = None
+            entity.removeComponent('text')

@@ -17,14 +17,14 @@ gamma.resourceManager.addImage('player', 'images/player/vita_00.png')
 #
 
 playerEntity = gamma.Entity(
-    gamma.Position(300, 200, 45, 51, xAnchor='center', yAnchor='middle')
+    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle')
 )
 playerImage = gamma.ImageGroup(gamma.resourceManager.getImage('player'))
 playerEntity.getComponent('imagegroups').add('default', playerImage)
 
 # add a text component to the player entity
 playerEntity.addComponent(
-    gamma.Text(
+    gamma.TextComponent(
         'Here is some sample text, split over multiple lines.',
         lifetime='timed',
         type='tick', overhead=False
@@ -36,10 +36,12 @@ playerEntity.addComponent(
 #
 
 cameraEntity = gamma.Entity(
-    gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE)
+    gamma.CameraComponent(0, 0, 600, 400,
+        bgColour=gamma.BLUE,
+        worldX=300, worldY = 150,
+        zoomLevel = 2
+    )
 )
-cameraEntity.getComponent('camera').setPosition(300,150)
-cameraEntity.getComponent('camera').setZoom(2)
 
 #
 # add entities to scene's world

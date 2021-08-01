@@ -22,7 +22,7 @@ gamma.resourceManager.addImage('player_idle_4', 'images/player/vita_03.png')
 #
 
 heartEntity = gamma.Entity(
-    gamma.Position(100, 200, 27, 30)
+    gamma.PositionComponent(100, 200, 27, 30)
 )
 heartImage = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
 heartEntity.getComponent('imagegroups').add('default', heartImage)
@@ -32,7 +32,7 @@ heartEntity.getComponent('imagegroups').add('default', heartImage)
 #
 
 playerEntity = gamma.Entity(
-    gamma.Position(250, 200, 45, 51)
+    gamma.PositionComponent(250, 200, 45, 51)
 )
 playerAnimation = gamma.ImageGroup(
         gamma.resourceManager.getImage('player_idle_1'),

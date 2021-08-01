@@ -1,4 +1,4 @@
-class ImageGroups:
+class ImageGroupsComponent:
 
     def __init__(self):
         self.key = 'imagegroups'

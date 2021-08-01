@@ -5,7 +5,7 @@ import gamma
 #
 
 playerEntity = gamma.Entity()
-playerEntity.addComponent(gamma.Input(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, gamma.keys.enter, None))
+playerEntity.addComponent(gamma.InputComponent(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, gamma.keys.enter, None))
 
 #
 # create some functions to attach to the menu buttons

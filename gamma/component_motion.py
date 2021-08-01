@@ -1,7 +1,7 @@
 import pygame
 import copy
 
-class Motion:
+class MotionComponent:
 
     def __init__(self, velocity=None, acceleration=None):
         self.key = 'motion'

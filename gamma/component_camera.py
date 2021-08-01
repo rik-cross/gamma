@@ -4,16 +4,22 @@ from .colours import *
 
 class CameraComponent(Component):
 
-    def __init__(self, x, y, w, h, bgColour=BLACK):
+    def __init__(self, x, y, w, h,
+        bgColour=BLACK,
+        worldX = 0, worldY = 0,
+        entityToTrack = None,
+        zoomLevel = 1
+        ):
+        
         self.key = 'camera'
         
         self.rect = pygame.Rect(x,y,w,h)
         self.bgColour = bgColour
         
-        self.worldX = 0
-        self.worldY = 0
-        self.entityToTrack = None
-        self.zoomLevel = 1
+        self.worldX = worldX
+        self.worldY = worldY
+        self.entityToTrack = entityToTrack
+        self.zoomLevel = zoomLevel
 
         self.zoomPerFrame = 0
         self.targetZoom = self.zoomLevel

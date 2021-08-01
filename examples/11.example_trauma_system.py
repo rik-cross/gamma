@@ -1,3 +1,4 @@
+from gamma.colours import BLUE
 import gamma
 
 #
@@ -42,27 +43,32 @@ playerAnimation = gamma.ImageGroup(
     )
 playerEntity.getComponent('imagegroups').add('idle', playerAnimation)
 
-#
-# create a camera
-#
+# add a camera to the player
+playerEntity.addComponent(gamma.CameraComponent(
+    0, 0, 600, 400,
+    bgColour = BLUE,
+    zoomLevel = 2,
+    entityToTrack = playerEntity
+))
 
-cameraEntity = gamma.Entity(
-    gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE)
-)
-cameraEntity.getComponent('camera').setPosition(300, 200)
+# player controls = enter to add trauma
+def playerControls(player):
+    if gamma.inputManager.isPressed(player.getComponent('input').b1):
+        # add some trauma
+        player.trauma += 0.5
+
+playerEntity.addComponent(gamma.InputComponent(None, None, None, None, gamma.keys.enter, None, playerControls))
 
 #
 # add entities to scene's world
 #
 
-mainScene.world.entities.append(heartEntity)
 mainScene.world.entities.append(playerEntity)
-mainScene.world.entities.append(cameraEntity)
 
 #
 # add scene to the gamma and start
 #
 
-gamma.init((600, 400), caption='Gamma // Image and Animation Example')
+gamma.init((600, 400), caption='Gamma // Trauma System Example')
 gamma.sceneManager.push(mainScene)
 gamma.run()

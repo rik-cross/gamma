@@ -8,7 +8,7 @@ def changeColour(image, colour):
     finalImage.blit(colouredImage, (0, 0), special_flags = pygame.BLEND_MULT)
     return finalImage
     
-class Image:
+class ImageComponent:
     def __init__(self, image):
         self.image = image
     def update(self):

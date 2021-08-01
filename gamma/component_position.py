@@ -2,7 +2,7 @@ import pygame
 from copy import deepcopy
 from .component import Component
 
-class Position(Component):
+class PositionComponent(Component):
 
     def __init__(self, x, y, w, h, xAnchor='left', yAnchor='top', angle=90, rotationStyle='none'):
 

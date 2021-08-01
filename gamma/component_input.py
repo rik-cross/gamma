@@ -1,6 +1,6 @@
 # TODO -- add other inputs...
 
-class Input:
+class InputComponent:
     def __init__(self, up, down, left, right, b1, b2, inputFunc=None):
         self.key = 'input'
         self.up = up

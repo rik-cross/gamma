@@ -3,7 +3,7 @@ from .colours import *
 from .component_emote import EmoteComponent
 import gamma as engine
 
-class Triggers:
+class TriggersComponent:
     def __init__(self):
         self.key = 'triggers'
         # a list of Interaction objects

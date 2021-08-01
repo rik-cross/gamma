@@ -21,7 +21,7 @@ class EmoteComponent(Component):
         self.imagePadding = 2
         self.pointerWidth = 4
         self.pointerHeight = 4
-        self.destroy = Falsegamma.resourceManager.getImage('player')
+        self.destroy = False
     
     def update(self):
         # decrement timer
