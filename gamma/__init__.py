@@ -2,6 +2,7 @@ from .gamma import *
 
 from .scene import *
 from .transition import *
+from .cutscene import *
 
 from .entity import *
 from .entity_factory import *

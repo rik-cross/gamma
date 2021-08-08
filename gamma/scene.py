@@ -2,10 +2,14 @@ import pygame
 import math
 from .gamma import screen, systemManager
 from .world import World
+from .utils import *
+from .colours import *
 
 class Scene:
     
     def __init__(self, world=World(), menu=None):
+        
+        self.cutscene = None
         self.frame = 0
         self.world = world
         self.menu = menu
@@ -53,6 +57,9 @@ class Scene:
         self.frame += 1
         self.update()
     
+        if self.cutscene is not None:
+            self.cutscene.update(self)
+
         for sys in systemManager.systems:
             if not sys.requiresDraw:
                 sys.update(self)
@@ -90,6 +97,10 @@ class Scene:
         a = math.ceil(self.maxAlpha / 100 * self.currentAlphaPercentage)
         x = math.ceil(pygame.display.get_surface().get_size()[0] / 100 * self.leftPercentage)
         y = math.ceil(pygame.display.get_surface().get_size()[1] / 100 * self.topPercentage)
+
+        # draw the cutscene
+        if self.cutscene is not None:
+            self.cutscene.draw(self)
 
         # draw the scene
         self.surface.set_alpha(a)

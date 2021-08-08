@@ -39,25 +39,36 @@ def drawImage(s, image, x, y, xAnchor='left', yAnchor='top', scale=1):
 def createControllerInputComponent(controllerNumber, entityControllerFunction):
 
     controllerInputComponent = InputComponent(
-        up=     controller[controllerNumber].dpad_up,
-        down=   controller[controllerNumber].dpad_down,
-        left=   controller[controllerNumber].dpad_left,
-        right=  controller[controllerNumber].dpad_right,
-        b1=     controller[controllerNumber].a,
-        b2=     controller[controllerNumber].b,
-
-        b3=     controller[controllerNumber].x,
-        b4=     controller[controllerNumber].y,
-
-        b9=     controller[controllerNumber].leftShoulder,
-        b10=    controller[controllerNumber].rightShoulder,
-        b11=    controller[controllerNumber].leftTrigger,
-        b12=    controller[controllerNumber].rightTrigger,
-        b13=    controller[controllerNumber].rightDir_up,
-        b14=    controller[controllerNumber].rightDir_down,
-        b15=    controller[controllerNumber].rightDir_left,
-        b16=    controller[controllerNumber].rightDir_right,
-        inputFunc= entityControllerFunction
+        # left dpad
+        up          = controller[controllerNumber].dpad_up,
+        down        = controller[controllerNumber].dpad_down,
+        left        = controller[controllerNumber].dpad_left,
+        right       = controller[controllerNumber].dpad_right,
+        # 4 main buttons
+        b1          = controller[controllerNumber].a,
+        b2          = controller[controllerNumber].b,
+        b3          = controller[controllerNumber].x,
+        b4          = controller[controllerNumber].y,
+        # shoulder and trigger buttons
+        b5          = controller[controllerNumber].leftShoulder,
+        b6          = controller[controllerNumber].rightShoulder,
+        b7          = controller[controllerNumber].leftTrigger,
+        b8          = controller[controllerNumber].rightTrigger,
+        # left thumb
+        b9          = controller[controllerNumber].leftDir_up,
+        b10         = controller[controllerNumber].leftDir_down,
+        b11         = controller[controllerNumber].leftDir_left,
+        b12         = controller[controllerNumber].leftDir_right,
+        # right thumb
+        b13         = controller[controllerNumber].rightDir_up,
+        b14         = controller[controllerNumber].rightDir_down,
+        b15         = controller[controllerNumber].rightDir_left,
+        b16         = controller[controllerNumber].rightDir_right,
+        # start and select
+        b17         = controller[controllerNumber].start,
+        b18         = controller[controllerNumber].select,
+        # entity controller
+        inputFunc   = entityControllerFunction
     )
 
     return controllerInputComponent
