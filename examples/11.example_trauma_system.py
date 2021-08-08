@@ -57,7 +57,7 @@ def playerControls(player):
         # add some trauma
         player.trauma += 0.5
 
-playerEntity.addComponent(gamma.InputComponent(None, None, None, None, gamma.keys.enter, None, playerControls))
+playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter, inputFunc=playerControls))
 
 #
 # add entities to scene's world

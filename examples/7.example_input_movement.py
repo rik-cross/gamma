@@ -28,7 +28,7 @@ def heartMovement(heart):
     if heart.getComponent('position').rect.x < 550:
         heart.getComponent('position').rect.x += 2
 
-heartEntity.addComponent(gamma.InputComponent(None, None, None, None, None, None, heartMovement))
+heartEntity.addComponent(gamma.InputComponent(inputFunc=heartMovement))
 
 #
 # create a player entity that moves using WASD
@@ -51,7 +51,7 @@ def playerMovement(player):
     if gamma.inputManager.isDown(player.getComponent('input').right):
         player.getComponent('position').x += 2
 
-playerEntity.addComponent(gamma.InputComponent(gamma.keys.w, gamma.keys.s, gamma.keys.a, gamma.keys.d, None, None, playerMovement))
+playerEntity.addComponent(gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, inputFunc=playerMovement))
 
 #
 # create a camera that has zoom functionality

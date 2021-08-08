@@ -1,2 +1,3 @@
 class Component:
-    pass
+    def reset(self):
+        pass

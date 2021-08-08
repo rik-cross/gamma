@@ -9,3 +9,7 @@ Gamma.egg-info
 Gamma.egg-info/*
 platformer
 platformer/*
+tools/
+tools/*
+tools/world_editor/__pycache__/
+tools/world_editor/__pycache__/*

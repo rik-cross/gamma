@@ -5,15 +5,17 @@ from .map_image import MapImage
 class Map:
 
     def __init__(self, tiles=None, tileSize=32):
+        
         self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
+        self.drawGrid = False
         self.mapImages = []
         # 'tiles' is a 2D array of strings, which are keys to Tile.tiles
         if tiles is None:
             self.tiles = [ [ 'none' for w in range(self.MAX_MAPSIZE) ] for h in range(self.MAX_MAPSIZE) ]
         else:
             self.tiles = tiles
-        self.setDimensions() 
+        self.setDimensions()
 
     def setDimensions(self):
 
@@ -43,6 +45,7 @@ class Map:
     
     def setTile(self, x, y, tileString):
         self.tiles[y][x] = tileString
+        self.setDimensions()
 
     def getTileAtPosition(self, x, y):
         xTile = int(x // self.tileSize)
@@ -62,10 +65,11 @@ class Map:
         return (self.h_real//2,self.w_real//2)
 
     def draw(self, screen, x, y, z):
+        #print(self.w_map, self.h_map)
         for r in range(self.h_map):
             for c in range(self.w_map):
                 tile = self.tiles[r][c]
-                if Tile.tiles[tile].image is not None: 
+                if Tile.tiles[tile].image is not None:
                     newX = x + c*(self.tileSize*z)
                     newY = y + r*(self.tileSize*z)
                     newWidth = math.ceil(self.tileSize * z)

@@ -24,6 +24,7 @@ from .world import *
 
 # stores the path of this file
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+print(ROOT_DIR)
 
 pygame.init()
 
@@ -33,6 +34,8 @@ soundManager = SoundManager()
 resourceManager = ResourceManager()
 resourceManager.addFont('munro24', ROOT_DIR + '/fonts/munro.ttf')
 resourceManager.addImage('default_icon', ROOT_DIR + '/images/icon.png')
+resourceManager.addImage('tile_outline', ROOT_DIR + '/images/tile_outline.png')
+resourceManager.addImage('cross', ROOT_DIR + '/images/cross.png')
 
 # add core game systems
 systemManager = SystemManager()

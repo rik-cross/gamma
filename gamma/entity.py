@@ -1,9 +1,6 @@
 from .component_tags import TagsComponent
 from .component_imagegroups import ImageGroupsComponent
 
-def resetEntity(entity):
-    pass
-
 class Entity:
     
     # class-level ID, used to create new entities
@@ -19,27 +16,33 @@ class Entity:
         # format = {componentKey : component}
         self.components = {}
 
-        # add entity default components
-        self.addComponent(ImageGroupsComponent())
-        self.addComponent(TagsComponent())
+        self.addDefaultEntities()
 
         # populate component dictionary from passed componenets
         # (this will overwrite existing default components)
         for component in componentList:
             self.addComponent(component)
 
-        self.reset = resetEntity
-        # trauma level % between 0 and 100
+        # trauma level % between 0 and 1
         self.trauma = 0
+
         self.owner = self
     
+    # add entity default components
+    def addDefaultEntities(self):
+        self.addComponent(ImageGroupsComponent())
+        self.addComponent(TagsComponent())
+
     # removes all components from the entity
     def clear(self):
         self.components = {}
+        self.addDefaultEntities()
     
     # used to reset an entity to an initial state
     def reset(self):
-        self.reset()
+        # defer to each component reset() method
+        for c in self.components.values:
+            c.reset()
 
     def hasComponent(self, componentKey, *otherComponentKeys):
         for c in [componentKey] + list(otherComponentKeys):

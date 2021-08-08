@@ -71,6 +71,14 @@ class CameraSystem(System):
         # render map
         if scene.world.map is not None:
             scene.world.map.draw(scene.surface, offsetX, offsetY, cameraComponent.zoomLevel)
+            # map grid lines
+            if scene.world.map.drawGrid:
+                # columns
+                for c in range(0,scene.world.map.MAX_MAPSIZE*scene.world.map.tileSize,scene.world.map.tileSize):
+                    pygame.draw.line(scene.surface, LIGHT_GREY, (c*cameraComponent.zoomLevel+offsetX,0*cameraComponent.zoomLevel+offsetY), (c*cameraComponent.zoomLevel+offsetX,scene.world.map.MAX_MAPSIZE*scene.world.map.tileSize*cameraComponent.zoomLevel+offsetY))
+                # rows
+                for r in range(0,scene.world.map.MAX_MAPSIZE*scene.world.map.tileSize,scene.world.map.tileSize):
+                    pygame.draw.line(scene.surface, LIGHT_GREY, (0*cameraComponent.zoomLevel+offsetX,r*cameraComponent.zoomLevel+offsetY), (scene.world.map.MAX_MAPSIZE*scene.world.map.tileSize*cameraComponent.zoomLevel+offsetX,r*cameraComponent.zoomLevel+offsetY))
 
         # render entities
         for e in scene.world.entities:
@@ -95,7 +103,7 @@ class CameraSystem(System):
 
         # render emotes
         for e in scene.world.entities:
-            if e.hasComponent('emote'):
+            if e.hasComponent('emote', 'position'):
                 emote = e.getComponent('emote')
                 pos = e.getComponent('position')
                 emote.draw(scene.surface,
@@ -137,23 +145,6 @@ class CameraSystem(System):
         #                (img.x * entity.camera.zoomLevel) + offsetX + parallaxOffsetX,
         #                (img.y * entity.camera.zoomLevel) + offsetY + parallaxOffsetY,
         #                entity.camera.zoomLevel)          
-
-        # render text
-        #for e in engine.world.entities:
-        #    if e.text is not None:
-        #        e.text.draw(screen, (e.position.rect.x * entity.camera.zoomLevel) + offsetX, (e.position.rect.y * entity.camera.zoomLevel)+ offsetY)
-
-        # entity HUD
-
-        # score
-        #if entity.score is not None:
-        #    screen.blit(utils.coin0, (entity.camera.rect.x + 10, entity.camera.rect.y + 10))
-        #    engine.drawText(screen, str(entity.score.score), entity.camera.rect.x + 50, entity.camera.rect.y + 10, WHITE, 255)
-
-        # lives
-        #if entity.battle is not None:
-        #    for l in range(entity.battle.lives):
-        #        screen.blit(utils.heart_image, (entity.camera.rect.x + 200 + (l*50),entity.camera.rect.y + 10))
 
         # unset clipping rectangle
         scene.surface.set_clip(None)

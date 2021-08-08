@@ -5,7 +5,7 @@ import gamma
 #
 
 playerEntity = gamma.Entity()
-playerEntity.addComponent(gamma.InputComponent(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, gamma.keys.enter, None))
+playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter))
 
 # store images
 

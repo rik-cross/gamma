@@ -1,4 +1,5 @@
 import pygame
+from .gamma import resourceManager
 
 class Tile:
 
