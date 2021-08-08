@@ -51,11 +51,21 @@ playerEntity.addComponent(gamma.CameraComponent(
     entityToTrack = playerEntity
 ))
 
-# player controls = enter to add trauma
+cutscene = gamma.Cutscene()
+cutscene.actionList = [
+    lambda: playerEntity.getComponent('camera').setZoom(3, duration=60),
+    lambda: mainScene.cutscene.setDelay(120),
+    lambda: playerEntity.addComponent(gamma.TextComponent('Hello!', lifetime='timed', type='tick', final_display_time=120)),
+    lambda: mainScene.cutscene.setDelay(240),
+    lambda: playerEntity.getComponent('camera').setZoom(2, duration=60)
+]
+
+# player controls = enter to start cutscene
 def playerControls(player):
     if gamma.inputManager.isPressed(player.getComponent('input').b1):
         # start the cutscene
-        player.trauma += 0.5
+        cutscene.reset()
+        mainScene.cutscene = cutscene
 
 playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter, inputFunc=playerControls))
 
@@ -64,16 +74,6 @@ playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter, inputFunc=pl
 #
 
 mainScene.world.entities.append(playerEntity)
-mainScene.cutscene = gamma.Cutscene()
-mainScene.cutscene.actionList = [
-    lambda: mainScene.cutscene.setDelay(120),
-    lambda: playerEntity.getComponent('camera').setZoom(3, duration=60),
-    lambda: mainScene.cutscene.setDelay(120),
-    lambda: playerEntity.addComponent(gamma.TextComponent('Hello!', lifetime='timed', type='tick', final_display_time=120)),
-    lambda: mainScene.cutscene.setDelay(240),
-    lambda: playerEntity.getComponent('camera').setZoom(2, duration=60),
-    lambda: mainScene.cutscene.setDelay(120)
-]
 
 #
 # add scene to the gamma and start
