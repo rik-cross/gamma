@@ -1,5 +1,7 @@
-import pygame
 import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
+import pygame
 
 from .manager_sound import *
 from .manager_input import *
@@ -24,7 +26,6 @@ from .world import *
 
 # stores the path of this file
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-print(ROOT_DIR)
 
 pygame.init()
 

@@ -17,6 +17,7 @@ class ImageGroup:
         self.animationTimer = 0
         self.animationDelay = delay
         self.loop = loop
+        self.afterAnimate = None
     def reset(self):
         self.animationTimer = 0
         self.imageIndex = 0
@@ -36,6 +37,8 @@ class ImageGroup:
                     self.imageIndex = 0
                 else:
                     self.imageIndex = len(self.imageList) - 1
+                if self.afterAnimate is not None:
+                    self.afterAnimate()
 
     def draw(self, screen, x, y, flipX=False, flipY=False, zoomLevel=1, alpha=255, hue=None):
         image = self.imageList[self.imageIndex]
