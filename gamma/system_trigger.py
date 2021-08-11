@@ -1,3 +1,4 @@
+import pygame
 from .system import *
 from .gamma import *
 
@@ -41,8 +42,10 @@ class TriggerSystem(System):
                             trigger.current.append(otherEntity.ID)
                 
             if trigger.current and not trigger.last:
-                trigger.onEnter(entity)
+                trigger.onCollisionEnter(entity)
+
             elif not trigger.current and trigger.last:
-                trigger.onExit(entity)
+                trigger.onCollisionExit(entity)
+            
             elif trigger.current:
-                trigger.onStay(entity)
+                trigger.onCollide(entity)

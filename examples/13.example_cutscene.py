@@ -1,4 +1,3 @@
-from gamma.component_text import TextComponent
 import gamma
 
 #
@@ -47,7 +46,7 @@ playerEntity.getComponent('imagegroups').add('idle', playerAnimation)
 playerEntity.addComponent(gamma.CameraComponent(
     0, 0, 600, 400,
     bgColour = gamma.BLUE,
-    zoomLevel = 2,
+    zoomLevel = 1,
     entityToTrack = playerEntity
 ))
 
@@ -55,9 +54,10 @@ cutscene = gamma.Cutscene()
 cutscene.actionList = [
     lambda: playerEntity.getComponent('camera').setZoom(3, duration=60),
     lambda: mainScene.cutscene.setDelay(120),
-    lambda: playerEntity.addComponent(gamma.TextComponent('Hello!', lifetime='timed', type='tick', final_display_time=120)),
-    lambda: mainScene.cutscene.setDelay(240),
-    lambda: playerEntity.getComponent('camera').setZoom(2, duration=60)
+    lambda: playerEntity.addComponent(gamma.TextComponent('Hello! How are you?', lifetime='timed', type='tick', final_display_time=120)),
+    lambda: mainScene.cutscene.setDelay(300),
+    lambda: playerEntity.getComponent('camera').setZoom(1, duration=60),
+    lambda: mainScene.cutscene.setDelay(60)
 ]
 
 # player controls = enter to start cutscene
