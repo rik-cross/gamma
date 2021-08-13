@@ -32,8 +32,8 @@ class MainScene(gamma.Scene):
         self.setMenu(gamma.Menu(300,150,
             [
                 gamma.UITextMenuItem('Change title text colour', actionListener=gamma.ActionListener(changeTextColour)),
-                gamma.UITextMenuItem('Change background to Blue', actionListener=gamma.ActionListener(changeBackgroundColour, gamma.BLUE)),
-                gamma.UITextMenuItem('Change background to Dark Grey', actionListener=gamma.ActionListener(changeBackgroundColour, gamma.DARK_GREY))
+                gamma.UITextMenuItem('Change background to Dark Grey', actionListener=gamma.ActionListener(lambda: changeBackgroundColour(gamma.DARK_GREY))),
+                gamma.UITextMenuItem('Change background to Blue', actionListener=gamma.ActionListener(lambda: changeBackgroundColour(gamma.BLUE)))
             ]
         , entities=[playerEntity]), self)
 

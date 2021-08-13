@@ -46,7 +46,6 @@ playerEntity.getComponent('imagegroups').add('idle', playerAnimation)
 playerEntity.addComponent(gamma.CameraComponent(
     0, 0, 600, 400,
     bgColour = gamma.BLUE,
-    zoomLevel = 1,
     entityToTrack = playerEntity
 ))
 

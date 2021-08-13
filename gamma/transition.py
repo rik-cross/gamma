@@ -4,13 +4,13 @@ from .gamma import sceneManager, screen
 
 class Transition:
 
-    def __init__(self, fromScenes, toScenes):
+    def __init__(self, fromScenes, toScenes, frameDuration=30):
         self.fromScenes = fromScenes
         self.toScenes = toScenes
+        self.frameDuration = frameDuration
         self.currentPercentage = 0
 
         self.resetAllSceneEffects()
-
         self.init()
 
     def init(self):
@@ -42,13 +42,13 @@ class Transition:
                 sceneManager.push(s)
 
         self.onComplete()
-    
+
     def onComplete(self):
         pass
 
     def _update(self):
 
-        self.currentPercentage = min(100, self.currentPercentage+2)
+        self.currentPercentage = min(100, self.currentPercentage+(100/self.frameDuration))
 
         for fs in self.fromScenes:
             fs._update()
@@ -57,7 +57,6 @@ class Transition:
             ts._update()
 
         if self.currentPercentage == 100:
-            #self.resetAllSceneEffects()
             sceneManager.transition = None
             self._onComplete()
 
