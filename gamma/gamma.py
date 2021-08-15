@@ -97,6 +97,8 @@ def run(fps=60):
         # set maximum framerate
         clock.tick(fps)
 
+        #print(clock.get_fps())
+
     # quit
     sceneManager.clear()
     pygame.quit()

@@ -7,11 +7,14 @@ from .colours import *
 
 class Scene:
     
-    def __init__(self, world=World(), menu=None):
+    def __init__(self, world=None, menu=None):
         
+        self.world = world
+        if self.world is None:
+            self.world = World()
+
         self.cutscene = None
         self.frame = 0
-        self.world = world
         self.menu = menu
         self.buttons = []
         self.maxAlpha = 255

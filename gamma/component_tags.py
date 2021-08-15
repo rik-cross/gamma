@@ -8,7 +8,13 @@ class TagsComponent(Component):
     
     def add(self, tag, *moreTags):
         for t in [tag] + list(moreTags):
-            self.tags.append(t)
+            if t not in self.tags:
+                self.tags.append(t)
+    
+    def remove(self, tag, *moreTags):
+        for t in [tag] + list(moreTags):
+            if t in self.tags:
+                self.tags.remove(t)
     
     def has(self, *tags):
         for t in tags:

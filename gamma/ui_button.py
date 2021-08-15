@@ -25,28 +25,40 @@ class UIButton:
         self.text = text
         self.font = font
 
+        self.downCurrent = False
+        self.downPrevious = False
+
+        self.active = True
+
     def update(self):
 
+        if not self.active:
+            return
+
+        self.downPrevious = self.downCurrent
+
         # find out whether any input linked to the button is pressed
-        down= False
+        self.downCurrent = False
         if self.controlledBy is not None:
             for c in self.controlledBy:
 
                 if inputManager.isDown(c):
-                    down = True
+                    self.downCurrent = True
                     break
         
         # display the button as pressed or not
-        if down:
+        if self.downCurrent:
             self.currentImageGroup = self.pressedImageGroup
-            self.defaultImageGroup.reset()
         else:
             self.currentImageGroup = self.defaultImageGroup
+
+        # reset imageGroup on state change
+        if self.downCurrent is not self.downPrevious:
             self.pressedImageGroup.reset()
-                
+
         # execute the button (once) if pressed
         for c in self.controlledBy:
-            if inputManager.isDown(c):
+            if inputManager.isPressed(c):
                 if self.actionListener is not None:
                     self.actionListener.execute()
         
@@ -54,10 +66,15 @@ class UIButton:
         self.currentImageGroup.update()
 
     def draw(self, screen):
+
+        alpha = 255
+        if not self.active:
+            alpha = 100
+
         # draw button image
-        self.currentImageGroup.draw(screen, self.x, self.y)
+        self.currentImageGroup.draw(screen, self.x, self.y, alpha=alpha)
         # draw button text
         if self.text is not None:
             textX = self.x + self.currentImageGroup.imageList[self.currentImageGroup.imageIndex].get_rect().w + 10
             textY = self.y
-            drawText(screen, self.text, textX, textY, fontTag=self.font)
+            drawText(screen, self.text, textX, textY, alpha=alpha, fontTag=self.font)

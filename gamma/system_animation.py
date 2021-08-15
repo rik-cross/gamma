@@ -10,4 +10,5 @@ class AnimationSystem(System):
     def updateEntity(self, entity, scene):
         ig = entity.getComponent('imagegroups')
         if ig.current is not None:
-            ig.animationList[ig.current].update()
+            if ig.playing:
+                ig.animationList[ig.current].update()
