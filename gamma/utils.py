@@ -4,7 +4,8 @@ from .manager_input import controller, keys
 
 def drawRect(s,x,y,w,h,c,a=255):
     overlay = pygame.Surface((w,h))
-    overlay.set_alpha(a)
+    if a < 255:
+        overlay.set_alpha(a)
     overlay.fill(c)
     s.blit(overlay, (x,y))
 

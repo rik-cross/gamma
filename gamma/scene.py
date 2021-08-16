@@ -25,7 +25,6 @@ class Scene:
         pass
 
     def resetEffects(self):
-        self.currentAlphaPercentage = 100
         self.widthPercentage = 100
         self.heightPercentage = 100
         self.leftPercentage = 0
@@ -97,7 +96,6 @@ class Scene:
             b.draw(self.surface)
 
         # calculate the scene position and transparency
-        a = math.ceil(self.maxAlpha / 100 * self.currentAlphaPercentage)
         x = math.ceil(pygame.display.get_surface().get_size()[0] / 100 * self.leftPercentage)
         y = math.ceil(pygame.display.get_surface().get_size()[1] / 100 * self.topPercentage)
 
@@ -106,7 +104,6 @@ class Scene:
             self.cutscene.draw(self)
 
         # draw the scene
-        self.surface.set_alpha(a)
         screen.blit(self.surface, (x,y))
 
     def input(self):

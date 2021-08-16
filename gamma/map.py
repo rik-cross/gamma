@@ -64,8 +64,7 @@ class Map:
     def getMapCenter(self):
         return (self.h_real//2,self.w_real//2)
 
-    def draw(self, screen, x, y, z):
-        #print(self.w_map, self.h_map)
+    def draw(self, screen, x, y, z=1):
         for r in range(self.h_map):
             for c in range(self.w_map):
                 tile = self.tiles[r][c]

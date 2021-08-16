@@ -21,6 +21,7 @@ class ImageGroup:
     def reset(self):
         self.animationTimer = 0
         self.imageIndex = 0
+
     def update(self):
         # increment the timer
         self.animationTimer += 1
@@ -42,10 +43,10 @@ class ImageGroup:
 
     def draw(self, screen, x, y, flipX=False, flipY=False, zoomLevel=1, alpha=255, hue=None):
         image = self.imageList[self.imageIndex]
-        if hue is not None:
-            colour = pygame.Color(0)
-            colour.hsla = (hue, 100, 50, 100)
-            image = changeColour(image,colour)
+        #if hue is not None:
+        #    colour = pygame.Color(0)
+        #    colour.hsla = (hue, 100, 50, 100)
+        #    image = changeColour(image,colour)
         image.set_alpha(alpha)
         newWidth = int(image.get_rect().w * zoomLevel)
         newHeight = int(image.get_rect().h * zoomLevel)

@@ -21,9 +21,6 @@ def pushSecond():
 def blackTransitionSecond():
     gamma.sceneManager.setTransition(gamma.TransitionBlack([firstScene],[secondScene]))
 
-def fadeTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionFade([firstScene],[secondScene]))
-
 def wipeLeftTransitionSecond():
     gamma.sceneManager.setTransition(gamma.TransitionWipeLeft([firstScene],[secondScene]))
 
@@ -54,9 +51,6 @@ def popScene():
 
 def blackTransitionFirst():
     gamma.sceneManager.setTransition(gamma.TransitionBlack([secondScene],[]))
-
-def fadeTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionFade([secondScene],[]))
 
 def wipeLeftTransitionFirst():
     gamma.sceneManager.setTransition(gamma.TransitionWipeLeft([secondScene],[]))
@@ -93,7 +87,6 @@ class FirstScene(gamma.Scene):
             [
                 gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(pushSecond)),
                 gamma.UITextMenuItem('Black transition', actionListener=gamma.ActionListener(blackTransitionSecond)),
-                gamma.UITextMenuItem('Fade transition', actionListener=gamma.ActionListener(fadeTransitionSecond)),
                 gamma.UITextMenuItem('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionSecond)),
                 gamma.UITextMenuItem('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionSecond)),
                 gamma.UITextMenuItem('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionSecond)),
@@ -117,7 +110,6 @@ class SecondScene(gamma.Scene):
             [
                 gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(popScene)),
                 gamma.UITextMenuItem('Black transition', actionListener=gamma.ActionListener(blackTransitionFirst)),
-                gamma.UITextMenuItem('Fade transition', actionListener=gamma.ActionListener(fadeTransitionFirst)),
                 gamma.UITextMenuItem('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionFirst)),
                 gamma.UITextMenuItem('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionFirst)),
                 gamma.UITextMenuItem('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionFirst)),

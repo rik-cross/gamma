@@ -95,7 +95,6 @@ class CameraSystem(System):
                     if p.rotationStyle == 'leftRight':
                         if p.angle == 270:
                             hFlip = True
-
                     a.draw(scene.surface,
                         (p.rect.x * cameraComponent.zoomLevel) + offsetX,
                         (p.rect.y * cameraComponent.zoomLevel) + offsetY,

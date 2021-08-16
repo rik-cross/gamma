@@ -109,38 +109,6 @@ class TransitionBlack(Transition):
         overlay.fill(BLACK)
         screen.blit(overlay, (0,0))
 
-class TransitionFade(Transition):
-
-    def init(self):
-
-        if len(self.toScenes) == 0:
-            if len(sceneManager.scenes) > 1:
-                sceneManager.scenes[-2].currentAlphaPercentage = 0
-        else:
-            for s in self.toScenes:
-                s.currentAlphaPercentage = 0    
-
-    def update(self):
-
-        if len(self.toScenes) == 0:
-            if len(sceneManager.scenes) > 1:
-                sceneManager.scenes[-2].currentAlphaPercentage = self.currentPercentage
-        else:
-            for s in self.toScenes:
-                s.currentAlphaPercentage = self.currentPercentage
-
-    def draw(self):
-        
-        for s in self.fromScenes:
-            s._draw()
-
-        if len(self.toScenes) == 0:
-            if len(sceneManager.scenes) > 1:
-                sceneManager.scenes[-2]._draw()
-        else:
-            for s in self.toScenes:
-                s._draw()
-
 class TransitionWipeRight(Transition):
 
     def init(self):
@@ -157,7 +125,6 @@ class TransitionWipeRight(Transition):
         if len(self.toScenes) == 0:
             if len(sceneManager.scenes) > 1:
                 sceneManager.scenes[-2].widthPercentage = self.currentPercentage
-                #print(sceneManager.scenes[-2].widthPercentage)
         else:
             for s in self.toScenes:
                 s.widthPercentage = self.currentPercentage
