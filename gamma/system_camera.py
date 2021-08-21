@@ -89,7 +89,8 @@ class CameraSystem(System):
                     a.draw(scene.surface,
                         (p.rect.x * cameraComponent.zoomLevel) + offsetX,
                         (p.rect.y * cameraComponent.zoomLevel) + offsetY,
-                        hFlip, vFlip, cameraComponent.zoomLevel, igComp.alpha, igComp.hue)
+                        w=p.w, h=p.h,
+                        flipX=hFlip, flipY=vFlip, zoomLevel=cameraComponent.zoomLevel, alpha=igComp.alpha, hue=igComp.hue)
 
         # render emotes
         for e in scene.world.entities:

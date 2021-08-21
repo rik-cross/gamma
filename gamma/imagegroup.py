@@ -41,13 +41,17 @@ class ImageGroup:
                 if self.afterAnimate is not None:
                     self.afterAnimate()
 
-    def draw(self, screen, x, y, flipX=False, flipY=False, zoomLevel=1, alpha=255, hue=None):
+    def draw(self, screen, x, y, w=None, h=None, flipX=False, flipY=False, zoomLevel=1, alpha=255, hue=None):
         image = self.imageList[self.imageIndex]
         #if hue is not None:
         #    colour = pygame.Color(0)
         #    colour.hsla = (hue, 100, 50, 100)
         #    image = changeColour(image,colour)
+        if w is None:
+            w = image.get_rect().w
+        if h is None:
+            h = image.get_rect().h
         image.set_alpha(alpha)
-        newWidth = int(image.get_rect().w * zoomLevel)
-        newHeight = int(image.get_rect().h * zoomLevel)
+        newWidth = int(w * zoomLevel)
+        newHeight = int(h * zoomLevel)
         screen.blit(pygame.transform.scale(pygame.transform.flip(image, flipX, flipY), (newWidth, newHeight)), (x, y))

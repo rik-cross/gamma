@@ -4,7 +4,7 @@ from .colours import *
 class AnimationSystem(System):
 
     def setRequirements(self):
-        self.requiredComponents = ['imagegroups']
+        self.requiredComponents = ['imagegroups', 'position']
         self.requiredTags = []
 
     def updateEntity(self, entity, scene):

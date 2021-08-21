@@ -35,6 +35,8 @@ class PositionComponent(Component):
     def reset(self):
         self.rect = deepcopy(self.initialRect)
 
+    def setSize...
+
     def touching(self, otherEntity):
         if not otherEntity.hasComponent('position'):
             return False
