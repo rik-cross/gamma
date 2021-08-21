@@ -44,17 +44,8 @@ class CameraSystem(System):
             angle += (entity.trauma ** 3) * (random.random()*2-1) * 30 * cameraComponent.zoomLevel
 
         # fill camera background
-        scene.surface.fill(cameraComponent.bgColour)
-
-        # draw level background
-        if scene.world.map is not None:
-
-            worldRect = pygame.Rect(
-                0 + offsetX,
-                0 + offsetY,
-                scene.world.map.w_real * cameraComponent.zoomLevel,
-                scene.world.map.h_real * cameraComponent.zoomLevel)
-            pygame.draw.rect(scene.surface, DARK_GREY, worldRect)
+        if cameraComponent.bgColour is not None:
+            scene.surface.fill(cameraComponent.bgColour)
 
             # render map images behind map
             for img in scene.world.map.mapImages:

@@ -30,6 +30,7 @@ class System():
     # meet the system requirements
     # TODO - name as _update(), as it's internal
     def update(self, scene):
+
         for entity in scene.world.entities:
             if self._checkRequirements(entity):
                 self.updateEntity(entity, scene)

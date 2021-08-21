@@ -73,7 +73,7 @@ class SceneManager:
 
     def getSceneBelow(self, scene):
         if scene not in self.scenes:
-            return self.getTopScene
+            return self.getTopScene()
         if len(self.scenes) <= 1:
             return None
         return self.scenes[self.scenes.index(scene)-1]

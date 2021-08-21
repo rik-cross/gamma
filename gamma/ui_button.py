@@ -32,9 +32,6 @@ class UIButton:
 
     def update(self):
 
-        if not self.active:
-            return
-
         self.downPrevious = self.downCurrent
 
         # find out whether any input linked to the button is pressed
@@ -60,7 +57,8 @@ class UIButton:
         for c in self.controlledBy:
             if inputManager.isPressed(c):
                 if self.actionListener is not None:
-                    self.actionListener.execute()
+                    if self.active:
+                        self.actionListener.execute()
         
         # update the button's current imageGroup
         self.currentImageGroup.update()

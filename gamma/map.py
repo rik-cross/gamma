@@ -4,7 +4,7 @@ from .map_image import MapImage
 
 class Map:
 
-    def __init__(self, tiles=None, tileSize=32):
+    def __init__(self, tiles=None, tileSize=32, name=None):
         
         self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
@@ -16,6 +16,7 @@ class Map:
         else:
             self.tiles = tiles
         self.setDimensions()
+        self.name = name
 
     def setDimensions(self):
 

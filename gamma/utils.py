@@ -3,9 +3,12 @@ from .component_input import InputComponent
 from .manager_input import controller, keys
 
 def drawRect(s,x,y,w,h,c,a=255):
-    overlay = pygame.Surface((w,h))
+    # only add transparency if needed
     if a < 255:
+        overlay = pygame.Surface((w,h), pygame.SRCALPHA)
         overlay.set_alpha(a)
+    else:
+        overlay = pygame.Surface((w,h))
     overlay.fill(c)
     s.blit(overlay, (x,y))
 
@@ -77,13 +80,29 @@ def createControllerInputComponent(controllerNumber, entityControllerFunction):
 def createKeyboardInputComponent(entityControllerFunction):
 
     keyboardInputComponent = InputComponent(
-        up=keys.up,
-        down=keys.down,
-        left=keys.left,
-        right=keys.right,
-        b1=keys.enter,
-        b2=keys.esc,
-        inputFunc=entityControllerFunction
+        up          = keys.up,
+        down        = keys.down,
+        left        = keys.left,
+        right       = keys.right,
+        b1          = keys.enter,
+        b2          = keys.esc,
+        b3          = None,
+        b4          = None,
+        b5          = None,
+        b6          = None,
+        b7          = None,
+        b8          = None,
+        b9          = None,
+        b10         = None,
+        b11         = keys.i,
+        b12         = keys.k,
+        b13         = None,
+        b14         = None,
+        b15         = None,
+        b16         = None,
+        b17         = None,
+        b18         = None,
+        inputFunc   = entityControllerFunction
     )
 
     return keyboardInputComponent

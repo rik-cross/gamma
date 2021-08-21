@@ -5,7 +5,7 @@ from .colours import *
 class CameraComponent(Component):
 
     def __init__(self, x, y, w, h,
-        bgColour=BLACK,
+        bgColour=None,
         worldX = 0, worldY = 0,
         entityToTrack = None,
         zoomLevel = 1

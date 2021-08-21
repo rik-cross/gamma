@@ -1,6 +1,6 @@
 import pygame
 import math
-from .gamma import screen, systemManager
+from .gamma import screen, systemManager, sceneManager
 from .world import World
 from .utils import *
 from .colours import *
@@ -17,14 +17,18 @@ class Scene:
         self.frame = 0
         self.menu = menu
         self.buttons = []
-        self.maxAlpha = 255
         self.resetEffects()
+
+        self.drawSceneBelow = False
+
         self.init()
 
     def init(self):
         pass
 
     def resetEffects(self):
+        # TODO - use a clipping rectangle instead
+        # x, y, w, h
         self.widthPercentage = 100
         self.heightPercentage = 100
         self.leftPercentage = 0
@@ -77,8 +81,13 @@ class Scene:
         # calculate the scene size
         w = math.ceil(pygame.display.get_surface().get_size()[0] / 100 * self.widthPercentage)
         h = math.ceil(pygame.display.get_surface().get_size()[1] / 100 * self.heightPercentage)
-        self.surface = pygame.Surface((w,h))
+        self.surface = pygame.Surface((w,h), pygame.SRCALPHA)
+        self.surface.convert_alpha()
         
+        # draw scene below if requested
+        if self.drawSceneBelow:
+            sceneManager.getSceneBelow(self)._draw()
+
         # call the scene-specific draw method
         self.draw()
 

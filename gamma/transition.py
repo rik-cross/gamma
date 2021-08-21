@@ -36,6 +36,7 @@ class Transition:
         self.resetAllSceneEffects()
 
         if len(self.toScenes) == 0:
+            for s in self.fromScenes:
                 sceneManager.pop()
         else:
             for s in self.toScenes:
@@ -50,17 +51,22 @@ class Transition:
 
         self.currentPercentage = min(100, self.currentPercentage+(100/self.frameDuration))
 
-        for fs in self.fromScenes:
-            fs._update()
+        # update the top of the new scenes,
+        # if there is one
+        if len(self.toScenes) > 0:
+            self.toScenes[-1]._update()
 
-        for ts in self.toScenes:
-            ts._update()
+        # update the top scene in the
+        # current scene stack
+        if len(sceneManager.scenes) > 0:
+            sceneManager.getTopScene()._update()
 
         if self.currentPercentage == 100:
             sceneManager.transition = None
             self._onComplete()
 
         self.update()
+
     def update(self):
         pass
 
@@ -81,26 +87,23 @@ class TransitionNone(Transition):
 
         if len(self.toScenes) == 0:
             if len(sceneManager.scenes) > 1:
-                sceneManager.scenes[-2]._draw()
+                sceneManager.scenes[-2 - (len(self.fromScenes)-1)]._draw()
         else:
-            for s in self.toScenes:
-                s._draw()
+            self.toScenes[-1]._draw()
 
-class TransitionBlack(Transition):
+# DONE
+class TransitionBlack(Transition): #todo, copy this to other scenes.
 
     def draw(self):
 
         if self.currentPercentage < 50:
-            sceneManager.getTopScene()._draw()
-            for s in self.fromScenes:
-                s._draw()
+            self.fromScenes[0]._draw()
         else:
             if len(self.toScenes) == 0:
                 if len(sceneManager.scenes) > 1:
-                    sceneManager.scenes[-2]._draw()
+                    sceneManager.scenes[-2 - (len(self.fromScenes)-1)]._draw()
             else:
-                for s in self.toScenes:
-                    s._draw()
+                self.toScenes[-1]._draw()
 
         # fade overlay
         overlay = pygame.Surface(pygame.display.get_surface().get_size())
@@ -108,6 +111,9 @@ class TransitionBlack(Transition):
         overlay.set_alpha(255 - alpha)
         overlay.fill(BLACK)
         screen.blit(overlay, (0,0))
+
+# TODO
+# add clipping rectangle to scenes for wipes
 
 class TransitionWipeRight(Transition):
 
@@ -129,7 +135,6 @@ class TransitionWipeRight(Transition):
             for s in self.toScenes:
                 s.widthPercentage = self.currentPercentage
                 
-
     def draw(self):
         
         for s in self.fromScenes:
@@ -142,24 +147,23 @@ class TransitionWipeRight(Transition):
             for s in self.toScenes:
                 s._draw()
 
+# DONE
 class TransitionWipeLeft(Transition):
 
     def update(self):
 
         for s in self.fromScenes:
             s.widthPercentage = 100 - self.currentPercentage
-
+        
     def draw(self):
 
         if len(self.toScenes) == 0:
             if len(sceneManager.scenes) > 1:
-                sceneManager.scenes[-2]._draw()
+                sceneManager.scenes[-2 - (len(self.fromScenes)-1)]._draw()
         else:
-            for s in self.toScenes:
-                s._draw()
-        
-        for s in self.fromScenes:
-            s._draw()
+            self.toScenes[-1]._draw()
+
+        self.fromScenes[0]._draw()
 
 class TransitionFlyOutRight(Transition):
 

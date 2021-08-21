@@ -3,9 +3,14 @@ import pickle
 
 class World:
 
-    def __init__(self):
-        self.entities = []
-        self.map = None
+    def __init__(self, map=None, entities=None):
+
+        if entities is None:
+            self.entities = []
+        else:
+            self.entities = entities
+            
+        self.map = map
 
     # entity methods
 
