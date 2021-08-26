@@ -74,7 +74,6 @@ class Scene:
             self.cutscene.update(self)
 
         for sys in systemManager.systems:
-            if not sys.requiresDraw:
                 sys._update(self)
 
         if self.menu is not None:
@@ -86,8 +85,8 @@ class Scene:
     def _draw(self):
 
         # calculate the scene size
-        w = math.ceil(pygame.display.get_surface().get_size()[0] / 100 * self.widthPercentage)
-        h = math.ceil(pygame.display.get_surface().get_size()[1] / 100 * self.heightPercentage)
+        w = int(pygame.display.get_surface().get_size()[0] / 100 * self.widthPercentage)
+        h = int(pygame.display.get_surface().get_size()[1] / 100 * self.heightPercentage)
         self.surface = pygame.Surface((w,h), pygame.SRCALPHA)
         self.surface.convert_alpha()
 
@@ -99,20 +98,12 @@ class Scene:
                 self.background.draw(self.surface)
 
         # draw scene below if requested
-        # TODO -- all systems need to run, as they send images, etc. to the renderer
-        # maybe have self.pause per scene, and only draw if paused.
         if self.drawSceneBelow:
             sceneManager.getSceneBelow(self)._draw()
 
         # draw map
         if self.world.map is not None:
             self.world.map.draw(self)
-
-        # update systems that require a draw call
-        # TODO - get rid of this. Just render.
-        for sys in systemManager.systems:
-            if sys.requiresDraw:
-                sys._update(self)
 
         for sys in systemManager.systems:
             sys._draw(self)

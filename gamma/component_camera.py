@@ -65,7 +65,7 @@ class CameraComponent(Component):
 
             # if world narrower than camera:
             if (self.rect.w) > (scene.world.map.w_real*self.zoomLevel):
-                newX = (scene.world.map.w_real / 2)
+                newX = int(scene.world.map.w_real / 2)
             else:
                 newX = max(newX, (self.rect.w/self.zoomLevel)/2)
                 newX = min(newX, ( ((scene.world.map.w_real) - (self.rect.w/2/self.zoomLevel)) ) )
@@ -74,7 +74,7 @@ class CameraComponent(Component):
 
             # if world narrower than camera:
             if self.rect.h > (scene.world.map.h_real*self.zoomLevel):
-                newY = (scene.world.map.h_real / 2)
+                newY = int(scene.world.map.h_real / 2)
             else:
                 newY = max(newY, (self.rect.h/self.zoomLevel/2))
                 newY = min(newY, ( ((scene.world.map.h_real) - (self.rect.h/2/self.zoomLevel)) ) )

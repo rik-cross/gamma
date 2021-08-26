@@ -74,9 +74,9 @@ class Map:
             for c in range(self.w_map):
                 tile = self.tiles[r][c]
                 if Tile.tiles[tile].image is not None:
-                    newX = ceil(x + c*(self.tileSize*z))
-                    newY = ceil(y + r*(self.tileSize*z))
-                    newSize = ceil(self.tileSize*z)
+                    newX = int(x + c*(self.tileSize*z))
+                    newY = int(y + r*(self.tileSize*z))
+                    newSize = int(self.tileSize*z)
                     Tile.tiles[tile].drawX(scene.surface, newX, newY, newSize)
 
     def draw(self, scene, x=0, y=0, z=1):

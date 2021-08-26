@@ -61,5 +61,5 @@ class Cutscene:
         w = scene.surface.get_rect().w
         h = scene.surface.get_rect().h
         p = self.fadePercentage / 100
-        drawRect(scene.surface, 0, 0, w, ceil(h//10 * p), self.colour)
-        drawRect(scene.surface, 0, ceil(h - (h//10) * p) , w, h//10 * p, self.colour)
+        drawRect(scene.surface, 0, 0, w, int(h//10 * p), self.colour)
+        drawRect(scene.surface, 0, int(h - (h//10) * p) , w, h//10 * p, self.colour)
