@@ -13,10 +13,14 @@ Note: This library is currently in early development. Until it reaches version 1
 Until the library is more stable, it's advised to install using `python3 setup.py develop` in a virtual environment. This means that changes made to the library won't require a reinstall. Just `git pull` to get the latest version.
 
 ```
+git clone https://github.com/rik-cross/gamma.git
+cd gamma
+
 pip3 install virtualenv
 virtualenv venv
-python3 setup.py develop
 source venv/bin/activate
+
+python3 setup.py develop
 ```
 
 ## Changelog
