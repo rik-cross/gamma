@@ -25,6 +25,7 @@ source venv/bin/activate
 |---|---|
 |0.1|Initial engine version. Includes a basic ECS implementation, scenes (and transitions) and some UI elements. There are very basic versions of a number of systems.|
 |0.2|Some improvements to the systems, mainly adding optional parameters to allow customisation.|
+|0.3|More improvements to the systems, including the addition of a renderer for each scene. This takes the drawing away from the camera system, and allows for the addition of custom systems that can draw.|
 
 ## Licence
 
