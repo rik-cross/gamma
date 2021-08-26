@@ -20,5 +20,7 @@ class ImageSystem(System):
                     componentPosition.y,
                     componentPosition.w,
                     componentPosition.h,
-                    False, False, alpha=componentImageGroups.alpha
+                    componentPosition.angle == 270 and componentPosition.rotationStyle == 'leftRight',
+                    False,
+                    alpha=componentImageGroups.alpha
                 ))

@@ -37,8 +37,8 @@ class Image(Renderable):
 
     def draw(self, surface, xOff=0, yOff=0, scale=1):
 
-        newWidth = int(self.rect.w * scale)
-        newHeight = int(self.rect.h * scale)
+        newWidth = ceil(self.rect.w * scale)
+        newHeight = ceil(self.rect.h * scale)
         newX = self.rect.x * scale + xOff
         newY = self.rect.y * scale + yOff
 
