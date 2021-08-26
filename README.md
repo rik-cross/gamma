@@ -14,8 +14,8 @@ Until the library is more stable, it's advised to install using `python3 setup.p
 
 ```
 pip3 install virtualenv
-python3 setup.py develop
 virtualenv venv
+python3 setup.py develop
 source venv/bin/activate
 ```
 
