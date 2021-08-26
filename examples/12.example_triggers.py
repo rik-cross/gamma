@@ -67,7 +67,6 @@ playerEntity.addComponent(gamma.CameraComponent(
     entityToTrack=playerEntity
 ))
 
-
 # player controls = enter to start cutscene
 def playerControls(player):
     if gamma.inputManager.isDown(player.getComponent('input').left):
