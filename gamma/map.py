@@ -1,6 +1,10 @@
-import math
+from math import ceil
+
+from pygame import surface
 from .tiles import Tile
 from .map_image import MapImage
+import pygame
+from .colours import LIGHT_GREY
 
 class Map:
 
@@ -65,13 +69,30 @@ class Map:
     def getMapCenter(self):
         return (self.h_real//2,self.w_real//2)
 
-    def draw(self, screen, x, y, z=1):
+    def drawThumbnail(self, scene, x, y, z):
+        for r in range(self.h_map):
+            for c in range(self.w_map):
+                tile = self.tiles[r][c]
+                if Tile.tiles[tile].image is not None:
+                    newX = ceil(x + c*(self.tileSize*z))
+                    newY = ceil(y + r*(self.tileSize*z))
+                    newSize = ceil(self.tileSize*z)
+                    Tile.tiles[tile].drawX(scene.surface, newX, newY, newSize)
+
+    def draw(self, scene, x=0, y=0, z=1):
+ 
+        #if self.drawGrid:
+        #    for r in range(self.h_map):
+        #        pygame.draw.line(screen, LIGHT_GREY, (), ())
+        #    for c in range(self.w_map):
+        #        pygame.draw.line(screen, LIGHT_GREY, (), ())
+
         for r in range(self.h_map):
             for c in range(self.w_map):
                 tile = self.tiles[r][c]
                 if Tile.tiles[tile].image is not None:
                     newX = x + c*(self.tileSize*z)
                     newY = y + r*(self.tileSize*z)
-                    newWidth = math.ceil(self.tileSize * z)
-                    newHeight = math.ceil(self.tileSize * z)
-                    Tile.tiles[tile].draw(screen, newX, newY, newWidth, newHeight)
+                    newSize = self.tileSize*z
+                    Tile.tiles[tile].draw(scene, newX, newY, newSize)
+                

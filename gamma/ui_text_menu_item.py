@@ -1,5 +1,5 @@
 from .ui_action_listener import *
-from .ui_text import *
+from .ui_text2 import Text
 from .colours import *
 
 class UITextMenuItem:
@@ -84,4 +84,5 @@ class UITextMenuItem:
             self.colour = self.normalColour
         
     def draw(self, x, y, scene):
-        drawText(scene.surface, self.text, x, y, self.colour, hAlign='center', underline=self.colour is not self.normalColour)
+        Text(self.text, x, y, colour=self.colour, underline=self.colour is not self.normalColour, hAlign='center').draw(scene.surface)
+        #drawText(scene.surface, self.text, x, y, self.colour, hAlign='center', underline=self.colour is not self.normalColour)

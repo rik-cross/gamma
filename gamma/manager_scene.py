@@ -42,14 +42,17 @@ class SceneManager:
                 self.getTopScene()._draw()
     
     def push(self, scene):
-        self.exitScene()
+        if not scene.drawSceneBelow:
+            self.exitScene()
         self.scenes.append(scene)
         self.enterScene()
 
     def pop(self):
+        scene = self.scenes[-1]
         self.exitScene()
         self.scenes.pop()
-        self.enterScene()
+        if not scene.drawSceneBelow:
+            self.enterScene()
 
     def set(self, scenes):
         # pop all scenes

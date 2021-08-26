@@ -1,6 +1,8 @@
 from .gamma import *
 
 from .scene import *
+from .renderer import *
+from .renderable import *
 
 from .transition import *
 from .transition_none import *
@@ -32,6 +34,7 @@ from .system_trauma import *
 from .system_particle import *
 from .system_emote import *
 from .system_text import *
+from .system_image import *
 
 from .component import *
 from .component_camera import *
@@ -63,10 +66,15 @@ from .map import *
 from .map_image import *
 
 from .ui_text import *
+from .ui_text2 import *
 from .ui_text_menu_item import *
 from .ui_action_listener import *
 from .ui_menu import *
 from .ui_button import *
+
+from .image import *
+from .rectangle import *
+from .circle import *
 
 from .particle import *
 from .component_particle_emitter import *

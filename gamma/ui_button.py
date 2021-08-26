@@ -1,3 +1,5 @@
+from .ui_text2 import Text
+from .image import Image
 from .gamma import inputManager
 from .ui_text import drawText
 
@@ -63,16 +65,19 @@ class UIButton:
         # update the button's current imageGroup
         self.currentImageGroup.update()
 
-    def draw(self, screen):
+    def draw(self, surface):
 
+        # calculate alpha
         alpha = 255
         if not self.active:
             alpha = 100
 
         # draw button image
-        self.currentImageGroup.draw(screen, self.x, self.y, alpha=alpha)
+        image = self.currentImageGroup.imageList[self.currentImageGroup.imageIndex].copy()
+        Image(image, self.x, self.y, alpha=alpha).draw(surface)
+        
         # draw button text
         if self.text is not None:
             textX = self.x + self.currentImageGroup.imageList[self.currentImageGroup.imageIndex].get_rect().w + 10
             textY = self.y
-            drawText(screen, self.text, textX, textY, alpha=alpha, fontTag=self.font)
+            Text(self.text, textX, textY, alpha=alpha).draw(surface)

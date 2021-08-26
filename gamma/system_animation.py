@@ -1,5 +1,6 @@
 from .system import *
 from .colours import *
+from .image import Image
 
 class AnimationSystem(System):
 

@@ -42,7 +42,7 @@ def playerControls(player):
             )
         )
 
-playerEntity.addComponent(gamma.InputComponent(gamma.keys.w, gamma.keys.s, gamma.keys.a, gamma.keys.d, gamma.keys.enter, None, playerControls))
+playerEntity.addComponent(gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, b1=gamma.keys.enter, inputFunc=playerControls))
 
 #
 # create a camera that has zoom functionality

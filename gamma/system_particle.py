@@ -11,6 +11,8 @@ class ParticleSystem(System):
         emt.update(pos.rect.x, pos.rect.y)
         if emt.destroy:
             entity.removeComponent('emitter')
-            # TODO - delete entity if its only function is a particle emitter
-            #if len(entity.components) == 4 and entity.hasComponent('emitter', 'position', 'transform', 'tags'):
-            #    world.deleteEntity(entity)
+            #if entity.getComponent('tags').has('particle'):
+            #    scene.world.deleteEntity(entity)
+    
+    def drawEntity(self, entity, scene):
+        entity.getComponent('emitter').draw(scene)

@@ -18,6 +18,7 @@ from .system_physics import *
 from .system_text import *
 from .system_trauma import *
 from .system_trigger import *
+from .system_image import *
 
 from .manager_entity import *
 from .entity_factory import *
@@ -37,19 +38,22 @@ resourceManager.addFont('munro24', ROOT_DIR + '/fonts/munro.ttf')
 resourceManager.addImage('default_icon', ROOT_DIR + '/images/icon.png')
 resourceManager.addImage('tile_outline', ROOT_DIR + '/images/tile_outline.png')
 resourceManager.addImage('cross', ROOT_DIR + '/images/cross.png')
+resourceManager.addImage('emote', ROOT_DIR + '/images/emote_box.png')
+resourceManager.addImage('gamma', ROOT_DIR + '/images/gamma.png')
 
 # add core game systems
 systemManager = SystemManager()
 systemManager.addSystem(
-    AnimationSystem(),
-    EmoteSystem(),
+    CameraSystem(),
     InputSystem(),
     PhysicsSystem(),
-    TextSystem(),
     TraumaSystem(),
     TriggerSystem(),
-    ParticleSystem(),
-    CameraSystem()
+    AnimationSystem(),
+    ImageSystem(),
+    EmoteSystem(),
+    TextSystem(),
+    ParticleSystem()
 )
 
 entityManager = EntityManager()

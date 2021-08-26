@@ -1,12 +1,12 @@
+from random import randint
+
+
 class System():
     
     def __init__(self):
         self.requiredComponents = []
         self.requiredTags = []
-        # all systems run as part of a scene update() method,
-        # but those tagged as 'requiresDraw' instead run as part
-        # of the scene draw() method
-        self.requiresDraw = False
+        self.requiresDraw = False # TODO - don't need
         self.setRequirements()
         self.init()
 
@@ -26,15 +26,34 @@ class System():
             return True
         return entity.hasComponent(*self.requiredComponents) and entity.getComponent('tags').has(*self.requiredTags)
 
-    # runs the 'updateEntity() method on all systems that
-    # meet the system requirements
-    # TODO - name as _update(), as it's internal
-    def update(self, scene):
-
+    # runs update() and updateEntity() method on all
+    # systems that meet the system requirements
+    def _update(self, scene):
+        self.update(scene)
         for entity in scene.world.entities:
             if self._checkRequirements(entity):
                 self.updateEntity(entity, scene)
 
-    # this method processes each entity in a given scene
+    # runs once per frame
+    def update(self, scene):
+        pass
+
+    # processes each entity in a given scene
     def updateEntity(self, entity, scene):
+        pass
+
+    # runs draw() and drawEntity() method on all
+    # systems that meet the system requirements
+    def _draw(self, scene):
+        self.draw(scene)
+        for entity in scene.world.entities:
+            if self._checkRequirements(entity):
+                self.drawEntity(entity, scene)
+    
+    # runs once per frame
+    def draw(self, scene):
+        pass
+    
+    # processes each entity in a given scene
+    def drawEntity(self, entity, scene):
         pass

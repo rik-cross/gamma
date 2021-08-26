@@ -30,6 +30,14 @@ class CameraComponent(Component):
         self.movementPerFrameY = 0
 
         self.clampToWorld=True
+
+        # test
+        self._x = 0
+        self._y = 0
+        self._z = 0
+    
+    def getTransform(x, y):
+        pass # todo
     
     def setZoom(self, level, duration=1):
         if duration < 1:

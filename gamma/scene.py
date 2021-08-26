@@ -1,14 +1,16 @@
 import pygame
 import math
-from .gamma import screen, systemManager, sceneManager
+from .gamma import screen, systemManager, sceneManager, windowSize
 from .world import World
 from .utils import *
 from .colours import *
+from .renderer import Renderer
+from .utils import drawRect
 
 class Scene:
     
-    def __init__(self, world=None, menu=None):
-        
+    def __init__(self, world=None, menu=None, background=None, backgroundAlpha=255):
+
         self.world = world
         if self.world is None:
             self.world = World()
@@ -19,7 +21,12 @@ class Scene:
         self.buttons = []
         self.resetEffects()
 
+        self.background = background
+        self.backgroundAlpha = backgroundAlpha
+
         self.drawSceneBelow = False
+
+        self.renderer = Renderer(self)
 
         self.init()
 
@@ -68,7 +75,7 @@ class Scene:
 
         for sys in systemManager.systems:
             if not sys.requiresDraw:
-                sys.update(self)
+                sys._update(self)
 
         if self.menu is not None:
             self.menu.update()
@@ -83,26 +90,37 @@ class Scene:
         h = math.ceil(pygame.display.get_surface().get_size()[1] / 100 * self.heightPercentage)
         self.surface = pygame.Surface((w,h), pygame.SRCALPHA)
         self.surface.convert_alpha()
-        
+
+        # draw background (colour or image)
+        if self.background is not None:
+            if type(self.background) is pygame.Color:
+                self.surface.fill(self.background)
+            else:
+                self.background.draw(self.surface)
+
         # draw scene below if requested
+        # TODO -- all systems need to run, as they send images, etc. to the renderer
+        # maybe have self.pause per scene, and only draw if paused.
         if self.drawSceneBelow:
             sceneManager.getSceneBelow(self)._draw()
 
-        # call the scene-specific draw method
-        self.draw()
+        # draw map
+        if self.world.map is not None:
+            self.world.map.draw(self)
 
         # update systems that require a draw call
+        # TODO - get rid of this. Just render.
         for sys in systemManager.systems:
             if sys.requiresDraw:
-                sys.update(self)
-        
-        # draw the menu
-        if self.menu is not None:
-            self.menu.draw()
+                sys._update(self)
 
-        # draw buttons
-        for b in self.buttons:
-            b.draw(self.surface)
+        for sys in systemManager.systems:
+            sys._draw(self)
+
+        self.renderer.draw()
+        self.renderer.flush()
+
+
 
         # calculate the scene position and transparency
         x = math.ceil(pygame.display.get_surface().get_size()[0] / 100 * self.leftPercentage)
@@ -112,8 +130,21 @@ class Scene:
         if self.cutscene is not None:
             self.cutscene.draw(self)
 
+        # call the scene-specific draw method
+        self.draw()
+
+        # draw the menu
+        if self.menu is not None:
+            self.menu.draw()
+
+        # draw buttons
+        for b in self.buttons:
+            b.draw(self.surface)              
+
         # draw the scene
         screen.blit(self.surface, (x,y))
+
+        
 
     def input(self):
         pass

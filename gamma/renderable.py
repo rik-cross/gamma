@@ -1,0 +1,2 @@
+class Renderable:
+    pass

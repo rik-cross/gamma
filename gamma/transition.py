@@ -2,7 +2,7 @@ from .gamma import sceneManager
 
 class Transition:
 
-    def __init__(self, fromScenes, toScenes, frameDuration=30):
+    def __init__(self, fromScenes, toScenes, frameDuration=60):
         self.fromScenes = fromScenes
         self.toScenes = toScenes
         self.frameDuration = frameDuration

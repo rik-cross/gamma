@@ -11,12 +11,20 @@ class PositionComponent(Component):
         self.initialRect = pygame.Rect(x, y, w, h)
 
         # store position anchor points
+        
         self.xAnchor = xAnchor
+        self.initialXAnchor = deepcopy(xAnchor)
+        
         self.yAnchor = yAnchor
+        self.initialYAnchor = deepcopy(yAnchor)
+
         self.calculatePositionUsingAnchors()
 
         self.angle = angle
+        self.initialAngle = deepcopy(angle)
+
         self.rotationStyle = rotationStyle
+        self.initialRotationStyle = deepcopy(rotationStyle)
 
     def calculatePositionUsingAnchors(self):
 
@@ -33,9 +41,14 @@ class PositionComponent(Component):
             self.rect.y -= (self.rect.h)
 
     def reset(self):
+        self.xAnchor = self.initialXAnchor
+        self.yAnchor = self.initialYAnchor
         self.rect = deepcopy(self.initialRect)
+        self.calculatePositionUsingAnchors()
+        self.angle = self.initialAngle
+        self.rotationStyle = self.initialRotationStyle
 
-    def setSize...
+    #def setSize...
 
     def touching(self, otherEntity):
         if not otherEntity.hasComponent('position'):

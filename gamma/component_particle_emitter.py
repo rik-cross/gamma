@@ -54,8 +54,8 @@ class ParticleEmitterComponent:
             if len(self.particles) == 0:
                 self.destroy = True
 
-    def draw(self, screen):
+    def draw(self, scene):
 
         # draw all particles
         for p in self.particles:
-            p.draw(screen)
+            p.draw(scene)

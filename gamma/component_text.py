@@ -3,6 +3,7 @@ import gamma
 from .ui_text import *
 from .colours import *
 from .colours import *
+from .ui_text2 import Text
 
 class TextComponent(Component):
 
@@ -11,7 +12,7 @@ class TextComponent(Component):
         # minimum text character width
         width = 20,
         # spacing between rows of text
-        spacing = 30,
+        spacing = 15,
         # display above the entity, or at bottom of scene
         # (not yet implemented)
         overhead = True,
@@ -142,11 +143,26 @@ class TextComponent(Component):
             if self.fadeAmount == 0:
                 self.destroy = True
 
-    def draw(self, screen, x, y):        
+    def draw(self, scene, x, y):      
+
         rows = self.spacing * len(self.textList)
 
         for i,l in enumerate(self.textList):
+
             if i == self.row:
-                drawText(screen, l[0:self.index], x, y-10-rows+(i*self.spacing), self.colour, self.fadeAmount)
+                scene.renderer.add(Text(
+                    l[0:self.index],
+                    x,
+                    y-10-rows+(i*self.spacing),
+                    colour=self.colour,
+                    alpha=self.fadeAmount
+                ))
+
             elif i < self.row:
-                drawText(screen, l, x, y-10-rows+(i*self.spacing), self.colour, self.fadeAmount)
+                scene.renderer.add(Text(
+                    l,
+                    x,
+                    y-10-rows+(i*self.spacing),
+                    colour=self.colour,
+                    alpha=self.fadeAmount
+                ))

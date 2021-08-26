@@ -8,6 +8,11 @@ class ImageGroupsComponent:
         self.hue = None
         self.playing = True
     
+    def getCurrentImageGroup(self):
+        if self.animationList == {} or self.current is None:
+            return None
+        return self.animationList[self.current]
+
     def add(self, state, animation):
         self.animationList[state] = animation
         if self.current == None:
