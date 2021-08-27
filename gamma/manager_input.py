@@ -3,11 +3,14 @@ from .controller import *
 from .keyboard import *
 
 class PlayerInput:
-    def __init__(self, controllerNumber, inputNumber, type, threshhold):
+    def __init__(self, controllerNumber, inputNumber, type, threshhold, imagesReleased=None, imagesPressed=None):
         self.controllerNumber = controllerNumber
         self.inputNumber = inputNumber
         self.type = type
         self.threshhold = threshhold
+
+        self.imagesReleased = imagesReleased
+        self.imagesPressed = imagesPressed
 
 class InputManager:
     def __init__(self):

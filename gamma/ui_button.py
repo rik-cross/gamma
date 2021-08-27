@@ -14,8 +14,10 @@ class UIButton:
         self.pressedImageGroup = pressedImageGroup
         self.currentImageGroup = self.defaultImageGroup
 
-        self.defaultImageGroup.loop = False
-        self.pressedImageGroup.loop = False
+        if self.defaultImageGroup is not None:
+            self.defaultImageGroup.loop = False
+        if self.pressedImageGroup is not None:
+            self.pressedImageGroup.loop = False
 
         # a list of entities that can press the button
         self.controlledBy = controlledBy
@@ -46,14 +48,16 @@ class UIButton:
                     break
         
         # display the button as pressed or not
-        if self.downCurrent:
-            self.currentImageGroup = self.pressedImageGroup
-        else:
-            self.currentImageGroup = self.defaultImageGroup
+        if self.defaultImageGroup is not None and self.pressedImageGroup is not None:
+            if self.downCurrent:
+                self.currentImageGroup = self.pressedImageGroup
+            else:
+                self.currentImageGroup = self.defaultImageGroup
 
         # reset imageGroup on state change
         if self.downCurrent is not self.downPrevious:
-            self.pressedImageGroup.reset()
+            if self.pressedImageGroup is not None:
+                self.pressedImageGroup.reset()
 
         # execute the button (once) if pressed
         for c in self.controlledBy:
@@ -63,7 +67,8 @@ class UIButton:
                         self.actionListener.execute()
         
         # update the button's current imageGroup
-        self.currentImageGroup.update()
+        if self.currentImageGroup is not None:
+            self.currentImageGroup.update()
 
     def draw(self, surface):
 
@@ -73,11 +78,16 @@ class UIButton:
             alpha = 100
 
         # draw button image
-        image = self.currentImageGroup.imageList[self.currentImageGroup.imageIndex].copy()
-        Image(image, self.x, self.y, alpha=alpha).draw(surface)
-        
-        # draw button text
-        if self.text is not None:
-            textX = self.x + self.currentImageGroup.imageList[self.currentImageGroup.imageIndex].get_rect().w + 10
-            textY = self.y
-            Text(self.text, textX, textY, alpha=alpha).draw(surface)
+        if self.currentImageGroup is not None:
+
+            image = self.currentImageGroup.imageList[self.currentImageGroup.imageIndex]
+
+            if image is not None:
+                image = image.copy()
+                Image(image, self.x, self.y, alpha=alpha).draw(surface)
+                
+                # draw button text
+                if self.text is not None:
+                    textX = self.x + self.currentImageGroup.imageList[self.currentImageGroup.imageIndex].get_rect().w + 10
+                    textY = self.y
+                    Text(self.text, textX, textY, alpha=alpha).draw(surface)

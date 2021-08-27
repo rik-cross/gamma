@@ -84,10 +84,10 @@ def createKeyboardInputComponent(entityControllerFunction):
         down        = keys.down,
         left        = keys.left,
         right       = keys.right,
-        b1          = keys.enter,
-        b2          = keys.esc,
-        b3          = None,
-        b4          = None,
+        b1          = keys.k,
+        b2          = keys.l,
+        b3          = keys.j,
+        b4          = keys.i,
         b5          = None,
         b6          = None,
         b7          = None,
@@ -106,3 +106,4 @@ def createKeyboardInputComponent(entityControllerFunction):
     )
 
     return keyboardInputComponent
+
