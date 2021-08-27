@@ -73,7 +73,7 @@ def init(size=(1200,800), caption='', icon=resourceManager.getImage('default_ico
     pygame.display.set_caption(caption)
     pygame.display.set_icon(icon)
 
-def run(fps=60):
+def run(fps=60, showFPS=False):
     running = True
     while running:
     # game loop
@@ -101,7 +101,8 @@ def run(fps=60):
         # set maximum framerate
         clock.tick(fps)
 
-        #print(clock.get_fps())
+        if showFPS:
+            print('FPS:', clock.get_fps())
 
     # quit
     sceneManager.clear()

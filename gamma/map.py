@@ -9,7 +9,7 @@ from .colours import LIGHT_GREY
 class Map:
 
     def __init__(self, tiles=None, tileSize=32, name=None):
-        
+
         self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
         self.drawGrid = False
@@ -80,7 +80,7 @@ class Map:
                     Tile.tiles[tile].drawX(scene.surface, newX, newY, newSize)
 
     def draw(self, scene, x=0, y=0, z=1):
- 
+
         #if self.drawGrid:
         #    for r in range(self.h_map):
         #        pygame.draw.line(screen, LIGHT_GREY, (), ())
@@ -94,5 +94,5 @@ class Map:
                     newX = x + c*(self.tileSize*z)
                     newY = y + r*(self.tileSize*z)
                     newSize = self.tileSize*z
-                    Tile.tiles[tile].draw(scene, newX, newY, newSize)
+                    Tile.tiles[tile].draw(scene, newX, newY, newSize, alpha=self.alpha)
                 

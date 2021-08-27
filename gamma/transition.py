@@ -2,12 +2,12 @@ from .gamma import sceneManager
 
 class Transition:
 
-    def __init__(self, fromScenes, toScenes, frameDuration=60):
+    def __init__(self, fromScenes, toScenes, frameDuration=60, replaceScenes=False):
         self.fromScenes = fromScenes
         self.toScenes = toScenes
         self.frameDuration = frameDuration
         self.currentPercentage = 0
-
+        self.replaceScenes = replaceScenes
         self.resetAllSceneEffects()
         self.init()
 
@@ -37,6 +37,8 @@ class Transition:
             for s in self.fromScenes:
                 sceneManager.pop()
         else:
+            if self.replaceScenes:
+                sceneManager.clear()
             for s in self.toScenes:
                 sceneManager.push(s)
 

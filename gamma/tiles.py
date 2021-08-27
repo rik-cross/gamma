@@ -13,13 +13,14 @@ class Tile:
         self.image = image
         self.solid = solid
     
-    def draw(self, scene, x, y, size):
+    def draw(self, scene, x, y, size, alpha=255):
         if self.image is None:
             return
         scene.renderer.add(Image(
             self.image,
             x, y,
-            size, size
+            size, size,
+            alpha=alpha
         ))
 
     def drawX(self, screen, x, y, size):

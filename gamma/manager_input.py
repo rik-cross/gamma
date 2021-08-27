@@ -18,7 +18,8 @@ class InputManager:
         self.keyboard.processInput()
         for controller in self.controllers:
             controller.processInput()
-    # TODO have as lists.
+    def numControllers(self):
+        return pygame.joystick.get_count()
     def isDown(self, playerinput):
         if playerinput is None:
             return False

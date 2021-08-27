@@ -70,11 +70,11 @@ class Scene:
         self.frame += 1
         self.update()
     
-        if self.cutscene is not None:
-            self.cutscene.update(self)
-
         for sys in systemManager.systems:
                 sys._update(self)
+
+        if self.cutscene is not None:
+            self.cutscene.update(self)
 
         if self.menu is not None:
             self.menu.update()

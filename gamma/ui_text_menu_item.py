@@ -84,5 +84,9 @@ class UITextMenuItem:
             self.colour = self.normalColour
         
     def draw(self, x, y, scene):
-        Text(self.text, x, y, colour=self.colour, underline=self.colour is not self.normalColour, hAlign='center').draw(scene.surface)
-        #drawText(scene.surface, self.text, x, y, self.colour, hAlign='center', underline=self.colour is not self.normalColour)
+        # draw the menu item text
+        t = Text(self.text, x, y, colour=self.colour, underline=False, hAlign='center')
+        t.draw(scene.surface)
+        # mark the currently selected item
+        if self.colour is not self.normalColour:
+            Text('>', x - (t.rect.w//2) - 10, y, colour=self.colour, underline=False, hAlign='right').draw(scene.surface)
