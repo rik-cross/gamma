@@ -57,7 +57,7 @@ class CameraComponent(Component):
 
         newX = x
         newY = y
-  
+
         if scene.world is not None and scene.world.map is not None and self.clampToWorld:
 
             # calculate x value

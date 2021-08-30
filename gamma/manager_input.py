@@ -84,6 +84,11 @@ class KeyInput:
         self.u = PlayerInput(0,pygame.K_u,'key',1)
         self.o = PlayerInput(0,pygame.K_o,'key',1)
 
+        self.t = PlayerInput(0,pygame.K_t,'key',1)
+        self.g = PlayerInput(0,pygame.K_g,'key',1)
+        self.f = PlayerInput(0,pygame.K_f,'key',1)
+        self.h = PlayerInput(0,pygame.K_h,'key',1)
+
         self.n1 = PlayerInput(0,pygame.K_1,'key',1)
         self.n2 = PlayerInput(0,pygame.K_2,'key',1)
         self.n3 = PlayerInput(0,pygame.K_3,'key',1)

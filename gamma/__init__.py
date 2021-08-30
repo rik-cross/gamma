@@ -71,6 +71,7 @@ from .ui_text_menu_item import *
 from .ui_action_listener import *
 from .ui_menu import *
 from .ui_button import *
+from .ui_text_input import *
 
 from .image import *
 from .rectangle import *

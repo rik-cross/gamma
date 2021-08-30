@@ -8,7 +8,7 @@ from .colours import LIGHT_GREY
 
 class Map:
 
-    def __init__(self, tiles=None, tileSize=32, name=None):
+    def __init__(self, tiles=None, tileSize=32, name=None, alpha=255):
 
         self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
@@ -21,6 +21,7 @@ class Map:
             self.tiles = tiles
         self.setDimensions()
         self.name = name
+        self.alpha = alpha
 
     def setDimensions(self):
 

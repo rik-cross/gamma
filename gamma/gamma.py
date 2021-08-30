@@ -69,7 +69,7 @@ def init(size=(1200,800), caption='', icon=resourceManager.getImage('default_ico
     global windowSize
     windowSize.w = size[0]
     windowSize.h = size[1]
-    screen = pygame.display.set_mode((windowSize.w, windowSize.h))
+    screen = pygame.display.set_mode((windowSize.w, windowSize.h))#, pygame.RESIZABLE)
     pygame.display.set_caption(caption)
     pygame.display.set_icon(icon)
 
