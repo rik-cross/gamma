@@ -1,33 +1,52 @@
-from .colours import WHITE
-from .renderable import Renderable
-#from .ui_text import blit_alpha
 import pygame
-
-def blit_alpha(target, source, location, opacity):
-
-    x = location[0]
-    y = location[1]
-    temp = pygame.Surface((source.get_width(), source.get_height())).convert()
-    temp.blit(target, (-x, -y))
-    temp.blit(source, (0, 0))
-    temp.set_alpha(opacity)
-    target.blit(temp, location)
+from .renderable import Renderable
+from .utils_draw import blit_alpha
+from .colours import WHITE
 
 class Circle(Renderable):
 
-    def __init__(self, x, y, r, colour=WHITE, alpha=255):
+    def __init__(self,
+    
+        # required parameters
+        x, y, radius,
         
-        self.colour = colour
-        self.alpha = alpha
+        # optional parameters
+        hAlign='left', vAlign='top',
+        colour=WHITE,
+        alpha=255
 
-        self.x = x
-        self.y = y
-        self.r = r
+    ):
+
+        super().__init__(x, y, hAlign, vAlign, colour, alpha)
+        
+        # set additional text object parameters 
+        self._radius = radius
+        self._createSurface()
+    
+    def _createSurface(self):
+
+        self.surface = pygame.Surface((self._radius*2, self._radius*2), pygame.SRCALPHA)
+        pygame.draw.circle(self.surface, self.colour, (self._radius, self._radius), self._radius)
+        self.rect = self.surface.get_rect()
+        self._align()
 
     def draw(self, surface, xOff=0, yOff=0, scale=1):
-        x = int(self.x * scale + xOff)
-        y = int(self.y * scale + yOff)
-        r = int(self.r * scale)
-        pygame.draw.circle(surface, self.colour, (x, y), r)
+
+        x = int(self.rect.x * scale + xOff)
+        y = int(self.rect.y * scale + yOff)
+        r = int(self.rect.w * scale)
+        scaled_surface = pygame.transform.scale(self.surface, (r, r))
+        blit_alpha(surface, scaled_surface, (x, y), self.alpha)
+
+    #  radius property
+
+    @property
+    def radius(self):
+        return self._radius
+    
+    @radius.setter
+    def radius(self, value):
+        self._radius = value
+        self._createSurface()
 
 

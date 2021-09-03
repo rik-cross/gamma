@@ -1,50 +1,53 @@
 from .gamma import resourceManager
-from .colours import WHITE
 from .renderable import Renderable
-import pygame
-
-def blit_alpha(target, source, location, opacity):
-
-    x = location[0]
-    y = location[1]
-    temp = pygame.Surface((source.get_width(), source.get_height())).convert()
-    temp.blit(target, (-x, -y))
-    temp.blit(source, (0, 0))
-    temp.set_alpha(opacity)
-    target.blit(temp, location)
+from .utils_draw import blit_alpha
+from .colours import WHITE
 
 class Text(Renderable):
 
-    def __init__(self, text, x, y, colour=WHITE, alpha=255, fontTag='munro24', underline=False, hAlign='left', vAlign='top'):
+    def __init__(self,
+
+        # required parameters
+        text, x, y,
         
-        self.text = str(text)
-        self.colour = colour
-        self.alpha = alpha
+        # optional parameters
+        hAlign='left', vAlign='top',
+        colour=WHITE,
+        alpha=255,
+        fontTag='munro24',
+        underline=False
+
+    ):
+
+        super().__init__(x, y, hAlign, vAlign, colour, alpha)
+        
+        # set additional text object parameters 
+        self._text = str(text)
         self.fontTag = fontTag
         self.underline = underline
+        self._createSurface()
+
+    def _createSurface(self):
 
         self.font = resourceManager.getFont(self.fontTag)
         self.font.set_underline(self.underline)
-        self.textSurface = self.font.render(self.text, True, self.colour)
+        self.textSurface = self.font.render(self._text, True, self.colour)
         self.rect = self.textSurface.get_rect()
-
-        self.rect.x = x
-        self.rect.y = y
-
-        # adjust x position for horizontal anchor
-        if hAlign == 'center':
-            self.rect.centerx = self.rect.x
-        if hAlign == 'right':
-            self.rect.right = self.rect.x
-
-        # adjust y position for vertical anchor
-        if vAlign == 'middle':
-            self.rect.centery = self.rect.y
-        if vAlign == 'bottom':
-            self.rect.bottom = self.rect.y
+        self._align()
 
     def draw(self, surface, xOff=0, yOff=0, scale=1):
+
         x = self.rect.x * scale + xOff
         y = self.rect.y * scale + yOff
         blit_alpha(surface, self.textSurface, (x,y), self.alpha)
 
+    #  text property
+
+    @property
+    def text(self):
+        return self._text
+    
+    @text.setter
+    def text(self, value):
+        self._text = str(value)
+        self._createSurface()

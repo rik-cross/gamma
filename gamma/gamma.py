@@ -35,7 +35,7 @@ inputManager = InputManager()
 soundManager = SoundManager()
 resourceManager = ResourceManager()
 resourceManager.addFont('munro24', ROOT_DIR + '/fonts/munro.ttf')
-resourceManager.addImage('default_icon', ROOT_DIR + '/images/icon.png')
+resourceManager.addImage('gamma_icon', ROOT_DIR + '/images/icon.png')
 resourceManager.addImage('tile_outline', ROOT_DIR + '/images/tile_outline.png')
 resourceManager.addImage('cross', ROOT_DIR + '/images/cross.png')
 resourceManager.addImage('emote', ROOT_DIR + '/images/emote_box.png')
@@ -64,12 +64,12 @@ clock = pygame.time.Clock()
 windowSize = pygame.Rect(0,0,1200,800)
 screen = pygame.display.set_mode((windowSize.w, windowSize.h))
 
-def init(size=(1200,800), caption='', icon=resourceManager.getImage('default_icon')):
+def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma_icon')):
     global screen
     global windowSize
     windowSize.w = size[0]
     windowSize.h = size[1]
-    screen = pygame.display.set_mode((windowSize.w, windowSize.h))#, pygame.RESIZABLE)
+    screen = pygame.display.set_mode((windowSize.w, windowSize.h))
     pygame.display.set_caption(caption)
     pygame.display.set_icon(icon)
 
@@ -91,8 +91,10 @@ def run(fps=60, showFPS=False):
 
         # input
         sceneManager.input()
+
         # update
         sceneManager.update()
+        
         # draw
         screen.fill((0,0,0))
         sceneManager.draw() 
