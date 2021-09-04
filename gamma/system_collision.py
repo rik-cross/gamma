@@ -3,6 +3,9 @@ from .system import System
 
 class CollisionSystem(System):
 
+    def init(self):
+        self.key = 'collision'
+
     def setRequirements(self):
         self.requiredComponents = ['position', 'collider']
     
@@ -46,6 +49,6 @@ class CollisionSystem(System):
 
         # collision with world
         if scene.world.map is not None:
-
+            pass
             # get the tile at each of the 4 entity collider corners
             # TODO...

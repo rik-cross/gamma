@@ -3,7 +3,7 @@ import gamma
 from .ui_text import *
 from .colours import *
 from .colours import *
-from .ui_text2 import Text
+from .text import Text
 
 class TextComponent(Component):
 

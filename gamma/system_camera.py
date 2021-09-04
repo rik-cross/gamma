@@ -4,6 +4,9 @@ import random
 
 class CameraSystem(System):
 
+    def init(self):
+        self.key = 'camera'
+
     def setRequirements(self):
         self.requiredComponents = ['camera']
 

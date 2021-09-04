@@ -15,11 +15,11 @@ class RenderableScene(gamma.Scene):
             'Title text',
             gamma.windowSize.w/2,
             100,
-            colour=gamma.BLUE,
+            colour=gamma.YELLOW,
             alpha=255,
             hAlign='center',
             vAlign='middle',
-            fontTag='large',
+            font=gamma.resourceManager.getFont('large'),
             underline=True
         )
 

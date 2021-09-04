@@ -1,6 +1,6 @@
 from gamma.rectangle import Rectangle
 from .utils import drawBox
-from .ui_text2 import Text
+from .text import Text
 from .gamma import inputManager, entityManager
 from .colours import *
 

@@ -1,4 +1,9 @@
 import pygame
+
+# TODO -- would prefer to pass imageTag instead of surface
+# but this gives a circular import (via .gamma systems that use Image)
+#from .gamma import resourceManager
+
 from .renderable import Renderable
 from .utils_draw import blit_alpha
 from math import ceil
@@ -8,7 +13,7 @@ class Image(Renderable):
     def __init__(self,
     
         # requried parameters
-        image, x, y,
+        imageSurface, x, y,
         
         # optional parameters
         w=None, h=None,
@@ -21,11 +26,10 @@ class Image(Renderable):
         
         super().__init__(x, y, hAlign, vAlign, colour, alpha)
 
-        self.image = image.copy() # do this when getting from the resourceManager
-        
+        # set additional image object parameters
+        self.imageSurface = imageSurface.copy()
         self.flipX = flipX
         self.flipY = flipY
-
         self._w = w
         self._h = h
 
@@ -33,7 +37,7 @@ class Image(Renderable):
 
     def _createSurface(self):
 
-        self.rect = self.image.get_rect()
+        self.rect = self.imageSurface.get_rect()
         self.rect.x = self._x
         self.rect.y = self._y
 
@@ -55,7 +59,7 @@ class Image(Renderable):
             surface,
             pygame.transform.scale(
                 pygame.transform.flip(
-                    self.image, self.flipX, self.flipY
+                    self.imageSurface, self.flipX, self.flipY
                 ), (newWidth, newHeight)
             ),
             (newX, newY),

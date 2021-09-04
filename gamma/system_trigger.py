@@ -4,6 +4,9 @@ from .gamma import *
 
 class TriggerSystem(System):
 
+    def init(self):
+        self.key = 'trigger'
+
     def setRequirements(self):
         self.requiredComponents = ['position', 'triggers']
 

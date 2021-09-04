@@ -14,7 +14,7 @@ class Text(Renderable):
         hAlign='left', vAlign='top',
         colour=WHITE,
         alpha=255,
-        fontTag='munro24',
+        font=resourceManager.getFont('munro24'),
         underline=False
 
     ):
@@ -23,13 +23,13 @@ class Text(Renderable):
         
         # set additional text object parameters 
         self._text = str(text)
-        self.fontTag = fontTag
+        self.font = font
         self.underline = underline
         self._createSurface()
 
     def _createSurface(self):
 
-        self.font = resourceManager.getFont(self.fontTag)
+        #self.font = resourceManager.getFont(self.fontTag)
         self.font.set_underline(self.underline)
         self.textSurface = self.font.render(self._text, True, self.colour)
         self.rect = self.textSurface.get_rect()

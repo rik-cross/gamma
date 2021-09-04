@@ -1,8 +1,11 @@
 from .system import *
 from .colours import *
-from .image import Image
+#from .image import Image
 
 class AnimationSystem(System):
+
+    def init(self):
+        self.key = 'animation'
 
     def setRequirements(self):
         self.requiredComponents = ['imagegroups', 'position']

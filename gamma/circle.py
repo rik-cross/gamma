@@ -19,7 +19,7 @@ class Circle(Renderable):
 
         super().__init__(x, y, hAlign, vAlign, colour, alpha)
         
-        # set additional text object parameters 
+        # set additional circle object parameters 
         self._radius = radius
         self._createSurface()
     
@@ -48,5 +48,3 @@ class Circle(Renderable):
     def radius(self, value):
         self._radius = value
         self._createSurface()
-
-

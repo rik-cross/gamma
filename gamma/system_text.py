@@ -2,6 +2,9 @@ from .system import *
 
 class TextSystem(System):
 
+    def init(self):
+        self.key = 'text'
+
     def setRequirements(self):
         self.requiredComponents = ['text']
     

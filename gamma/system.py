@@ -1,9 +1,7 @@
-from random import randint
-
-
 class System():
     
     def __init__(self):
+
         self.requiredComponents = []
         self.requiredTags = []
         self.requiresDraw = False # TODO - don't need
@@ -12,7 +10,7 @@ class System():
 
     # allow systems to initialise themselves
     def init(self):
-        pass    
+        self.key = None  
 
     # all systems have a set of requirements, and only act on
     # entities with the required set of tags and components

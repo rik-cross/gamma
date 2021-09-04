@@ -14,7 +14,6 @@ class Tile:
         self.name = name
         self.image = image
         self.solid = solid
-        #print(self.name, self.image, self.solid)
     
     def draw(self, scene, x, y, size, alpha=255):
         if self.image is None:

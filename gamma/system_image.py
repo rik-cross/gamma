@@ -3,6 +3,9 @@ from .image import Image
 
 class ImageSystem(System):
 
+    def init(self):
+        self.key = 'image'
+
     def setRequirements(self):
         self.requiredComponents = ['imagegroups', 'position']
     

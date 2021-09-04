@@ -14,7 +14,7 @@ class ResourceManager:
     def getImage(self, key):
         if key not in self.images.keys():
             return None
-        return self.images[key]
+        return self.images[key].copy()
 
     # fonts
 

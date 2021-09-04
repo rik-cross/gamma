@@ -1,13 +1,14 @@
 from .system import System
 from .image import Image
-from .rectangle import Rectangle
 from .colours import *
-#from .gamma import resourceManager
 import pygame
 import os
 from math import floor
 
 class EmoteSystem(System):
+
+    def init(self):
+        self.key = 'emote'
 
     def setRequirements(self):
         self.requiredComponents = ['emote', 'position']
@@ -40,27 +41,6 @@ class EmoteSystem(System):
             p = h/20
             h = 20
             w = floor(w / p)
-
-        # outline rectangle
-        #scene.renderer.add(Rectangle(
-        #    positionComponent.x + positionComponent.w//2,
-        #    positionComponent.y - imageRect.h//2 - emoteComponent.bottomMargin,
-        #    imageRect.w + emoteComponent.imagePadding + 4,
-        #    imageRect.h + emoteComponent.imagePadding + 4,
-        #    colour = BLACK,
-        #    hAlign='center',
-        #    vAlign='middle'
-        #))
-
-        # rectangle
-        #scene.renderer.add(Rectangle(
-        #    positionComponent.x + positionComponent.w//2,
-        #    positionComponent.y - imageRect.h//2 - emoteComponent.bottomMargin,
-        #    imageRect.w + emoteComponent.imagePadding,
-        #    imageRect.h + emoteComponent.imagePadding,
-        #    hAlign='center',
-        #    vAlign='middle'
-        #))
 
         # box
         scene.renderer.add(Image(

@@ -1,4 +1,4 @@
-from .ui_text2 import Text
+from .text import Text
 from .image import Image
 from .gamma import inputManager
 from .ui_text import drawText

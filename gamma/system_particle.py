@@ -2,6 +2,9 @@ from .system import *
 
 class ParticleSystem(System):
 
+    def init(self):
+        self.key = 'particle'
+
     def setRequirements(self):
         self.requiredComponents = ['emitter']
 

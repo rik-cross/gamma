@@ -3,6 +3,9 @@ from .colours import *
 
 class InputSystem(System):
 
+    def init(self):
+        self.key = 'input'
+
     def setRequirements(self):
         self.requiredComponents = ['input']
     

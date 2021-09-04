@@ -33,8 +33,6 @@ class Renderable:
     def _createSurface(self):
         pass
 
-        # TODO -- add alpha.
-
     # position properties
 
     @property

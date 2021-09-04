@@ -66,7 +66,7 @@ from .map import *
 from .map_image import *
 
 from .ui_text import *
-from .ui_text2 import *
+from .text import *
 from .ui_text_menu_item import *
 from .ui_action_listener import *
 from .ui_menu import *

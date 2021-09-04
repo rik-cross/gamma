@@ -1,5 +1,5 @@
 from .ui_action_listener import *
-from .ui_text2 import Text
+from .text import Text
 from .colours import *
 
 class UITextMenuItem:
