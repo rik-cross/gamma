@@ -69,7 +69,7 @@ windowSize = pygame.Rect(0,0,1200,800)
 screen = pygame.display.set_mode((windowSize.w, windowSize.h))
 
 def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma_icon')):
-
+    
     global screen
     global windowSize
     windowSize.w = size[0]

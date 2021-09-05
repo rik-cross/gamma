@@ -37,10 +37,11 @@ class CameraSystem(System):
 
         angle = 0
         # add camera shake
-        if entity.trauma is not None:
-            offsetX += (entity.trauma ** 3) * (random.random()*2-1) * 20 * cameraComponent.zoomLevel
-            offsetY += (entity.trauma ** 3) * (random.random()*2-1) * 20 * cameraComponent.zoomLevel
-            angle += (entity.trauma ** 3) * (random.random()*2-1) * 30 * cameraComponent.zoomLevel
+        if entity.getComponent('trauma') is not None:
+            tc = entity.getComponent('trauma')
+            offsetX += (tc.traumaLevel ** 3) * (random.random()*2-1) * 20 * cameraComponent.zoomLevel
+            offsetY += (tc.traumaLevel ** 3) * (random.random()*2-1) * 20 * cameraComponent.zoomLevel
+            angle += (tc.traumaLevel ** 3) * (random.random()*2-1) * 30 * cameraComponent.zoomLevel
 
         # update zoom
         cameraComponent._z = cameraComponent.zoomLevel

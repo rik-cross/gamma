@@ -54,10 +54,8 @@ class World:
         map =  pickle.load( open( filename, "rb" ) )
         for img in mapImages:
             map.mapImages.append(img)
-
         # TODO -- put into map class
-        map.alpha = 255
-
+        #map.alpha = 255
         return map
 
     def saveMap(self, map, filename):

@@ -16,7 +16,6 @@ def colour(r, g, b, a=None):
         return color.Color(r, g, b)
     else:
         return color.Color(r, g, b, a)
-color = colour
 
 def getAlphaColour(colour, alpha):
     return color.Color(
@@ -25,4 +24,3 @@ def getAlphaColour(colour, alpha):
         colour[2],
         alpha
     )
-getAlphaColor = getAlphaColour

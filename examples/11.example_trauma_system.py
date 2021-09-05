@@ -32,7 +32,8 @@ heartEntity.getComponent('imagegroups').add('default', heartImage)
 #
 
 playerEntity = gamma.Entity(
-    gamma.PositionComponent(300, 100, 45, 51)
+    gamma.PositionComponent(300, 100, 45, 51),
+    gamma.TraumaComponent()
 )
 playerAnimation = gamma.ImageGroup(
         gamma.resourceManager.getImage('player_idle_1'),
@@ -53,8 +54,9 @@ playerEntity.addComponent(gamma.CameraComponent(
 # player controls = enter to add trauma
 def playerControls(player):
     if gamma.inputManager.isPressed(player.getComponent('input').b1):
+        pass
         # add some trauma
-        player.trauma += 0.5
+        player.getComponent('trauma').traumaLevel += 0.4
 
 playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter, inputFunc=playerControls))
 

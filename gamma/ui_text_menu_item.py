@@ -4,7 +4,7 @@ from .colours import *
 
 class UITextMenuItem:
 
-    def __init__(self, text, actionListener=None):
+    def __init__(self, text, actionListener=None, active=True):
 
         self.actionListener = actionListener
 
@@ -22,12 +22,15 @@ class UITextMenuItem:
         self.normalColour = LIGHT_GREY
         self.activeColour = WHITE
         self.pressedColour = GREEN
+        self.inactiveColour = MID_GREY
 
         self.colour = self.normalColour
 
         self.width = 100
         self.height = 45
         self.text = text
+
+        self._active = active
 
     def reset(self):
 
@@ -83,10 +86,24 @@ class UITextMenuItem:
         if deactivatedThisFrame:
             self.colour = self.normalColour
         
+        if not self.active:
+            self.colour = self.inactiveColour
+        
     def draw(self, x, y, scene):
         # draw the menu item text
         t = Text(self.text, x, y, colour=self.colour, underline=False, hAlign='center')
         t.draw(scene.surface)
         # mark the currently selected item
-        if self.colour is not self.normalColour:
+        if self.colour is not self.normalColour and self.colour is not self.inactiveColour:
             Text('>', x - (t.rect.w//2) - 10, y, colour=self.colour, underline=False, hAlign='right').draw(scene.surface)
+    
+    # active
+
+    @property
+    def active(self):
+        return self._active
+
+    @active.setter
+    def active(self, value):
+        self._active = value
+        self.reset()

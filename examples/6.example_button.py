@@ -34,7 +34,10 @@ class MainScene(gamma.Scene):
 
     def draw(self):
         self.surface.fill(gamma.BLUE)
-        gamma.drawText(self.surface, 'Press keyboard [enter] or controller [x] to activate.', 25, 25, gamma.WHITE)
+        gamma.Text(
+            'Press keyboard [enter] or controller [x] to activate.',
+            25, 25
+        ).draw(self.surface)
 
 #
 # add scene to the engine and start

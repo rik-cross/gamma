@@ -49,6 +49,7 @@ from .component_position import *
 from .component_motion import *
 
 from .component_tags import *
+from .component_trauma import *
 
 from .imagegroup import *
 

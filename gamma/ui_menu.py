@@ -18,6 +18,9 @@ class Menu:
             self.setButtonColour(b)
 
         self.activeButtonIndex = 0
+        if self.buttons[self.activeButtonIndex].active is False:
+            self.activeButtonIndex += 1
+
         self.x = x
         self.y = y
         self.direction = direction
@@ -47,14 +50,61 @@ class Menu:
             if e.hasComponent('input'):
                 if self.direction == 'vertical':
                     if inputManager.isPressed(e.getComponent('input').up):
-                        self.activeButtonIndex = max(0, self.activeButtonIndex - 1)
+
+                        originalIndex = self.activeButtonIndex
+                        newIndex = originalIndex
+                        found = False
+                        while newIndex > 0 and not found:
+                            newIndex -= 1
+                            if self.buttons[newIndex].active:
+                                found = True
+                        if not found:
+                            self.activeButtonIndex = originalIndex
+                        else:
+                            self.activeButtonIndex = newIndex
+
                     if inputManager.isPressed(e.getComponent('input').down):
-                        self.activeButtonIndex = min(len(self.buttons)-1, self.activeButtonIndex + 1)
+
+                        originalIndex = self.activeButtonIndex
+                        newIndex = originalIndex
+                        found = False
+                        while newIndex < len(self.buttons)-1 and not found:
+                            newIndex += 1
+                            if self.buttons[newIndex].active:
+                                found = True
+                        if not found:
+                            self.activeButtonIndex = originalIndex
+                        else:
+                            self.activeButtonIndex = newIndex
+
                 elif self.direction == 'horizontal':
                     if inputManager.isPressed(e.getComponent('input').left):
-                        self.activeButtonIndex = max(0, self.activeButtonIndex - 1)
+
+                        originalIndex = self.activeButtonIndex
+                        newIndex = originalIndex
+                        found = False
+                        while newIndex > 0 and not found:
+                            newIndex -= 1
+                            if self.buttons[newIndex].active:
+                                found = True
+                        if not found:
+                            self.activeButtonIndex = originalIndex
+                        else:
+                            self.activeButtonIndex = newIndex
+
                     if inputManager.isPressed(e.getComponent('input').right):
-                        self.activeButtonIndex = min(len(self.buttons)-1, self.activeButtonIndex + 1)
+
+                        originalIndex = self.activeButtonIndex
+                        newIndex = originalIndex
+                        found = False
+                        while newIndex < len(self.buttons)-1 and not found:
+                            newIndex += 1
+                            if self.buttons[newIndex].active:
+                                found = True
+                        if not found:
+                            self.activeButtonIndex = originalIndex
+                        else:
+                            self.activeButtonIndex = newIndex
 
         # update buttons in the button group
         pressed = False

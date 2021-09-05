@@ -16,27 +16,25 @@ class Entity:
         # format = {componentKey : component}
         self.components = {}
 
-        self.addDefaultEntities()
+        self._addDefaultEntities()
 
         # populate component dictionary from passed componenets
         # (this will overwrite existing default components)
         for component in componentList:
             self.addComponent(component)
 
-        # trauma level % between 0 and 1
-        self.trauma = 0
-
+        # every entity has an owner, default = self
         self.owner = self
     
     # add entity default components
-    def addDefaultEntities(self):
+    def _addDefaultEntities(self):
         self.addComponent(ImageGroupsComponent())
         self.addComponent(TagsComponent())
 
     # removes all components from the entity
     def clear(self):
         self.components = {}
-        self.addDefaultEntities()
+        self._addDefaultEntities()
     
     # used to reset an entity to an initial state
     def reset(self):
@@ -44,21 +42,25 @@ class Entity:
         for c in self.components.values:
             c.reset()
 
+    # returns true is entity has all passed component keys
     def hasComponent(self, componentKey, *otherComponentKeys):
         for c in [componentKey] + list(otherComponentKeys):
             if c not in self.components.keys():
                 return False
         return True
     
+    # uses the passed key to return a component
     def getComponent(self, componentKey):
         if componentKey not in self.components.keys():
             return None
         return self.components[componentKey]
 
+    #adds a component to the entity component list
     def addComponent(self, component):
         if component.key is not None:
             self.components[component.key] = component
     
+    # removes the specified component
     def removeComponent(self, componentKey):
         if componentKey in self.components.keys():
             self.components.pop(componentKey)

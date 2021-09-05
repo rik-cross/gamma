@@ -6,5 +6,10 @@ class TraumaSystem(System):
     def init(self):
         self.key = 'trauma'
 
-    def updateEntity(self, entity, scene):    
-        entity.trauma =  max(0, entity.trauma - 0.01 )
+    def setRequirements(self):
+        self.requiredComponents = ['trauma']
+
+    def updateEntity(self, entity, scene):
+        # update the entity trauma level each frame
+        tc = entity.getComponent('trauma')
+        tc.traumaLevel -= tc.traumaDecrement

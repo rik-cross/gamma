@@ -4,13 +4,13 @@ class System():
 
         self.requiredComponents = []
         self.requiredTags = []
-        self.requiresDraw = False # TODO - don't need
         self.setRequirements()
+        self.key = None
         self.init()
 
     # allow systems to initialise themselves
     def init(self):
-        self.key = None  
+         pass
 
     # all systems have a set of requirements, and only act on
     # entities with the required set of tags and components
