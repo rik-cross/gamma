@@ -3,71 +3,133 @@ from .utils import drawBox
 from .text import Text
 from .gamma import inputManager, entityManager
 from .colours import *
+from .keyboard_layouts import *
+from .renderable import Renderable
+import pygame
 
-keyboard = [
-    ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['z', 'x', 'c', 'v', 'b', 'n', 'm']
-]
+class UITextInput(Renderable):
 
-class UITextInput:
+    def __init__(self,
 
-    def __init__(self, x=0, y=0, w=100, h=100, keyboard=keyboard, show=True, text='', onComplete=None):
-        
-        self.x = x
-        self.y = y
-        self.w = w
-        self.h = h
+        x=0, y=0, 
+        keyboard=keyboard_layouts['en'],
+        text=None,
+        hAlign='left', vAlign='top',
+        controllingEntity = None,
+        keySize=50,
+        textEntryBoxSize = 80,
+        show=True
+    
+    ):
+
+        # initialise renderable element
+        super().__init__(x, y, hAlign, vAlign, None, 255)
+
         self.keyboard = keyboard
+
+        # initialise text
+        if text is None:
+            self.text = ''
+        else:
+            self.text = text
+    
+        # set the controlling entity and get the input component
+        self.controllingEntity = controllingEntity
+        if self.controllingEntity is not None:
+            self.controllingInputComponent = self.controllingEntity.getComponent('input')
+        else:
+            self.controllingInputComponent = None
+
+        self.keySize = keySize
+        self.textEntryBoxSize = textEntryBoxSize
         self.show = show
+        
+        # calculate keyboard width
+        self._w = max(map(len, self.keyboard)) * self.keySize
+        # calculate keyboard height
+        self._h = (len(self.keyboard) * self.keySize) + self.textEntryBoxSize
 
-        self.text = text
-
+        # selected key coordinates
         self.cursorX = 0
         self.cursorY = 0
 
-        self.complete = False
-        self.onComplete = onComplete
+        self._createSurface()
+
+        # displayed text
+        self.displayedText = Text(self.text, self.rect.x+10, self.rect.y + self.keySize*len(self.keyboard) + (self.textEntryBoxSize)/2, vAlign='middle')
+
+    def _createSurface(self):
+        self.rect = pygame.Rect(self._x, self._y, self._w, self._h)
+        self._align()
 
     def update(self):
         
-        if inputManager.isPressed(entityManager.getEntitiesByTag('player1')[0].getComponent('input').b1):
-            self.text = self.text + self.keyboard[self.cursorY][self.cursorX]
+        if self.controllingInputComponent is None:
+            return
 
-        if inputManager.isPressed(entityManager.getEntitiesByTag('player1')[0].getComponent('input').b4):
-            self.text = self.text[:-1]
+        # select key
+        if inputManager.isPressed(self.controllingInputComponent.b1):
+            # get key
+            key = self.keyboard[self.cursorY][self.cursorX]
+            # delete
+            if key == delete_symbol:
+                self.text = self.text[:-1]
+            # other keys
+            else:
+                self.text = self.text + key
+            self.displayedText.text = self.text
 
-        if inputManager.isPressed(entityManager.getEntitiesByTag('player1')[0].getComponent('input').b17):
-            self.complete = True
-            if self.onComplete is not None:
-                self.onComplete()
-        
-        if inputManager.isPressed(entityManager.getEntitiesByTag('player1')[0].getComponent('input').up):
+        # cursor movement
+        if inputManager.isPressed(self.controllingInputComponent.up):
             if len(self.keyboard[self.cursorY-1]) > self.cursorX:
                 self.cursorY = max(0, self.cursorY - 1)
-        if inputManager.isPressed(entityManager.getEntitiesByTag('player1')[0].getComponent('input').down):
+        if inputManager.isPressed(self.controllingInputComponent.down):
             if len(self.keyboard)-1 > self.cursorY:
                 if len(self.keyboard[self.cursorY+1]) > self.cursorX:
                     self.cursorY = min(len(self.keyboard)-1, self.cursorY + 1)
-
-        if inputManager.isPressed(entityManager.getEntitiesByTag('player1')[0].getComponent('input').left):
+        if inputManager.isPressed(self.controllingInputComponent.left):
             self.cursorX = max(0, self.cursorX - 1)
-        if inputManager.isPressed(entityManager.getEntitiesByTag('player1')[0].getComponent('input').right):
+        if inputManager.isPressed(self.controllingInputComponent.right):
             self.cursorX = min(len(self.keyboard[self.cursorY])-1, self.cursorX + 1)
-
+        
     def draw(self, surface):
 
+        # draw every key on the keyboard
         for c in range(len(self.keyboard)):
             for r in range(len(self.keyboard[c])):
-                #print(self.keyboard[c][r])
-                Rectangle(self.x+r*32, self.y+c*32, 32, 32, colour=DARK_GREY).draw(surface)
-                drawBox(surface, self.x+r*32, self.y+c*32, 32, 32, BLACK)
-                Text(self.keyboard[c][r],self.x+r*32+10, self.y+c*32).draw(surface)
                 
-                Rectangle(self.x, self.y + 32*len(self.keyboard), 32*10, 32*2, colour=BLACK).draw(surface)
-        
-                drawBox(surface, self.x+self.cursorX*32, self.y+self.cursorY*32, 32, 32, WHITE)
+                # black border
+                Rectangle(self.rect.x+r*self.keySize, self.rect.y+c*self.keySize, self.keySize, self.keySize, colour=BLACK).draw(surface)
+                # key background
+                Rectangle(self.rect.x+r*self.keySize+1, self.rect.y+c*self.keySize+1, self.keySize-2, self.keySize-2, colour=DARK_GREY).draw(surface)
+                # key name
+                Text(self.keyboard[c][r],self.rect.x+r*self.keySize+(self.keySize/2), self.rect.y+c*self.keySize+(self.keySize/2), hAlign='center', vAlign='middle').draw(surface)
+                 
+        # text output box and text
+        Rectangle(self.rect.x, self.rect.y + self.keySize*len(self.keyboard), self._w, self.textEntryBoxSize, colour=BLACK).draw(surface)
+        self.displayedText.draw(surface)
+        # cursor
+        Text('_', self.displayedText.x + self.displayedText.rect.w, self.displayedText.y, vAlign='middle').draw(surface)
 
-                Text(self.text,self.x+10, self.y + 32*len(self.keyboard) + 32, vAlign='middle').draw(surface)
+        # selected key highlight
+        drawBox(surface, self.rect.x+self.cursorX*self.keySize, self.rect.y+self.cursorY*self.keySize, self.keySize, self.keySize, WHITE)
+       
+    #  dimension properties
 
+    @property
+    def w(self):
+        return self._w
+    
+    @w.setter
+    def w(self, value):
+        self._w = value
+        self._createSurface()
+
+    @property
+    def h(self):
+        return self._h
+    
+    @h.setter
+    def h(self, value):
+        self._h = value
+        self._createSurface()

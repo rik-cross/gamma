@@ -109,8 +109,8 @@ def run(fps=60, showFPS=False):
         # set maximum framerate
         clock.tick(fps)
 
-        if showFPS:
-            print('FPS:', clock.get_fps())
+        #if showFPS:
+        #    print('FPS:', round(clock.get_fps(), 1))
 
     # quit
     sceneManager.clear()

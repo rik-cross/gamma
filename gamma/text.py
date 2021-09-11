@@ -29,7 +29,6 @@ class Text(Renderable):
 
     def _createSurface(self):
 
-        #self.font = resourceManager.getFont(self.fontTag)
         self.font.set_underline(self.underline)
         self.textSurface = self.font.render(self._text, True, self.colour)
         self.rect = self.textSurface.get_rect()
@@ -40,6 +39,7 @@ class Text(Renderable):
         x = self.rect.x * scale + xOff
         y = self.rect.y * scale + yOff
         blit_alpha(surface, self.textSurface, (x,y), self.alpha)
+        
 
     #  text property
 

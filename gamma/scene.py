@@ -111,8 +111,6 @@ class Scene:
         self.renderer.draw()
         self.renderer.flush()
 
-
-
         # calculate the scene position and transparency
         x = math.ceil(pygame.display.get_surface().get_size()[0] / 100 * self.leftPercentage)
         y = math.ceil(pygame.display.get_surface().get_size()[1] / 100 * self.topPercentage)

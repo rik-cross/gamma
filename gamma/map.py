@@ -80,6 +80,29 @@ class Map:
                     newSize = ceil(self.tileSize*z)
                     Tile.tiles[tile].drawX(scene.surface, newX, newY, newSize)
 
+    # draw map to the specified dimensions
+    def drawThumbnailX(self, scene, centerX, centerY, maxWidth, maxHeight):
+
+        # calculate largest tile size that will fit
+        tileSize = min(
+            int(maxWidth / self.w_map),
+            int(maxHeight / self.h_map)
+        )
+
+        # calculate position based on size
+        xPos = int(centerX - ((tileSize*self.w_map)/2))
+        yPos = int(centerY - ((tileSize*self.h_map)/2))
+
+        x=xPos
+        y=yPos
+        for r in range(self.h_map):
+            for c in range(self.w_map):
+                tile = self.tiles[r][c]
+                if Tile.tiles[tile].image is not None:
+                    newX = ceil(x + c*(tileSize))
+                    newY = ceil(y + r*(tileSize))
+                    Tile.tiles[tile].drawX(scene.surface, newX, newY, tileSize)
+
     def draw(self, scene, x=0, y=0, z=1):
 
         #if self.drawGrid:
