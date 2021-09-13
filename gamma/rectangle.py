@@ -39,8 +39,7 @@ class Rectangle(Renderable):
         w = int(self.rect.w * scale)
         h = int(self.rect.h * scale)
         scaled_surface = pygame.transform.scale(self.surface, (w, h))
-        blit_alpha(surface, scaled_surface, (x, y), self.alpha)
-        #surface.blit(scaled_surface, (x,y))
+        blit_alpha(surface, scaled_surface, (x, y), self._alpha)
 
     #  dimension properties
 

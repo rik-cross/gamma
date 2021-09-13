@@ -12,16 +12,6 @@ def drawRect(s,x,y,w,h,c,a=255):
     overlay.fill(c)
     s.blit(overlay, (x,y))
 
-def drawBox(s,x,y,w,h,c):
-    # top
-    pygame.draw.line(s,c,(x,y),(x+w,y))
-    # bottom
-    pygame.draw.line(s,c,(x,y+h),(x+w,y+h))
-    # left
-    pygame.draw.line(s,c,(x,y),(x,y+h))
-    # right
-    pygame.draw.line(s,c,(x+w,y),(x+w,y+h))
-
 def drawImage(s, image, x, y, xAnchor='left', yAnchor='top', scale=1):
     
     imageRect = image.get_rect()
@@ -72,7 +62,7 @@ def createControllerInputComponent(controllerNumber, entityControllerFunction):
         b17         = controller[controllerNumber].start,
         b18         = controller[controllerNumber].select,
         # entity controller
-        inputFunc   = entityControllerFunction
+        inputContext   = entityControllerFunction
     )
 
     return controllerInputComponent
@@ -102,7 +92,7 @@ def createKeyboardInputComponent(entityControllerFunction):
         b16         = keys.right,
         b17         = keys.enter,
         b18         = keys.esc,
-        inputFunc   = entityControllerFunction
+        inputContext   = entityControllerFunction
     )
 
     return keyboardInputComponent

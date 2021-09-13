@@ -3,14 +3,47 @@ import pickle
 
 class World:
 
-    def __init__(self, map=None, entities=None):
+    def __init__(self,
+        
+        map=None,
+        entities=None,
+        velocityForces = None,
+        accelerationForces = None
+    
+    ):
 
+        # store map
+        self.map = map
+
+        # create world entity list
         if entities is None:
             self.entities = []
         else:
             self.entities = entities
-            
-        self.map = map
+        
+        # create world forces dictionary
+        if velocityForces is None:
+            velocityForces = {}
+        if accelerationForces is None:
+            accelerationForces = {}
+        self.forces = {
+            'velocity' : velocityForces,
+            'acceleration' : accelerationForces
+        }
+
+    # world methods
+
+    def addVelocityForce(self, name, force):
+        self.forces['velocity'][name] = force
+
+    def addAccelerationForce(self, name, force):
+        self.forces['acceleration'][name] = force
+    
+    def removeForce(self, name):
+        if name in self.forces['velocity']:
+            del self.forces['velocity'][name]
+        if name in self.forces['acceleration']:
+            del self.forces['acceleration'][name]
 
     # entity methods
 
@@ -54,8 +87,6 @@ class World:
         map =  pickle.load( open( filename, "rb" ) )
         for img in mapImages:
             map.mapImages.append(img)
-        # TODO -- put into map class
-        #map.alpha = 255
         return map
 
     def saveMap(self, map, filename):

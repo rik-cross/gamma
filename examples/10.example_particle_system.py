@@ -10,7 +10,7 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('player', 'images/player/vita_00.png')
+gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a player entity that moves using WASD
@@ -42,7 +42,7 @@ def playerControls(player):
             )
         )
 
-playerEntity.addComponent(gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, b1=gamma.keys.enter, inputFunc=playerControls))
+playerEntity.addComponent(gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, b1=gamma.keys.enter, inputContext=playerControls))
 
 #
 # create a camera that has zoom functionality

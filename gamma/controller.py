@@ -1,6 +1,7 @@
 import pygame
 
 class Controller:
+
     def __init__(self, number):
         self.number = number
         self.joystick = None
@@ -14,6 +15,7 @@ class Controller:
         self.currentAxes = None
         self.previousHats = None
         self.currentHats = None
+    
     def processInput(self):
         if self.joystick is None:
             return
@@ -29,18 +31,21 @@ class Controller:
         self.currentHats = []
         for h in range(self.joystick.get_numhats()):
             self.currentHats.append(self.joystick.get_hat(h))
+    
     def isButtonDown(self, controllerInput):
         if self.currentButtons is None:
             return False
         if len(self.currentButtons) <= controllerInput.inputNumber:
             return False
         return self.currentButtons[controllerInput.inputNumber] >= controllerInput.threshhold
+    
     def isButtonPressed(self, controllerInput):
         if self.currentButtons is None or self.previousButtons is None:
             return False
         if len(self.currentButtons) <= controllerInput.inputNumber:
             return False
         return self.currentButtons[controllerInput.inputNumber] >= controllerInput.threshhold and self.previousButtons[controllerInput.inputNumber] < controllerInput.threshhold
+    
     def isButtonReleased(self, controllerInput):
         if len(self.currentButtons) <= controllerInput.inputNumber:
             return False
@@ -57,6 +62,7 @@ class Controller:
             return self.currentHats[controllerInput.inputNumber[0]][controllerInput.inputNumber[1]] >= controllerInput.threshhold
         else:
             return self.currentHats[controllerInput.inputNumber[0]][controllerInput.inputNumber[1]] <= controllerInput.threshhold
+    
     def isHatPressed(self, controllerInput):
         if self.currentHats is None or self.previousHats is None:
             return False
@@ -66,6 +72,7 @@ class Controller:
             return self.currentHats[controllerInput.inputNumber[0]][controllerInput.inputNumber[1]] >= controllerInput.threshhold and self.previousHats[controllerInput.inputNumber[0]][controllerInput.inputNumber[1]] < controllerInput.threshhold
         else:
             return self.currentHats[controllerInput.inputNumber[0]][controllerInput.inputNumber[1]] <= controllerInput.threshhold and self.previousHats[controllerInput.inputNumber[0]][controllerInput.inputNumber[1]] > controllerInput.threshhold
+    
     def isHatReleased(self, controllerInput):
         if self.currentHats is None or self.previousHats is None:
             return False
@@ -85,6 +92,7 @@ class Controller:
             return self.currentAxes[controllerInput.inputNumber] >= controllerInput.threshhold
         else:
             return self.currentAxes[controllerInput.inputNumber] <= controllerInput.threshhold
+    
     def isAxisPressed(self, controllerInput):
         if self.currentAxes is None or self.previousAxes is None:
             return False
@@ -94,6 +102,7 @@ class Controller:
             return self.currentAxes[controllerInput.inputNumber] >= controllerInput.threshhold and self.previousAxes[controllerInput.inputNumber] < controllerInput.threshhold
         else:
             return self.currentAxes[controllerInput.inputNumber] <= controllerInput.threshhold and self.previousAxes[controllerInput.inputNumber] > controllerInput.threshhold
+    
     def isAxisReleased(self, controllerInput):
         if self.currentAxes is None or self.previousAxes is None:
             return False

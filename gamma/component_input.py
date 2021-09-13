@@ -1,16 +1,21 @@
 class InputComponent:
 
     def __init__(self,
+
         # directional buttons
         up=None, down=None, left=None, right=None,
+        
         # 18 buttons
         b1=None, b2=None, b3=None, b4=None,
         b5=None, b6=None, b7=None, b8=None,
         b9=None, b10=None, b11=None, b12=None,
         b13=None, b14=None, b15=None, b16=None,
         b17=None, b18=None,
+        
         # entity controller
-        inputFunc=None):
+        inputContext=None
+    
+    ):
 
         self.key = 'input'
 
@@ -38,4 +43,4 @@ class InputComponent:
         self.b17 = b17
         self.b18 = b18
 
-        self.inputFunc = inputFunc
+        self.inputContext = inputContext

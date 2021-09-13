@@ -9,7 +9,15 @@ from .utils import drawRect
 
 class Scene:
     
-    def __init__(self, world=None, menu=None, background=None, backgroundAlpha=255):
+    def __init__(self,
+    
+        # optional parameters
+        world=None,
+        menu=None,
+        background=None,
+        backgroundAlpha=255
+    
+    ):
 
         self.world = world
         if self.world is None:
@@ -34,8 +42,6 @@ class Scene:
         pass
 
     def resetEffects(self):
-        # TODO - use a clipping rectangle instead
-        # x, y, w, h
         self.widthPercentage = 100
         self.heightPercentage = 100
         self.leftPercentage = 0
@@ -67,28 +73,36 @@ class Scene:
 
     def _update(self):
 
+        # update frame and call scene-specific update method
         self.frame += 1
         self.update()
     
+        # update systems
         for sys in systemManager.systems:
                 sys._update(self)
 
+        # update cutscene
         if self.cutscene is not None:
             self.cutscene.update(self)
 
+        # update menu
         if self.menu is not None:
             self.menu.update()
 
+        # update buttons
         for b in self.buttons:
             b.update()
 
     def _draw(self):
 
         # calculate the scene size
-        w = int(pygame.display.get_surface().get_size()[0] / 100 * self.widthPercentage)
-        h = int(pygame.display.get_surface().get_size()[1] / 100 * self.heightPercentage)
+        w = int(windowSize.w / 100 * self.widthPercentage)
+        h = int(windowSize.h / 100 * self.heightPercentage)
+        
+        # create the scene surface
         self.surface = pygame.Surface((w,h), pygame.SRCALPHA)
-        self.surface.convert_alpha()
+        if self.backgroundAlpha < 255:
+            self.surface.convert_alpha()
 
         # draw background (colour or image)
         if self.background is not None:
@@ -105,9 +119,11 @@ class Scene:
         if self.world.map is not None:
             self.world.map.draw(self)
 
+        # draw systems, which send to the renderer
         for sys in systemManager.systems:
             sys._draw(self)
 
+        # draw everything that was sent to the render
         self.renderer.draw()
         self.renderer.flush()
 
@@ -132,8 +148,6 @@ class Scene:
 
         # draw the scene
         screen.blit(self.surface, (x,y))
-
-        
 
     def input(self):
         pass

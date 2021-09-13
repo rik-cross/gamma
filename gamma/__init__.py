@@ -59,9 +59,10 @@ from .manager_scene import *
 from .manager_resource import *
 from .manager_system import *
 from .manager_entity import *
+from .manager_tile import TileManager
 
 from .colours import *
-from .tiles import *
+from .tile import *
 
 from .map import *
 from .map_image import *

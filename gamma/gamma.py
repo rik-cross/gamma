@@ -1,3 +1,4 @@
+from gamma.system_collision import CollisionSystem
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
@@ -10,6 +11,9 @@ from .entity_factory import *
 from .manager_scene import *
 from .manager_system import *
 from .manager_entity import *
+
+from .manager_tile import TileManager
+from .tile import Tile
 
 from .system_animation import *
 from .system_camera import *
@@ -33,21 +37,24 @@ pygame.init()
 sceneManager = SceneManager()
 inputManager = InputManager()
 soundManager = SoundManager()
+tileManager = TileManager()
 resourceManager = ResourceManager()
 entityManager = EntityManager()
 entityFactory = EntityFactory()
 
 # add font resources
-resourceManager.addFont('munro18', ROOT_DIR + '/fonts/munro.ttf', size=18)
-resourceManager.addFont('munro24', ROOT_DIR + '/fonts/munro.ttf', size=24)
-resourceManager.addFont('munro60', ROOT_DIR + '/fonts/munro.ttf', size=60)
+resourceManager.addFont('munro18', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=18)
+resourceManager.addFont('munro24', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=24)
+resourceManager.addFont('munro60', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=60)
 
 # add image resources
-resourceManager.addImage('gamma_icon', ROOT_DIR + '/images/gamma_icon.png')
-resourceManager.addImage('gamma', ROOT_DIR + '/images/gamma.png')
-resourceManager.addImage('tile_outline', ROOT_DIR + '/images/tile_outline.png')
-resourceManager.addImage('emote', ROOT_DIR + '/images/emote_box.png')
+resourceManager.addImage('gamma_icon', os.path.join(ROOT_DIR, 'images', 'gamma_icon.png'))
+resourceManager.addImage('gamma', os.path.join(ROOT_DIR, 'images', 'gamma.png'))
+resourceManager.addImage('tile_outline', os.path.join(ROOT_DIR, 'images', 'tile_outline.png'))
+resourceManager.addImage('emote', os.path.join(ROOT_DIR, 'images', 'emote_box.png'))
 
+# add tiles
+tileManager.addTile(Tile('none'))
 
 # add core game systems
 systemManager = SystemManager()
@@ -55,6 +62,7 @@ systemManager.addSystem(
     CameraSystem(),
     InputSystem(),
     PhysicsSystem(),
+    CollisionSystem(),
     TraumaSystem(),
     TriggerSystem(),
     AnimationSystem(),
@@ -109,8 +117,8 @@ def run(fps=60, showFPS=False):
         # set maximum framerate
         clock.tick(fps)
 
-        #if showFPS:
-        #    print('FPS:', round(clock.get_fps(), 1))
+        if showFPS:
+            print('FPS:', round(clock.get_fps(), 1))
 
     # quit
     sceneManager.clear()

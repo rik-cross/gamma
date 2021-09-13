@@ -14,6 +14,6 @@ class InputSystem(System):
         if scene.cutscene is not None:
             return
 
-        if entity.getComponent('input').inputFunc is not None:
-            entity.getComponent('input').inputFunc(entity)
+        if entity.getComponent('input').inputContext is not None:
+            entity.getComponent('input').inputContext(entity)
         

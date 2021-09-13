@@ -1,5 +1,5 @@
 from gamma.rectangle import Rectangle
-from .utils import drawBox
+from .utils_draw import drawBox
 from .text import Text
 from .gamma import inputManager, entityManager
 from .colours import *

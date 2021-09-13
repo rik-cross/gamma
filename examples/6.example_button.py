@@ -1,4 +1,5 @@
 import gamma
+import os
 
 #
 # create a player entity to control the button
@@ -9,9 +10,9 @@ playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter))
 
 # store images
 
-gamma.resourceManager.addImage('x', 'images/x_n.png')
-gamma.resourceManager.addImage('x_pressed1', 'images/x_y1.png')
-gamma.resourceManager.addImage('x_pressed2', 'images/x_y2.png')
+gamma.resourceManager.addImage('x', os.path.join('images', 'x_n.png'))
+gamma.resourceManager.addImage('x_pressed1', os.path.join('images', 'x_y1.png'))
+gamma.resourceManager.addImage('x_pressed2', os.path.join('images', 'x_y2.png'))
 
 #
 # create a main scene

@@ -1,32 +1,46 @@
 import pygame
 
 class SoundManager:
+
     def __init__(self):
+
         pygame.mixer.init()
+        
+        # sound effects
+        self.sounds = {}
         self.soundVolume = 1.0
+
+        # music
+        self.music = {}
         self.musicVolume = 1.0
         self.targetMusicVolume = 1.0
         self.volumeIncrement = 0.01
         self.nextMusic = None
         self.currentMusic = None
-        self.sounds = {}
-        self.music = {}
+
     def addSound(self, soundName, soundURL):
         self.sounds[soundName] = pygame.mixer.Sound(soundURL)
+    
     def addMusic(self, musicName, musicURL):
         self.music[musicName] = musicURL
+    
     def playSound(self, soundName, volume=None):
         if volume is None:
             volume = self.soundVolume
         self.sounds[soundName].set_volume(volume)
         self.sounds[soundName].play()
-    def playMusic(self, musicName):
+    
+    def playMusic(self, musicName, loop=True):
         # don't play the music if already playing
         if musicName is self.currentMusic:
             return
         pygame.mixer.music.load(self.music[musicName])
         self.currentMusic = musicName
-        pygame.mixer.music.play(-1)
+        if loop:
+            pygame.mixer.music.play(-1)
+        else:
+            pygame.mixer.music.play(0)
+    
     def playMusicFade(self, musicName, duration=500):
         # don't play the music if already playing
         if musicName is self.currentMusic:
@@ -35,11 +49,14 @@ class SoundManager:
         self.nextMusic = musicName
         # fade out current music
         self.fadeOut(duration)
+    
     def setMusicVolume(self, volume, duration=1):
         self.volumeIncrement = 1/duration
         self.targetMusicVolume = volume
+    
     def fadeOut(self, duration):
         pygame.mixer.music.fadeout(duration)
+    
     def update(self):
         # raise volume if lower than target
         if self.musicVolume < self.targetMusicVolume:

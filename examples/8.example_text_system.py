@@ -1,4 +1,5 @@
 import gamma
+import os
 
 #
 # create a main scene
@@ -10,7 +11,7 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('player', 'images/player/vita_00.png')
+gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a player entity

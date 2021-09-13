@@ -1,4 +1,5 @@
 import gamma
+import os
 
 #
 # create a main scene
@@ -10,8 +11,8 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('heart', 'images/heart.png')
-gamma.resourceManager.addImage('player', 'images/player/vita_00.png')
+gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
+gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a heart entity that moves automativcally
@@ -28,7 +29,7 @@ def heartMovement(heart):
     if heart.getComponent('position').rect.x < 550:
         heart.getComponent('position').rect.x += 2
 
-heartEntity.addComponent(gamma.InputComponent(inputFunc=heartMovement))
+heartEntity.addComponent(gamma.InputComponent(inputContext=heartMovement))
 
 #
 # create a player entity that moves using WASD
@@ -51,7 +52,7 @@ def playerMovement(player):
     if gamma.inputManager.isDown(player.getComponent('input').right):
         player.getComponent('position').x += 2
 
-playerEntity.addComponent(gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, inputFunc=playerMovement))
+playerEntity.addComponent(gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, inputContext=playerMovement))
 
 #
 # create a camera that has zoom functionality

@@ -17,6 +17,7 @@ class ImageSystem(System):
             image = imageGroup.getCurrentImage()
             if image is not None:
                 componentPosition = entity.getComponent('position')
+
                 scene.renderer.add(Image(
                     image,
                     componentPosition.x,

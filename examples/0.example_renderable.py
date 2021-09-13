@@ -1,9 +1,11 @@
 # import and initialise gamma
 import gamma
+import os
+
 gamma.init((600, 400), caption='Gamma // Renderable Objects Example')
 
 # add a font
-gamma.resourceManager.addFont('large', '../gamma/fonts/munro.ttf', size=64)
+gamma.resourceManager.addFont('large', os.path.join('..', 'gamma', 'fonts', 'munro.ttf'), size=64)
 
 # create a main scene class
 class RenderableScene(gamma.Scene):

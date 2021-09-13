@@ -4,16 +4,24 @@ from .colours import *
 
 class CameraComponent(Component):
 
-    def __init__(self, x, y, w, h,
+    def __init__(self,
+    
+        # required parameters
+        x, y,
+        w, h,
+        
+        # optional parameters
         bgColour=None,
         worldX = 0, worldY = 0,
         entityToTrack = None,
-        zoomLevel = 1
-        ):
+        zoomLevel = 1,
+        clampToMap = True
+    
+    ):
         
         self.key = 'camera'
         
-        self.rect = pygame.Rect(x,y,w,h)
+        self.rect = pygame.Rect(x, y, w, h)
         self.bgColour = bgColour
         
         self.worldX = worldX
@@ -29,14 +37,11 @@ class CameraComponent(Component):
         self.movementPerFrameX = 0
         self.movementPerFrameY = 0
 
-        self.clampToWorld=True
+        self.clampToWorld = clampToMap
 
         self._x = 0
         self._y = 0
         self._z = 0
-    
-    def getTransform(x, y):
-        pass # todo
     
     def setZoom(self, level, duration=1):
         if duration < 1:
@@ -52,6 +57,20 @@ class CameraComponent(Component):
         self.targetY = y
         self.movementPerFrameX = (self.targetX - self.worldX) / duration
         self.movementPerFrameY = (self.targetY - self.worldY) / duration
+
+    # sets the zoom level and position
+    # so that the entire map is visible in the camera
+    def setFullScreen(self, map):
+
+        # set the camera to the center of the world
+        self.worldX = map.w_real / 2
+        self.worldY = map.h_real / 2
+        # set the zoom level
+        if (self.rect.width / map.w_real) > (self.rect.height / map.h_real):
+            z = self.rect.width / map.w_real
+        else:
+            z = self.rect.height / map.h_real
+        self.zoomLevel = z
 
     def _updateWorldPosition(self, x, y, scene):
 

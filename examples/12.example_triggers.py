@@ -1,4 +1,5 @@
 import gamma
+import os
 
 #
 # create a main scene
@@ -10,8 +11,8 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('heart', 'images/heart.png')
-gamma.resourceManager.addImage('player_idle_1', 'images/player/vita_00.png')
+gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
+gamma.resourceManager.addImage('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a heart entity
@@ -74,7 +75,7 @@ def playerControls(player):
     if gamma.inputManager.isDown(player.getComponent('input').right):
         player.getComponent('position').rect.x += 2
 
-playerEntity.addComponent(gamma.InputComponent(left=gamma.keys.left, right=gamma.keys.right, inputFunc=playerControls))
+playerEntity.addComponent(gamma.InputComponent(left=gamma.keys.left, right=gamma.keys.right, inputContext=playerControls))
 
 #
 # add entities to scene's world

@@ -7,7 +7,7 @@ class Renderable:
         self.hAlign = h
         self.vAlign = v
         self.colour = c
-        self.alpha = a
+        self._alpha = a
     
     def _align(self):
 
@@ -32,6 +32,17 @@ class Renderable:
     
     def _createSurface(self):
         pass
+
+    # alpha property
+
+    @property
+    def alpha(self):
+        return self._alpha
+    
+    @alpha.setter
+    def alpha(self, value):
+        self._alpha = value
+        self._createSurface()
 
     # position properties
 

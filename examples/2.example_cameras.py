@@ -1,4 +1,5 @@
 import gamma
+import os
 
 #
 # create a main scene
@@ -10,12 +11,12 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('heart', 'images/heart.png')
+gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
 
-gamma.resourceManager.addImage('player_idle_1', 'images/player/vita_00.png')
-gamma.resourceManager.addImage('player_idle_2', 'images/player/vita_01.png')
-gamma.resourceManager.addImage('player_idle_3', 'images/player/vita_02.png')
-gamma.resourceManager.addImage('player_idle_4', 'images/player/vita_03.png')
+gamma.resourceManager.addImage('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
+gamma.resourceManager.addImage('player_idle_2', os.path.join('images', 'player', 'vita_01.png'))
+gamma.resourceManager.addImage('player_idle_3', os.path.join('images', 'player', 'vita_02.png'))
+gamma.resourceManager.addImage('player_idle_4', os.path.join('images', 'player', 'vita_03.png'))
 
 #
 # create a heart entity

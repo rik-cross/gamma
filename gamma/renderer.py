@@ -1,14 +1,19 @@
-from .ui_text import *
+import pygame
 
 class Renderer:
 
     def __init__(self, scene):
+
+        # list of items to render
         self.renderable = []
+        # a renderer is attached to a scene
         self.scene = scene
     
+    # adds a renderable object to the renderer
     def add(self, r):
         self.renderable.append(r)
     
+    # removes all renderable objects from the renderer
     def flush(self):
         self.renderable = []
 
@@ -21,6 +26,8 @@ class Renderer:
         # iterate over all cameras
         entitiesWithCamera = self.scene.world.getEntitiesWithComponent('camera')
         for e in entitiesWithCamera:
+
+            # get the camera component
             camera = e.getComponent('camera')
                 
             # set clipping rectangle
@@ -38,6 +45,3 @@ class Renderer:
             
             # unset clipping rectangle
             self.scene.surface.set_clip(None)
-        
-        # draw the UI overlay layer
-        # TODO

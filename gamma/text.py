@@ -38,7 +38,7 @@ class Text(Renderable):
 
         x = self.rect.x * scale + xOff
         y = self.rect.y * scale + yOff
-        blit_alpha(surface, self.textSurface, (x,y), self.alpha)
+        blit_alpha(surface, self.textSurface, (x,y), self._alpha)
         
 
     #  text property

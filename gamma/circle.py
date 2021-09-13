@@ -36,7 +36,7 @@ class Circle(Renderable):
         y = int(self.rect.y * scale + yOff)
         r = int(self.rect.w * scale)
         scaled_surface = pygame.transform.scale(self.surface, (r, r))
-        blit_alpha(surface, scaled_surface, (x, y), self.alpha)
+        blit_alpha(surface, scaled_surface, (x, y), self._alpha)
 
     #  radius property
 

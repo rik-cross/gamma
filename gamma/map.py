@@ -1,10 +1,11 @@
 from math import ceil
 
 from pygame import surface
-from .tiles import Tile
+from .tile import Tile
 from .map_image import MapImage
 import pygame
 from .colours import LIGHT_GREY
+from .gamma import tileManager
 
 class Map:
 
@@ -56,7 +57,7 @@ class Map:
     def getTileAtPosition(self, x, y):
         xTile = int(x // self.tileSize)
         yTile = int(y // self.tileSize)
-        return Tile.tiles[self.tiles[yTile][xTile]]
+        return tileManager.tiles[self.tiles[yTile][xTile]]
 
     def getAllTilesOfType(self, type):
         tilePos = []
@@ -70,18 +71,8 @@ class Map:
     def getMapCenter(self):
         return (self.h_real//2,self.w_real//2)
 
-    def drawThumbnail(self, scene, x, y, z):
-        for r in range(self.h_map):
-            for c in range(self.w_map):
-                tile = self.tiles[r][c]
-                if Tile.tiles[tile].image is not None:
-                    newX = ceil(x + c*(self.tileSize*z))
-                    newY = ceil(y + r*(self.tileSize*z))
-                    newSize = ceil(self.tileSize*z)
-                    Tile.tiles[tile].drawX(scene.surface, newX, newY, newSize)
-
     # draw map to the specified dimensions
-    def drawThumbnailX(self, scene, centerX, centerY, maxWidth, maxHeight):
+    def drawThumbnail(self, scene, centerX, centerY, maxWidth, maxHeight):
 
         # calculate largest tile size that will fit
         tileSize = min(
@@ -93,15 +84,13 @@ class Map:
         xPos = int(centerX - ((tileSize*self.w_map)/2))
         yPos = int(centerY - ((tileSize*self.h_map)/2))
 
-        x=xPos
-        y=yPos
         for r in range(self.h_map):
             for c in range(self.w_map):
                 tile = self.tiles[r][c]
-                if Tile.tiles[tile].image is not None:
-                    newX = ceil(x + c*(tileSize))
-                    newY = ceil(y + r*(tileSize))
-                    Tile.tiles[tile].drawX(scene.surface, newX, newY, tileSize)
+                if tileManager.tiles[tile].image is not None:
+                    newX = ceil(xPos + c*(tileSize))
+                    newY = ceil(yPos + r*(tileSize))
+                    tileManager.tiles[tile].draw(scene.surface, newX, newY, tileSize)
 
     def draw(self, scene, x=0, y=0, z=1):
 
@@ -114,9 +103,9 @@ class Map:
         for r in range(self.h_map):
             for c in range(self.w_map):
                 tile = self.tiles[r][c]
-                if Tile.tiles[tile].image is not None:
+                if tileManager.tiles[tile].image is not None:
                     newX = x + c*(self.tileSize*z)
                     newY = y + r*(self.tileSize*z)
                     newSize = self.tileSize*z
-                    Tile.tiles[tile].draw(scene, newX, newY, newSize, alpha=self.alpha)
+                    tileManager.tiles[tile].render(scene, newX, newY, newSize, alpha=self.alpha)
                 

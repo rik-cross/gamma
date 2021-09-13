@@ -24,7 +24,7 @@ class Image(Renderable):
 
         # set additional image object parameters
         self.imageSurface = imageSurface.copy()
-        print('image created', randint(1,1000))
+
         self.flipX = flipX
         self.flipY = flipY
         self._w = w
@@ -43,8 +43,8 @@ class Image(Renderable):
         if self._h is not None:
             self.rect.h = self._h
 
-        if self.alpha < 255:
-            self.imageSurface.set_alpha(self.alpha)
+        if self._alpha < 255:
+            self.imageSurface.set_alpha(self._alpha)
 
         self._align()
 

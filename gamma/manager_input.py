@@ -9,20 +9,21 @@ class PlayerInput:
         self.type = type
         self.threshhold = threshhold
 
-        self.imagesReleased = imagesReleased
-        self.imagesPressed = imagesPressed
-
 class InputManager:
+    
     def __init__(self):
         self.keyboard = Keyboard()
         pygame.joystick.init()
         self.controllers = [Controller(n) for n in range(4)]
+    
     def processInput(self):
         self.keyboard.processInput()
         for controller in self.controllers:
             controller.processInput()
+    
     def numControllers(self):
         return pygame.joystick.get_count()
+    
     def isDown(self, playerinput):
         if playerinput is None:
             return False
@@ -34,6 +35,7 @@ class InputManager:
             return self.controllers[playerinput.controllerNumber].isAxisDown(playerinput)
         if playerinput.type == 'key':
             return self.keyboard.isKeyDown(playerinput.inputNumber)             
+    
     def isPressed(self, playerinput):
         if playerinput is None:
             return False
@@ -45,6 +47,7 @@ class InputManager:
             return self.controllers[playerinput.controllerNumber].isAxisPressed(playerinput)          
         if playerinput.type == 'key':
             return self.keyboard.isKeyPressed(playerinput.inputNumber)
+    
     def isReleased(self, playerinput):
         if playerinput is None:
             return False
@@ -70,32 +73,48 @@ class KeyInput:
         self.left = PlayerInput(0,pygame.K_LEFT,'key',1)
         self.right = PlayerInput(0,pygame.K_RIGHT,'key',1)
 
-        self.w = PlayerInput(0,pygame.K_w,'key',1)
-        self.a = PlayerInput(0,pygame.K_a,'key',1)
-        self.s = PlayerInput(0,pygame.K_s,'key',1)
-        self.d = PlayerInput(0,pygame.K_d,'key',1)
-        self.q = PlayerInput(0,pygame.K_q,'key',1)
-        self.e = PlayerInput(0,pygame.K_e,'key',1)
+        self.a = PlayerInput(0, pygame.K_a, 'key', 1)
+        self.b = PlayerInput(0, pygame.K_b, 'key', 1)
+        self.c = PlayerInput(0, pygame.K_c, 'key', 1)
+        self.d = PlayerInput(0, pygame.K_d, 'key', 1)
+        self.e = PlayerInput(0, pygame.K_e, 'key', 1)
+        self.f = PlayerInput(0, pygame.K_f, 'key', 1)
+        self.g = PlayerInput(0, pygame.K_g, 'key', 1)
+        self.h = PlayerInput(0, pygame.K_h, 'key', 1)
+        self.i = PlayerInput(0, pygame.K_i, 'key', 1)
+        self.j = PlayerInput(0, pygame.K_j, 'key', 1)
+        self.k = PlayerInput(0, pygame.K_k, 'key', 1)
+        self.l = PlayerInput(0, pygame.K_l, 'key', 1)
+        self.m = PlayerInput(0, pygame.K_m, 'key', 1)
+        self.n = PlayerInput(0, pygame.K_n, 'key', 1)
+        self.o = PlayerInput(0, pygame.K_o, 'key', 1)
+        self.p = PlayerInput(0, pygame.K_p, 'key', 1)
+        self.q = PlayerInput(0, pygame.K_q, 'key', 1)
+        self.r = PlayerInput(0, pygame.K_r, 'key', 1)
+        self.s = PlayerInput(0, pygame.K_s, 'key', 1)
+        self.t = PlayerInput(0, pygame.K_t, 'key', 1)
+        self.u = PlayerInput(0, pygame.K_u, 'key', 1)
+        self.v = PlayerInput(0, pygame.K_v, 'key', 1)
+        self.w = PlayerInput(0, pygame.K_w, 'key', 1)
+        self.x = PlayerInput(0, pygame.K_x, 'key', 1)
+        self.y = PlayerInput(0, pygame.K_y, 'key', 1)
+        self.z = PlayerInput(0, pygame.K_z, 'key', 1)
 
-        self.i = PlayerInput(0,pygame.K_i,'key',1)
-        self.k = PlayerInput(0,pygame.K_k,'key',1)
-        self.j = PlayerInput(0,pygame.K_j,'key',1)
-        self.l = PlayerInput(0,pygame.K_l,'key',1)
-        self.u = PlayerInput(0,pygame.K_u,'key',1)
-        self.o = PlayerInput(0,pygame.K_o,'key',1)
-
-        self.t = PlayerInput(0,pygame.K_t,'key',1)
-        self.g = PlayerInput(0,pygame.K_g,'key',1)
-        self.f = PlayerInput(0,pygame.K_f,'key',1)
-        self.h = PlayerInput(0,pygame.K_h,'key',1)
-
-        self.n1 = PlayerInput(0,pygame.K_1,'key',1)
-        self.n2 = PlayerInput(0,pygame.K_2,'key',1)
-        self.n3 = PlayerInput(0,pygame.K_3,'key',1)
+        self.n0 = PlayerInput(0, pygame.K_0, 'key', 1)
+        self.n1 = PlayerInput(0, pygame.K_1, 'key', 1)
+        self.n2 = PlayerInput(0, pygame.K_2, 'key', 1)
+        self.n3 = PlayerInput(0, pygame.K_3, 'key', 1)
+        self.n4 = PlayerInput(0, pygame.K_4, 'key', 1)
+        self.n5 = PlayerInput(0, pygame.K_5, 'key', 1)
+        self.n6 = PlayerInput(0, pygame.K_6, 'key', 1)
+        self.n7 = PlayerInput(0, pygame.K_7, 'key', 1)
+        self.n8 = PlayerInput(0, pygame.K_8, 'key', 1)
+        self.n9 = PlayerInput(0, pygame.K_9, 'key', 1)
 
 keys = KeyInput()
 
 class ControllerInput:
+
     def __init__(self, number):
 
         self.a = PlayerInput(number,0,'button',1)
