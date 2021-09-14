@@ -33,6 +33,10 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 pygame.init()
 
+clock = pygame.time.Clock()
+windowSize = pygame.Rect(0,0,1200,800)
+screen = pygame.display.set_mode((windowSize.w, windowSize.h))
+
 # create managers
 sceneManager = SceneManager()
 inputManager = InputManager()
@@ -71,10 +75,6 @@ systemManager.addSystem(
     TextSystem(),
     ParticleSystem()
 )
-
-clock = pygame.time.Clock()
-windowSize = pygame.Rect(0,0,1200,800)
-screen = pygame.display.set_mode((windowSize.w, windowSize.h))
 
 def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma_icon')):
     

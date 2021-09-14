@@ -9,7 +9,7 @@ class ResourceManager:
     # images
 
     def addImage(self, key, url):
-        self.images[key] = pygame.image.load(url)
+        self.images[key] = pygame.image.load(url).convert_alpha()
 
     def getImage(self, key):
         if key not in self.images.keys():
