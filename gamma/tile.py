@@ -16,7 +16,7 @@ class Tile:
         self.image = image
         self.solid = solid
     
-    # just draws the map to the surface provided
+    # just draws the tile to the surface provided
     def draw(self, screen, x, y, size):
         if self.image is None:
             return
@@ -31,4 +31,4 @@ class Tile:
             x, y,
             size, size,
             alpha=alpha
-        ))
+        ), scene=False)

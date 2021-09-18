@@ -83,6 +83,9 @@ def moveRightTransitionFirst():
 class FirstScene(gamma.Scene):
 
     def init(self):
+
+        self.background = gamma.BLUE
+
         self.setMenu(gamma.Menu(300,70,
             [
                 gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(pushSecond)),
@@ -100,12 +103,14 @@ class FirstScene(gamma.Scene):
         , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
 
     def draw(self):
-        self.surface.fill(gamma.BLUE)
-        gamma.drawText(self.surface, 'First scene. Move to second scene using...', 25, 25, gamma.WHITE)
+        self.renderer.add(gamma.Text('First scene. Move to second scene using...', 25, 25, colour=gamma.WHITE))
 
 class SecondScene(gamma.Scene):
 
     def init(self):
+
+        self.background = gamma.RED
+
         self.setMenu(gamma.Menu(300,70,
             [
                 gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(popScene)),
@@ -122,9 +127,8 @@ class SecondScene(gamma.Scene):
         , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
     
     def draw(self):
-        self.surface.fill(gamma.RED)
-        gamma.drawText(self.surface, 'Second scene. Back to first scene using...', 25, 25, gamma.WHITE)
- 
+        self.renderer.add(gamma.Text('Second scene. Back to first scene using...', 25, 25, colour=gamma.WHITE))
+
 firstScene = FirstScene()
 secondScene = SecondScene()
 

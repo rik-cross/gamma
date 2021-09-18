@@ -7,7 +7,7 @@ class TextSystem(System):
 
     def setRequirements(self):
         self.requiredComponents = ['text']
-    
+
     def updateEntity(self, entity, scene):
 
         txt = entity.getComponent('text')
@@ -15,11 +15,10 @@ class TextSystem(System):
 
         if txt.destroy:
             entity.removeComponent('text')
-    
+
     def drawEntity(self, entity, scene):
 
         txt = entity.getComponent('text')
         pos = entity.getComponent('position')
-        txt.draw(scene, pos.rect.x, pos.rect.y)
 
-        
+        txt.draw(scene, pos.rect.x, pos.rect.y)

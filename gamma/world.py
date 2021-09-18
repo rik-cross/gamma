@@ -82,11 +82,9 @@ class World:
     def setMap(self, map):
         self.map = map
     
-    def loadMap(self, filename, mapImages=[]):
+    def loadMap(self, filename):
         filename = os.path.abspath(filename)
         map =  pickle.load( open( filename, "rb" ) )
-        for img in mapImages:
-            map.mapImages.append(img)
         return map
 
     def saveMap(self, map, filename):

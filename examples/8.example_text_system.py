@@ -28,7 +28,8 @@ playerEntity.addComponent(
     gamma.TextComponent(
         'Here is some sample text, split over multiple lines.',
         lifetime='timed',
-        type='tick'
+        type='tick',
+        overhead=False
     )
 )
 

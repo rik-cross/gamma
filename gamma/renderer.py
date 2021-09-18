@@ -5,21 +5,27 @@ class Renderer:
     def __init__(self, scene):
 
         # list of items to render
-        self.renderable = []
+        self.worldRenderable = []
+        self.sceneRenderable = []
         # a renderer is attached to a scene
         self.scene = scene
     
     # adds a renderable object to the renderer
-    def add(self, r):
-        self.renderable.append(r)
-    
+    def add(self, r, scene=True):
+        if not scene:
+            self.worldRenderable.append(r)
+        else:
+            self.sceneRenderable.append(r)
+
     # removes all renderable objects from the renderer
     def flush(self):
-        self.renderable = []
+        self.worldRenderable = []
+        self.sceneRenderable = []
 
     def draw(self):
 
         #
+        # WORLD RENDERING
         # draw all renderable objects, for all cameras
         #
 
@@ -40,8 +46,15 @@ class Renderer:
                 self.scene.surface.fill(camera.bgColour)
 
             # draw each renderable, transformed for the camera
-            for r in self.renderable:
+            for r in self.worldRenderable:
                 r.draw(self.scene.surface, camera._x, camera._y, camera._z)
             
             # unset clipping rectangle
             self.scene.surface.set_clip(None)
+        
+        #
+        # SCENE RENDERING
+        #
+
+        for r in self.sceneRenderable:
+            r.draw(self.scene.surface)

@@ -1,4 +1,5 @@
 import gamma
+import os
 
 #
 # create a main scene
@@ -24,6 +25,7 @@ playerEntity.getComponent('imagegroups').add('default', playerImage)
 
 # player controls = WASD keys, enter to create a particle emitter
 def playerControls(player):
+    
     if gamma.inputManager.isDown(player.getComponent('input').up):
         player.getComponent('position').y -= 2
     if gamma.inputManager.isDown(player.getComponent('input').down):
@@ -32,13 +34,13 @@ def playerControls(player):
         player.getComponent('position').x -= 2
     if gamma.inputManager.isDown(player.getComponent('input').right):
         player.getComponent('position').x += 2
+    
     if gamma.inputManager.isPressed(player.getComponent('input').b1):
         # add a new particle emitter at the player's center position
         player.addComponent(
             gamma.ParticleEmitterComponent(
-                xOff=player.getComponent('position').w/2,
-                yOff=player.getComponent('position').h/2,
-                emit_frequency=2
+                xOff=(player.getComponent('position').w/2),
+                yOff=(player.getComponent('position').h/2)
             )
         )
 

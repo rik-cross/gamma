@@ -65,7 +65,6 @@ from .colours import *
 from .tile import *
 
 from .map import *
-from .map_image import *
 
 from .ui_text import *
 from .text import *

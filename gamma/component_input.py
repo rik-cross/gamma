@@ -12,7 +12,7 @@ class InputComponent:
         b13=None, b14=None, b15=None, b16=None,
         b17=None, b18=None,
         
-        # entity controller
+        # entity input controller
         inputContext=None
     
     ):

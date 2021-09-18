@@ -11,14 +11,20 @@ class UITextInput(Renderable):
 
     def __init__(self,
 
-        x=0, y=0, 
-        keyboard=keyboard_layouts['en'],
-        text=None,
-        hAlign='left', vAlign='top',
+        # optional parameters
+        x = 0, y = 0, 
+        keyboard = keyboard_layouts['en'],
+        text = None,
+        hAlign = 'left', vAlign = 'top',
         controllingEntity = None,
-        keySize=50,
+        keySize = 50,
         textEntryBoxSize = 80,
-        show=True
+        show = True,
+        foregroundColour = LIGHT_GREY,
+        backgroundColour = DARK_GREY,
+        selectedForegroundColour = BLACK,
+        selectedBackgroundColour = WHITE,
+        padding = 2
     
     ):
 
@@ -40,9 +46,15 @@ class UITextInput(Renderable):
         else:
             self.controllingInputComponent = None
 
+        # store other optional parameters
         self.keySize = keySize
         self.textEntryBoxSize = textEntryBoxSize
         self.show = show
+        self.foregroundColour = foregroundColour
+        self.backgroundColour = backgroundColour
+        self.selectedForegroundColour = selectedForegroundColour
+        self.selectedBackgroundColour = selectedBackgroundColour
+        self.padding = padding
         
         # calculate keyboard width
         self._w = max(map(len, self.keyboard)) * self.keySize
@@ -100,10 +112,19 @@ class UITextInput(Renderable):
                 
                 # black border
                 Rectangle(self.rect.x+r*self.keySize, self.rect.y+c*self.keySize, self.keySize, self.keySize, colour=BLACK).draw(surface)
+                
+                # choose colours
+                if r == self.cursorX and c == self.cursorY:
+                    bg = self.selectedBackgroundColour
+                    fg = self.selectedForegroundColour
+                else:
+                    bg = self.backgroundColour
+                    fg = self.foregroundColour
+
                 # key background
-                Rectangle(self.rect.x+r*self.keySize+1, self.rect.y+c*self.keySize+1, self.keySize-2, self.keySize-2, colour=DARK_GREY).draw(surface)
+                Rectangle(self.rect.x+r*self.keySize+self.padding, self.rect.y+c*self.keySize+self.padding, self.keySize-(self.padding*2), self.keySize-(self.padding*2), colour=bg).draw(surface)
                 # key name
-                Text(self.keyboard[c][r],self.rect.x+r*self.keySize+(self.keySize/2), self.rect.y+c*self.keySize+(self.keySize/2), hAlign='center', vAlign='middle').draw(surface)
+                Text(self.keyboard[c][r],self.rect.x+r*self.keySize+(self.keySize/2)+self.padding, self.rect.y+c*self.keySize+(self.keySize/2)+self.padding, hAlign='center', vAlign='middle', colour=fg).draw(surface)
                  
         # text output box and text
         Rectangle(self.rect.x, self.rect.y + self.keySize*len(self.keyboard), self._w, self.textEntryBoxSize, colour=BLACK).draw(surface)
@@ -111,9 +132,6 @@ class UITextInput(Renderable):
         # cursor
         Text('_', self.displayedText.x + self.displayedText.rect.w, self.displayedText.y, vAlign='middle').draw(surface)
 
-        # selected key highlight
-        drawBox(surface, self.rect.x+self.cursorX*self.keySize, self.rect.y+self.cursorY*self.keySize, self.keySize, self.keySize, WHITE)
-       
     #  dimension properties
 
     @property

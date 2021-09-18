@@ -2,7 +2,6 @@ from math import ceil
 
 from pygame import surface
 from .tile import Tile
-from .map_image import MapImage
 import pygame
 from .colours import LIGHT_GREY
 from .gamma import tileManager
@@ -13,8 +12,6 @@ class Map:
 
         self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
-        self.drawGrid = False
-        self.mapImages = []
         # 'tiles' is a 2D array of strings, which are keys to Tile.tiles
         if tiles is None:
             self.tiles = [ [ 'none' for w in range(self.MAX_MAPSIZE) ] for h in range(self.MAX_MAPSIZE) ]
@@ -94,12 +91,6 @@ class Map:
 
     def draw(self, scene, x=0, y=0, z=1):
 
-        #if self.drawGrid:
-        #    for r in range(self.h_map):
-        #        pygame.draw.line(screen, LIGHT_GREY, (), ())
-        #    for c in range(self.w_map):
-        #        pygame.draw.line(screen, LIGHT_GREY, (), ())
-
         for r in range(self.h_map):
             for c in range(self.w_map):
                 tile = self.tiles[r][c]
@@ -108,4 +99,3 @@ class Map:
                     newY = y + r*(self.tileSize*z)
                     newSize = self.tileSize*z
                     tileManager.tiles[tile].render(scene, newX, newY, newSize, alpha=self.alpha)
-                

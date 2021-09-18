@@ -18,7 +18,7 @@ def changeTextColour():
         mainScene.textColour = gamma.WHITE
 
 def changeBackgroundColour(colour):
-    mainScene.backgroundColour = colour
+    mainScene.background = colour
 
 #
 # create a main scene
@@ -28,7 +28,7 @@ class MainScene(gamma.Scene):
 
     def init(self):
         self.textColour = gamma.WHITE
-        self.backgroundColour = gamma.BLUE
+        self.background = gamma.BLUE
         self.setMenu(gamma.Menu(300,150,
             [
                 gamma.UITextMenuItem('Change title text colour', actionListener=gamma.ActionListener(changeTextColour)),
@@ -38,8 +38,7 @@ class MainScene(gamma.Scene):
         , entities=[playerEntity]), self)
 
     def draw(self):
-        self.surface.fill(self.backgroundColour)
-        gamma.drawText(self.surface, 'Choose an option:', 25, 25, self.textColour)
+        self.renderer.add(gamma.Text('Choose an option:', 25, 25, colour=self.textColour))
 
 #
 # add scene to the engine and start

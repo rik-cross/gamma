@@ -50,7 +50,7 @@ class EmoteSystem(System):
             w=32, h=32,
             hAlign='center',
             vAlign='middle'
-        ))
+        ), scene=False)
 
         # image
         scene.renderer.add(Image(
@@ -60,5 +60,5 @@ class EmoteSystem(System):
             w=w, h=h,
             hAlign='center',
             vAlign='middle'
-        ))
+        ), scene=False)
 

@@ -22,6 +22,8 @@ class MainScene(gamma.Scene):
 
     def init(self):
 
+        self.background = gamma.BLUE
+
         # create a button
 
         # default image group
@@ -34,11 +36,10 @@ class MainScene(gamma.Scene):
         self.addButton(gamma.UIButton(200, 150, defaultImageGroup, pressedImageGroup, controlledBy=[gamma.controller[0].x, playerEntity.getComponent('input').b1], text='press me!'))
 
     def draw(self):
-        self.surface.fill(gamma.BLUE)
-        gamma.Text(
+        self.renderer.add(gamma.Text(
             'Press keyboard [enter] or controller [x] to activate.',
             25, 25
-        ).draw(self.surface)
+        ))
 
 #
 # add scene to the engine and start

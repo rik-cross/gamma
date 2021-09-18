@@ -11,10 +11,15 @@ class ImageSystem(System):
     
     def drawEntity(self, entity, scene):
 
+        # get the imagegroup to draw
         componentImageGroups = entity.getComponent('imagegroups')
         imageGroup = componentImageGroups.getCurrentImageGroup()
+
+        # get the current image in the imagegroup
         if imageGroup is not None:
             image = imageGroup.getCurrentImage()
+
+            # send the image to the renderer
             if image is not None:
                 componentPosition = entity.getComponent('position')
 
@@ -24,7 +29,8 @@ class ImageSystem(System):
                     componentPosition.y,
                     componentPosition.w,
                     componentPosition.h,
+                    # draw the image facing in the correct direction
                     componentPosition.angle == 270 and componentPosition.rotationStyle == 'leftRight',
                     False,
                     alpha=componentImageGroups.alpha
-                ))
+                ), scene=False)

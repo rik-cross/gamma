@@ -68,12 +68,12 @@ class RenderableScene(gamma.Scene):
 
     def draw(self):
         
-        gamma.Text('Hello world!', 0, 0).draw(self.surface)
-        self.titleText.draw(self.surface)
-        self.frameText.draw(self.surface)
-        self.circle.draw(self.surface)
-        self.rectangle.draw(self.surface)
-        self.image.draw(self.surface)
+        self.renderer.add(gamma.Text('Hello world!', 0, 0))
+        self.renderer.add(self.titleText)
+        self.renderer.add(self.frameText)
+        self.renderer.add(self.circle)
+        self.renderer.add(self.rectangle)
+        self.renderer.add(self.image)
         
 # create a scene instance
 scene = RenderableScene()

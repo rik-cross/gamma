@@ -11,9 +11,11 @@ class InputSystem(System):
     
     def updateEntity(self, entity, scene):
 
+        # don't allow input during a cutscene
         if scene.cutscene is not None:
             return
 
+        # run the stored input context
         if entity.getComponent('input').inputContext is not None:
             entity.getComponent('input').inputContext(entity)
         

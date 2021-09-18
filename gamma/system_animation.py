@@ -12,6 +12,8 @@ class AnimationSystem(System):
         self.requiredTags = []
 
     def updateEntity(self, entity, scene):
+
+        # update if an image group exists and is 'playing'
         ig = entity.getComponent('imagegroups')
         if ig.current is not None:
             if ig.playing:
