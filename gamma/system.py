@@ -43,14 +43,9 @@ class System():
     # runs draw() and drawEntity() method on all
     # systems that meet the system requirements
     def _draw(self, scene):
-        self.draw(scene)
         for entity in scene.world.entities:
             if self._checkRequirements(entity):
                 self.drawEntity(entity, scene)
-    
-    # runs once per frame
-    def draw(self, scene):
-        pass
     
     # processes each entity in a given scene
     def drawEntity(self, entity, scene):

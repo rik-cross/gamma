@@ -1,4 +1,3 @@
-from math import gamma
 from .component import Component
 from .colours import *
 from .text import Text
@@ -13,10 +12,13 @@ class TextComponent(Component):
         text,
         
         # optional parameters
-
-        colour = WHITE,
+        
+        # position (only if overhead = False)
+        x = 20, y = 20,
+        # colour
+        textColour = WHITE,
         # minimum text character width
-        width = 20,
+        textWidth = 20,
         # spacing between rows of text
         spacing = 15,
         # display above the entity, or at bottom of scene
@@ -43,8 +45,10 @@ class TextComponent(Component):
         # store component attributes
         
         self.text = text
-        self.colour = colour
-        self.width = width
+        self.x = x
+        self.y = y
+        self.textColour = textColour
+        self.textWidth = textWidth
         self.spacing = spacing
         self.overhead = overhead
         self.lifetime = lifetime
@@ -52,7 +56,7 @@ class TextComponent(Component):
         self.tick_sound = tick_sound
         self.final_display_time = final_display_time
         self.input_list = input_list
-        self.setType(type)
+        self._setType(type)
 
         # attributes to store current state
 
@@ -71,16 +75,17 @@ class TextComponent(Component):
         row = ''
         for char in self.text:
             row = row + char
-            if len(row) >= self.width and char == ' ':
+            if len(row) >= self.textWidth and char == ' ':
                 self.textList.append(row[:-1])
                 row = ''
         if len(row) > 0:
             self.textList.append(row)
+        
+        # add hint to press button
+        if self.lifetime == 'press':
+            self.textList[-1] += '  >>'
 
-    def startExit(self):
-        self.enterOrExit = 'exit'
-
-    def setType(self, type):
+    def _setType(self, type):
 
         # types are 'appear', 'tick' or 'fade'
         self.type = type
@@ -109,25 +114,32 @@ class TextComponent(Component):
         if self.type == 'appear':
             pass
 
+        # if text is appearing ticked
         if self.type == 'tick' and self.enterOrExit == 'enter':
             if not self.finished:
+                # wait for tick timer
                 self.delayTimer -= 1
                 if self.delayTimer <= 0:
                     self.delayTimer = self.tick_delay
+                    # increment text
                     self.index += 1
                     if self.tick_sound:
                         soundManager.playSound(self.tick_sound, soundManager.soundVolume / 2)
+                    # move to tick the next row of text
                     if self.index >= len(self.textList[self.row]):
                         self.index = 0
                         self.row += 1
+                        # finish once at the end of the last row
                         if self.row >= len(self.textList):
                             self.finished = True
 
+        # if fading in
         if self.type == 'fade' and self.enterOrExit == 'enter':
             self.fadeAmount = min(self.fadeAmount+4, 255)
             if self.fadeAmount == 255:
                 self.finished = True
 
+        # start exising once enter animations complete
         if self.finished and self.enterOrExit == 'enter':
 
             if self.lifetime == 'always':
@@ -138,16 +150,18 @@ class TextComponent(Component):
                 if self.final_display_time <= 0:
                     self.enterOrExit = 'exit'
 
-        # can press to advance, regardless of progress
+        # press to advance, regardless of progress
         if self.lifetime == 'press':
             if self.input_list is not None:
                 for input in self.input_list:
                     if inputManager.isPressed(input):
                         self.enterOrExit = 'exit'
-                        
+
+        # fade out the required amount (may be none)
+        # and then destroy component
         if self.enterOrExit == 'exit':
 
-            self.fadeAmount = max(self.fadeAmount - 4, 0)
+            self.fadeAmount = max(self.fadeAmount - 5, 0)
             if self.fadeAmount == 0:
                 self.destroy = True
 
@@ -157,22 +171,52 @@ class TextComponent(Component):
 
         for i,l in enumerate(self.textList):
 
+            # don't draw all of the current row if ticking
             if i == self.row:
 
-                scene.renderer.add(Text(
-                    l[0:self.index],
-                    x,
-                    y-10-rows+(i*self.spacing),
-                    colour=self.colour,
-                    alpha=self.fadeAmount
-                ), scene=False)           
+                if self.overhead:
 
+                    # draw above the entity
+                    scene.renderer.add(Text(
+                        l[0:self.index],
+                        x,
+                        y-10-rows+(i*self.spacing),
+                        colour=self.textColour,
+                        alpha=self.fadeAmount
+                    ), scene=False)
+
+                else:
+
+                    # draw at required x/y position
+                    scene.renderer.add(Text(
+                        l[0:self.index],
+                        self.x,
+                        self.y+(i*self.spacing*2),
+                        colour=self.textColour,
+                        alpha=self.fadeAmount
+                    ))   
+
+            # draw previous rows
             elif i < self.row:
 
-                scene.renderer.add(Text(
-                    l,
-                    x,
-                    y-10-rows+(i*self.spacing),
-                    colour=self.colour,
-                    alpha=self.fadeAmount
-                ), scene=False)
+                if self.overhead:
+
+                    # draw above the entity
+                    scene.renderer.add(Text(
+                        l,
+                        x,
+                        y-10-rows+(i*self.spacing),
+                        colour=self.textColour,
+                        alpha=self.fadeAmount
+                    ), scene=False)
+                
+                else:
+                    
+                    # draw at required x/y position
+                    scene.renderer.add(Text(
+                        l,
+                        self.x,
+                        self.y+(i*self.spacing*2),
+                        colour=self.textColour,
+                        alpha=self.fadeAmount
+                    ))

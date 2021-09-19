@@ -14,33 +14,42 @@ class EmoteSystem(System):
         self.requiredComponents = ['emote', 'position']
     
     def updateEntity(self, entity, scene):
-
+        
+        #update
         em = entity.getComponent('emote')
         em.update()
+
+        # destroy if required
         if em.destroy:
             entity.removeComponent('emote')
+        
+        # delete the entity if it serves only as a particle emitter
+        if entity.getComponent('tags').has('emote'):
+            scene.world.deleteEntity(entity)
     
     def drawEntity(self, entity, scene):
         
         emoteComponent = entity.getComponent('emote')
         positionComponent = entity.getComponent('position')
 
+        # get image info
         image = emoteComponent.image
         imageRect = image.get_rect()
+
+        # resize the image to be 18x18 max
         w = imageRect.w
         h = imageRect.h
-        s = 0
-        p = 0
+        percentageResize = 0
+        # resize based on width if greater
         if w >= h:
-            s = w
-            p = w/20
-            w = 20
-            h = floor(h / p)
+            percentageResize = w/18
+            w = 18
+            h = floor(h / percentageResize)
+        # resize based on heightif greater
         else:
-            s = h
-            p = h/20
-            h = 20
-            w = floor(w / p)
+            percentageResize = h/18
+            h = 18
+            w = floor(w / percentageResize)
 
         # box
         scene.renderer.add(Image(
@@ -56,7 +65,7 @@ class EmoteSystem(System):
         scene.renderer.add(Image(
             image,
             positionComponent.x + positionComponent.w//2,
-            positionComponent.y - imageRect.h//2 - emoteComponent.bottomMargin - 2,
+            positionComponent.y - imageRect.h//2 - emoteComponent.bottomMargin - 3,
             w=w, h=h,
             hAlign='center',
             vAlign='middle'

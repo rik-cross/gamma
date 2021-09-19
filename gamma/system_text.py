@@ -16,6 +16,10 @@ class TextSystem(System):
         if txt.destroy:
             entity.removeComponent('text')
 
+        # delete the entity if it serves only as a particle emitter
+        if entity.getComponent('tags').has('text'):
+            scene.world.deleteEntity(entity)
+
     def drawEntity(self, entity, scene):
 
         txt = entity.getComponent('text')

@@ -17,10 +17,15 @@ class Tile:
         self.solid = solid
     
     # just draws the tile to the surface provided
-    def draw(self, screen, x, y, size):
+    def draw(self, screen, x, y, size, alpha=255):
         if self.image is None:
             return
-        screen.blit(pygame.transform.scale(self.image, (size,size)), (x,y))
+        screen.renderer.add(Image(
+            self.image,
+            x, y,
+            size, size,
+            alpha = alpha
+        ))
 
     # renders the map for all entities with a camera
     def render(self, scene, x, y, size, alpha=255):
@@ -30,5 +35,5 @@ class Tile:
             self.image,
             x, y,
             size, size,
-            alpha=alpha
-        ), scene=False)
+            alpha = alpha
+        ), scene = False)

@@ -13,7 +13,6 @@ class EmoteComponent(Component):
         # optional parameters
         timed=True,
         timer=200,
-        backgroundColour=WHITE
     
     ):
 
@@ -23,13 +22,10 @@ class EmoteComponent(Component):
         self.image = image
         self.timed = timed
         self.timer = timer
-        self.backgroundColour = backgroundColour
 
         # set additional component properties
         self.bottomMargin = 10
         self.imagePadding = 2
-        self.pointerWidth = 4
-        self.pointerHeight = 4
         self.destroy = False
     
     def update(self):

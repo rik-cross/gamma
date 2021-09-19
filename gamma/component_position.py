@@ -48,8 +48,6 @@ class PositionComponent(Component):
         self.angle = self.initialAngle
         self.rotationStyle = self.initialRotationStyle
 
-    #def setSize...
-
     def touching(self, otherEntity):
         if not otherEntity.hasComponent('position'):
             return False

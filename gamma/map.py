@@ -1,6 +1,4 @@
 from math import ceil
-
-from pygame import surface
 from .tile import Tile
 import pygame
 from .colours import LIGHT_GREY
@@ -8,11 +6,19 @@ from .gamma import tileManager
 
 class Map:
 
-    def __init__(self, tiles=None, tileSize=32, name=None, alpha=255):
+    def __init__(self,
+    
+        # optional parameters
+        tiles=None,
+        tileSize=32,
+        name=None,
+        alpha=255
+    
+    ):
 
         self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
-        # 'tiles' is a 2D array of strings, which are keys to Tile.tiles
+        # 'tiles' is a 2D array of strings, which are keys to Tile objects
         if tiles is None:
             self.tiles = [ [ 'none' for w in range(self.MAX_MAPSIZE) ] for h in range(self.MAX_MAPSIZE) ]
         else:
@@ -47,15 +53,19 @@ class Map:
         self.h_real = self.h_map * self.tileSize
         self.w_real = self.w_map * self.tileSize
     
+    # set the tile at specified map (not world) coordinates
     def setTile(self, x, y, tileString):
         self.tiles[y][x] = tileString
         self.setDimensions()
 
+    # returns the tile at specified world coordinates
     def getTileAtPosition(self, x, y):
         xTile = int(x // self.tileSize)
         yTile = int(y // self.tileSize)
         return tileManager.tiles[self.tiles[yTile][xTile]]
 
+    # returns a list of all tiles of a specified type
+    # each list item is a set of (x,y) world coordinates
     def getAllTilesOfType(self, type):
         tilePos = []
         for r in range(self.h_map):
@@ -65,6 +75,7 @@ class Map:
                     tilePos.append((c*self.tileSize, r*self.tileSize))       
         return tilePos
 
+    # returns an (x,y) tuple with map center coordinates
     def getMapCenter(self):
         return (self.h_real//2,self.w_real//2)
 
@@ -81,18 +92,25 @@ class Map:
         xPos = int(centerX - ((tileSize*self.w_map)/2))
         yPos = int(centerY - ((tileSize*self.h_map)/2))
 
+        # loop through each tile
         for r in range(self.h_map):
             for c in range(self.w_map):
+
+                # draw tile image (not 'render'), if one exists
                 tile = self.tiles[r][c]
                 if tileManager.tiles[tile].image is not None:
                     newX = ceil(xPos + c*(tileSize))
                     newY = ceil(yPos + r*(tileSize))
-                    tileManager.tiles[tile].draw(scene.surface, newX, newY, tileSize)
+                    tileManager.tiles[tile].draw(scene, newX, newY, tileSize)
 
+    # draw the map, be sending each tile to the renderer
     def draw(self, scene, x=0, y=0, z=1):
 
+        # loop through each tile
         for r in range(self.h_map):
             for c in range(self.w_map):
+
+                # send tile image to the renderer (if one exists)
                 tile = self.tiles[r][c]
                 if tileManager.tiles[tile].image is not None:
                     newX = x + c*(self.tileSize*z)
