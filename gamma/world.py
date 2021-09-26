@@ -31,6 +31,9 @@ class World:
             'acceleration' : accelerationForces
         }
 
+        # entities to delete
+        self.delete = []
+
     # world methods
 
     def addVelocityForce(self, name, force):
@@ -52,6 +55,11 @@ class World:
     
     def deleteEntity(self, entity):
         self.entities.remove(entity)
+    
+    def deleteEntityByID(self, ID):
+        for e in self.entities:
+            if e.ID == ID:
+                self.deleteEntity(e)
 
     def getEntitiesByTag(self, tag, *otherTags):
         entityList = []

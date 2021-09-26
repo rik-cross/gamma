@@ -17,10 +17,10 @@ class Tile:
         self.solid = solid
     
     # just draws the tile to the surface provided
-    def draw(self, screen, x, y, size, alpha=255):
+    def draw(self, scene, x, y, size, alpha=255):
         if self.image is None:
             return
-        screen.renderer.add(Image(
+        scene.renderer.add(Image(
             self.image,
             x, y,
             size, size,

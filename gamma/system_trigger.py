@@ -1,6 +1,5 @@
 import pygame
 from .system import *
-from .gamma import *
 
 class TriggerSystem(System):
 
@@ -52,20 +51,24 @@ class TriggerSystem(System):
 
                         # if entity trigger rect collides with other entity collider
                         if adjustedRect.colliderect(otherRect):
-                            trigger.current.append(otherEntity)
+                            # check whether a button press is required:
+                            if trigger.checkPress():
+                                trigger.current.append(otherEntity)
             
-            #
-            # execute the relevant trigger function for each collision
-            #
+        #
+        # execute the relevant trigger function for each collision
+        #
 
-            # trigger is 'entered' if only collided this frame
-            if trigger.current and not trigger.last:
-                trigger.onCollisionEnter(entity)
+        for trigger in trg.triggerList:
 
-            # trigger is 'exited' if no longer colliding
-            elif not trigger.current and trigger.last:
-                trigger.onCollisionExit(entity)
-            
-            # otherwise it's an ongoing collision
-            elif trigger.current:
-                trigger.onCollide(entity)
+            # only process entities in both lists once
+            for e in trigger.current + list(set(trigger.last) - set(trigger.current)):
+
+                if e in trigger.current and e not in trigger.last:
+                    trigger.onCollisionEnter(entity, e)
+                
+                elif e not in trigger.current and e in trigger.last:
+                    trigger.onCollisionExit(entity, e)
+                
+                elif e in trigger.current:
+                    trigger.onCollide(entity, e)

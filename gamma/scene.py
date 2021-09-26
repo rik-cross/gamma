@@ -33,7 +33,10 @@ class Scene:
         self.backgroundAlpha = backgroundAlpha
 
         self.drawSceneBelow = False
-
+        # delete
+        #print(self.world.delete)
+        for e in self.world.delete:
+            self.world.entities.remove(e)
         self.renderer = Renderer(self)
 
         self.init()

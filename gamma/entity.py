@@ -12,11 +12,14 @@ class Entity:
         self.ID = Entity.ID
         Entity.ID += 1
 
+        # deletion flag
+        #self.delete = False
+
         # create component dictionary
         # format = {componentKey : component}
         self.components = {}
 
-        self._addDefaultEntities()
+        self._addDefaultComponents()
 
         # populate component dictionary from passed componenets
         # (this will overwrite existing default components)
@@ -27,7 +30,7 @@ class Entity:
         self.owner = self
     
     # add entity default components
-    def _addDefaultEntities(self):
+    def _addDefaultComponents(self):
         self.addComponent(ImageGroupsComponent())
         self.addComponent(TagsComponent())
 

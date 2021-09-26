@@ -26,21 +26,21 @@ heartEntity.getComponent('imagegroups').add('default', heartImage)
 
 # create a trigger subclass for focusing on the heart
 class HeartFocusTrigger(gamma.Trigger):
-    def onCollisionEnter(self, otherEntity):
-        playerEntity.getComponent('camera').trackEntity(heartEntity)
-    def onCollide(self, otherEntity):
+    def onCollisionEnter(self, entity, otherEntity):
+        otherEntity.getComponent('camera').trackEntity(entity)
+    def onCollide(self, entity, otherEntity):
         pass
-    def onCollisionExit(self, otherEntity):
-        playerEntity.getComponent('camera').trackEntity(playerEntity)
+    def onCollisionExit(self, entity, otherEntity):
+        otherEntity.getComponent('camera').trackEntity(otherEntity)
 
 # create a trigger subclass for zooming in on the heart
 class HeartZoomTrigger(gamma.Trigger):
-    def onCollisionEnter(self, otherEntity):
-        playerEntity.getComponent('camera').setZoom(4, duration=60)
-    def onCollide(self, otherEntity):
+    def onCollisionEnter(self, entity, otherEntity):
+        otherEntity.getComponent('camera').setZoom(4, duration=60)
+    def onCollide(self, entity, otherEntity):
         pass
-    def onCollisionExit(self, otherEntity):
-        playerEntity.getComponent('camera').setZoom(1, duration=60)
+    def onCollisionExit(self, entity, otherEntity):
+        otherEntity.getComponent('camera').setZoom(1, duration=60)
 
 # add triggers
 heartEntity.addComponent(gamma.TriggersComponent())

@@ -35,6 +35,7 @@ from .system_particle import *
 from .system_emote import *
 from .system_text import *
 from .system_image import *
+from .system_inventory import *
 
 from .component import *
 from .component_camera import *
@@ -47,6 +48,7 @@ from .component_triggers import *
 
 from .component_position import *
 from .component_motion import *
+from .component_inventory import *
 
 from .component_tags import *
 from .component_trauma import *

@@ -1,4 +1,3 @@
-from gamma.system_collision import CollisionSystem
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
@@ -25,6 +24,8 @@ from .system_text import *
 from .system_trauma import *
 from .system_trigger import *
 from .system_image import *
+from .system_collision import *
+from .system_inventory import *
 
 from .world import *
 
@@ -73,7 +74,8 @@ systemManager.addSystem(
     ImageSystem(),
     EmoteSystem(),
     TextSystem(),
-    ParticleSystem()
+    ParticleSystem(),
+    InventorySystem()
 )
 
 def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma_icon')):
@@ -113,6 +115,11 @@ def run(fps=60, showFPS=False):
         screen.fill((0,0,0))
         sceneManager.draw() 
         pygame.display.flip()
+
+        # delete entities marked for deletion
+        #for e in sceneManager.getTopScene().world.entities:
+        #    if e.delete:
+        #        sceneManager.getTopScene().world.deleteEntity(e)
 
         # set maximum framerate
         clock.tick(fps)
