@@ -28,6 +28,8 @@ class Entity:
 
         # every entity has an owner, default = self
         self.owner = self
+        # z-order for entity layering, 1 by default
+        self.z=1
     
     # add entity default components
     def _addDefaultComponents(self):

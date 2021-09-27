@@ -34,6 +34,9 @@ class World:
         # entities to delete
         self.delete = []
 
+        # a flag to mark entities for reordering
+        self.reorderEntities = False
+
     # world methods
 
     def addVelocityForce(self, name, force):
@@ -52,6 +55,7 @@ class World:
 
     def addEntity(self, entity):
         self.entities.append(entity)
+        self.reorderEntities = True
     
     def deleteEntity(self, entity):
         self.entities.remove(entity)
@@ -84,7 +88,7 @@ class World:
     def clear(self):
         self.entities = []
         self.map = None
-    
+
     # map methods
 
     def setMap(self, map):

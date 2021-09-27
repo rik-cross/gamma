@@ -66,7 +66,7 @@ class CameraComponent(Component):
         self.worldX = map.w_real / 2
         self.worldY = map.h_real / 2
         # set the zoom level
-        if (self.rect.width / map.w_real) > (self.rect.height / map.h_real):
+        if (self.rect.width / map.w_real) < (self.rect.height / map.h_real):
             z = self.rect.width / map.w_real
         else:
             z = self.rect.height / map.h_real

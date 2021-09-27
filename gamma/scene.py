@@ -33,10 +33,7 @@ class Scene:
         self.backgroundAlpha = backgroundAlpha
 
         self.drawSceneBelow = False
-        # delete
-        #print(self.world.delete)
-        for e in self.world.delete:
-            self.world.entities.remove(e)
+
         self.renderer = Renderer(self)
 
         self.init()
@@ -95,6 +92,11 @@ class Scene:
         # update buttons
         for b in self.buttons:
             b.update()
+        
+        # reorder world entities if required
+        if self.world.reorderEntities:
+            self.world.entities.sort(key = lambda e: e.z)
+            self.world.reorderEntities = False
 
     def _draw(self):
 

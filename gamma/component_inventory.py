@@ -103,19 +103,17 @@ class InventoryComponent(Component):
             entityString = self.items[self.selected][0]
             # remove the entity from the inventory
             self.removeEntityFromSlot(self.selected)
-            # create a new entity
+            # create a new entity, with a dummy position
             entity = entityFactory.create(entityString, 0, 0)
-            # set position
+            # set position, using entity dimensions
             pos = self.entity.getComponent('position')
-
             x = pos.x + pos.w/2 - entity.getComponent('position').w/2
             y = pos.y + pos.h/2 - entity.getComponent('position').h/2
             entity.getComponent('position').x = x
             entity.getComponent('position').y = y
 
             # add entity
-            #self.scene.world.addEntity(entity)
-            sceneManager.getTopScene().world.addEntity(entity)
+            self.scene.world.addEntity(entity)
 
     def buildImages(self):
         self.images = []

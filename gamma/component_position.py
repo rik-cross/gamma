@@ -4,11 +4,12 @@ from .component import Component
 
 class PositionComponent(Component):
 
-    def __init__(self, x, y, w, h, xAnchor='left', yAnchor='top', angle=90, rotationStyle='none'):
+    def __init__(self, x, y, w, h, z=1, xAnchor='left', yAnchor='top', angle=90, rotationStyle='none'):
 
         self.key = 'position'
         self.rect = pygame.Rect(x, y, w, h)
         self.initialRect = pygame.Rect(x, y, w, h)
+        self.z = z
 
         # store position anchor points
         

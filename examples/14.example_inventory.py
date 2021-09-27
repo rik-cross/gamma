@@ -53,7 +53,7 @@ playerEntity.addComponent(
     gamma.InventoryComponent(
         20, 20,
         playerEntity, mainScene,
-        slots=4,
+        slots=3,
         left=playerEntity.getComponent('input').b1,
         right=playerEntity.getComponent('input').b2,
         drop=playerEntity.getComponent('input').down
@@ -61,6 +61,9 @@ playerEntity.addComponent(
 )
 
 playerEntity.getComponent('tags').add('player')
+
+# ensure the player is in front of the hearts
+playerEntity.z = 10
 
 #
 # create a trigger to collect hearts
@@ -92,7 +95,7 @@ for i in range(5):
     playerEntity.getComponent('inventory').addEntity('heart')
 
 # add a heart to the world
-he = gamma.entityFactory.create('heart', 0, 0)
+he = gamma.entityFactory.create('heart', 50, 0)
 mainScene.world.entities.append(he)
 
 #

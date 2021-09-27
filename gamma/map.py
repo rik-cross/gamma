@@ -1,7 +1,4 @@
 from math import ceil
-from .tile import Tile
-import pygame
-from .colours import LIGHT_GREY
 from .gamma import tileManager
 
 class Map:
@@ -14,7 +11,7 @@ class Map:
         name=None,
         alpha=255
     
-    ):
+    ):   
 
         self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
