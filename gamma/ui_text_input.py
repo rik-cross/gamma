@@ -20,7 +20,7 @@ class UITextInput(Renderable):
         keySize = 50,
         textEntryBoxSize = 80,
         show = True,
-        foregroundColour = LIGHT_GREY,
+        foregroundColour = WHITE,
         backgroundColour = DARK_GREY,
         selectedForegroundColour = BLACK,
         selectedBackgroundColour = WHITE,

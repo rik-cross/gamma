@@ -10,17 +10,19 @@ class Image(Renderable):
     
         # requried parameters
         imageSurface, x, y,
-        
+
         # optional parameters
         w=None, h=None,
         flipX=False, flipY=False,
         alpha=255,
         hAlign='left', vAlign='top',
-        colour=None
+        colour=None,
+        z=1,
+        xParallax=False, yParallax=False
 
     ):
         
-        super().__init__(x, y, hAlign, vAlign, colour, alpha)
+        super().__init__(x, y, z, hAlign, vAlign, colour, alpha, xParallax, yParallax)
 
         # set additional image object parameters
         self.imageSurface = imageSurface.copy()
@@ -50,8 +52,16 @@ class Image(Renderable):
 
     def draw(self, surface, xOff=0, yOff=0, scale=1):
 
-        newX = self.rect.x * scale + xOff
-        newY = self.rect.y * scale + yOff
+        if self.xp:
+            newX = self.rect.x * scale + (xOff*self.z)
+        else:
+            newX = self.rect.x * scale + xOff
+        
+        if self.yp:
+            newY = self.rect.y * scale + (yOff*self.z)
+        else:
+            newY = self.rect.y * scale + yOff
+
         newWidth = ceil(self.rect.w * scale)
         newHeight = ceil(self.rect.h * scale)
         

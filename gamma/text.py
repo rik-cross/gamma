@@ -15,11 +15,13 @@ class Text(Renderable):
         colour=WHITE,
         alpha=255,
         font=resourceManager.getFont('munro24'),
-        underline=False
+        underline=False,
+        z=1,
+        xParallax=False, yParallax=False
 
     ):
 
-        super().__init__(x, y, hAlign, vAlign, colour, alpha)
+        super().__init__(x, y, z, hAlign, vAlign, colour, alpha, xParallax, yParallax)
         
         # set additional text object parameters 
         self._text = str(text)

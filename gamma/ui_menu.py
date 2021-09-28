@@ -17,9 +17,7 @@ class Menu:
         for b in self.buttons:
             self.setButtonColour(b)
 
-        self.activeButtonIndex = 0
-        if self.buttons[self.activeButtonIndex].active is False:
-            self.activeButtonIndex += 1
+        self.setActiveButton()
 
         self.x = x
         self.y = y
@@ -27,6 +25,11 @@ class Menu:
         self.spacing = spacing
 
         self.entities = entities
+
+    def setActiveButton(self):
+        self.activeButtonIndex = 0
+        if self.buttons[self.activeButtonIndex].active is False:
+            self.activeButtonIndex += 1
 
     def addButton(self, button):
         self.buttons.append(button)

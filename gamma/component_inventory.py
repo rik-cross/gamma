@@ -27,7 +27,6 @@ class InventoryComponent(Component):
 
         left = None,
         right = None,
-        add = None,
         drop = None
     
     ):
@@ -50,7 +49,6 @@ class InventoryComponent(Component):
         # input
         self.left = left
         self.right = right
-        self.add = add
         self.drop = drop
 
         self.selected = 0

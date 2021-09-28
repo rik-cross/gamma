@@ -6,23 +6,33 @@ class Map:
     def __init__(self,
     
         # optional parameters
-        tiles=None,
-        tileSize=32,
-        name=None,
-        alpha=255
+        tiles = None,
+        tileSize = 32,
+        name = None,
+        alpha = 255,
+        mapImages = None
     
     ):   
 
         self.MAX_MAPSIZE = 512
         self.tileSize = tileSize
+
         # 'tiles' is a 2D array of strings, which are keys to Tile objects
         if tiles is None:
             self.tiles = [ [ 'none' for w in range(self.MAX_MAPSIZE) ] for h in range(self.MAX_MAPSIZE) ]
         else:
             self.tiles = tiles
+        
         self.setDimensions()
+        
         self.name = name
         self.alpha = alpha
+
+        # map images
+        if mapImages is None:
+            self.mapImages = []
+        else:
+            self.mapImages = mapImages
 
     def setDimensions(self):
 
@@ -114,3 +124,4 @@ class Map:
                     newY = y + r*(self.tileSize*z)
                     newSize = self.tileSize*z
                     tileManager.tiles[tile].render(scene, newX, newY, newSize, alpha=self.alpha)
+

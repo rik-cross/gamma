@@ -55,6 +55,8 @@ class Scene:
         self.buttons.append(button)
 
     def _onEnter(self):
+        if self.menu is not None:
+            self.menu.setActiveButton()
         self.onEnter()
 
     def onEnter(self):
@@ -120,6 +122,12 @@ class Scene:
         if self.drawSceneBelow:
             sceneManager.getSceneBelow(self)._draw()
 
+        # draw world images behind
+        if self.world.map is not None and self.world.map.mapImages is not None:
+            for i in self.world.map.mapImages:
+                if i.z < 1:
+                    self.renderer.add(i, scene=False)
+
         # draw map
         if self.world.map is not None:
             self.world.map.draw(self)
@@ -127,6 +135,12 @@ class Scene:
         # draw systems, which send to the renderer
         for sys in systemManager.systems:
             sys._draw(self)
+
+        # draw world images in front
+        if self.world.map is not None and self.world.map.mapImages is not None:
+            for i in self.world.map.mapImages:
+                if i.z >= 1:
+                    self.renderer.add(i, scene=False)
 
         # draw everything that was sent to the render
         self.renderer.draw()

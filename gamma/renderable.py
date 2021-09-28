@@ -1,13 +1,16 @@
 class Renderable:
     
-    def __init__(self, x, y, h, v, c, a):
+    def __init__(self, x, y, z, h, v, c, a, xp, yp):
         
         self._x = x
         self._y = y
+        self.z = z
         self.hAlign = h
         self.vAlign = v
         self.colour = c
         self._alpha = a
+        self.xp = xp
+        self.yp = yp
     
     def _align(self):
 

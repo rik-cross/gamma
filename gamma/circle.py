@@ -13,11 +13,13 @@ class Circle(Renderable):
         # optional parameters
         hAlign='left', vAlign='top',
         colour=WHITE,
-        alpha=255
+        alpha=255,
+        z=1,
+        xParallax=False, yParallax=False
 
     ):
 
-        super().__init__(x, y, hAlign, vAlign, colour, alpha)
+        super().__init__(x, y, z, hAlign, vAlign, colour, alpha, xParallax, yParallax)
         
         # set additional circle object parameters 
         self._radius = radius
