@@ -36,6 +36,7 @@ from .system_emote import *
 from .system_text import *
 from .system_image import *
 from .system_inventory import *
+from .system_crafting import *
 
 from .component import *
 from .component_camera import *
@@ -49,6 +50,7 @@ from .component_triggers import *
 from .component_position import *
 from .component_motion import *
 from .component_inventory import *
+from .component_crafting import *
 
 from .component_tags import *
 from .component_trauma import *
@@ -67,6 +69,8 @@ from .colours import *
 from .tile import *
 
 from .map import *
+
+from .crafting_recipe import *
 
 from .ui_text import *
 from .text import *

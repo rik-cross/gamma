@@ -1,3 +1,4 @@
+from gamma.system_crafting import CraftingSystem
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
@@ -75,7 +76,8 @@ systemManager.addSystem(
     EmoteSystem(),
     TextSystem(),
     ParticleSystem(),
-    InventorySystem()
+    InventorySystem(),
+    CraftingSystem()
 )
 
 def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma_icon')):
@@ -115,11 +117,6 @@ def run(fps=60, showFPS=False):
         screen.fill((0,0,0))
         sceneManager.draw() 
         pygame.display.flip()
-
-        # delete entities marked for deletion
-        #for e in sceneManager.getTopScene().world.entities:
-        #    if e.delete:
-        #        sceneManager.getTopScene().world.deleteEntity(e)
 
         # set maximum framerate
         clock.tick(fps)

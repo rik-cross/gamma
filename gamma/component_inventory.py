@@ -56,12 +56,12 @@ class InventoryComponent(Component):
         self.items = [(None, 0) for i in range(self.slots)]
         self.images = [None for i in range(self.slots)]
     
-    def addEntity(self, entityString):
+    def addEntity(self, entityString, amount=1):
 
         # add to existing pile, if there is one
         for i in range(self.slots):
             if self.items[i][0] == entityString:
-                self.items[i][1] += 1
+                self.items[i][1] += amount
                 self.buildImages()
                 return
 
@@ -77,14 +77,24 @@ class InventoryComponent(Component):
                 if self.items[slotNumber][1] == 0:
                     self.items[slotNumber][0] = None
     
-    def removeEntityByName(self, entityString):
+    def removeEntityByName(self, entityString, amount=1):
         for i in range(self.slots):
             if self.items[i][0] == entityString:
                 if self.items[i][1] > 0:
-                    self.items[i][1] = self.items[i][1] - 1
-                    if self.items[i][1] == 0:
+                    self.items[i][1] = self.items[i][1] - amount
+                    if self.items[i][1] <= 0:
                         self.items[i][0] = None
                     return
+
+    def has(self, entityName, amount):
+        total = 0
+        for i in self.items:
+            if i[0] is not None:
+                if i[0] == entityName:
+                    total += i[1]
+        if total >= amount:
+            return True
+        return False
 
     def update(self):
         
@@ -174,7 +184,7 @@ class InventoryComponent(Component):
                         percentageResize = w/(self.slot_size-self.imagePadding*2)
                         w = (self.slot_size-self.imagePadding*2)
                         h = floor(h / percentageResize)
-                    # resize based on heightif greater
+                    # resize based on height if greater
                     else:
                         percentageResize = h/(self.slot_size-self.imagePadding*2)
                         h = (self.slot_size-self.imagePadding*2)
