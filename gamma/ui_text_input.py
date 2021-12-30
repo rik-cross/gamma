@@ -29,7 +29,7 @@ class UITextInput(Renderable):
     ):
 
         # initialise renderable element
-        super().__init__(x, y, hAlign, vAlign, None, 255)
+        super().__init__(x, y, 1, hAlign, vAlign, None)
 
         self.keyboard = keyboard
 

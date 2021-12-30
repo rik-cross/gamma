@@ -25,6 +25,13 @@ class PhysicsSystem(System):
 
         # velocity
 
+        if entity.hasComponent('motion'):
+            m = entity.getComponent('motion')
+            if m.velocity is not None:
+                p = entity.getComponent('position')
+                p.x += m.velocity.x
+                p.y += m.velocity.y
+
         # acceleration
 
         #

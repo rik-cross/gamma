@@ -12,8 +12,6 @@ class InventoryComponent(Component):
     
         # required parameters
         x, y,
-        entity,
-        scene,
 
         # optional parameters
         slots = 1,
@@ -35,8 +33,6 @@ class InventoryComponent(Component):
 
         self.x = x
         self.y = y
-        self.entity = entity
-        self.scene = scene
         self.slots = slots
         self.slot_size = slot_size
         self.hidden = hidden
@@ -67,7 +63,7 @@ class InventoryComponent(Component):
 
         # else add to current slot
         if self.items[self.selected][0] is None:
-            self.items[self.selected] = [entityString, 1]
+            self.items[self.selected] = [entityString, amount]
             self.buildImages()
 
     def removeEntityFromSlot(self, slotNumber):
@@ -96,32 +92,24 @@ class InventoryComponent(Component):
             return True
         return False
 
-    def update(self):
-        
-        # controls
-
-        # left
-        if inputManager.isPressed(self.left) and self.selected > 0:
-            self.selected -= 1
-        # right
-        if inputManager.isPressed(self.right) and self.selected < self.slots - 1:
+    def next(self):
+        if self.selected < self.slots - 1:
             self.selected += 1
-        # drop
-        if inputManager.isPressed(self.drop) and self.items[self.selected][0] is not None:
-            entityString = self.items[self.selected][0]
-            # remove the entity from the inventory
-            self.removeEntityFromSlot(self.selected)
-            # create a new entity, with a dummy position
-            entity = entityFactory.create(entityString, 0, 0)
-            # set position, using entity dimensions
-            pos = self.entity.getComponent('position')
-            x = pos.x + pos.w/2 - entity.getComponent('position').w/2
-            y = pos.y + pos.h/2 - entity.getComponent('position').h/2
-            entity.getComponent('position').x = x
-            entity.getComponent('position').y = y
+    
+    def prev(self):
+        if self.selected > 0:
+            self.selected -= 1
 
-            # add entity
-            self.scene.world.addEntity(entity)
+    def dropItem(self):
+        # return None if there's no item to drop
+        if self.items[self.selected][0] is None or self.items[self.selected][1] == 0:
+            return None
+        # return the entity dropped
+        entityString = self.items[self.selected][0]
+        entity = entityFactory.create(entityString, 0, 0)
+        # remove one from the inventory
+        self.removeEntityFromSlot(self.selected)
+        return entity
 
     def buildImages(self):
         self.images = []

@@ -11,6 +11,8 @@ GREEN      = color.Color(50,150,50)
 BLUE       = color.Color(50,50,150)
 YELLOW     = color.Color(150,150,50)
 
+CORNFLOWER_BLUE = color.Color(100, 147, 237)
+
 def colour(r, g, b, a=None):
     if a is not None:
         return color.Color(r, g, b)

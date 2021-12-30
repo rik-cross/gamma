@@ -21,7 +21,27 @@ class ImageSystem(System):
 
             # send the image to the renderer
             if image is not None:
+
                 componentPosition = entity.getComponent('position')
+
+                #
+                # calculate angle and flip, based on rotation style
+                #
+                                
+                v = False
+                h = False
+                a = 0
+
+                if componentPosition.rotationStyle == 'none':
+                    pass
+                elif componentPosition.rotationStyle == 'allAround':
+                    a = componentPosition.angle * -1
+                elif componentPosition.rotationStyle == 'leftRight':
+                    if 180 <= componentPosition.angle % 360 <= 360:
+                        h = True
+                elif componentPosition.rotationStyle == 'upDown':
+                    if 91 <= componentPosition.angle % 360 <= 270:
+                        v = True
 
                 scene.renderer.add(Image(
                     image,
@@ -29,8 +49,10 @@ class ImageSystem(System):
                     componentPosition.y,
                     componentPosition.w,
                     componentPosition.h,
-                    # draw the image facing in the correct direction
-                    componentPosition.angle == 270 and componentPosition.rotationStyle == 'leftRight',
-                    False,
-                    alpha=componentImageGroups.alpha
+                    # horizontal & vertical flip
+                    h, v,
+                    # rotation angle
+                    a,
+                    alpha=componentImageGroups.alpha,
+                    hue = componentImageGroups.hue
                 ), scene=False)

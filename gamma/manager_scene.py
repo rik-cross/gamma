@@ -37,7 +37,6 @@ class SceneManager:
         if self.transition is not None:
             self.transition._draw()
         else:
-            pass
             if len(self.scenes) > 0:
                 self.getTopScene()._draw()
     
@@ -72,6 +71,8 @@ class SceneManager:
         self.transition = t
 
     def getTopScene(self):
+        if len(self.scenes) == 0:
+            return None
         return self.scenes[-1]
 
     def getSceneBelow(self, scene):

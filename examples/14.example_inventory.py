@@ -37,10 +37,24 @@ playerEntity.addComponent(gamma.CameraComponent(
 
 # player controls = enter to start cutscene
 def playerControls(player):
+    # left and right movement
     if gamma.inputManager.isDown(player.getComponent('input').left):
         player.getComponent('position').rect.x -= 2
     if gamma.inputManager.isDown(player.getComponent('input').right):
         player.getComponent('position').rect.x += 2
+    # inventory controls
+    if gamma.inputManager.isPressed(player.getComponent('input').b1):
+        player.getComponent('inventory').prev()
+    if gamma.inputManager.isPressed(player.getComponent('input').b2):
+        player.getComponent('inventory').next()
+    # drop item
+    if gamma.inputManager.isPressed(player.getComponent('input').down):
+        entity = player.getComponent('inventory').dropItem()
+        if entity is not None:
+            pos = player.getComponent('position')
+            entity.getComponent('position').center = pos.x + pos.w/2
+            entity.getComponent('position').bottom = pos.y + pos.h
+            mainScene.world.addEntity(entity)
 
 playerEntity.addComponent(gamma.InputComponent(
     left=gamma.keys.a, right=gamma.keys.d,
@@ -52,11 +66,7 @@ playerEntity.addComponent(gamma.InputComponent(
 playerEntity.addComponent(
     gamma.InventoryComponent(
         20, 20,
-        playerEntity, mainScene,
-        slots=3,
-        left=playerEntity.getComponent('input').b1,
-        right=playerEntity.getComponent('input').b2,
-        drop=playerEntity.getComponent('input').down
+        slots=3
     )
 )
 

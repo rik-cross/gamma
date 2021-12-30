@@ -33,6 +33,10 @@ from .world import *
 # stores the path of this file
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+def quit():
+    global sceneManager
+    sceneManager.clear()
+
 pygame.init()
 
 clock = pygame.time.Clock()
@@ -50,8 +54,11 @@ entityFactory = EntityFactory()
 
 # add font resources
 resourceManager.addFont('munro18', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=18)
+resourceManager.addFont('small', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=18)
 resourceManager.addFont('munro24', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=24)
+resourceManager.addFont('medium', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=24)
 resourceManager.addFont('munro60', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=60)
+resourceManager.addFont('large', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=60)
 
 # add image resources
 resourceManager.addImage('gamma_icon', os.path.join(ROOT_DIR, 'images', 'gamma_icon.png'))
@@ -121,8 +128,9 @@ def run(fps=60, showFPS=False):
         # set maximum framerate
         clock.tick(fps)
 
+        # show FPS as caption if required
         if showFPS:
-            print('FPS:', round(clock.get_fps(), 1))
+            pygame.display.set_caption('FPS : ' + str(round(clock.get_fps(), 1)))
 
     # quit
     sceneManager.clear()

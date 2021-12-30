@@ -36,7 +36,7 @@ class InputManager:
         if playerinput.type == 'key':
             return self.keyboard.isKeyDown(playerinput.inputNumber)             
     
-    def isPressed(self, playerinput):
+    def isPressed(self, playerinput, long=False):
         if playerinput is None:
             return False
         if playerinput.type == 'button':
@@ -46,7 +46,7 @@ class InputManager:
         if playerinput.type == 'axis':
             return self.controllers[playerinput.controllerNumber].isAxisPressed(playerinput)          
         if playerinput.type == 'key':
-            return self.keyboard.isKeyPressed(playerinput.inputNumber)
+            return self.keyboard.isKeyPressed(playerinput.inputNumber, long)
     
     def isReleased(self, playerinput):
         if playerinput is None:

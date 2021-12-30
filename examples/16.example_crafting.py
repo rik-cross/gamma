@@ -54,11 +54,7 @@ playerEntity.addComponent(gamma.InputComponent(
 playerEntity.addComponent(
     gamma.InventoryComponent(
         20, 20,
-        playerEntity, mainScene,
-        slots=3,
-        left=playerEntity.getComponent('input').b1,
-        right=playerEntity.getComponent('input').b2,
-        drop=playerEntity.getComponent('input').down
+        slots=3
     )
 )
 

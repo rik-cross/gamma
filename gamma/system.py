@@ -27,6 +27,7 @@ class System():
     # runs update() and updateEntity() method on all
     # systems that meet the system requirements
     def _update(self, scene):
+        
         self.update(scene)
         for entity in scene.world.entities:
             if self._checkRequirements(entity):

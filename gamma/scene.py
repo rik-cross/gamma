@@ -95,11 +95,24 @@ class Scene:
         for b in self.buttons:
             b.update()
         
+        # update entity timed actions
+        for e in self.world.entities:
+            for action in e.actions:
+                action[0] = max(0, action[0] - 1)
+                if action[0] == 0:
+                    action[1]()
+                    e.actions.remove(action)
+
         # reorder world entities if required
         if self.world.reorderEntities:
             self.world.entities.sort(key = lambda e: e.z)
             self.world.reorderEntities = False
-
+        
+        # delete marked entities
+        for e in self.world.entities:
+            if e.delete:    # TODO: destroy instead?
+                self.world.entities.remove(e)
+        
     def _draw(self):
 
         # calculate the scene size

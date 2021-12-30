@@ -24,6 +24,7 @@ class PositionComponent(Component):
         self.angle = angle
         self.initialAngle = deepcopy(angle)
 
+        # rotationStyle can be 'none', 'allAround', 'leftRight', 'upDown'
         self.rotationStyle = rotationStyle
         self.initialRotationStyle = deepcopy(rotationStyle)
 

@@ -14,7 +14,9 @@ class Image(Renderable):
         # optional parameters
         w=None, h=None,
         flipX=False, flipY=False,
+        angle=0,
         alpha=255,
+        hue=None,
         hAlign='left', vAlign='top',
         colour=None,
         z=1,
@@ -29,8 +31,18 @@ class Image(Renderable):
 
         self.flipX = flipX
         self.flipY = flipY
-        self._w = w
-        self._h = h
+        self.angle = angle
+        self.hue = hue
+
+        if w is not None:
+            self._w = w
+        else:
+            self._w = self.imageSurface.get_rect().w
+
+        if h is not None:
+            self._h = h
+        else:
+            self._h = self.imageSurface.get_rect().h
 
         self._createSurface()
 
@@ -65,10 +77,19 @@ class Image(Renderable):
         newWidth = ceil(self.rect.w * scale)
         newHeight = ceil(self.rect.h * scale)
         
+        if self.hue is not None:
+            colourMask = pygame.Surface(self.imageSurface.get_size())
+            colourMask.fill(self.hue)
+            colouredSurface = self.imageSurface.copy()
+            colouredSurface.blit(colourMask, (0,0), special_flags = pygame.BLEND_MULT)
+        else:
+            colouredSurface = self.imageSurface
+
         adjustedSurface = pygame.transform.scale(
                 pygame.transform.flip(
-                    self.imageSurface, self.flipX, self.flipY
+                    colouredSurface, self.flipX, self.flipY
                 ), (newWidth, newHeight)
             )
 
-        surface.blit(adjustedSurface, (newX, newY))
+        rotatedSurface = pygame.transform.rotate(adjustedSurface, self.angle)
+        surface.blit(rotatedSurface, (newX, newY))

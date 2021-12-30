@@ -52,7 +52,7 @@ class TriggerSystem(System):
                         # if entity trigger rect collides with other entity collider
                         if adjustedRect.colliderect(otherRect):
                             # check whether a button press is required:
-                            if trigger.checkPress():
+                            if trigger.checkPress(otherEntity):
                                 trigger.current.append(otherEntity)
             
         #

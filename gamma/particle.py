@@ -77,5 +77,6 @@ class Particle:
             scene.renderer.add(Rectangle(
                 self.pos.x, self.pos.y, self.size, self.size,
                 hAlign='center', vAlign='middle',
-                colour=self.colour, alpha=self.alpha
+                colour=self.colour,
+                alpha=self.alpha
             ), scene=False)

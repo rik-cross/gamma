@@ -9,9 +9,9 @@ class InventorySystem(System):
         self.requiredComponents = ['inventory']
 
     def updateEntity(self, entity, scene):
-        
-        inv = entity.getComponent('inventory')
-        inv.update()
+        pass
+        #inv = entity.getComponent('inventory')
+        #inv.update()
         
     def drawEntity(self, entity, scene):
         entity.getComponent('inventory').draw(scene)

@@ -2,9 +2,11 @@ from .component import Component
 
 class TagsComponent(Component):
 
-    def __init__(self):
+    def __init__(self, tag=None, *moreTags):
         self.key = 'tags'
         self.tags = []
+        if tag is not None:
+            self.add(tag, *moreTags)
     
     # adds all listed tags
     def add(self, tag, *moreTags):

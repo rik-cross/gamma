@@ -13,7 +13,7 @@ class Entity:
         Entity.ID += 1
 
         # deletion flag
-        #self.delete = False
+        self.delete = False
 
         # create component dictionary
         # format = {componentKey : component}
@@ -29,12 +29,17 @@ class Entity:
         # every entity has an owner, default = self
         self.owner = self
         # z-order for entity layering, 1 by default
-        self.z=1
+        self.z = 1
+
+        # timed actions
+        self.actions = []
     
     # add entity default components
     def _addDefaultComponents(self):
-        self.addComponent(ImageGroupsComponent())
-        self.addComponent(TagsComponent())
+        if not self.hasComponent('imagegroups'):
+            self.addComponent(ImageGroupsComponent())
+        if not self.hasComponent('tags'):
+            self.addComponent(TagsComponent())
 
     # removes all components from the entity
     def clear(self):
@@ -46,6 +51,10 @@ class Entity:
         # defer to each component reset() method
         for c in self.components.values:
             c.reset()
+    
+    # delete an entity
+    def destroy(self):
+        self.delete = True
 
     # returns true is entity has all passed component keys
     def hasComponent(self, componentKey, *otherComponentKeys):
@@ -69,3 +78,7 @@ class Entity:
     def removeComponent(self, componentKey):
         if componentKey in self.components.keys():
             self.components.pop(componentKey)
+    
+    # perform an action after a set number of frames
+    def after(self, frames, action):
+        self.actions.append([frames, action])

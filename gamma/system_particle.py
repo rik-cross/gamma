@@ -9,7 +9,7 @@ class ParticleSystem(System):
         self.requiredComponents = ['emitter']
 
     def updateEntity(self, entity, scene):
-        
+
         emt = entity.getComponent('emitter')
         pos = entity.getComponent('position')
         

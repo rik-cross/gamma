@@ -1,6 +1,6 @@
 class Renderable:
     
-    def __init__(self, x, y, z, h, v, c, a, xp, yp):
+    def __init__(self, x, y, z, h, v, c, a=255, xp=False, yp=False):
         
         self._x = x
         self._y = y
