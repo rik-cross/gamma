@@ -20,15 +20,15 @@ class GameOverScene(gamma.Scene):
 
         # return to main menu if esc key pressed
         if gamma.inputManager.isPressed(gamma.keys.esc):
-            # pop both this scene and the game scene
+            # pop both this overlay scene and the game scene
             gamma.sceneManager.pop()
             gamma.sceneManager.pop()
     
     def draw(self):
         
         # draw game over message
-        self.gameOverText.draw(self.surface)
-        self.scoreText.draw(self.surface)
+        self.renderer.add(self.gameOverText)
+        self.renderer.add(self.scoreText)
 
         # draw back text
         self.renderer.add(

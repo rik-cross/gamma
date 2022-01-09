@@ -6,6 +6,7 @@ def newCoin(x, y):
 
     # create a coin entity
     coin = gamma.Entity(
+
         # tag the entity as 'coin'
         gamma.TagsComponent('coin'),
 
@@ -27,6 +28,7 @@ def newCoin(x, y):
         
         # add a trigger, for when the coin collides with the player
         gamma.TriggersComponent(CoinTrigger(boundingBox=gamma.PositionComponent(0,0,23,23)))
+    
     )
 
     # return the created coin entity

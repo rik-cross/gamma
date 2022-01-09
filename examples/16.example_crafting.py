@@ -18,16 +18,28 @@ gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
 # create a player entity
 #
 
+# player controls = left and right to move
+def playerControls(player):
+    if gamma.inputManager.isDown(player.getComponent('input').left):
+        player.getComponent('position').rect.x -= 2
+    if gamma.inputManager.isDown(player.getComponent('input').right):
+        player.getComponent('position').rect.x += 2
+
 playerEntity = gamma.Entity(
-    gamma.PositionComponent(0, 0, 45, 51),
-    gamma.ColliderComponent(0,0,10,10)
-)
-playerAnimation = gamma.ImageGroup(
-        gamma.resourceManager.getImage('player_idle_1')
+    gamma.TagsComponent('player'),
+    gamma.PositionComponent(0, 0, 45, 51, z=10),
+    gamma.ImageGroupsComponent('idle', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
+    # triggers only work on entities with a collider
+    gamma.ColliderComponent(0, 0, 45, 51),
+    gamma.InputComponent(
+        left=gamma.keys.a, right=gamma.keys.d,
+        up=gamma.keys.w, down=gamma.keys.s,
+        b1=gamma.keys.q, b2=gamma.keys.e,
+        b3=gamma.keys.j, b4=gamma.keys.l,
+        b5=gamma.keys.k,
+        inputContext=playerControls
     )
-playerEntity.getComponent('imagegroups').add('idle', playerAnimation)
-# triggers only work on entities with a collider
-playerEntity.addComponent(gamma.ColliderComponent(0, 0, 45, 51))
+)
 
 # add a camera to the player
 playerEntity.addComponent(gamma.CameraComponent(
@@ -35,22 +47,7 @@ playerEntity.addComponent(gamma.CameraComponent(
     bgColour = gamma.BLUE
 ))
 
-# player controls = enter to start cutscene
-def playerControls(player):
-    if gamma.inputManager.isDown(player.getComponent('input').left):
-        player.getComponent('position').rect.x -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').right):
-        player.getComponent('position').rect.x += 2
-
-playerEntity.addComponent(gamma.InputComponent(
-    left=gamma.keys.a, right=gamma.keys.d,
-    up=gamma.keys.w, down=gamma.keys.s,
-    b1=gamma.keys.q, b2=gamma.keys.e,
-    b3=gamma.keys.j, b4=gamma.keys.l,
-    b5=gamma.keys.k,
-    inputContext=playerControls)
-)
-
+# add an invemtory component to the player
 playerEntity.addComponent(
     gamma.InventoryComponent(
         20, 20,
@@ -58,6 +55,7 @@ playerEntity.addComponent(
     )
 )
 
+# add a crafting component to the player
 playerEntity.addComponent(
     gamma.CraftingComponent(
         200, 20,
@@ -68,11 +66,6 @@ playerEntity.addComponent(
         craft=playerEntity.getComponent('input').b5
     )
 )
-
-playerEntity.getComponent('tags').add('player')
-
-# ensure the player is in front of the hearts
-playerEntity.z = 10
 
 #
 # create a trigger to collect hearts
@@ -91,10 +84,8 @@ class CollectHeartTrigger(gamma.Trigger):
 def createHeart(x, y):
     heartEntity = gamma.Entity()
     heartEntity.addComponent(gamma.PositionComponent(x, y, 27, 30))
-    heartEntity.addComponent(gamma.TriggersComponent())
-    heartEntity.getComponent('triggers').addTrigger(CollectHeartTrigger(boundingBox=gamma.PositionComponent(0,0,27,30), buttonPress=gamma.keys.w))
-    heartImageGroup = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
-    heartEntity.getComponent('imagegroups').add('idle', heartImageGroup)
+    heartEntity.addComponent(gamma.ImageGroupsComponent('idle', gamma.ImageGroup(gamma.resourceManager.getImage('heart'))))
+    heartEntity.addComponent(gamma.TriggersComponent(CollectHeartTrigger(boundingBox=gamma.PositionComponent(0,0,27,30), buttonPress='up')))
     return heartEntity
 
 gamma.entityFactory.addEntity('heart', createHeart)

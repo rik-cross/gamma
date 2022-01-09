@@ -21,7 +21,7 @@ class GameScene(gamma.Scene):
             # adding a tag to the player with help determine collision befaviour
             gamma.TagsComponent('player'),
             # player is centered at (0,0)
-            gamma.PositionComponent(0, 0, 45, 51, xAnchor='center', yAnchor='middle'),
+            gamma.PositionComponent(0, 0, 45, 51, z=4, xAnchor='center', yAnchor='middle'),
             # add an imageGroup (tagged as 'default') to the player, consisting of a single image (i.e. not an animation)
             #player.getComponent('imagegroups').add('default', gamma.ImageGroup(gamma.resourceManager.getImage('player')))
             gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
@@ -30,7 +30,7 @@ class GameScene(gamma.Scene):
             gamma.InputComponent(gamma.keys.w, gamma.keys.s, gamma.keys.a, gamma.keys.d, inputContext=playerInputContext),
             # player has a collider, which allows it to collect coins
             # collider is the same size as the player
-            gamma.ColliderComponent(0, 0, 45, 51),
+            gamma.ColliderComponent(5, 5, 35, 41),
             # add the custom score component
             ScoreComponent()
         )
@@ -39,7 +39,7 @@ class GameScene(gamma.Scene):
         self.world.addEntity(player)
 
         # create a timer, and set the initial value
-        self.timer = 30 - (self.frame // 60)
+        self.timer = 15 - (self.frame // 60)
     
     def onEnter(self):
         gamma.soundManager.playMusicFade('dawn')
@@ -51,16 +51,31 @@ class GameScene(gamma.Scene):
             gamma.sceneManager.pop()
         
         # update the game timer
-        self.timer = 30 - (self.frame // 60)
+        self.timer = 15 - (self.frame // 60)
         # end the game when the timer reaches 0
         if self.timer == 0:
             # show gameOver scene as overlay
             gamma.sceneManager.push(GameOverScene(world=gamma.World(entities=self.world.getEntitiesByTag('player'))))
 
+        # create score text
+        self.scoreText = gamma.Text(
+            self.world.getEntitiesByTag('player')[0].getComponent('score').score,
+            25, 15,
+            font=gamma.resourceManager.getFont('large')
+        )
+
+        # create timer text
+        self.timerText = gamma.Text(
+            self.timer,
+            580, 15,
+            hAlign='right',
+            font=gamma.resourceManager.getFont('large')
+        )
+
     def draw(self):
 
-        # display the player score in the top-left of the screen
-        self.renderer.add(gamma.Text(self.world.getEntitiesByTag('player')[0].getComponent('score').score, 25, 15, font=gamma.resourceManager.getFont('large')))
+        # display the player score
+        self.renderer.add(self.scoreText)
         
-        # display the timer in the top-right of the screen
-        self.renderer.add(gamma.Text(self.timer, 580, 15, hAlign='right', font=gamma.resourceManager.getFont('large')))
+        # display the timer
+        self.renderer.add(self.timerText)

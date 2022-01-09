@@ -26,7 +26,7 @@ gamma.soundManager.addMusic('dawn', os.path.join('music', 'before_the_dawn.ogg')
 # Sound by Maskedsound: https://maskedsound.itch.io/8-bit-sfx-pack
 gamma.soundManager.addSound('coin', os.path.join('sounds', 'coin.ogg'))
 
-# add a coin system to the list of systems
+# add a custom coin system
 coinSystem = CoinSystem()
 gamma.systemManager.addSystem(coinSystem)
 

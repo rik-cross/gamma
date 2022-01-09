@@ -39,7 +39,6 @@ class Trigger:
         b = getattr(i, self.buttonPress)
         if b is not None and inputManager.isDown(b):
             return True
-        
         return False
 
     def onCollide(self, entity, otherEntity):

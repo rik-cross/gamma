@@ -51,23 +51,6 @@ heartEntity.getComponent('triggers').addTrigger(HeartZoomTrigger(boundingBox=gam
 # create a player entity
 #
 
-playerEntity = gamma.Entity(
-    gamma.PositionComponent(0, 0, 45, 51)
-)
-playerAnimation = gamma.ImageGroup(
-        gamma.resourceManager.getImage('player_idle_1')
-    )
-playerEntity.getComponent('imagegroups').add('idle', playerAnimation)
-# triggers only work on entities with a collider
-playerEntity.addComponent(gamma.ColliderComponent(0, 0, 45, 51))
-
-# add a camera to the player
-playerEntity.addComponent(gamma.CameraComponent(
-    0, 0, 600, 400,
-    bgColour = gamma.BLUE,
-    entityToTrack=playerEntity
-))
-
 # player controls = enter to start cutscene
 def playerControls(player):
     if gamma.inputManager.isDown(player.getComponent('input').left):
@@ -75,7 +58,20 @@ def playerControls(player):
     if gamma.inputManager.isDown(player.getComponent('input').right):
         player.getComponent('position').rect.x += 2
 
-playerEntity.addComponent(gamma.InputComponent(left=gamma.keys.left, right=gamma.keys.right, inputContext=playerControls))
+playerEntity = gamma.Entity(
+    gamma.PositionComponent(0, 0, 45, 51),
+    gamma.ImageGroupsComponent('idle', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
+    # triggers only work on entities with a collider
+    gamma.ColliderComponent(0, 0, 45, 51),
+    gamma.InputComponent(left=gamma.keys.left, right=gamma.keys.right, inputContext=playerControls)
+)
+
+# add a camera to the player
+playerEntity.addComponent(gamma.CameraComponent(
+    0, 0, 600, 400,
+    bgColour = gamma.BLUE,
+    entityToTrack=playerEntity
+))
 
 #
 # add entities to scene's world

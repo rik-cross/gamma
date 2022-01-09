@@ -19,13 +19,9 @@ gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
 #
 
 playerEntity = gamma.Entity(
-    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle')
-)
-playerImage = gamma.ImageGroup(gamma.resourceManager.getImage('player'))
-playerEntity.getComponent('imagegroups').add('default', playerImage)
-
-# add a text component to the player entity
-playerEntity.addComponent(
+    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
+    # add a text component to the player entity
     gamma.EmoteComponent(gamma.resourceManager.getImage('heart'))
 )
 

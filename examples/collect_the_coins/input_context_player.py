@@ -7,6 +7,10 @@ def playerInputContext(player):
     # store some components, just to make the code easier to read!
     inp = player.getComponent('input')
     pos = player.getComponent('position')
+
+    # only proceed if entity has the required components
+    if inp is None or pos is None:
+        return
     
     # input associated with directions moves the player
     if gamma.inputManager.isDown(inp.up):

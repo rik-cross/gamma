@@ -23,25 +23,25 @@ gamma.resourceManager.addImage('player_idle_4', os.path.join('images', 'player',
 #
 
 heartEntity = gamma.Entity(
-    gamma.PositionComponent(100, 100, 27, 30)
+    gamma.PositionComponent(100, 100, 27, 30),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('heart')))
 )
-heartImage = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
-heartEntity.getComponent('imagegroups').add('default', heartImage)
 
 #
 # create an animated player
 #
 
-playerEntity = gamma.Entity(
-    gamma.PositionComponent(300, 100, 45, 51)
-)
 playerAnimation = gamma.ImageGroup(
         gamma.resourceManager.getImage('player_idle_1'),
         gamma.resourceManager.getImage('player_idle_2'),
         gamma.resourceManager.getImage('player_idle_3'),
         gamma.resourceManager.getImage('player_idle_4')
     )
-playerEntity.getComponent('imagegroups').add('idle', playerAnimation)
+
+playerEntity = gamma.Entity(
+    gamma.PositionComponent(300, 100, 45, 51),
+    gamma.ImageGroupsComponent('idle', playerAnimation)
+)
 
 # add a camera to the player
 playerEntity.addComponent(gamma.CameraComponent(

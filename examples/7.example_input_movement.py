@@ -35,12 +35,6 @@ heartEntity.addComponent(gamma.InputComponent(inputContext=heartMovement))
 # create a player entity that moves using WASD
 #
 
-playerEntity = gamma.Entity(
-    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle')
-)
-playerImage = gamma.ImageGroup(gamma.resourceManager.getImage('player'))
-playerEntity.getComponent('imagegroups').add('default', playerImage)
-
 # player movement = WASD keys
 def playerMovement(player):
     if gamma.inputManager.isDown(player.getComponent('input').up):
@@ -52,16 +46,15 @@ def playerMovement(player):
     if gamma.inputManager.isDown(player.getComponent('input').right):
         player.getComponent('position').x += 2
 
-playerEntity.addComponent(gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, inputContext=playerMovement))
+playerEntity = gamma.Entity(
+    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
+    gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, inputContext=playerMovement)
+)
 
 #
 # create a camera that has zoom functionality
 #
-
-cameraEntity = gamma.Entity(
-    gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE)
-)
-cameraEntity.getComponent('camera').setPosition(300, 200)
 
 # camera movement = arrow keys up/down to zoom, left/right to pan
 def cameraMovement(camera):
@@ -76,7 +69,11 @@ def cameraMovement(camera):
     if gamma.inputManager.isDown(camera.getComponent('input').right):
         camera.getComponent('camera').worldX += 2
 
-cameraEntity.addComponent(gamma.InputComponent(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, None, None, cameraMovement))
+cameraEntity = gamma.Entity(
+    gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE),
+    gamma.InputComponent(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, None, None, cameraMovement)
+)
+cameraEntity.getComponent('camera').setPosition(300, 200)
 
 #
 # add entities to scene's world

@@ -18,18 +18,10 @@ gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'vita_
 #
 
 playerEntity = gamma.Entity(
-    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle')
-)
-playerImage = gamma.ImageGroup(gamma.resourceManager.getImage('player'))
-playerEntity.getComponent('imagegroups').add('default', playerImage)
-
-# add a text component to the player entity
-playerEntity.addComponent(
-    gamma.TextComponent(
-        'Here is some sample text, split over multiple lines.',
-        type='tick',
-        lifetime='timed'
-    )
+    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
+    # add a text component to the player entity
+    gamma.TextComponent('Here is some sample text, split over multiple lines.', type='tick', lifetime='timed') 
 )
 
 #

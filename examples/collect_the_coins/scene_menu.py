@@ -28,20 +28,36 @@ class MenuScene(gamma.Scene):
 
         # title
         self.renderer.add(
-            gamma.Text('Collect the coins', 300, 30, hAlign='center', font=gamma.resourceManager.getFont('large'))
+            gamma.Text('Collect the coins',
+                gamma.windowSize.w/2, 30,
+                hAlign='center',
+                font=gamma.resourceManager.getFont('large')
+            )
         )
 
         # instructions
         self.renderer.add(
-            gamma.Text('[enter] play    [i] info    [esc] exit', 300, 350, hAlign='center')
+            gamma.Text('[enter] play    [i] info    [esc] exit',
+                gamma.windowSize.w/2, 350,
+                hAlign='center'
+            )
         )
 
         # circle
         self.renderer.add(
-            gamma.Circle(300, 225, 100, hAlign='center', vAlign='middle', colour=gamma.BLACK)
+            gamma.Circle(
+                gamma.windowSize.w/2, 225,
+                100,
+                hAlign='center', vAlign='middle',
+                colour=gamma.BLUE
+            )
         )
 
         # character
         self.renderer.add(
-            gamma.Image(gamma.resourceManager.getImage('coin0'), 300, 225, hAlign='center', vAlign='middle', w=23*4, h=23*4)
+            gamma.Image(gamma.resourceManager.getImage('coin0'),
+                gamma.windowSize.w/2, 225,
+                hAlign='center', vAlign='middle',
+                w=23*4, h=23*4
+            )
         )

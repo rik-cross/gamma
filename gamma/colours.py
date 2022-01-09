@@ -12,6 +12,7 @@ BLUE       = color.Color(50,50,150)
 YELLOW     = color.Color(150,150,50)
 
 CORNFLOWER_BLUE = color.Color(100, 147, 237)
+ALMOST_BLACK = color.Color(20, 20, 20)
 
 def colour(r, g, b, a=None):
     if a is not None:

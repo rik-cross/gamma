@@ -1,4 +1,3 @@
-from gamma.system_crafting import CraftingSystem
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
@@ -27,6 +26,7 @@ from .system_trigger import *
 from .system_image import *
 from .system_collision import *
 from .system_inventory import *
+from .system_crafting import *
 
 from .world import *
 
@@ -50,6 +50,7 @@ soundManager = SoundManager()
 tileManager = TileManager()
 resourceManager = ResourceManager()
 entityManager = EntityManager()
+
 entityFactory = EntityFactory()
 
 # add font resources
@@ -114,16 +115,23 @@ def run(fps=60, showFPS=False):
         if sceneManager.isEmpty() and sceneManager.transition is None:
             running = False
 
-        # input
-        sceneManager.input()
-
+        # get current scene
+        sceneBeforeUpdate = sceneManager.getTopScene()
+        
         # update
         sceneManager.update()
-        
-        # draw
-        screen.fill((0,0,0))
-        sceneManager.draw() 
-        pygame.display.flip()
+
+        # get new current scene after update
+        sceneAfterUpdate = sceneManager.getTopScene()
+
+        # only draw if the scene hasn't changed
+        # (otherwise scene variables might not have been initialised)
+        if sceneAfterUpdate is sceneBeforeUpdate:
+
+            # draw
+            screen.fill(BLACK)
+            sceneManager.draw() 
+            pygame.display.flip()
 
         # set maximum framerate
         clock.tick(fps)

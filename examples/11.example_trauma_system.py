@@ -23,34 +23,20 @@ gamma.resourceManager.addImage('player_idle_4', os.path.join('images', 'player',
 #
 
 heartEntity = gamma.Entity(
-    gamma.PositionComponent(100, 100, 27, 30)
+    gamma.PositionComponent(100, 100, 27, 30),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('heart')))
 )
-heartImage = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
-heartEntity.getComponent('imagegroups').add('default', heartImage)
 
 #
 # create an animated player
 #
 
-playerEntity = gamma.Entity(
-    gamma.PositionComponent(300, 100, 45, 51),
-    gamma.TraumaComponent()
-)
 playerAnimation = gamma.ImageGroup(
         gamma.resourceManager.getImage('player_idle_1'),
         gamma.resourceManager.getImage('player_idle_2'),
         gamma.resourceManager.getImage('player_idle_3'),
         gamma.resourceManager.getImage('player_idle_4')
     )
-playerEntity.getComponent('imagegroups').add('idle', playerAnimation)
-
-# add a camera to the player
-playerEntity.addComponent(gamma.CameraComponent(
-    0, 0, 600, 400,
-    bgColour = gamma.BLUE,
-    zoomLevel = 2,
-    entityToTrack = playerEntity
-))
 
 # player controls = enter to add trauma
 def playerControls(player):
@@ -59,7 +45,21 @@ def playerControls(player):
         # add some trauma
         player.getComponent('trauma').traumaLevel += 0.4
 
-playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter, inputContext=playerControls))
+playerEntity = gamma.Entity(
+    gamma.PositionComponent(300, 100, 45, 51),
+    gamma.ImageGroupsComponent('idle', playerAnimation),
+    gamma.InputComponent(b1=gamma.keys.enter, inputContext=playerControls),
+    # add a trauma component to the player
+    gamma.TraumaComponent()
+)
+
+# add a camera to the player
+playerEntity.addComponent(gamma.CameraComponent(
+    0, 0, 600, 400,
+    bgColour = gamma.BLUE,
+    zoomLevel = 2,
+    entityToTrack = playerEntity
+))
 
 #
 # add entities to scene's world

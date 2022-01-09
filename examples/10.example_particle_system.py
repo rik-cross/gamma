@@ -17,12 +17,6 @@ gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'vita_
 # create a player entity that moves using WASD
 #
 
-playerEntity = gamma.Entity(
-    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle')
-)
-playerImage = gamma.ImageGroup(gamma.resourceManager.getImage('player'))
-playerEntity.getComponent('imagegroups').add('default', playerImage)
-
 # player controls = WASD keys, enter to create a particle emitter
 def playerControls(player):
     
@@ -44,7 +38,11 @@ def playerControls(player):
             )
         )
 
-playerEntity.addComponent(gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, b1=gamma.keys.enter, inputContext=playerControls))
+playerEntity = gamma.Entity(
+    gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
+    gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, b1=gamma.keys.enter, inputContext=playerControls)
+)
 
 #
 # create a camera that has zoom functionality

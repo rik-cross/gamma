@@ -77,14 +77,23 @@ mainScene.world.map.mapImages = [
 # create a player entity
 #
 
+# player controls
+def playerControls(player):
+    if gamma.inputManager.isDown(player.getComponent('input').left):
+        player.getComponent('position').rect.x -= 2
+    if gamma.inputManager.isDown(player.getComponent('input').right):
+        player.getComponent('position').rect.x += 2
+
 playerEntity = gamma.Entity(
     gamma.PositionComponent(150, 64-51, 45, 51),
+    gamma.ImageGroupsComponent('idle', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
+    gamma.InputComponent(
+        left=gamma.keys.a, right=gamma.keys.d,
+        up=gamma.keys.w, down=gamma.keys.s,
+        inputContext=playerControls
+    ),
     gamma.ColliderComponent(0,0,10,10)
 )
-playerAnimation = gamma.ImageGroup(
-    gamma.resourceManager.getImage('player_idle_1')
-)
-playerEntity.getComponent('imagegroups').add('idle', playerAnimation)
 
 # add a camera to the player
 
@@ -95,20 +104,6 @@ playerEntity.addComponent(
         entityToTrack=playerEntity,
         clampToMap=False
     )
-)
-
-# player controls
-
-def playerControls(player):
-    if gamma.inputManager.isDown(player.getComponent('input').left):
-        player.getComponent('position').rect.x -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').right):
-        player.getComponent('position').rect.x += 2
-
-playerEntity.addComponent(gamma.InputComponent(
-    left=gamma.keys.a, right=gamma.keys.d,
-    up=gamma.keys.w, down=gamma.keys.s,
-    inputContext=playerControls)
 )
 
 #

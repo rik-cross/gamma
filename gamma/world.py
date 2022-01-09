@@ -1,6 +1,27 @@
 import os
 import pickle
 
+# functions to sort by x, y, or z position
+
+def sortByX(e):
+    pos = e.getComponent('position')
+    if pos is None:
+        return 1
+    return pos.x
+
+def sortByY(e):
+    pos = e.getComponent('position')
+    if pos is None:    
+        return 1
+    return pos.y
+
+def sortByZ(e):
+    #return e.z
+    pos = e.getComponent('position')
+    if pos is None:    
+        return 1
+    return pos.z
+
 class World:
 
     def __init__(self,
@@ -11,6 +32,10 @@ class World:
         accelerationForces = None
     
     ):
+
+        # key to sort
+        self.orderKey = sortByZ
+        self.orderWhen = 'added' # 'always', 'added' or 'never'
 
         # store map
         self.map = map
@@ -38,6 +63,28 @@ class World:
         self.reorderEntities = False
 
     # world methods
+
+    def _update(self):
+
+        # update entity timed actions
+        for e in self.entities:
+            for action in e.actions:
+                action[0] = max(0, action[0] - 1)
+                if action[0] == 0:
+                    action[1]()
+                    e.actions.remove(action)
+        
+        # reorder world entities if required
+        if self.orderWhen == 'always' or (self.orderWhen == 'added' and self.reorderEntities):
+        #if self.reorderEntities:
+            self.entities.sort(key = self.orderKey)
+            if self.reorderEntities:
+                self.reorderEntities = False
+
+        # delete marked entities
+        for e in self.entities:
+            if e.delete:
+                self.entities.remove(e)
 
     def addVelocityForce(self, name, force):
         self.forces['velocity'][name] = force

@@ -22,10 +22,6 @@ class SceneManager:
         if len(self.scenes) > 0:
             self.getTopScene()._onExit()
 
-    def input(self):
-        if len(self.scenes) > 0:
-            self.getTopScene()._input()
-    
     def update(self):
         if self.transition is not None:
             self.transition._update()
