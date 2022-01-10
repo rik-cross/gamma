@@ -53,7 +53,7 @@ class MenuScene(gamma.Scene):
             )
         )
 
-        # character
+        # coin
         self.renderer.add(
             gamma.Image(gamma.resourceManager.getImage('coin0'),
                 gamma.windowSize.w/2, 225,

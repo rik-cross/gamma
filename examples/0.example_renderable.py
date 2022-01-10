@@ -4,9 +4,6 @@ import os
 
 gamma.init((600, 400), caption='Gamma // Renderable Objects Example')
 
-# add a font
-gamma.resourceManager.addFont('large', os.path.join('..', 'gamma', 'fonts', 'munro.ttf'), size=64)
-
 # create a main scene class
 class RenderableScene(gamma.Scene):
     
@@ -63,8 +60,6 @@ class RenderableScene(gamma.Scene):
         self.frameText.text = self.frame
         self.circle.radius = min(75, self.frame)
         self.image.alpha = min(255, self.frame)
-        if self.frame == 120:
-            self.image.flipX = True
 
     def draw(self):
         
