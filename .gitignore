@@ -3,11 +3,7 @@ __pycache__/*
 gamma/__pycache__/
 gamma/__pycache__/*
 *.pyc
-venv
-venv/*
 Gamma.egg-info
 Gamma.egg-info/*
-platformer
-platformer/*
 examples/collect_the_coins/__pycache__/
 examples/collect_the_coins/__pycache__/*
