@@ -42,12 +42,12 @@ class Entity:
     # removes all components from the entity
     def clear(self):
         self.components = {}
-        self._addDefaultEntities()
+        self._addDefaultComponents()
     
     # used to reset an entity to an initial state
     def reset(self):
         # defer to each component reset() method
-        for c in self.components.values:
+        for c in self.components.values():
             c.reset()
     
     # delete an entity
