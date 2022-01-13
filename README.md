@@ -1,5 +1,7 @@
 # Gamma
 
+![Gamma](gamma/images/gamma.png)
+
 ### A simple ECS game engine for Python, built on Pygame, with an emphasis on ease of use.
 
 ## Installing

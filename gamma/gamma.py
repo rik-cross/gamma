@@ -62,7 +62,6 @@ resourceManager.addFont('munro60', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'),
 resourceManager.addFont('large', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=60)
 
 # add image resources
-resourceManager.addImage('gamma_icon', os.path.join(ROOT_DIR, 'images', 'gamma_icon.png'))
 resourceManager.addImage('gamma', os.path.join(ROOT_DIR, 'images', 'gamma.png'))
 resourceManager.addImage('tile_outline', os.path.join(ROOT_DIR, 'images', 'tile_outline.png'))
 resourceManager.addImage('emote', os.path.join(ROOT_DIR, 'images', 'emote_box.png'))
