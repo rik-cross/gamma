@@ -16,9 +16,9 @@ ALMOST_BLACK = color.Color(20, 20, 20)
 
 def colour(r, g, b, a=None):
     if a is not None:
-        return color.Color(r, g, b)
-    else:
         return color.Color(r, g, b, a)
+    else:
+        return color.Color(r, g, b)
 
 def getAlphaColour(colour, alpha):
     return color.Color(
