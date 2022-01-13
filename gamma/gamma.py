@@ -87,7 +87,7 @@ systemManager.addSystem(
     CraftingSystem()
 )
 
-def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma_icon')):
+def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma')):
     
     global screen
     global windowSize
