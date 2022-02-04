@@ -10,7 +10,7 @@ class Hurtbox:
         self.hurtOnce = hurtOnce
     
     def __str__(self):
-        return 'Hitbox x=' + str(self.x) + ', y=' + str(self.y) + ', w=' + str(self.w) + ', h=' + str(self.h)
+        return 'Hurtbox x=' + str(self.x) + ', y=' + str(self.y) + ', w=' + str(self.w) + ', h=' + str(self.h)
     
     def getRect(self):
         return pygame.Rect(self.x, self.y, self.w, self.h)
