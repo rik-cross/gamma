@@ -86,7 +86,7 @@ def playerControls(player):
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(150, 64-51, 45, 51),
-    gamma.ImageGroupsComponent('idle', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
     gamma.InputComponent(
         left=gamma.keys.a, right=gamma.keys.d,
         up=gamma.keys.w, down=gamma.keys.s,

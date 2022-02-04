@@ -38,6 +38,7 @@ from .system_text import *
 from .system_image import *
 from .system_inventory import *
 from .system_crafting import *
+from .system_battle import *
 
 from .component import *
 from .component_camera import *
@@ -47,12 +48,11 @@ from .component_input import *
 from .component_emote import *
 from .component_text import *
 from .component_triggers import *
-
+from .component_battle import *
 from .component_position import *
 from .component_motion import *
 from .component_inventory import *
 from .component_crafting import *
-
 from .component_tags import *
 from .component_trauma import *
 
@@ -85,6 +85,9 @@ from .keyboard_layouts import *
 from .image import *
 from .rectangle import *
 from .circle import *
+
+from .hitbox import *
+from .hurtbox import *
 
 from .particle import *
 from .component_particle_emitter import *

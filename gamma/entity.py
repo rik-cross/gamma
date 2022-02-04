@@ -12,6 +12,10 @@ class Entity:
         self.ID = Entity.ID
         Entity.ID += 1
 
+        # set initial default state
+        self.state = 'default'
+        self.prevState = 'default'
+
         # deletion flag
         self.delete = False
 
@@ -32,12 +36,19 @@ class Entity:
         # timed actions
         self.actions = []
     
+    def _update(self):
+        self.prevState = self.state
+
     # add entity default components
     def _addDefaultComponents(self):
         if not self.hasComponent('imagegroups'):
             self.addComponent(ImageGroupsComponent())
         if not self.hasComponent('tags'):
             self.addComponent(TagsComponent())
+
+    # set entity state
+    def setState(self, state):
+        self.state = state
 
     # removes all components from the entity
     def clear(self):
@@ -49,6 +60,7 @@ class Entity:
         # defer to each component reset() method
         for c in self.components.values():
             c.reset()
+        self.state = 'default'
     
     # delete an entity
     def destroy(self):

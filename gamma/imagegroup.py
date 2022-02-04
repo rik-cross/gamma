@@ -7,6 +7,7 @@ class ImageGroup:
         image,
         *additionalImages,
         delay = 8,
+        hFlip = False, vFlip = False,
         loop = True,
         afterAnimate = None
     
@@ -18,6 +19,8 @@ class ImageGroup:
             self.imageList.append(i)
 
         self.animationDelay = delay
+        self.hFlip = hFlip
+        self.vFlip = vFlip
         self.loop = loop
         self.afterAnimate = afterAnimate
 

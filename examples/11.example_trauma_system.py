@@ -47,7 +47,7 @@ def playerControls(player):
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 100, 45, 51),
-    gamma.ImageGroupsComponent('idle', playerAnimation),
+    gamma.ImageGroupsComponent('default', playerAnimation),
     gamma.InputComponent(b1=gamma.keys.enter, inputContext=playerControls),
     # add a trauma component to the player
     gamma.TraumaComponent()

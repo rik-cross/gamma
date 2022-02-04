@@ -66,6 +66,10 @@ class World:
 
     def _update(self):
 
+        # update entities
+        for e in self.entities:
+            e._update()
+
         # update entity timed actions
         for e in self.entities:
             for action in e.actions:
@@ -76,7 +80,6 @@ class World:
         
         # reorder world entities if required
         if self.orderWhen == 'always' or (self.orderWhen == 'added' and self.reorderEntities):
-        #if self.reorderEntities:
             self.entities.sort(key = self.orderKey)
             if self.reorderEntities:
                 self.reorderEntities = False

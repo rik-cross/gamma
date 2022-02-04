@@ -27,6 +27,7 @@ from .system_image import *
 from .system_collision import *
 from .system_inventory import *
 from .system_crafting import *
+from .system_battle import *
 
 from .world import *
 
@@ -84,7 +85,8 @@ systemManager.addSystem(
     TextSystem(),
     ParticleSystem(),
     InventorySystem(),
-    CraftingSystem()
+    CraftingSystem(),
+    Battleystem()
 )
 
 def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma')):

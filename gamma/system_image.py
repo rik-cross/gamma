@@ -19,6 +19,7 @@ class ImageSystem(System):
         if imageGroup is not None:
             image = imageGroup.getCurrentImage()
 
+
             # send the image to the renderer
             if image is not None:
 
@@ -28,20 +29,20 @@ class ImageSystem(System):
                 # calculate angle and flip, based on rotation style
                 #
                                 
-                v = False
-                h = False
+                v = imageGroup.vFlip
+                h = imageGroup.hFlip
                 a = 0
 
-                if componentPosition.rotationStyle == 'none':
-                    pass
-                elif componentPosition.rotationStyle == 'allAround':
-                    a = componentPosition.angle * -1
-                elif componentPosition.rotationStyle == 'leftRight':
-                    if 180 <= componentPosition.angle % 360 <= 360:
-                        h = True
-                elif componentPosition.rotationStyle == 'upDown':
-                    if 91 <= componentPosition.angle % 360 <= 270:
-                        v = True
+                #if componentPosition.rotationStyle == 'none':
+                #    pass
+                #elif componentPosition.rotationStyle == 'allAround':
+                #    a = componentPosition.angle * -1
+                #elif componentPosition.rotationStyle == 'leftRight':
+                #    if 180 <= componentPosition.angle % 360 <= 360:
+                #        h = not h
+                #elif componentPosition.rotationStyle == 'upDown':
+                #    if 91 <= componentPosition.angle % 360 <= 270:
+                #        v = not v
 
                 scene.renderer.add(Image(
                     image,

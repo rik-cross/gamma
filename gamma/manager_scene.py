@@ -43,7 +43,7 @@ class SceneManager:
         self.enterScene()
 
     def pop(self):
-        scene = self.scenes[-1]
+        scene = self.getTopScene()
         self.exitScene()
         self.scenes.pop()
         if not scene.drawSceneBelow:
@@ -55,7 +55,7 @@ class SceneManager:
             self.pop()
         # add new scenes
         for s in scenes:
-            self.scenes.append(s)
+            self.scenes.append(s)   # push(s)?
         # enter the top scene
         self.enterScene()
 

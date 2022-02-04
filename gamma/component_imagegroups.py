@@ -10,6 +10,9 @@ class ImageGroupsComponent:
         if key is not None and imageGroup is not None:
             self.add(key, imageGroup)
     
+    def setHue(self, hue):
+        self.hue = hue
+
     def getCurrentImageGroup(self):
         if self.animationList == {} or self.current is None:
             return None
@@ -17,8 +20,6 @@ class ImageGroupsComponent:
 
     def add(self, state, animation):
         self.animationList[state] = animation
-        if self.current == None:
-            self.current = state
     
     def pause(self):
         self.playing = False
@@ -28,4 +29,5 @@ class ImageGroupsComponent:
 
     def stop(self):
         self.playing = False
-        self.animationList[self.current].reset()
+        if self.current is not None:
+            self.animationList[self.current].reset()

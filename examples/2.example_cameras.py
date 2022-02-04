@@ -40,7 +40,7 @@ playerAnimation = gamma.ImageGroup(
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(250, 200, 45, 51),
-    gamma.ImageGroupsComponent('idle', playerAnimation)
+    gamma.ImageGroupsComponent('default', playerAnimation)
 )
 
 #

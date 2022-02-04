@@ -1,6 +1,5 @@
 from .system import *
 from .colours import *
-#from .image import Image
 
 class AnimationSystem(System):
 
@@ -10,11 +9,20 @@ class AnimationSystem(System):
     def setRequirements(self):
         self.requiredComponents = ['imagegroups', 'position']
         self.requiredTags = []
-
+    
     def updateEntity(self, entity, scene):
 
-        # update if an image group exists and is 'playing'
         ig = entity.getComponent('imagegroups')
-        if ig.current is not None:
+
+        # check that imagegroups state matches global entity state
+        # (making sure to reset the 'old' imagegroup before updating)
+        if ig.current != entity.state:
+            i = ig.getCurrentImageGroup()
+            if i is not None:
+                i.reset()
+            ig.current = entity.state
+
+        # update if an image group exists and is 'playing'
+        if ig.current is not None and ig.current in ig.animationList.keys():
             if ig.playing:
                 ig.animationList[ig.current].update()

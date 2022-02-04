@@ -42,7 +42,7 @@ def playerControls(player):
 playerEntity = gamma.Entity(
     gamma.TagsComponent('player'),
     gamma.PositionComponent(0, 0, 45, 51, z=10),
-    gamma.ImageGroupsComponent('idle', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
     # triggers only work on entities with a collider
     gamma.ColliderComponent(0,0,45,51),
     gamma.InputComponent(
