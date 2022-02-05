@@ -54,8 +54,9 @@ class SoundManager:
         self.volumeIncrement = 1/duration
         self.targetMusicVolume = volume
     
-    def fadeOut(self, duration):
+    def fadeOut(self, duration=1000):
         pygame.mixer.music.fadeout(duration)
+        self.currentMusic = None
     
     def update(self):
         # raise volume if lower than target

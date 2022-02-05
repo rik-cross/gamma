@@ -147,8 +147,10 @@ class World:
     def loadMap(self, filename):
         filename = os.path.abspath(filename)
         map =  pickle.load( open( filename, "rb" ) )
+        map.editorMode = False
         return map
 
     def saveMap(self, map, filename):
+        map.editorMode = False
         filename = os.path.abspath(filename)
         pickle.dump( map, open( filename, "wb" ) )

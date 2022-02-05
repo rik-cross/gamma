@@ -33,6 +33,8 @@ class Map:
             self.mapImages = []
         else:
             self.mapImages = mapImages
+        
+        self.editorMode = False
 
     def setDimensions(self):
 
@@ -108,9 +110,9 @@ class Map:
                 if tileManager.tiles[tile].image is not None:
                     newX = ceil(xPos + c*(tileSize))
                     newY = ceil(yPos + r*(tileSize))
-                    tileManager.tiles[tile].draw(scene, newX, newY, tileSize)
+                    tileManager.tiles[tile].draw(scene, newX, newY, tileSize, editorMode=self.editorMode)
 
-    # draw the map, be sending each tile to the renderer
+    # draw the map, by sending each tile to the renderer
     def draw(self, scene, x=0, y=0, z=1):
 
         # loop through each tile
@@ -123,5 +125,5 @@ class Map:
                     newX = x + c*(self.tileSize*z)
                     newY = y + r*(self.tileSize*z)
                     newSize = self.tileSize*z
-                    tileManager.tiles[tile].render(scene, newX, newY, newSize, alpha=self.alpha)
+                    tileManager.tiles[tile].render(scene, newX, newY, newSize, alpha=self.alpha, editorMode=self.editorMode)
 
