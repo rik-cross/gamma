@@ -92,3 +92,11 @@ class Entity:
     # perform an action after a set number of frames
     def after(self, frames, action):
         self.actions.append([frames, action])
+    
+    # method run when entity is added to a scene
+    def onAddedToScene(self):
+        pass
+
+     # method run when entity is removed from a scene
+    def onRemovedFromScene(self):
+        pass

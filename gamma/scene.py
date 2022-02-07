@@ -236,9 +236,11 @@ class Scene:
 
     def addEntity(self, entity):
         self.entities.append(entity)
+        entity.onAddedToScene()
         self.reorderEntities = True
     
     def deleteEntity(self, entity):
+        entity.onRemovedFromScene()
         self.entities.remove(entity)
     
     def deleteEntityByID(self, ID):
