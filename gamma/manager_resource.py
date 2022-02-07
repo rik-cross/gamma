@@ -5,8 +5,6 @@ class ResourceManager:
     def __init__(self):
         self.images = {}
         self.fonts = {}
-        self.sounds = {}
-        self.music = {}
 
     # images
 
@@ -27,21 +25,3 @@ class ResourceManager:
         if key not in self.fonts.keys():
             return None
         return self.fonts[key]
-    
-    # sound and music
-
-    def addSound(self, key, soundURL):
-        self.sounds[key] = pygame.mixer.Sound(key)
-    
-    def getSound(self, key):
-        if key not in self.fonts.keys():
-            return None
-        return self.sound[key]
-    
-    def addMusic(self, key, url):
-        self.music[key] = url
-    
-    def getMusic(self, key):
-        if key not in self.music.keys():
-            return None
-        return self.music[key]

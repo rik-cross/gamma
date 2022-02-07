@@ -10,7 +10,7 @@ class CoinTrigger(gamma.Trigger):
         # if the other entity is tagged as a 'player'
         if otherEntity.getComponent('tags').has('player'):
             # play a sound stored in the sound manager
-            gamma.soundManager.playSound(gamma.resourceManager.getSound('coin'))
+            gamma.soundManager.playSound('coin')
             # add one to the player score, using the 'score' component
             otherEntity.getComponent('score').score += 1
             # delete the coin

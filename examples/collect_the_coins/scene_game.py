@@ -42,7 +42,7 @@ class GameScene(gamma.Scene):
         self.timer = 15 - (self.frame // 60)
     
     def onEnter(self):
-        gamma.soundManager.playMusicFade(gamma.resourceManager.getMusic('dawn'))
+        gamma.soundManager.playMusicFade('dawn')
 
     def update(self):
 

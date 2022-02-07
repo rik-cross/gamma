@@ -8,7 +8,7 @@ class MenuScene(gamma.Scene):
         self.background = gamma.CORNFLOWER_BLUE
     
     def onEnter(self):
-        gamma.soundManager.playMusicFade(gamma.resourceManager.get('solace'))
+        gamma.soundManager.playMusicFade('solace')
 
     def update(self):
 
