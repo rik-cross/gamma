@@ -7,46 +7,40 @@ class SoundManager:
         pygame.mixer.init()
         
         # sound effects
-        self.sounds = {}
+        #self.sounds = {}
         self.soundVolume = 1.0
 
         # music
-        self.music = {}
+        #self.music = {}
         self.musicVolume = 1.0
         self.targetMusicVolume = 1.0
         self.volumeIncrement = 0.01
         self.nextMusic = None
         self.currentMusic = None
-
-    def addSound(self, soundName, soundURL):
-        self.sounds[soundName] = pygame.mixer.Sound(soundURL)
     
-    def addMusic(self, musicName, musicURL):
-        self.music[musicName] = musicURL
-    
-    def playSound(self, soundName, volume=None):
+    def playSound(self, sound, volume=None):
         if volume is None:
             volume = self.soundVolume
-        self.sounds[soundName].set_volume(volume)
-        self.sounds[soundName].play()
+        sound.set_volume(volume)
+        sound.play()
     
-    def playMusic(self, musicName, loop=True):
+    def playMusic(self, music, loop=True):
         # don't play the music if already playing
-        if musicName is self.currentMusic:
+        if music is self.currentMusic:
             return
-        pygame.mixer.music.load(self.music[musicName])
-        self.currentMusic = musicName
+        pygame.mixer.music.load(music)
+        self.currentMusic = music
         if loop:
             pygame.mixer.music.play(-1)
         else:
             pygame.mixer.music.play(0)
     
-    def playMusicFade(self, musicName, duration=500):
+    def playMusicFade(self, music, duration=500):
         # don't play the music if already playing
-        if musicName is self.currentMusic:
+        if music is self.currentMusic:
             return
         # add music to queue
-        self.nextMusic = musicName
+        self.nextMusic = music
         # fade out current music
         self.fadeOut(duration)
     

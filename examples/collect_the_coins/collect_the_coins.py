@@ -20,11 +20,11 @@ gamma.resourceManager.addImage('coin5', os.path.join('images', 'coin', 'coin_5.p
 # add sound and music to the sound manager
 
 # Music by ArcOfDream: https://arcofdream.itch.io/monolith-ost
-gamma.soundManager.addMusic('solace', os.path.join('music', 'solace.ogg'))
-gamma.soundManager.addMusic('dawn', os.path.join('music', 'before_the_dawn.ogg'))
+gamma.resourceManager.addMusic('solace', os.path.join('music', 'solace.ogg'))
+gamma.resourceManager.addMusic('dawn', os.path.join('music', 'before_the_dawn.ogg'))
 
 # Sound by Maskedsound: https://maskedsound.itch.io/8-bit-sfx-pack
-gamma.soundManager.addSound('coin', os.path.join('sounds', 'coin.ogg'))
+gamma.resourceManager.addSound('coin', os.path.join('sounds', 'coin.ogg'))
 
 # add a custom coin system
 coinSystem = CoinSystem()
