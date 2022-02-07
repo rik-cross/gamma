@@ -12,7 +12,7 @@ class CameraComponent(Component):
         
         # optional parameters
         bgColour=None,
-        worldX = 0, worldY = 0,
+        sceneX = 0, sceneY = 0,
         entityToTrack = None,
         zoomLevel = 1,
         clampToMap = True
@@ -24,8 +24,8 @@ class CameraComponent(Component):
         self.rect = pygame.Rect(x, y, w, h)
         self.bgColour = bgColour
         
-        self.worldX = worldX
-        self.worldY = worldY
+        self.sceneX = sceneX
+        self.sceneY = sceneY
         self.entityToTrack = entityToTrack
         self.zoomLevel = zoomLevel
 
@@ -55,16 +55,16 @@ class CameraComponent(Component):
         self.entityToTrack = None
         self.targetX = x
         self.targetY = y
-        self.movementPerFrameX = (self.targetX - self.worldX) / duration
-        self.movementPerFrameY = (self.targetY - self.worldY) / duration
+        self.movementPerFrameX = (self.targetX - self.sceneX) / duration
+        self.movementPerFrameY = (self.targetY - self.sceneY) / duration
 
     # sets the zoom level and position
     # so that the entire map is visible in the camera
     def setFullScreen(self, map):
 
         # set the camera to the center of the world
-        self.worldX = map.w_real / 2
-        self.worldY = map.h_real / 2
+        self.sceneX = map.w_real / 2
+        self.sceneY = map.h_real / 2
         # set the zoom level
         if (self.rect.width / map.w_real) < (self.rect.height / map.h_real):
             z = self.rect.width / map.w_real
@@ -97,8 +97,8 @@ class CameraComponent(Component):
                 newY = max(newY, (self.rect.h/self.zoomLevel/2))
                 newY = min(newY, ( ((scene.map.h_real) - (self.rect.h/2/self.zoomLevel)) ) )
 
-        self.worldX = newX
-        self.worldY = newY
+        self.sceneX = newX
+        self.sceneY = newY
 
     def trackEntity(self, entity):
         self.entityToTrack = entity
@@ -106,5 +106,5 @@ class CameraComponent(Component):
     def goToEntity(self, entity):
         self.entityToTrack = None
         pos = entity.getComponent('position')
-        self.worldX = pos.rect.x + (pos.rect.w / 2)
-        self.worldY = pos.rect.y + (pos.rect.h / 2)
+        self.sceneX = pos.rect.x + (pos.rect.w / 2)
+        self.sceneY = pos.rect.y + (pos.rect.h / 2)

@@ -65,9 +65,9 @@ def cameraMovement(camera):
         camera.getComponent('camera').zoomLevel = max(camera.getComponent('camera').zoomLevel - 0.02, 0.1)
     # pan
     if gamma.inputManager.isDown(camera.getComponent('input').left):
-        camera.getComponent('camera').worldX -= 2
+        camera.getComponent('camera').sceneX -= 2
     if gamma.inputManager.isDown(camera.getComponent('input').right):
-        camera.getComponent('camera').worldX += 2
+        camera.getComponent('camera').sceneX += 2
 
 cameraEntity = gamma.Entity(
     gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE),

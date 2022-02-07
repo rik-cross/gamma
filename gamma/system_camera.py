@@ -21,8 +21,8 @@ class CameraSystem(System):
 
             trackedEntity = cameraComponent.entityToTrack
 
-            currentX = cameraComponent.worldX
-            currentY = cameraComponent.worldY
+            currentX = cameraComponent.sceneX
+            currentY = cameraComponent.sceneY
 
             trackedEntityPosition = trackedEntity.getComponent('position')
 
@@ -32,8 +32,8 @@ class CameraSystem(System):
             cameraComponent._updateWorldPosition((currentX * 0.95) + (targetX * 0.05), (currentY * 0.95) + (targetY * 0.05), scene)
 
         # calculate offsets
-        offsetX = cameraRect.x + cameraRect.w/2 - (cameraComponent.worldX * cameraComponent.zoomLevel)
-        offsetY = cameraRect.y + cameraRect.h/2 - (cameraComponent.worldY * cameraComponent.zoomLevel)
+        offsetX = cameraRect.x + cameraRect.w/2 - (cameraComponent.sceneX * cameraComponent.zoomLevel)
+        offsetY = cameraRect.y + cameraRect.h/2 - (cameraComponent.sceneY * cameraComponent.zoomLevel)
 
         angle = 0
         # add camera shake
@@ -55,15 +55,15 @@ class CameraSystem(System):
         # x
         cameraComponent._x = offsetX
         if cameraComponent.movementPerFrameX != 0:
-            cameraComponent.worldX += cameraComponent.movementPerFrameX
-            if abs(cameraComponent.worldX - cameraComponent.targetX) < 0.1 :
+            cameraComponent.sceneX += cameraComponent.movementPerFrameX
+            if abs(cameraComponent.sceneX - cameraComponent.targetX) < 0.1 :
                 cameraComponent.movementPerFrameX = 0
 
         # y
         cameraComponent._y = offsetY
         if cameraComponent.movementPerFrameY != 0:
-            cameraComponent.worldY += cameraComponent.movementPerFrameY
-            if abs(cameraComponent.worldY - cameraComponent.targetY) < 0.1 :
+            cameraComponent.sceneY += cameraComponent.movementPerFrameY
+            if abs(cameraComponent.sceneY - cameraComponent.targetY) < 0.1 :
                 cameraComponent.movementPerFrameY = 0
         
         

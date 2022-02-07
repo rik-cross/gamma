@@ -32,7 +32,7 @@ playerEntity = gamma.Entity(
 cameraEntity = gamma.Entity(
     gamma.CameraComponent(0, 0, 600, 400,
         bgColour=gamma.BLUE,
-        worldX=300, worldY = 150,
+        sceneX=300, sceneY = 150,
         zoomLevel = 2
     )
 )
