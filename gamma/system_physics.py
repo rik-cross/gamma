@@ -12,7 +12,7 @@ class PhysicsSystem(System):
         pass
 
         #
-        # apply world forces
+        # apply scene forces
         #
 
         # velocity

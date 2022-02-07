@@ -33,7 +33,7 @@ class TriggerSystem(System):
                 )
 
                 # check against all other entities
-                for otherEntity in scene.world.entities:
+                for otherEntity in scene.entities:
 
                     if otherEntity.hasComponent('position') and otherEntity.hasComponent('collider'):
                         

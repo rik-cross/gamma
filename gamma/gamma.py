@@ -29,8 +29,6 @@ from .system_inventory import *
 from .system_crafting import *
 from .system_battle import *
 
-from .world import *
-
 # stores the path of this file
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 

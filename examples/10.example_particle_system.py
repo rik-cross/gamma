@@ -56,11 +56,11 @@ cameraEntity = gamma.Entity(
 )
 
 #
-# add entities to scene's world
+# add entities to scene
 #
 
-mainScene.world.entities.append(playerEntity)
-mainScene.world.entities.append(cameraEntity)
+mainScene.entities.append(playerEntity)
+mainScene.entities.append(cameraEntity)
 
 #
 # add scene to the gamma and start

@@ -28,7 +28,7 @@ class Battleystem(System):
             currentHitbox.h
         )
         
-        otherEntities = scene.world.getEntitiesWithComponent('battle', 'position')
+        otherEntities = scene.getEntitiesWithComponent('battle', 'position')
         otherEntities.remove(entity)
 
         if entity.prevState != entity.state:

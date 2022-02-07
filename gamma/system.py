@@ -29,7 +29,7 @@ class System():
     def _update(self, scene):
         
         self.update(scene)
-        for entity in scene.world.entities:
+        for entity in scene.entities:
             if self._checkRequirements(entity):
                 self.updateEntity(entity, scene)
 
@@ -44,7 +44,7 @@ class System():
     # runs draw() and drawEntity() method on all
     # systems that meet the system requirements
     def _draw(self, scene):
-        for entity in scene.world.entities:
+        for entity in scene.entities:
             if self._checkRequirements(entity):
                 self.drawEntity(entity, scene)
     

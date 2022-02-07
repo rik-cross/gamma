@@ -12,8 +12,8 @@ class CollisionSystem(System):
     
     def updateEntity(self, entity, scene):
 
-        # collisions only happen in a world
-        if scene.world is None:
+        # collisions only happen in a scene
+        if scene is None:
             return
 
         # get components
@@ -21,7 +21,7 @@ class CollisionSystem(System):
         col = entity.getComponent('collider')
 
         # collision with other entities
-        for otherEntity in scene.world.entities:
+        for otherEntity in scene.entities:
             if entity is not otherEntity:
 
                 if otherEntity.hasComponent('position', 'collider'):
@@ -64,11 +64,11 @@ class CollisionSystem(System):
 
                             col.collisionResponse('entity', otherEntity, directions)
 
-        # collision with world
+        # collision with scene
 
-        if scene.world.map is not None:
+        if scene.map is not None:
             
-            map = scene.world.map
+            map = scene.map
 
             # get the tile at each of the 4 entity collider corners
             topLeft     = map.getTileAtPosition(pos.rect.x, pos.rect.y)

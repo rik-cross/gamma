@@ -37,7 +37,7 @@ def playerControls(player):
             pos = player.getComponent('position')
             entity.getComponent('position').center = pos.x + pos.w/2
             entity.getComponent('position').bottom = pos.y + pos.h
-            mainScene.world.addEntity(entity)
+            mainScene.addEntity(entity)
 
 playerEntity = gamma.Entity(
     gamma.TagsComponent('player'),
@@ -94,15 +94,15 @@ gamma.entityFactory.addEntity('heart', createHeart)
 for i in range(5):
     playerEntity.getComponent('inventory').addEntity('heart')
 
-# add a heart to the world
+# add a heart to the scene
 he = gamma.entityFactory.create('heart', 50, 0)
-mainScene.world.entities.append(he)
+mainScene.entities.append(he)
 
 #
-# add entities to scene's world
+# add entities to scene
 #
 
-mainScene.world.entities.append(playerEntity)
+mainScene.entities.append(playerEntity)
 
 #
 # add scene to the gamma and start

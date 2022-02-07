@@ -2,6 +2,27 @@ import pygame
 from .component_input import InputComponent
 from .manager_input import controller, keys
 
+# functions to sort by x, y, or z position
+
+def sortByX(e):
+    pos = e.getComponent('position')
+    if pos is None:
+        return 1
+    return pos.x
+
+def sortByY(e):
+    pos = e.getComponent('position')
+    if pos is None:    
+        return 1
+    return pos.y
+
+def sortByZ(e):
+    #return e.z
+    pos = e.getComponent('position')
+    if pos is None:    
+        return 1
+    return pos.z
+
 def drawRect(s,x,y,w,h,c,a=255):
     # only add transparency if needed
     if a < 255:

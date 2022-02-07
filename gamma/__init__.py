@@ -92,6 +92,4 @@ from .hurtbox import *
 from .particle import *
 from .component_particle_emitter import *
 
-from .world import *
-
 from .utils_draw import *

@@ -25,24 +25,24 @@ gamma.tileManager.addTile(gamma.Tile('water', gamma.resourceManager.getImage('ti
 # create a map and add to scene
 #
 
-mainScene.world.setMap(gamma.Map(tiles=[ ['grass' for i in range(10)] for j in range(10) ]))
-#map = mainScene.world.loadMap('filename.extension')
-mainScene.world.map.setTile(3,3,'water')
+mainScene.setMap(gamma.Map(tiles=[ ['grass' for i in range(10)] for j in range(10) ]))
+#map = mainScene.loadMap('filename.extension')
+mainScene.map.setTile(3,3,'water')
 
 #
 # create a camera
 #
 
-worldCameraEntity = gamma.Entity(
+sceneCameraEntity = gamma.Entity(
     gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.DARK_GREY)
 )
-worldCameraEntity.getComponent('camera').setPosition(300, 200)
+sceneCameraEntity.getComponent('camera').setPosition(300, 200)
 
 #
-# add camera to world
+# add camera to scene
 #
 
-mainScene.world.entities.append(worldCameraEntity)
+mainScene.entities.append(sceneCameraEntity)
 
 #
 # add scene to the gamma and start
@@ -50,5 +50,5 @@ mainScene.world.entities.append(worldCameraEntity)
 
 gamma.init((600, 400), caption='Gamma // Map Example')
 gamma.sceneManager.push(mainScene)
-#mainScene.world.saveMap(map, 'filename.extension')
+#mainScene.saveMap(map, 'filename.extension')
 gamma.run()

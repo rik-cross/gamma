@@ -70,10 +70,10 @@ def playerControls(player):
 playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter, inputContext=playerControls))
 
 #
-# add entities to scene's world
+# add entities to scene
 #
 
-mainScene.world.entities.append(playerEntity)
+mainScene.entities.append(playerEntity)
 
 #
 # add scene to the gamma and start

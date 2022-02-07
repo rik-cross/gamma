@@ -9,9 +9,9 @@ class GameScene(gamma.Scene):
 
         self.background = gamma.CORNFLOWER_BLUE
 
-        # add a camera entity to the world
+        # add a camera entity to the scene
         # the same size as the screen, but with a 10px border
-        self.world.addEntity(gamma.Entity(
+        self.addEntity(gamma.Entity(
             # the camera entity only contains a single camera component
             gamma.CameraComponent(10, 10, gamma.windowSize.w-20, gamma.windowSize.h-20, bgColour=gamma.DARK_GREY)
         ))
@@ -35,8 +35,8 @@ class GameScene(gamma.Scene):
             ScoreComponent()
         )
         
-        # add the entity to the world
-        self.world.addEntity(player)
+        # add the entity to the scene
+        self.addEntity(player)
 
         # create a timer, and set the initial value
         self.timer = 15 - (self.frame // 60)
@@ -55,11 +55,11 @@ class GameScene(gamma.Scene):
         # end the game when the timer reaches 0
         if self.timer == 0:
             # show gameOver scene as overlay
-            gamma.sceneManager.push(GameOverScene(world=gamma.World(entities=self.world.getEntitiesByTag('player'))))
+            gamma.sceneManager.push(GameOverScene(entities=self.getEntitiesByTag('player')))
 
         # create score text
         self.scoreText = gamma.Text(
-            self.world.getEntitiesByTag('player')[0].getComponent('score').score,
+            self.getEntitiesByTag('player')[0].getComponent('score').score,
             25, 15,
             font=gamma.resourceManager.getFont('large')
         )

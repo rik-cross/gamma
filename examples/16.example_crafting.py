@@ -76,7 +76,7 @@ playerEntity.addComponent(
 class CollectHeartTrigger(gamma.Trigger):
     def onCollide(self, entity, otherEntity):
         if otherEntity.getComponent('tags').has('player'):
-            mainScene.world.deleteEntity(entity)
+            mainScene.deleteEntity(entity)
             otherEntity.getComponent('inventory').addEntity('heart')
 
 # add a heart to the entity factory
@@ -94,9 +94,9 @@ gamma.entityFactory.addEntity('heart', createHeart)
 for i in range(15):
     playerEntity.getComponent('inventory').addEntity('heart')
 
-# add a heart to the world
+# add a heart to the scene
 he = gamma.entityFactory.create('heart', 50, 0)
-mainScene.world.entities.append(he)
+mainScene.entities.append(he)
 
 #
 # crafting
@@ -111,10 +111,10 @@ recipe = gamma.CraftingRecipe(
 playerEntity.getComponent('crafting').addRecipe(recipe)
 
 #
-# add entities to scene's world
+# add entities to scene
 #
 
-mainScene.world.entities.append(playerEntity)
+mainScene.entities.append(playerEntity)
 
 #
 # add scene to the gamma and start

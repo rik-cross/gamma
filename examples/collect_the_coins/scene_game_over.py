@@ -13,7 +13,7 @@ class GameOverScene(gamma.Scene):
         self.gameOverText = gamma.Text('Game over', 300, 200, hAlign='center', vAlign='middle', font=gamma.resourceManager.getFont('large'))
         
         # create text displaying the final player score
-        score = self.world.getEntitiesByTag('player')[0].getComponent('score').score
+        score = self.getEntitiesByTag('player')[0].getComponent('score').score
         self.scoreText = gamma.Text('You scored ' + str(score), 300, self.gameOverText.bottom + 10, hAlign='center', vAlign='middle')
 
     def update(self):

@@ -29,15 +29,15 @@ gamma.tileManager.addTile(gamma.Tile('dirt', gamma.resourceManager.getImage('til
 mainScene = gamma.Scene()
 
 #
-# add map and world images
+# add map and scene images
 #
 
-mainScene.world.map = gamma.Map()
+mainScene.map = gamma.Map()
 for i in range(20):
-    mainScene.world.map.setTile(i,2,'grass')
-    mainScene.world.map.setTile(i,3,'dirt')
+    mainScene.map.setTile(i,2,'grass')
+    mainScene.map.setTile(i,3,'dirt')
 
-mainScene.world.map.mapImages = [
+mainScene.map.mapImages = [
 
     # mountains behind
 
@@ -107,15 +107,15 @@ playerEntity.addComponent(
 )
 
 #
-# add player to scene's world
+# add player to scene
 #
 
-mainScene.world.entities.append(playerEntity)
+mainScene.entities.append(playerEntity)
 
 #
 # add scene to the gamma and start
 #
 
-gamma.init((600, 400), caption='Gamma // World Images Example')
+gamma.init((600, 400), caption='Gamma // Scene Images Example')
 gamma.sceneManager.push(mainScene)
 gamma.run()

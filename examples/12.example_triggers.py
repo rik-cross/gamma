@@ -74,11 +74,11 @@ playerEntity.addComponent(gamma.CameraComponent(
 ))
 
 #
-# add entities to scene's world
+# add entities to scene
 #
 
-mainScene.world.entities.append(playerEntity)
-mainScene.world.entities.append(heartEntity)
+mainScene.entities.append(playerEntity)
+mainScene.entities.append(heartEntity)
 
 #
 # add scene to the gamma and start

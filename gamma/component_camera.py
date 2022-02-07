@@ -77,25 +77,25 @@ class CameraComponent(Component):
         newX = x
         newY = y
 
-        if scene.world is not None and scene.world.map is not None and self.clampToWorld:
+        if scene is not None and scene.map is not None and self.clampToWorld:
 
             # calculate x value
 
-            # if world narrower than camera:
-            if (self.rect.w) > (scene.world.map.w_real*self.zoomLevel):
-                newX = int(scene.world.map.w_real / 2)
+            # if scene narrower than camera:
+            if (self.rect.w) > (scene.map.w_real*self.zoomLevel):
+                newX = int(scene.map.w_real / 2)
             else:
                 newX = max(newX, (self.rect.w/self.zoomLevel)/2)
-                newX = min(newX, ( ((scene.world.map.w_real) - (self.rect.w/2/self.zoomLevel)) ) )
+                newX = min(newX, ( ((scene.map.w_real) - (self.rect.w/2/self.zoomLevel)) ) )
 
             # calculate y value
 
-            # if world narrower than camera:
-            if self.rect.h > (scene.world.map.h_real*self.zoomLevel):
-                newY = int(scene.world.map.h_real / 2)
+            # if scene narrower than camera:
+            if self.rect.h > (scene.map.h_real*self.zoomLevel):
+                newY = int(scene.map.h_real / 2)
             else:
                 newY = max(newY, (self.rect.h/self.zoomLevel/2))
-                newY = min(newY, ( ((scene.world.map.h_real) - (self.rect.h/2/self.zoomLevel)) ) )
+                newY = min(newY, ( ((scene.map.h_real) - (self.rect.h/2/self.zoomLevel)) ) )
 
         self.worldX = newX
         self.worldY = newY

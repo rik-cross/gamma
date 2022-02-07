@@ -22,7 +22,7 @@ class ParticleSystem(System):
 
             # delete the entity if it serves only as a particle emitter
             if entity.getComponent('tags').has('particle'):
-                scene.world.deleteEntity(entity)
+                scene.deleteEntity(entity)
     
     def drawEntity(self, entity, scene):
         entity.getComponent('emitter').draw(scene)

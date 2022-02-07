@@ -1,7 +1,9 @@
 import pygame
 import math
+import os
+import pickle
+from .utils import sortByX, sortByY, sortByZ
 from .gamma import screen, systemManager, sceneManager, windowSize
-from .world import World
 from .utils import *
 from .colours import *
 from .renderer import Renderer
@@ -12,16 +14,45 @@ class Scene:
     def __init__(self,
     
         # optional parameters
-        world=None,
         menu=None,
         background=None,
-        backgroundAlpha=255
+        backgroundAlpha=255,
+
+        map=None,
+        entities=None,
+        velocityForces = None,
+        accelerationForces = None
     
     ):
+        
+        # key to sort
+        self.orderKey = sortByZ
+        self.orderWhen = 'added' # 'always', 'added' or 'never'
 
-        self.world = world
-        if self.world is None:
-            self.world = World()
+        # store map
+        self.map = map
+
+        # create scene entity list
+        if entities is None:
+            self.entities = []
+        else:
+            self.entities = entities
+        
+        # create scene forces dictionary
+        if velocityForces is None:
+            velocityForces = {}
+        if accelerationForces is None:
+            accelerationForces = {}
+        self.forces = {
+            'velocity' : velocityForces,
+            'acceleration' : accelerationForces
+        }
+
+        # entities to delete
+        self.delete = []
+
+        # a flag to mark entities for reordering
+        self.reorderEntities = False
 
         self.cutscene = None
         self.frame = 0
@@ -92,8 +123,28 @@ class Scene:
         for b in self.buttons:
             b.update()
         
-        if self.world is not None:
-            self.world._update()
+        # update entities
+        for e in self.entities:
+            e._update()
+
+        # update entity timed actions
+        for e in self.entities:
+            for action in e.actions:
+                action[0] = max(0, action[0] - 1)
+                if action[0] == 0:
+                    action[1]()
+                    e.actions.remove(action)
+        
+        # reorder scene entities if required
+        if self.orderWhen == 'always' or (self.orderWhen == 'added' and self.reorderEntities):
+            self.entities.sort(key = self.orderKey)
+            if self.reorderEntities:
+                self.reorderEntities = False
+
+        # delete marked entities
+        for e in self.entities:
+            if e.delete:
+                self.entities.remove(e)
         
     def _draw(self):
 
@@ -117,23 +168,23 @@ class Scene:
         if self.drawSceneBelow:
             sceneManager.getSceneBelow(self)._draw()
 
-        # draw world images behind
-        if self.world.map is not None and self.world.map.mapImages is not None:
-            for i in self.world.map.mapImages:
+        # draw scene images behind
+        if self.map is not None and self.map.mapImages is not None:
+            for i in self.map.mapImages:
                 if i.z < 1:
                     self.renderer.add(i, scene=False)
 
         # draw map
-        if self.world.map is not None:
-            self.world.map.draw(self)
+        if self.map is not None:
+            self.map.draw(self)
 
         # draw systems, which send to the renderer
         for sys in systemManager.systems:
             sys._draw(self)
 
-        # draw world images in front
-        if self.world.map is not None and self.world.map.mapImages is not None:
-            for i in self.world.map.mapImages:
+        # draw scene images in front
+        if self.map is not None and self.map.mapImages is not None:
+            for i in self.map.mapImages:
                 if i.z >= 1:
                     self.renderer.add(i, scene=False)
 
@@ -168,3 +219,69 @@ class Scene:
 
     def draw(self):
         pass
+
+    def addVelocityForce(self, name, force):
+        self.forces['velocity'][name] = force
+
+    def addAccelerationForce(self, name, force):
+        self.forces['acceleration'][name] = force
+    
+    def removeForce(self, name):
+        if name in self.forces['velocity']:
+            del self.forces['velocity'][name]
+        if name in self.forces['acceleration']:
+            del self.forces['acceleration'][name]
+
+    # entity methods
+
+    def addEntity(self, entity):
+        self.entities.append(entity)
+        self.reorderEntities = True
+    
+    def deleteEntity(self, entity):
+        self.entities.remove(entity)
+    
+    def deleteEntityByID(self, ID):
+        for e in self.entities:
+            if e.ID == ID:
+                self.deleteEntity(e)
+
+    def getEntitiesByTag(self, tag, *otherTags):
+        entityList = []
+        for e in self.entities:
+            if e.getComponent('tags').has(tag, *otherTags):
+                entityList.append(e)
+        return entityList
+
+    def getEntityByID(self, entityID):
+        for e in self.entities:
+            if e.ID == entityID:
+                return e
+        return None
+    
+    def getEntitiesWithComponent(self, *componentKeys):
+        entityList = []
+        for e in self.entities:
+            if e.hasComponent(*componentKeys):
+                entityList.append(e)
+        return entityList
+    
+    def clear(self):
+        self.entities = []
+        self.map = None
+
+    # map methods
+
+    def setMap(self, map):
+        self.map = map
+    
+    def loadMap(self, filename):
+        filename = os.path.abspath(filename)
+        map =  pickle.load( open( filename, "rb" ) )
+        map.editorMode = False
+        return map
+
+    def saveMap(self, map, filename):
+        map.editorMode = False
+        filename = os.path.abspath(filename)
+        pickle.dump( map, open( filename, "wb" ) )

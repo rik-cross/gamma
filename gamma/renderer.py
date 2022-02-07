@@ -30,7 +30,7 @@ class Renderer:
         #
 
         # iterate over all cameras
-        entitiesWithCamera = self.scene.world.getEntitiesWithComponent('camera')
+        entitiesWithCamera = self.scene.getEntitiesWithComponent('camera')
         for e in entitiesWithCamera:
 
             # get the camera component

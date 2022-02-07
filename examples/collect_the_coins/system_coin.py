@@ -10,8 +10,8 @@ class CoinSystem(gamma.System):
 
     def update(self, scene):
 
-        # get the number of coin entities in the world
-        num = len(scene.world.getEntitiesByTag('coin'))
+        # get the number of coin entities in the scene
+        num = len(scene.getEntitiesByTag('coin'))
         
         # create a new coin if there are less than 2
         if num < 2:
@@ -20,5 +20,5 @@ class CoinSystem(gamma.System):
             # at a random position on the scene
             newCoin = gamma.entityFactory.create('coin', randint(-280, 280), randint(-180, 180))
             
-            # add the new coin to the scene's world
-            scene.world.addEntity(newCoin)
+            # add the new coin to the scene
+            scene.addEntity(newCoin)
