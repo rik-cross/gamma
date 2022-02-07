@@ -5,19 +5,19 @@ import gamma
 def playerInputContext(player):
 
     # store some components, just to make the code easier to read!
-    inp = player.getComponent('input')
-    pos = player.getComponent('position')
+    inputComponent = player.getComponent('input')
+    positionComponent = player.getComponent('position')
 
     # only proceed if entity has the required components
-    if inp is None or pos is None:
+    if inputComponent is None or positionComponent is None:
         return
     
     # input associated with directions moves the player
-    if gamma.inputManager.isDown(inp.up):
-        pos.y -= 2
-    if gamma.inputManager.isDown(inp.down):
-        pos.y += 2
-    if gamma.inputManager.isDown(inp.left):
-        pos.x -= 2
-    if gamma.inputManager.isDown(inp.right):
-        pos.x += 2
+    if gamma.inputManager.isDown(inputComponent.up):
+        positionComponent.y -= 2
+    if gamma.inputManager.isDown(inputComponent.down):
+        positionComponent.y += 2
+    if gamma.inputManager.isDown(inputComponent.left):
+        positionComponent.x -= 2
+    if gamma.inputManager.isDown(inputComponent.right):
+        positionComponent.x += 2

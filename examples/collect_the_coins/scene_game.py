@@ -18,19 +18,24 @@ class GameScene(gamma.Scene):
 
         # create a player entity
         player = gamma.Entity(
+            
             # adding a tag to the player with help determine collision befaviour
             gamma.TagsComponent('player'),
+            
             # player is centered at (0,0)
             gamma.PositionComponent(0, 0, 45, 51, z=4, xAnchor='center', yAnchor='middle'),
+            
             # add an imageGroup (tagged as 'default') to the player, consisting of a single image (i.e. not an animation)
-            #player.getComponent('imagegroups').add('default', gamma.ImageGroup(gamma.resourceManager.getImage('player')))
             gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
+            
             # player uses WASD to move
             # the effect of pressing WASD is described in the 'playerInputContext' function
             gamma.InputComponent(gamma.keys.w, gamma.keys.s, gamma.keys.a, gamma.keys.d, inputContext=playerInputContext),
+            
             # player has a collider, which allows it to collect coins
-            # collider is the same size as the player
+            # collider is 5 pixels smaller than the player on all sides
             gamma.ColliderComponent(5, 5, 35, 41),
+            
             # add the custom score component
             ScoreComponent()
         )

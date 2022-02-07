@@ -21,8 +21,7 @@ class GameOverScene(gamma.Scene):
         # return to main menu if esc key pressed
         if gamma.inputManager.isPressed(gamma.keys.esc):
             # pop both this overlay scene and the game scene
-            gamma.sceneManager.pop()
-            gamma.sceneManager.pop()
+            gamma.sceneManager.pop(2)
     
     def draw(self):
         

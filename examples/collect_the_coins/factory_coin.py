@@ -27,7 +27,7 @@ def newCoin(x, y):
         )),
         
         # add a trigger, for when the coin collides with the player
-        gamma.TriggersComponent(CoinTrigger(boundingBox=gamma.PositionComponent(0,0,23,23)))
+        gamma.TriggersComponent(CoinTrigger(boundingBox=gamma.PositionComponent(0, 0, 23, 23)))
     
     )
 
