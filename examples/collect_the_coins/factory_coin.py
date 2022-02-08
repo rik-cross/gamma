@@ -14,7 +14,7 @@ def newCoin(x, y):
         gamma.PositionComponent(x, y, 23, 23, xAnchor='center', yAnchor='middle'),
         
         # create a new coin animation (an image group consisting of 6 frames)
-        gamma.ImageGroupsComponent('default', gamma.ImageGroup(
+        gamma.SpritesComponent('default', gamma.Sprite(
             # animation contains 6 frames
             gamma.resourceManager.getTexture('coin0'),
             gamma.resourceManager.getTexture('coin1'),

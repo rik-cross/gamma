@@ -43,7 +43,7 @@ from .system_battle import *
 from .component import *
 from .component_camera import *
 from .component_collider import *
-from .component_imagegroups import *
+from .component_sprites import *
 from .component_input import *
 from .component_emote import *
 from .component_text import *
@@ -56,7 +56,7 @@ from .component_crafting import *
 from .component_tags import *
 from .component_trauma import *
 
-from .imagegroup import *
+from .sprite import *
 
 from .manager_sound import *
 from .manager_input import *

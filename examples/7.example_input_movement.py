@@ -21,8 +21,8 @@ gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vit
 heartEntity = gamma.Entity(
     gamma.PositionComponent(50, 50, 27, 30)
 )
-heartImage = gamma.ImageGroup(gamma.resourceManager.getTexture('heart'))
-heartEntity.getComponent('imagegroups').add('default', heartImage)
+heartImage = gamma.Sprite(gamma.resourceManager.getTexture('heart'))
+heartEntity.getComponent('sprites').add('default', heartImage)
 
 # heart movement = AI
 def heartMovement(heart):
@@ -48,7 +48,7 @@ def playerMovement(player):
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
-    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('player'))),
+    gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('player'))),
     gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, inputContext=playerMovement)
 )
 

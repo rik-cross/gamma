@@ -106,7 +106,7 @@ class CraftingComponent(Component):
 
                 # create output entity
                 ent = entityFactory.create(self.items[i].output, 0, 0)
-                igs = ent.getComponent('imagegroups')
+                igs = ent.getComponent('sprites')
                 if len(igs.animationList) > 0:
                     # get first key
                     key = list(igs.animationList.keys())[0]
@@ -118,7 +118,7 @@ class CraftingComponent(Component):
                 for inp in self.items[i].inputs:
                     #print(inp[0], inp[1])
                     ent = entityFactory.create(inp[0], 0, 0)
-                    igs = ent.getComponent('imagegroups')
+                    igs = ent.getComponent('sprites')
                     if len(igs.animationList) > 0:
                         # get first key
                         key = list(igs.animationList.keys())[0]

@@ -27,13 +27,13 @@ class MainScene(gamma.Scene):
         # create a button
 
         # default image group
-        defaultImageGroup = gamma.ImageGroup(gamma.resourceManager.getTexture('x'))
+        defaultSprite = gamma.Sprite(gamma.resourceManager.getTexture('x'))
         # pressed image group
-        pressedImageGroup = gamma.ImageGroup(gamma.resourceManager.getTexture('x_pressed1'), gamma.resourceManager.getTexture('x_pressed2'))
+        pressedSprite = gamma.Sprite(gamma.resourceManager.getTexture('x_pressed1'), gamma.resourceManager.getTexture('x_pressed2'))
         # button linked to:
         # -- controller[0] x button
         # -- player entity 'button 1' (set as 'enter' above)
-        self.addButton(gamma.UIButton(200, 150, defaultImageGroup, pressedImageGroup, controlledBy=[gamma.controller[0].x, playerEntity.getComponent('input').b1], text='press me!'))
+        self.addButton(gamma.UIButton(200, 150, defaultSprite, pressedSprite, controlledBy=[gamma.controller[0].x, playerEntity.getComponent('input').b1], text='press me!'))
 
     def draw(self):
         self.renderer.add(gamma.Text(

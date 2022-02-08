@@ -1,11 +1,11 @@
 import pygame
     
-class ImageGroup:
+class Sprite:
     
     def __init__(self,
     
-        image,
-        *additionalImages,
+        texture,
+        *additionalTextures,
         delay = 8,
         hFlip = False, vFlip = False,
         loop = True,
@@ -14,9 +14,9 @@ class ImageGroup:
     ):
     
         # construct image list
-        self.imageList = [image]
-        for i in additionalImages:
-            self.imageList.append(i)
+        self.textureList = [texture]
+        for i in additionalTextures:
+            self.textureList.append(i)
 
         self.animationDelay = delay
         self.hFlip = hFlip
@@ -26,16 +26,16 @@ class ImageGroup:
 
         self.reset()
 
-    def getCurrentImage(self):
+    def getCurrentTexture(self):
 
-        if self.imageList == []:
+        if self.textureList == []:
             return None
-        return self.imageList[self.imageIndex]
+        return self.textureList[self.textureIndex]
 
     def reset(self):
 
         self.animationTimer = 0
-        self.imageIndex = 0
+        self.textureIndex = 0
 
     def update(self):
 
@@ -48,16 +48,16 @@ class ImageGroup:
             # reset the timer
             self.animationTimer = 0
             
-            # increment the current image
-            self.imageIndex += 1
+            # increment the current texture
+            self.textureIndex += 1
             
-            # loop back to the first image in the list
+            # loop back to the first texture in the list
             # once the index gets too high
-            if self.imageIndex > len(self.imageList) - 1:
+            if self.textureIndex > len(self.textureList) - 1:
                 if self.loop:
-                    self.imageIndex = 0
+                    self.textureIndex = 0
                 else:
-                    self.imageIndex = len(self.imageList) - 1
+                    self.textureIndex = len(self.textureList) - 1
                 # execute afterAnimate function, if one exists
                 if self.afterAnimate is not None:
                     self.afterAnimate()

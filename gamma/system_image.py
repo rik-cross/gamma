@@ -7,21 +7,21 @@ class ImageSystem(System):
         self.key = 'image'
 
     def setRequirements(self):
-        self.requiredComponents = ['imagegroups', 'position']
+        self.requiredComponents = ['sprites', 'position']
     
     def drawEntity(self, entity, scene):
 
-        # get the imagegroup to draw
-        componentImageGroups = entity.getComponent('imagegroups')
-        imageGroup = componentImageGroups.getCurrentImageGroup()
+        # get the Sprite to draw
+        componentSprites = entity.getComponent('sprites')
+        Sprite = componentSprites.getCurrentSprite()
 
-        # get the current image in the imagegroup
-        if imageGroup is not None:
-            image = imageGroup.getCurrentImage()
+        # get the current image in the Sprite
+        if Sprite is not None:
+            texture = Sprite.getCurrentTexture()
 
 
             # send the image to the renderer
-            if image is not None:
+            if texture is not None:
 
                 componentPosition = entity.getComponent('position')
 
@@ -29,8 +29,8 @@ class ImageSystem(System):
                 # calculate angle and flip, based on rotation style
                 #
                                 
-                v = imageGroup.vFlip
-                h = imageGroup.hFlip
+                v = Sprite.vFlip
+                h = Sprite.hFlip
                 a = 0
 
                 #if componentPosition.rotationStyle == 'none':
@@ -45,7 +45,7 @@ class ImageSystem(System):
                 #        v = not v
 
                 scene.renderer.add(Image(
-                    image,
+                    texture,
                     componentPosition.x,
                     componentPosition.y,
                     componentPosition.w,
@@ -54,6 +54,6 @@ class ImageSystem(System):
                     h, v,
                     # rotation angle
                     a,
-                    alpha=componentImageGroups.alpha,
-                    hue = componentImageGroups.hue
+                    alpha=componentSprites.alpha,
+                    hue=componentSprites.hue
                 ), scene=False)

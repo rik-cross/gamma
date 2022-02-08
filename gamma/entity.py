@@ -1,5 +1,5 @@
 from .component_tags import TagsComponent
-from .component_imagegroups import ImageGroupsComponent
+from .component_sprites import SpritesComponent
 
 class Entity:
     
@@ -41,8 +41,8 @@ class Entity:
 
     # add entity default components
     def _addDefaultComponents(self):
-        if not self.hasComponent('imagegroups'):
-            self.addComponent(ImageGroupsComponent())
+        if not self.hasComponent('sprites'):
+            self.addComponent(SpritesComponent())
         if not self.hasComponent('tags'):
             self.addComponent(TagsComponent())
 

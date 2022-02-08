@@ -118,7 +118,7 @@ class InventoryComponent(Component):
             if self.items[i][0] is not None:
                 # create entity
                 ent = entityFactory.create(self.items[i][0], 0, 0)
-                igs = ent.getComponent('imagegroups')
+                igs = ent.getComponent('sprites')
                 if len(igs.animationList) > 0:
                     # get first key
                     key = list(igs.animationList.keys())[0]

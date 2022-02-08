@@ -7,22 +7,22 @@ class AnimationSystem(System):
         self.key = 'animation'
 
     def setRequirements(self):
-        self.requiredComponents = ['imagegroups', 'position']
+        self.requiredComponents = ['sprites', 'position']
         self.requiredTags = []
     
     def updateEntity(self, entity, scene):
 
-        ig = entity.getComponent('imagegroups')
+        ig = entity.getComponent('sprites')
 
-        # check that imagegroups state matches global entity state
-        # (making sure to reset the 'old' imagegroup before updating)
+        # check that Sprites state matches global entity state
+        # (making sure to reset the 'old' Sprite before updating)
         if ig.current != entity.state:
-            i = ig.getCurrentImageGroup()
+            i = ig.getCurrentSprite()
             if i is not None:
                 i.reset()
             ig.current = entity.state
 
-        # update if an image group exists and is 'playing'
-        if ig.current is not None and ig.current in ig.animationList.keys():
+        # update if a sprite exists and is 'playing'
+        if ig.current is not None and ig.current in ig.spriteList.keys():
             if ig.playing:
-                ig.animationList[ig.current].update()
+                ig.spriteList[ig.current].update()

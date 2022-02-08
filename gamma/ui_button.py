@@ -5,19 +5,19 @@ from .ui_text import drawText
 
 class UIButton:
 
-    def __init__(self, x, y, defaultImageGroup, pressedImageGroup, controlledBy=None, actionListener=None, text=None, font='munro24'):
+    def __init__(self, x, y, defaultSprite, pressedSprite, controlledBy=None, actionListener=None, text=None, font='munro24'):
 
         self.x = x
         self.y = y
 
-        self.defaultImageGroup = defaultImageGroup
-        self.pressedImageGroup = pressedImageGroup
-        self.currentImageGroup = self.defaultImageGroup
+        self.defaultSprite = defaultSprite
+        self.pressedSprite = pressedSprite
+        self.currentSprite = self.defaultSprite
 
-        if self.defaultImageGroup is not None:
-            self.defaultImageGroup.loop = False
-        if self.pressedImageGroup is not None:
-            self.pressedImageGroup.loop = False
+        if self.defaultSprite is not None:
+            self.defaultSprite.loop = False
+        if self.pressedSprite is not None:
+            self.pressedSprite.loop = False
 
         # a list of entities that can press the button
         self.controlledBy = controlledBy
@@ -48,16 +48,16 @@ class UIButton:
                     break
         
         # display the button as pressed or not
-        if self.defaultImageGroup is not None and self.pressedImageGroup is not None:
+        if self.defaultSprite is not None and self.pressedSprite is not None:
             if self.downCurrent:
-                self.currentImageGroup = self.pressedImageGroup
+                self.currentSprite = self.pressedSprite
             else:
-                self.currentImageGroup = self.defaultImageGroup
+                self.currentSprite = self.defaultSprite
 
-        # reset imageGroup on state change
+        # reset Sprite on state change
         if self.downCurrent is not self.downPrevious:
-            if self.pressedImageGroup is not None:
-                self.pressedImageGroup.reset()
+            if self.pressedSprite is not None:
+                self.pressedSprite.reset()
 
         # execute the button (once) if pressed
         for c in self.controlledBy:
@@ -66,9 +66,9 @@ class UIButton:
                     if self.active:
                         self.actionListener.execute()
         
-        # update the button's current imageGroup
-        if self.currentImageGroup is not None:
-            self.currentImageGroup.update()
+        # update the button's current Sprite
+        if self.currentSprite is not None:
+            self.currentSprite.update()
 
     def draw(self, surface):
 
@@ -78,9 +78,9 @@ class UIButton:
             alpha = 100
 
         # draw button image
-        if self.currentImageGroup is not None:
+        if self.currentSprite is not None:
 
-            image = self.currentImageGroup.imageList[self.currentImageGroup.imageIndex]
+            image = self.currentSprite.textureList[self.currentSprite.textureIndex]
 
             if image is not None:
                 image = image.copy()
@@ -88,6 +88,6 @@ class UIButton:
                 
                 # draw button text
                 if self.text is not None:
-                    textX = self.x + self.currentImageGroup.imageList[self.currentImageGroup.imageIndex].get_rect().w + 10
+                    textX = self.x + self.currentSprite.textureList[self.currentSprite.textureIndex].get_rect().w + 10
                     textY = self.y
                     Text(self.text, textX, textY, alpha=alpha).draw(surface)

@@ -19,7 +19,7 @@ gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vit
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
-    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('player'))),
+    gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('player'))),
     # add a text component to the player entity
     gamma.TextComponent('Here is some sample text, split over multiple lines.', type='tick', lifetime='timed') 
 )

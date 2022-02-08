@@ -24,14 +24,14 @@ gamma.resourceManager.addTexture('player_idle_4', os.path.join('images', 'player
 
 heartEntity = gamma.Entity(
     gamma.PositionComponent(100, 100, 27, 30),
-    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('heart')))
+    gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('heart')))
 )
 
 #
 # create an animated player
 #
 
-playerAnimation = gamma.ImageGroup(
+playerAnimation = gamma.Sprite(
         gamma.resourceManager.getTexture('player_idle_1'),
         gamma.resourceManager.getTexture('player_idle_2'),
         gamma.resourceManager.getTexture('player_idle_3'),
@@ -40,7 +40,7 @@ playerAnimation = gamma.ImageGroup(
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 100, 45, 51),
-    gamma.ImageGroupsComponent('default', playerAnimation)
+    gamma.SpritesComponent('default', playerAnimation)
 )
 
 # add a camera to the player
