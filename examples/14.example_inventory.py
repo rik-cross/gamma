@@ -11,8 +11,8 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
-gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
+gamma.resourceManager.addTexture('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
+gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
 
 #
 # create a player entity
@@ -42,7 +42,7 @@ def playerControls(player):
 playerEntity = gamma.Entity(
     gamma.TagsComponent('player'),
     gamma.PositionComponent(0, 0, 45, 51, z=10),
-    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('player_idle_1'))),
     # triggers only work on entities with a collider
     gamma.ColliderComponent(0,0,45,51),
     gamma.InputComponent(
@@ -84,7 +84,7 @@ def createHeart(x, y):
     heartEntity = gamma.Entity()
     heartEntity.addComponent(gamma.PositionComponent(x, y, 27, 30))
     heartEntity.addComponent(gamma.TriggersComponent(CollectHeartTrigger(boundingBox=gamma.PositionComponent(0,0,27,30), buttonPress='b1')))
-    heartImageGroup = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
+    heartImageGroup = gamma.ImageGroup(gamma.resourceManager.getTexture('heart'))
     heartEntity.getComponent('imagegroups').add('idle', heartImageGroup)
     return heartEntity
 

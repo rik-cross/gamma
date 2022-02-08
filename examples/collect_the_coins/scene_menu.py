@@ -55,7 +55,7 @@ class MenuScene(gamma.Scene):
 
         # coin
         self.renderer.add(
-            gamma.Image(gamma.resourceManager.getImage('coin0'),
+            gamma.Image(gamma.resourceManager.getTexture('coin0'),
                 gamma.windowSize.w/2, 225,
                 hAlign='center', vAlign='middle',
                 w=23*4, h=23*4

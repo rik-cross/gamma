@@ -11,8 +11,8 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
-gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'vita_00.png'))
+gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
+gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a heart entity that moves automativcally
@@ -21,7 +21,7 @@ gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'vita_
 heartEntity = gamma.Entity(
     gamma.PositionComponent(50, 50, 27, 30)
 )
-heartImage = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
+heartImage = gamma.ImageGroup(gamma.resourceManager.getTexture('heart'))
 heartEntity.getComponent('imagegroups').add('default', heartImage)
 
 # heart movement = AI
@@ -48,7 +48,7 @@ def playerMovement(player):
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
-    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('player'))),
     gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, inputContext=playerMovement)
 )
 

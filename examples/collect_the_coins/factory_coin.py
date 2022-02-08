@@ -16,12 +16,12 @@ def newCoin(x, y):
         # create a new coin animation (an image group consisting of 6 frames)
         gamma.ImageGroupsComponent('default', gamma.ImageGroup(
             # animation contains 6 frames
-            gamma.resourceManager.getImage('coin0'),
-            gamma.resourceManager.getImage('coin1'),
-            gamma.resourceManager.getImage('coin2'),
-            gamma.resourceManager.getImage('coin3'),
-            gamma.resourceManager.getImage('coin4'),
-            gamma.resourceManager.getImage('coin5'),
+            gamma.resourceManager.getTexture('coin0'),
+            gamma.resourceManager.getTexture('coin1'),
+            gamma.resourceManager.getTexture('coin2'),
+            gamma.resourceManager.getTexture('coin3'),
+            gamma.resourceManager.getTexture('coin4'),
+            gamma.resourceManager.getTexture('coin5'),
             # delay between animation frames (i.e. animation speed)
             delay=6
         )),

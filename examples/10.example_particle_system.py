@@ -11,7 +11,7 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'vita_00.png'))
+gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a player entity that moves using WASD
@@ -40,7 +40,7 @@ def playerControls(player):
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
-    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('player'))),
     gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, b1=gamma.keys.enter, inputContext=playerControls)
 )
 

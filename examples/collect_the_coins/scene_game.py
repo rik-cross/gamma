@@ -26,7 +26,7 @@ class GameScene(gamma.Scene):
             gamma.PositionComponent(0, 0, 45, 51, z=4, xAnchor='center', yAnchor='middle'),
             
             # add an imageGroup (tagged as 'default') to the player, consisting of a single image (i.e. not an animation)
-            gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player'))),
+            gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('player'))),
             
             # player uses WASD to move
             # the effect of pressing WASD is described in the 'playerInputContext' function

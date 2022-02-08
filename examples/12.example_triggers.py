@@ -11,8 +11,8 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
-gamma.resourceManager.addImage('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
+gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
+gamma.resourceManager.addTexture('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a heart entity
@@ -21,7 +21,7 @@ gamma.resourceManager.addImage('player_idle_1', os.path.join('images', 'player',
 heartEntity = gamma.Entity(
     gamma.PositionComponent(300, 0, 27, 30)
 )
-heartImage = gamma.ImageGroup(gamma.resourceManager.getImage('heart'))
+heartImage = gamma.ImageGroup(gamma.resourceManager.getTexture('heart'))
 heartEntity.getComponent('imagegroups').add('default', heartImage)
 
 # create a trigger subclass for focusing on the heart
@@ -60,7 +60,7 @@ def playerControls(player):
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(0, 0, 45, 51),
-    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('player_idle_1'))),
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('player_idle_1'))),
     # triggers only work on entities with a collider
     gamma.ColliderComponent(0, 0, 45, 51),
     gamma.InputComponent(left=gamma.keys.left, right=gamma.keys.right, inputContext=playerControls)

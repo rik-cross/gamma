@@ -10,9 +10,9 @@ playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter))
 
 # store images
 
-gamma.resourceManager.addImage('x', os.path.join('images', 'x_n.png'))
-gamma.resourceManager.addImage('x_pressed1', os.path.join('images', 'x_y1.png'))
-gamma.resourceManager.addImage('x_pressed2', os.path.join('images', 'x_y2.png'))
+gamma.resourceManager.addTexture('x', os.path.join('images', 'x_n.png'))
+gamma.resourceManager.addTexture('x_pressed1', os.path.join('images', 'x_y1.png'))
+gamma.resourceManager.addTexture('x_pressed2', os.path.join('images', 'x_y2.png'))
 
 #
 # create a main scene
@@ -27,9 +27,9 @@ class MainScene(gamma.Scene):
         # create a button
 
         # default image group
-        defaultImageGroup = gamma.ImageGroup(gamma.resourceManager.getImage('x'))
+        defaultImageGroup = gamma.ImageGroup(gamma.resourceManager.getTexture('x'))
         # pressed image group
-        pressedImageGroup = gamma.ImageGroup(gamma.resourceManager.getImage('x_pressed1'), gamma.resourceManager.getImage('x_pressed2'))
+        pressedImageGroup = gamma.ImageGroup(gamma.resourceManager.getTexture('x_pressed1'), gamma.resourceManager.getTexture('x_pressed2'))
         # button linked to:
         # -- controller[0] x button
         # -- player entity 'button 1' (set as 'enter' above)

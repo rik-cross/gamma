@@ -3,18 +3,18 @@ import pygame
 class ResourceManager:
     
     def __init__(self):
-        self.images = {}
+        self.textures = {}
         self.fonts = {}
 
     # images
 
-    def addImage(self, key, url):
-        self.images[key] = pygame.image.load(url).convert_alpha()
+    def addTexture(self, key, url):
+        self.textures[key] = pygame.image.load(url).convert_alpha()
 
-    def getImage(self, key):
-        if key not in self.images.keys():
+    def getTexture(self, key):
+        if key not in self.textures.keys():
             return None
-        return self.images[key].copy()
+        return self.textures[key].copy()
 
     # fonts
 

@@ -61,9 +61,9 @@ resourceManager.addFont('munro60', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'),
 resourceManager.addFont('large', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=60)
 
 # add image resources
-resourceManager.addImage('gamma', os.path.join(ROOT_DIR, 'images', 'gamma.png'))
-resourceManager.addImage('tile_outline', os.path.join(ROOT_DIR, 'images', 'tile_outline.png'))
-resourceManager.addImage('emote', os.path.join(ROOT_DIR, 'images', 'emote_box.png'))
+resourceManager.addTexture('gamma', os.path.join(ROOT_DIR, 'images', 'gamma.png'))
+resourceManager.addTexture('tile_outline', os.path.join(ROOT_DIR, 'images', 'tile_outline.png'))
+resourceManager.addTexture('emote', os.path.join(ROOT_DIR, 'images', 'emote_box.png'))
 
 # add tiles
 tileManager.addTile(Tile('none'))
@@ -87,7 +87,7 @@ systemManager.addSystem(
     Battleystem()
 )
 
-def init(size=(1200,800), caption='', icon=resourceManager.getImage('gamma')):
+def init(size=(1200,800), caption='', icon=resourceManager.getTexture('gamma')):
     
     global screen
     global windowSize

@@ -11,12 +11,12 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addImage('heart', os.path.join('images', 'heart.png'))
+gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
 
-gamma.resourceManager.addImage('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
-gamma.resourceManager.addImage('player_idle_2', os.path.join('images', 'player', 'vita_01.png'))
-gamma.resourceManager.addImage('player_idle_3', os.path.join('images', 'player', 'vita_02.png'))
-gamma.resourceManager.addImage('player_idle_4', os.path.join('images', 'player', 'vita_03.png'))
+gamma.resourceManager.addTexture('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
+gamma.resourceManager.addTexture('player_idle_2', os.path.join('images', 'player', 'vita_01.png'))
+gamma.resourceManager.addTexture('player_idle_3', os.path.join('images', 'player', 'vita_02.png'))
+gamma.resourceManager.addTexture('player_idle_4', os.path.join('images', 'player', 'vita_03.png'))
 
 #
 # create a heart entity
@@ -24,7 +24,7 @@ gamma.resourceManager.addImage('player_idle_4', os.path.join('images', 'player',
 
 heartEntity = gamma.Entity(
     gamma.PositionComponent(100, 200, 27, 30),
-    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getImage('heart')))
+    gamma.ImageGroupsComponent('default', gamma.ImageGroup(gamma.resourceManager.getTexture('heart')))
 )
 
 #
@@ -32,10 +32,10 @@ heartEntity = gamma.Entity(
 #
 
 playerAnimation = gamma.ImageGroup(
-        gamma.resourceManager.getImage('player_idle_1'),
-        gamma.resourceManager.getImage('player_idle_2'),
-        gamma.resourceManager.getImage('player_idle_3'),
-        gamma.resourceManager.getImage('player_idle_4')
+        gamma.resourceManager.getTexture('player_idle_1'),
+        gamma.resourceManager.getTexture('player_idle_2'),
+        gamma.resourceManager.getTexture('player_idle_3'),
+        gamma.resourceManager.getTexture('player_idle_4')
     )
 
 playerEntity = gamma.Entity(

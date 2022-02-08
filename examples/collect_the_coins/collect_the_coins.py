@@ -7,15 +7,15 @@ from factory_coin import newCoin
 # add image resources to the resource manager
 
 # Dinosaur player images by Arks: https://arks.itch.io/dino-characters
-gamma.resourceManager.addImage('player', os.path.join('images', 'player', 'player.png'))
+gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'player.png'))
 
 # Coin sprite by DasBilligeAlien: https://opengameart.org/content/rotating-coin-0
-gamma.resourceManager.addImage('coin0', os.path.join('images', 'coin', 'coin_0.png'))
-gamma.resourceManager.addImage('coin1', os.path.join('images', 'coin', 'coin_1.png'))
-gamma.resourceManager.addImage('coin2', os.path.join('images', 'coin', 'coin_2.png'))
-gamma.resourceManager.addImage('coin3', os.path.join('images', 'coin', 'coin_3.png'))
-gamma.resourceManager.addImage('coin4', os.path.join('images', 'coin', 'coin_4.png'))
-gamma.resourceManager.addImage('coin5', os.path.join('images', 'coin', 'coin_5.png'))
+gamma.resourceManager.addTexture('coin0', os.path.join('images', 'coin', 'coin_0.png'))
+gamma.resourceManager.addTexture('coin1', os.path.join('images', 'coin', 'coin_1.png'))
+gamma.resourceManager.addTexture('coin2', os.path.join('images', 'coin', 'coin_2.png'))
+gamma.resourceManager.addTexture('coin3', os.path.join('images', 'coin', 'coin_3.png'))
+gamma.resourceManager.addTexture('coin4', os.path.join('images', 'coin', 'coin_4.png'))
+gamma.resourceManager.addTexture('coin5', os.path.join('images', 'coin', 'coin_5.png'))
 
 # add sound and music to the sound manager
 
