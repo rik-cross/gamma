@@ -10,5 +10,6 @@ setup(
     author_email='rik@rikcross.net',
     license='MIT License',
     packages=['gamma'],
-    install_requires=['pygame']
+    install_requires=['pygame'],
+    include_package_data=True
 )
