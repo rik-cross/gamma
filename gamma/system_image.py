@@ -13,12 +13,12 @@ class ImageSystem(System):
 
         # get the Sprite to draw
         componentSprites = entity.getComponent('sprites')
-        Sprite = componentSprites.getCurrentSprite()
+        sprite = componentSprites.getCurrentSprite()
 
         # get the current image in the Sprite
-        if Sprite is not None:
-            texture = Sprite.getCurrentTexture()
+        if sprite is not None:
 
+            texture = sprite.getCurrentTexture()
 
             # send the image to the renderer
             if texture is not None:
@@ -29,8 +29,8 @@ class ImageSystem(System):
                 # calculate angle and flip, based on rotation style
                 #
                                 
-                v = Sprite.vFlip
-                h = Sprite.hFlip
+                v = sprite.vFlip
+                h = sprite.hFlip
                 a = 0
 
                 #if componentPosition.rotationStyle == 'none':
@@ -46,10 +46,10 @@ class ImageSystem(System):
 
                 scene.renderer.add(Image(
                     texture,
-                    componentPosition.x,
-                    componentPosition.y,
-                    componentPosition.w,
-                    componentPosition.h,
+                    componentPosition.x - sprite.xOffset,
+                    componentPosition.y - sprite.yOffset,
+                    texture.get_rect().w,
+                    texture.get_rect().h,
                     # horizontal & vertical flip
                     h, v,
                     # rotation angle

@@ -9,7 +9,8 @@ class Sprite:
         delay = 8,
         hFlip = False, vFlip = False,
         loop = True,
-        afterAnimate = None
+        afterAnimate = None,
+        xOffset=0, yOffset=0
     
     ):
     
@@ -23,6 +24,8 @@ class Sprite:
         self.vFlip = vFlip
         self.loop = loop
         self.afterAnimate = afterAnimate
+        self.xOffset = xOffset
+        self.yOffset = yOffset
 
         self.reset()
 
