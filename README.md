@@ -34,6 +34,11 @@ mkdir [game-folder-name]
 cd [game-folder-name]
 ```
 
+## Getting started
+
++ See the [examples](./examples/)
++ Follow the 'Collect the Coins' [tutorial video series](https://www.youtube.com/playlist?list=PLQaniv5ve2ygtBCpEiLC_fFa0Um-51Txu) and [final code](./examples/collect_the_coins)
+
 ## Changelog
 
 |Version|Description|
