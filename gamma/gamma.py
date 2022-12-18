@@ -3,31 +3,31 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 import pygame
 
-from .manager_resource import *
-from .manager_sound import *
-from .manager_input import *
-from .entity_factory import *
-from .manager_scene import *
-from .manager_system import *
-from .manager_entity import *
+from .managers.manager_resource import *
+from .managers.manager_sound import *
+from .managers.manager_input import *
+from .core.entity_factory import *
+from .managers.manager_scene import *
+from .managers.manager_system import *
+from .managers.manager_entity import *
 
-from .manager_tile import TileManager
-from .tile import Tile
+from .managers.manager_tile import TileManager
+from .core.tile import Tile
 
-from .system_animation import *
-from .system_camera import *
-from .system_emote import *
-from .system_input import *
-from .system_particle import *
-from .system_physics import *
-from .system_text import *
-from .system_trauma import *
-from .system_trigger import *
-from .system_image import *
-from .system_collision import *
-from .system_inventory import *
-from .system_crafting import *
-from .system_battle import *
+from .systems.system_animation import *
+from .systems.system_camera import *
+from .systems.system_emote import *
+from .systems.system_input import *
+from .systems.system_particle import *
+from .systems.system_physics import *
+from .systems.system_text import *
+from .systems.system_trauma import *
+from .systems.system_trigger import *
+from .systems.system_image import *
+from .systems.system_collision import *
+from .systems.system_inventory import *
+from .systems.system_crafting import *
+from .systems.system_battle import *
 
 # stores the path of this file
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))

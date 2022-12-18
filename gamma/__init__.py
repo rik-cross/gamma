@@ -1,95 +1,96 @@
 from .gamma import *
 
-from .scene import *
+from .core.scene import *
 
-from .renderer import *
-from .renderable import *
+from .core.renderer import *
+from .core.renderable import *
 
-from .transition import *
-from .transition_none import *
-from .transition_black import *
-from .transition_flyinleft import *
-from .transition_flyinright import *
-from .transition_flyoutleft import *
-from .transition_flyoutright import *
-from .transition_moveleft import *
-from .transition_moveright import *
-from .transition_wipeleft import *
-from .transition_wiperight import *
+from .core.transition import *
+from .transitions.transition_none import *
+from .transitions.transition_black import *
+from .transitions.transition_flyinleft import *
+from .transitions.transition_flyinright import *
+from .transitions.transition_flyoutleft import *
+from .transitions.transition_flyoutright import *
+from .transitions.transition_moveleft import *
+from .transitions.transition_moveright import *
+from .transitions.transition_wipeleft import *
+from .transitions.transition_wiperight import *
 
-from .cutscene import *
+from .core.cutscene import *
 
-from .entity import *
-from .entity_factory import *
+from .core.entity import *
+from .core.entity_factory import *
 
-from .system import *
+from .core.system import *
 
-from .utils import *
+from .utils.utils import *
 
-from .system_animation import *
-from .system_camera import *
-from .system_input import *
-from .system_physics import *
-from .system_trigger import *
-from .system_trauma import *
-from .system_particle import *
-from .system_emote import *
-from .system_text import *
-from .system_image import *
-from .system_inventory import *
-from .system_crafting import *
-from .system_battle import *
+from .systems.system_animation import *
+from .systems.system_camera import *
+from .systems.system_input import *
+from .systems.system_physics import *
+from .systems.system_trigger import *
+from .systems.system_trauma import *
+from .systems.system_particle import *
+from .systems.system_emote import *
+from .systems.system_text import *
+from .systems.system_image import *
+from .systems.system_inventory import *
+from .systems.system_crafting import *
+from .systems.system_battle import *
 
-from .component import *
-from .component_camera import *
-from .component_collider import *
-from .component_sprites import *
-from .component_input import *
-from .component_emote import *
-from .component_text import *
-from .component_triggers import *
-from .component_battle import *
-from .component_position import *
-from .component_motion import *
-from .component_inventory import *
-from .component_crafting import *
-from .component_tags import *
-from .component_trauma import *
+from .core.component import *
+from .components.component_camera import *
+from .components.component_collider import *
+from .components.component_sprites import *
+from .components.component_input import *
+from .components.component_emote import *
+from .components.component_text import *
+from .components.component_triggers import *
+from .components.component_battle import *
+from .components.component_position import *
+from .components.component_motion import *
+from .components.component_inventory import *
+from .components.component_crafting import *
+from .components.component_tags import *
+from .components.component_trauma import *
 
-from .sprite import *
+from .core.sprite import *
 
-from .manager_sound import *
-from .manager_input import *
-from .manager_scene import *
-from .manager_resource import *
-from .manager_system import *
-from .manager_entity import *
-from .manager_tile import TileManager
+from .managers.manager_sound import *
+from .managers.manager_input import *
+from .managers.manager_scene import *
+from .managers.manager_resource import *
+from .managers.manager_system import *
+from .managers.manager_entity import *
+from .managers.manager_tile import TileManager
 
-from .colours import *
-from .tile import *
+from .core.colours import *
+from .core.tile import *
 
-from .map import *
+from .core.map import *
 
-from .crafting_recipe import *
+from .core.crafting_recipe import *
 
-from .ui_text import *
-from .text import *
-from .ui_text_menu_item import *
-from .ui_action_listener import *
-from .ui_menu import *
-from .ui_button import *
-from .ui_text_input import *
-from .keyboard_layouts import *
+from .ui.ui_text import *
 
-from .image import *
-from .rectangle import *
-from .circle import *
+from .ui.ui_text_menu_item import *
+from .ui.ui_action_listener import *
+from .ui.ui_menu import *
+from .ui.ui_button import *
+from .ui.ui_text_input import *
+from .ui.keyboard_layouts import *
 
-from .hitbox import *
-from .hurtbox import *
+from .renderables.text import *
+from .renderables.image import *
+from .renderables.rectangle import *
+from .renderables.circle import *
 
-from .particle import *
-from .component_particle_emitter import *
+from .core.hitbox import *
+from .core.hurtbox import *
 
-from .utils_draw import *
+from .core.particle import *
+from .components.component_particle_emitter import *
+
+from .utils.utils_draw import *
