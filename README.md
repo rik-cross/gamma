@@ -17,7 +17,7 @@ Until the library is more stable, it's advised to install using `python3 setup.p
 The following commands create an overall place (specified by `folder-name`) in which to work. A virtual environment is then created in the root of that folder, with separate sub-folders `gamma` for the game engine and `game-folder-name` for the game that you'll create. This ensures that everything is in the same virtual environment, but separating the engine from the game being developed. This will allow you to upload the game you make to a separate git repository.
 
 ```
-pip3 install virtualenv
+pip3 install --user virtualenv
 mkdir [folder-name]
 cd [folder-name]
 
