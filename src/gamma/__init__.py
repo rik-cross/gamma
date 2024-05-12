@@ -1,3 +1,7 @@
+__version__ = "0.4.3"
+__author__ = 'Rik Cross'
+__license__ = 'MIT'
+
 from .gamma import *
 
 from .core.scene import *

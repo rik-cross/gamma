@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/gamma"]
+
+[project]
+name = "pygame-gamma"
+version = "0.4.3"
+authors = [
+  { name="Rik Cross", email="rik.j.cross@gmail.com" },
+]
+description = "A simple ECS game engine for Python, built on Pygame, with an emphasis on ease of use"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/rik-cross/gamma"
+"Suggestions and bugs" = "https://github.com/rik-cross/gamma/issues"
