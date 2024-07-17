@@ -1,10 +1,11 @@
 import pygame
 import copy
 
-class MotionComponent:
+from ..core.component import Component
+
+class MotionComponent(Component):
 
     def __init__(self, velocity=None, acceleration=None):
-        self.key = 'motion'
         if velocity is None:
             self.velocity = pygame.math.Vector2()
         else:

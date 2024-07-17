@@ -14,8 +14,6 @@ class EmoteComponent(Component):
         timer=200,
     
     ):
-
-        self.key = 'emote'
         
         # store the passed parameters
         self.image = image

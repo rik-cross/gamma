@@ -20,21 +20,21 @@ gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vit
 # player controls = WASD keys, enter to create a particle emitter
 def playerControls(player):
     
-    if gamma.inputManager.isDown(player.getComponent('input').up):
-        player.getComponent('position').y -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').down):
-        player.getComponent('position').y += 2
-    if gamma.inputManager.isDown(player.getComponent('input').left):
-        player.getComponent('position').x -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').right):
-        player.getComponent('position').x += 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).up):
+        player.getComponent(gamma.PositionComponent).y -= 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).down):
+        player.getComponent(gamma.PositionComponent).y += 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).left):
+        player.getComponent(gamma.PositionComponent).x -= 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).right):
+        player.getComponent(gamma.PositionComponent).x += 2
     
-    if gamma.inputManager.isPressed(player.getComponent('input').b1):
+    if gamma.inputManager.isPressed(player.getComponent(gamma.InputComponent).b1):
         # add a new particle emitter at the player's center position
         player.addComponent(
             gamma.ParticleEmitterComponent(
-                xOff=(player.getComponent('position').w/2),
-                yOff=(player.getComponent('position').h/2)
+                xOff=(player.getComponent(gamma.PositionComponent).w/2),
+                yOff=(player.getComponent(gamma.PositionComponent).h/2)
             )
         )
 

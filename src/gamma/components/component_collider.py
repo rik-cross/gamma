@@ -13,8 +13,6 @@ class ColliderComponent(Component):
     
     ):
         
-        self.key = 'collider'
-        
         # collision rect
         self.rect = pygame.Rect(offsetX, offsetY, w, h)
         

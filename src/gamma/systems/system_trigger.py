@@ -4,16 +4,22 @@ from ..core.system import *
 class TriggerSystem(System):
 
     def init(self):
-        self.key = 'trigger'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['position', 'triggers']
+        from ..components.component_position import PositionComponent
+        from ..components.component_triggers import TriggersComponent
+        self.requiredComponents = [PositionComponent, TriggersComponent]
 
     def updateEntity(self, entity, scene):
 
+        from ..components.component_position import PositionComponent
+        from ..components.component_triggers import TriggersComponent
+        from ..components.component_collider import ColliderComponent
+
         # store components
-        trg = entity.getComponent('triggers')
-        pos = entity.getComponent('position')
+        trg = entity.getComponent(TriggersComponent)
+        pos = entity.getComponent(PositionComponent)
 
         # check each trigger in the list
         for trigger in trg.triggerList:
@@ -35,11 +41,11 @@ class TriggerSystem(System):
                 # check against all other entities
                 for otherEntity in scene.entities:
 
-                    if otherEntity.hasComponent('position') and otherEntity.hasComponent('collider'):
+                    if otherEntity.hasComponent(PositionComponent) and otherEntity.hasComponent(ColliderComponent):
                         
                         # get other entity components
-                        op = otherEntity.getComponent('position')
-                        oc = otherEntity.getComponent('collider')
+                        op = otherEntity.getComponent(PositionComponent)
+                        oc = otherEntity.getComponent(ColliderComponent)
                         
                         # calculate rect for other entity
                         otherRect = pygame.rect.Rect(

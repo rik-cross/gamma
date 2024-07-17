@@ -49,10 +49,12 @@ class Menu:
 
     def update(self):
 
+        from ..components.component_input import InputComponent
+
         for e in self.entities:
-            if e.hasComponent('input'):
+            if e.hasComponent(InputComponent):
                 if self.direction == 'vertical':
-                    if inputManager.isPressed(e.getComponent('input').up):
+                    if inputManager.isPressed(e.getComponent(InputComponent).up):
 
                         originalIndex = self.activeButtonIndex
                         newIndex = originalIndex
@@ -66,7 +68,7 @@ class Menu:
                         else:
                             self.activeButtonIndex = newIndex
 
-                    if inputManager.isPressed(e.getComponent('input').down):
+                    if inputManager.isPressed(e.getComponent(InputComponent).down):
 
                         originalIndex = self.activeButtonIndex
                         newIndex = originalIndex
@@ -81,7 +83,7 @@ class Menu:
                             self.activeButtonIndex = newIndex
 
                 elif self.direction == 'horizontal':
-                    if inputManager.isPressed(e.getComponent('input').left):
+                    if inputManager.isPressed(e.getComponent(InputComponent).left):
 
                         originalIndex = self.activeButtonIndex
                         newIndex = originalIndex
@@ -95,7 +97,7 @@ class Menu:
                         else:
                             self.activeButtonIndex = newIndex
 
-                    if inputManager.isPressed(e.getComponent('input').right):
+                    if inputManager.isPressed(e.getComponent(InputComponent).right):
 
                         originalIndex = self.activeButtonIndex
                         newIndex = originalIndex
@@ -112,8 +114,8 @@ class Menu:
         # update buttons in the button group
         pressed = False
         for e in self.entities:
-            if e.hasComponent('input'):
-                if inputManager.isPressed(e.getComponent('input').b1):
+            if e.hasComponent(InputComponent):
+                if inputManager.isPressed(e.getComponent(InputComponent).b1):
                     pressed = True
                     break
 

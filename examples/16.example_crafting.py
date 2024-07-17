@@ -20,10 +20,10 @@ gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
 
 # player controls = left and right to move
 def playerControls(player):
-    if gamma.inputManager.isDown(player.getComponent('input').left):
-        player.getComponent('position').rect.x -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').right):
-        player.getComponent('position').rect.x += 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).left):
+        player.getComponent(gamma.PositionComponent).rect.x -= 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).right):
+        player.getComponent(gamma.PositionComponent).rect.x += 2
 
 playerEntity = gamma.Entity(
     gamma.TagsComponent('player'),
@@ -61,9 +61,9 @@ playerEntity.addComponent(
         200, 20,
         playerEntity, mainScene,
         slots=3,
-        left=playerEntity.getComponent('input').b3,
-        right=playerEntity.getComponent('input').b4,
-        craft=playerEntity.getComponent('input').b5
+        left=playerEntity.getComponent(gamma.InputComponent).b3,
+        right=playerEntity.getComponent(gamma.InputComponent).b4,
+        craft=playerEntity.getComponent(gamma.InputComponent).b5
     )
 )
 
@@ -75,9 +75,9 @@ playerEntity.addComponent(
 
 class CollectHeartTrigger(gamma.Trigger):
     def onCollide(self, entity, otherEntity):
-        if otherEntity.getComponent('tags').has('player'):
+        if otherEntity.getComponent(gamma.TagsComponent).has('player'):
             mainScene.deleteEntity(entity)
-            otherEntity.getComponent('inventory').addEntity('heart')
+            otherEntity.getComponent(gamma.InventoryComponent).addEntity('heart')
 
 # add a heart to the entity factory
 
@@ -92,7 +92,7 @@ gamma.entityFactory.addEntity('heart', createHeart)
 
 # add some hearts to the player inventory
 for i in range(15):
-    playerEntity.getComponent('inventory').addEntity('heart')
+    playerEntity.getComponent(gamma.InventoryComponent).addEntity('heart')
 
 # add a heart to the scene
 he = gamma.entityFactory.create('heart', 50, 0)
@@ -108,7 +108,7 @@ recipe = gamma.CraftingRecipe(
     ('heart', 2),
     ('heart', 3)
 )
-playerEntity.getComponent('crafting').addRecipe(recipe)
+playerEntity.getComponent(gamma.CraftingComponent).addRecipe(recipe)
 
 #
 # add entities to scene

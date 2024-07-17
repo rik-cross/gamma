@@ -23,11 +23,14 @@ class Image(Renderable):
         xParallax=False, yParallax=False
 
     ):
-        
+
         super().__init__(x, y, z, hAlign, vAlign, colour, alpha, xParallax, yParallax)
 
         # set additional image object parameters
-        self.imageSurface = imageSurface.copy()
+        if imageSurface is not None:
+            self.imageSurface = imageSurface.copy()
+        else:
+            self.imageSurface = None
 
         self.flipX = flipX
         self.flipY = flipY
@@ -48,6 +51,9 @@ class Image(Renderable):
 
     def _createSurface(self):
 
+        if self.imageSurface is None:
+            return
+
         self.rect = self.imageSurface.get_rect()
         self.rect.x = self._x
         self.rect.y = self._y
@@ -63,6 +69,9 @@ class Image(Renderable):
         self._align()
 
     def draw(self, surface, xOff=0, yOff=0, scale=1):
+
+        if self.imageSurface is None:
+            return
 
         if self.xp:
             newX = self.rect.x * scale + (xOff*self.z)

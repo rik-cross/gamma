@@ -4,15 +4,17 @@ from ..core.colours import *
 class AnimationSystem(System):
 
     def init(self):
-        self.key = 'animation'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['sprites', 'position']
+        from ..components.component_sprites import SpritesComponent
+        from ..components.component_position import PositionComponent
+        self.requiredComponents = [SpritesComponent, PositionComponent]
         self.requiredTags = []
     
     def updateEntity(self, entity, scene):
-
-        ig = entity.getComponent('sprites')
+        from ..components.component_sprites import SpritesComponent
+        ig = entity.getComponent(SpritesComponent)
 
         # check that Sprites state matches global entity state
         # (making sure to reset the 'old' Sprite before updating)

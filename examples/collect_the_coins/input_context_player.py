@@ -5,8 +5,8 @@ import gamma
 def playerInputContext(player):
 
     # store some components, just to make the code easier to read!
-    inputComponent = player.getComponent('input')
-    positionComponent = player.getComponent('position')
+    inputComponent = player.getComponent(gamma.InputComponent)
+    positionComponent = player.getComponent(gamma.PositionComponent)
 
     # only proceed if entity has the required components
     if inputComponent is None or positionComponent is None:

@@ -52,17 +52,17 @@ playerEntity.addComponent(gamma.CameraComponent(
 
 cutscene = gamma.Cutscene()
 cutscene.actionList = [
-    lambda: playerEntity.getComponent('camera').setZoom(3, duration=60),
+    lambda: playerEntity.getComponent(gamma.CameraComponent).setZoom(3, duration=60),
     lambda: mainScene.cutscene.setDelay(120),
     lambda: playerEntity.addComponent(gamma.TextComponent('Hello! How are you?', lifetime='timed', type='tick', final_display_time=120)),
     lambda: mainScene.cutscene.setDelay(300),
-    lambda: playerEntity.getComponent('camera').setZoom(1, duration=60),
+    lambda: playerEntity.getComponent(gamma.CameraComponent).setZoom(1, duration=60),
     lambda: mainScene.cutscene.setDelay(60)
 ]
 
 # player controls = enter to start cutscene
 def playerControls(player):
-    if gamma.inputManager.isPressed(player.getComponent('input').b1):
+    if gamma.inputManager.isPressed(player.getComponent(gamma.InputComponent).b1):
         # start the cutscene
         cutscene.reset()
         mainScene.cutscene = cutscene

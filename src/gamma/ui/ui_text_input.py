@@ -28,6 +28,8 @@ class UITextInput(Renderable):
     
     ):
 
+        from ..components.component_input import InputComponent
+
         # initialise renderable element
         super().__init__(x, y, 1, hAlign, vAlign, None)
 
@@ -42,7 +44,7 @@ class UITextInput(Renderable):
         # set the controlling entity and get the input component
         self.controllingEntity = controllingEntity
         if self.controllingEntity is not None:
-            self.controllingInputComponent = self.controllingEntity.getComponent('input')
+            self.controllingInputComponent = self.controllingEntity.getComponent(InputComponent)
         else:
             self.controllingInputComponent = None
 

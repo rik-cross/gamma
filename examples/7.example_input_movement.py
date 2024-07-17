@@ -22,12 +22,12 @@ heartEntity = gamma.Entity(
     gamma.PositionComponent(50, 50, 27, 30)
 )
 heartImage = gamma.Sprite(gamma.resourceManager.getTexture('heart'))
-heartEntity.getComponent('sprites').add('default', heartImage)
+heartEntity.getComponent(gamma.SpritesComponent).add('default', heartImage)
 
 # heart movement = AI
 def heartMovement(heart):
-    if heart.getComponent('position').rect.x < 550:
-        heart.getComponent('position').rect.x += 2
+    if heart.getComponent(gamma.PositionComponent).rect.x < 550:
+        heart.getComponent(gamma.PositionComponent).rect.x += 2
 
 heartEntity.addComponent(gamma.InputComponent(inputContext=heartMovement))
 
@@ -37,14 +37,14 @@ heartEntity.addComponent(gamma.InputComponent(inputContext=heartMovement))
 
 # player movement = WASD keys
 def playerMovement(player):
-    if gamma.inputManager.isDown(player.getComponent('input').up):
-        player.getComponent('position').y -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').down):
-        player.getComponent('position').y += 2
-    if gamma.inputManager.isDown(player.getComponent('input').left):
-        player.getComponent('position').x -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').right):
-        player.getComponent('position').x += 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).up):
+        player.getComponent(gamma.PositionComponent).y -= 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).down):
+        player.getComponent(gamma.PositionComponent).y += 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).left):
+        player.getComponent(gamma.PositionComponent).x -= 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).right):
+        player.getComponent(gamma.PositionComponent).x += 2
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
@@ -59,21 +59,21 @@ playerEntity = gamma.Entity(
 # camera movement = arrow keys up/down to zoom, left/right to pan
 def cameraMovement(camera):
     # zoom
-    if gamma.inputManager.isDown(camera.getComponent('input').up):
-        camera.getComponent('camera').zoomLevel += 0.02
-    if gamma.inputManager.isDown(camera.getComponent('input').down):
-        camera.getComponent('camera').zoomLevel = max(camera.getComponent('camera').zoomLevel - 0.02, 0.1)
+    if gamma.inputManager.isDown(camera.getComponent(gamma.InputComponent).up):
+        camera.getComponent(gamma.CameraComponent).zoomLevel += 0.02
+    if gamma.inputManager.isDown(camera.getComponent(gamma.InputComponent).down):
+        camera.getComponent(gamma.CameraComponent).zoomLevel = max(camera.getComponent(gamma.CameraComponent).zoomLevel - 0.02, 0.1)
     # pan
-    if gamma.inputManager.isDown(camera.getComponent('input').left):
-        camera.getComponent('camera').sceneX -= 2
-    if gamma.inputManager.isDown(camera.getComponent('input').right):
-        camera.getComponent('camera').sceneX += 2
+    if gamma.inputManager.isDown(camera.getComponent(gamma.InputComponent).left):
+        camera.getComponent(gamma.CameraComponent).sceneX -= 2
+    if gamma.inputManager.isDown(camera.getComponent(gamma.InputComponent).right):
+        camera.getComponent(gamma.CameraComponent).sceneX += 2
 
 cameraEntity = gamma.Entity(
     gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE),
     gamma.InputComponent(gamma.keys.up, gamma.keys.down, gamma.keys.left, gamma.keys.right, None, None, cameraMovement)
 )
-cameraEntity.getComponent('camera').setPosition(300, 200)
+cameraEntity.getComponent(gamma.CameraComponent).setPosition(300, 200)
 
 #
 # add entities to scene

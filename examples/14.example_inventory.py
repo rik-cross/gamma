@@ -21,22 +21,22 @@ gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
 # player controls = enter to start cutscene
 def playerControls(player):
     # left and right movement
-    if gamma.inputManager.isDown(player.getComponent('input').left):
-        player.getComponent('position').rect.x -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').right):
-        player.getComponent('position').rect.x += 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).left):
+        player.getComponent(gamma.PositionComponent).rect.x -= 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).right):
+        player.getComponent(gamma.PositionComponent).rect.x += 2
     # inventory controls
-    if gamma.inputManager.isPressed(player.getComponent('input').b1):
-        player.getComponent('inventory').prev()
-    if gamma.inputManager.isPressed(player.getComponent('input').b2):
-        player.getComponent('inventory').next()
+    if gamma.inputManager.isPressed(player.getComponent(gamma.InputComponent).b1):
+        player.getComponent(gamma.InventoryComponent).prev()
+    if gamma.inputManager.isPressed(player.getComponent(gamma.InputComponent).b2):
+        player.getComponent(gamma.InventoryComponent).next()
     # drop item
-    if gamma.inputManager.isPressed(player.getComponent('input').down):
-        entity = player.getComponent('inventory').dropItem()
+    if gamma.inputManager.isPressed(player.getComponent(gamma.InputComponent).down):
+        entity = player.getComponent(gamma.InventoryComponent).dropItem()
         if entity is not None:
-            pos = player.getComponent('position')
-            entity.getComponent('position').center = pos.x + pos.w/2
-            entity.getComponent('position').bottom = pos.y + pos.h
+            pos = player.getComponent(gamma.PositionComponent)
+            entity.getComponent(gamma.PositionComponent).center = pos.x + pos.w/2
+            entity.getComponent(gamma.PositionComponent).bottom = pos.y + pos.h
             mainScene.addEntity(entity)
 
 playerEntity = gamma.Entity(
@@ -74,9 +74,9 @@ playerEntity.addComponent(
 
 class CollectHeartTrigger(gamma.Trigger):
     def onCollide(self, entity, otherEntity):
-        if otherEntity.getComponent('tags').has('player'):
+        if otherEntity.getComponent(gamma.TagsComponent).has('player'):
             entity.destroy()
-            otherEntity.getComponent('inventory').addEntity('heart')
+            otherEntity.getComponent(gamma.InventoryComponent).addEntity('heart')
 
 # add a heart to the entity factory
 
@@ -85,14 +85,14 @@ def createHeart(x, y):
     heartEntity.addComponent(gamma.PositionComponent(x, y, 27, 30))
     heartEntity.addComponent(gamma.TriggersComponent(CollectHeartTrigger(boundingBox=gamma.PositionComponent(0,0,27,30), buttonPress='b1')))
     heartSprite = gamma.Sprite(gamma.resourceManager.getTexture('heart'))
-    heartEntity.getComponent('sprites').add('idle', heartSprite)
+    heartEntity.getComponent(gamma.SpritesComponent).add('default', heartSprite)
     return heartEntity
 
 gamma.entityFactory.addEntity('heart', createHeart)
 
 # add some hearts to the player inventory
 for i in range(5):
-    playerEntity.getComponent('inventory').addEntity('heart')
+    playerEntity.getComponent(gamma.InventoryComponent).addEntity('heart')
 
 # add a heart to the scene
 he = gamma.entityFactory.create('heart', 50, 0)

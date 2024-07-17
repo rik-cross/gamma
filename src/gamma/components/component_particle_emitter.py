@@ -3,7 +3,9 @@ import random
 from ..core.particle import *
 from ..core.colours import *
 
-class ParticleEmitterComponent:
+from ..core.component import Component
+
+class ParticleEmitterComponent(Component):
     
     def __init__(self,
     
@@ -49,8 +51,6 @@ class ParticleEmitterComponent:
         maxYVel = 2,
     
     ):
-        
-        self.key = 'emitter'
         
         self.particles = []
 

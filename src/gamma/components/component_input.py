@@ -1,4 +1,6 @@
-class InputComponent:
+from ..core.component import Component
+
+class InputComponent(Component):
 
     def __init__(self,
 
@@ -16,8 +18,6 @@ class InputComponent:
         inputContext=None
     
     ):
-
-        self.key = 'input'
 
         self.up = up
         self.down = down

@@ -5,20 +5,23 @@ from ..managers.manager_input import controller, keys
 # functions to sort by x, y, or z position
 
 def sortByX(e):
-    pos = e.getComponent('position')
+    from ..components.component_position import PositionComponent
+    pos = e.getComponent(PositionComponent)
     if pos is None:
         return 1
     return pos.x
 
 def sortByY(e):
-    pos = e.getComponent('position')
+    from ..components.component_position import PositionComponent
+    pos = e.getComponent(PositionComponent)
     if pos is None:    
         return 1
     return pos.y
 
 def sortByZ(e):
+    from ..components.component_position import PositionComponent
     #return e.z
-    pos = e.getComponent('position')
+    pos = e.getComponent(PositionComponent)
     if pos is None:    
         return 1
     return pos.z

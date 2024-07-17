@@ -4,18 +4,21 @@ from ..core.colours import *
 class InputSystem(System):
 
     def init(self):
-        self.key = 'input'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['input']
+        from ..components.component_input import InputComponent
+        self.requiredComponents = [InputComponent]
     
     def updateEntity(self, entity, scene):
+
+        from ..components.component_input import InputComponent
 
         # don't allow input during a cutscene
         if scene.cutscene is not None:
             return
 
         # run the stored input context
-        if entity.getComponent('input').inputContext is not None:
-            entity.getComponent('input').inputContext(entity)
+        if entity.getComponent(InputComponent).inputContext is not None:
+            entity.getComponent(InputComponent).inputContext(entity)
         

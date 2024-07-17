@@ -6,15 +6,18 @@ from ..renderables.rectangle import Rectangle
 class Battleystem(System):
 
     def init(self):
-        self.key = 'battle'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['battle', 'position']
+        from ..components.component_battle import BattleComponent
+        from ..components.component_position import PositionComponent
+        self.requiredComponents = [BattleComponent, PositionComponent]
 
     def updateEntity(self, entity, scene):
-        
-        btl = entity.getComponent('battle')
-        pos = entity.getComponent('position')
+        from ..components.component_battle import BattleComponent
+        from ..components.component_position import PositionComponent
+        btl = entity.getComponent(BattleComponent)
+        pos = entity.getComponent(PositionComponent)
 
         currentHitbox = btl.getHitbox(entity.state)
 
@@ -28,7 +31,7 @@ class Battleystem(System):
             currentHitbox.h
         )
         
-        otherEntities = scene.getEntitiesWithComponent('battle', 'position')
+        otherEntities = scene.getEntitiesWithComponent(BattleComponent, PositionComponent)
         otherEntities.remove(entity)
 
         if entity.prevState != entity.state:
@@ -37,8 +40,8 @@ class Battleystem(System):
 
         for e in otherEntities:
 
-            o_btl = e.getComponent('battle')
-            o_pos = e.getComponent('position')
+            o_btl = e.getComponent(BattleComponent)
+            o_pos = e.getComponent(PositionComponent)
 
             o_currentHurtbox = o_btl.getHurtbox(e.state)
 
@@ -62,8 +65,11 @@ class Battleystem(System):
 
         return
 
-        btl = entity.getComponent('battle')
-        pos = entity.getComponent('position')
+        from ..components.component_battle import BattleComponent
+        from ..components.component_position import PositionComponent
+
+        btl = entity.getComponent(BattleComponent)
+        pos = entity.getComponent(PositionComponent)
 
         # draw hitbox in green
         if entity.state in btl.hitboxes.keys():

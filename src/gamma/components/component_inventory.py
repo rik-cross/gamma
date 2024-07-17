@@ -28,8 +28,6 @@ class InventoryComponent(Component):
         drop = None
     
     ):
-        
-        self.key = 'inventory'
 
         self.x = x
         self.y = y
@@ -112,18 +110,21 @@ class InventoryComponent(Component):
         return entity
 
     def buildImages(self):
+
+        from ..components.component_sprites import SpritesComponent
+
         self.images = []
         # for all filled slots
         for i in range(self.slots):
             if self.items[i][0] is not None:
                 # create entity
                 ent = entityFactory.create(self.items[i][0], 0, 0)
-                igs = ent.getComponent('sprites')
-                if len(igs.animationList) > 0:
+                igs = ent.getComponent(SpritesComponent)
+                if len(igs.spriteList) > 0:
                     # get first key
-                    key = list(igs.animationList.keys())[0]
-                    ig = igs.animationList[key]
-                    img = ig.imageList[0]
+                    key = list(igs.spriteList.keys())[0]
+                    ig = igs.spriteList[key]
+                    img = ig.textureList[0]
                     self.images.append(img)
                 else:
                     self.images.append(None)

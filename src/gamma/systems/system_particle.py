@@ -3,26 +3,32 @@ from ..core.system import *
 class ParticleSystem(System):
 
     def init(self):
-        self.key = 'particle'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['emitter']
+        from ..components.component_particle_emitter import ParticleEmitterComponent
+        self.requiredComponents = [ParticleEmitterComponent]
 
     def updateEntity(self, entity, scene):
 
-        emt = entity.getComponent('emitter')
-        pos = entity.getComponent('position')
+        from ..components.component_position import PositionComponent
+        from ..components.component_particle_emitter import ParticleEmitterComponent
+        from ..components.component_tags import TagsComponent
+
+        emt = entity.getComponent(ParticleEmitterComponent)
+        pos = entity.getComponent(PositionComponent)
         
         # update the particles
         emt.update(pos.rect.x, pos.rect.y)
 
         # destroy if it has finished emitting particles
         if emt.destroy:
-            entity.removeComponent('emitter')
+            entity.removeComponent(ParticleEmitterComponent)
 
             # delete the entity if it serves only as a particle emitter
-            if entity.getComponent('tags').has('particle'):
+            if entity.getComponent(TagsComponent).has('particle'):
                 scene.deleteEntity(entity)
     
     def drawEntity(self, entity, scene):
-        entity.getComponent('emitter').draw(scene)
+        from ..components.component_particle_emitter import ParticleEmitterComponent
+        entity.getComponent(ParticleEmitterComponent).draw(scene)

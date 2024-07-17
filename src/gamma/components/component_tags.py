@@ -3,7 +3,6 @@ from ..core.component import Component
 class TagsComponent(Component):
 
     def __init__(self, tag=None, *moreTags):
-        self.key = 'tags'
         self.tags = []
         if tag is not None:
             self.add(tag, *moreTags)

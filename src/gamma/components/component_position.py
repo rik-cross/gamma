@@ -6,7 +6,6 @@ class PositionComponent(Component):
 
     def __init__(self, x, y, w, h, z=1, xAnchor='left', yAnchor='top', angle=90, rotationStyle='none'):
 
-        self.key = 'position'
         self.rect = pygame.Rect(x, y, w, h)
         self.initialRect = pygame.Rect(x, y, w, h)
         self.z = z
@@ -51,9 +50,10 @@ class PositionComponent(Component):
         self.rotationStyle = self.initialRotationStyle
 
     def touching(self, otherEntity):
-        if not otherEntity.hasComponent('position'):
+        from ..components.component_position import PositionComponent
+        if not otherEntity.hasComponent(PositionComponent):
             return False
-        return self.rect.colliderect(otherEntity.getComponent('position').rect)
+        return self.rect.colliderect(otherEntity.getComponent(PositionComponent).rect)
     
     # getters and setters for position
 

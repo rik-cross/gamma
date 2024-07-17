@@ -4,10 +4,6 @@ from random import randint
 # system to ensure that there are always 2 coins in the game
 class CoinSystem(gamma.System):
 
-    def init(self):
-        # system referred to as 'coin'
-        self.key = 'coin'
-
     def update(self, scene):
 
         # get the number of coin entities in the scene

@@ -22,30 +22,30 @@ heartEntity = gamma.Entity(
     gamma.PositionComponent(300, 0, 27, 30)
 )
 heartImage = gamma.Sprite(gamma.resourceManager.getTexture('heart'))
-heartEntity.getComponent('sprites').add('default', heartImage)
+heartEntity.getComponent(gamma.SpritesComponent).add('default', heartImage)
 
 # create a trigger subclass for focusing on the heart
 class HeartFocusTrigger(gamma.Trigger):
     def onCollisionEnter(self, entity, otherEntity):
-        otherEntity.getComponent('camera').trackEntity(entity)
+        otherEntity.getComponent(gamma.CameraComponent).trackEntity(entity)
     def onCollide(self, entity, otherEntity):
         pass
     def onCollisionExit(self, entity, otherEntity):
-        otherEntity.getComponent('camera').trackEntity(otherEntity)
+        otherEntity.getComponent(gamma.CameraComponent).trackEntity(otherEntity)
 
 # create a trigger subclass for zooming in on the heart
 class HeartZoomTrigger(gamma.Trigger):
     def onCollisionEnter(self, entity, otherEntity):
-        otherEntity.getComponent('camera').setZoom(4, duration=60)
+        otherEntity.getComponent(gamma.CameraComponent).setZoom(4, duration=60)
     def onCollide(self, entity, otherEntity):
         pass
     def onCollisionExit(self, entity, otherEntity):
-        otherEntity.getComponent('camera').setZoom(1, duration=60)
+        otherEntity.getComponent(gamma.CameraComponent).setZoom(1, duration=60)
 
 # add triggers
 heartEntity.addComponent(gamma.TriggersComponent())
-heartEntity.getComponent('triggers').addTrigger(HeartFocusTrigger(boundingBox=gamma.PositionComponent(-100,-100,200,200)))
-heartEntity.getComponent('triggers').addTrigger(HeartZoomTrigger(boundingBox=gamma.PositionComponent(0,0,27,30)))
+heartEntity.getComponent(gamma.TriggersComponent).addTrigger(HeartFocusTrigger(boundingBox=gamma.PositionComponent(-100,-100,200,200)))
+heartEntity.getComponent(gamma.TriggersComponent).addTrigger(HeartZoomTrigger(boundingBox=gamma.PositionComponent(0,0,27,30)))
 
 #
 # create a player entity
@@ -53,10 +53,10 @@ heartEntity.getComponent('triggers').addTrigger(HeartZoomTrigger(boundingBox=gam
 
 # player controls = enter to start cutscene
 def playerControls(player):
-    if gamma.inputManager.isDown(player.getComponent('input').left):
-        player.getComponent('position').rect.x -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').right):
-        player.getComponent('position').rect.x += 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).left):
+        player.getComponent(gamma.PositionComponent).rect.x -= 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).right):
+        player.getComponent(gamma.PositionComponent).rect.x += 2
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(0, 0, 45, 51),

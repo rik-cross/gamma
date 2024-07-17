@@ -1,30 +1,34 @@
 import pygame
 from ..core.system import System
-from ..components.component_emote import EmoteComponent
 
 class CollisionSystem(System):
 
     def init(self):
-        self.key = 'collider'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['position', 'collider']
+        from ..components.component_position import PositionComponent
+        from ..components.component_collider import ColliderComponent
+        self.requiredComponents = [PositionComponent, ColliderComponent]
     
     def updateEntity(self, entity, scene):
+
+        from ..components.component_position import PositionComponent
+        from ..components.component_collider import ColliderComponent
 
         # collisions only happen in a scene
         if scene is None:
             return
 
         # get components
-        pos = entity.getComponent('position')
-        col = entity.getComponent('collider')
+        pos = entity.getComponent(PositionComponent)
+        col = entity.getComponent(ColliderComponent)
 
         # collision with other entities
         for otherEntity in scene.entities:
             if entity is not otherEntity:
 
-                if otherEntity.hasComponent('position', 'collider'):
+                if otherEntity.hasComponent(PositionComponent, ColliderComponent):
                     
                     # calculate absolute collider positions
                     
@@ -37,8 +41,8 @@ class CollisionSystem(System):
                     )
 
                     # ...for other entity
-                    otherEntityPosRect = otherEntity.getComponent('position').rect
-                    otherEntityColliderRect = otherEntity.getComponent('collider').rect
+                    otherEntityPosRect = otherEntity.getComponent(PositionComponent).rect
+                    otherEntityColliderRect = otherEntity.getComponent(ColliderComponent).rect
                     otherEntityRect = pygame.Rect(
                         otherEntityPosRect.x + otherEntityColliderRect.x,
                         otherEntityPosRect.y + otherEntityColliderRect.y,

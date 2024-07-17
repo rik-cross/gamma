@@ -8,29 +8,35 @@ from ..renderables.image import Image
 class EmoteSystem(System):
 
     def init(self):
-        self.key = 'emote'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['emote', 'position']
+        from ..components.component_emote import EmoteComponent
+        from ..components.component_position import PositionComponent
+        self.requiredComponents = [EmoteComponent, PositionComponent]
     
     def updateEntity(self, entity, scene):
-        
+        from ..components.component_emote import EmoteComponent
+        from ..components.component_tags import TagsComponent
         #update
-        em = entity.getComponent('emote')
+        em = entity.getComponent(EmoteComponent)
         em.update()
 
         # destroy if required
         if em.destroy:
-            entity.removeComponent('emote')
+            entity.removeComponent(EmoteComponent)
         
         # delete the entity if it serves only as a particle emitter
-        if entity.getComponent('tags').has('emote'):
+        if entity.getComponent(TagsComponent).has('emote'):
             scene.deleteEntity(entity)
     
     def drawEntity(self, entity, scene):
         
-        emoteComponent = entity.getComponent('emote')
-        positionComponent = entity.getComponent('position')
+        from ..components.component_emote import EmoteComponent
+        from ..components.component_position import PositionComponent
+
+        emoteComponent = entity.getComponent(EmoteComponent)
+        positionComponent = entity.getComponent(PositionComponent)
 
         # get image info
         image = emoteComponent.image
@@ -50,16 +56,16 @@ class EmoteSystem(System):
             percentageResize = h/18
             h = 18
             w = floor(w / percentageResize)
-
+        
         # box
-        scene.renderer.add(Image(
-            pygame.image.load(os.path.dirname(os.path.abspath(__file__)) + '/images/emote_box.png'),
-            positionComponent.x + positionComponent.w//2,
-            positionComponent.y - imageRect.h//2 - emoteComponent.bottomMargin,
-            w=32, h=32,
-            hAlign='center',
-            vAlign='middle'
-        ), scene=False)
+        #scene.renderer.add(Image(
+        #    pygame.image.load(os.path.dirname(os.path.abspath(__file__)) + '/../images/heart.png'),
+        #    positionComponent.x + positionComponent.w//2,
+        #    positionComponent.y - imageRect.h//2 - emoteComponent.bottomMargin,
+        #    w=32, h=32,
+        #    hAlign='center',
+        #    vAlign='middle'
+        #), scene=False)
 
         # image
         scene.renderer.add(Image(

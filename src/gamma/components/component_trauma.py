@@ -4,7 +4,6 @@ from ..core.component import Component
 class TraumaComponent(Component):
 
     def init(self):
-        self.key = 'trauma'
         self._traumaLevel = 0
         self.maxTrauma = 1
         self.traumaDecrement = 0.01

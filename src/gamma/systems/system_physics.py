@@ -3,12 +3,17 @@ from ..core.system import *
 class PhysicsSystem(System):
 
     def init(self):
-        self.key = 'physics'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['position']
+        from ..components.component_position import PositionComponent
+        self.requiredComponents = [PositionComponent]
     
     def updateEntity(self, entity, scene):
+
+        from ..components.component_position import PositionComponent
+        from ..components.component_motion import MotionComponent
+
         pass
 
         #
@@ -25,10 +30,10 @@ class PhysicsSystem(System):
 
         # velocity
 
-        if entity.hasComponent('motion'):
-            m = entity.getComponent('motion')
+        if entity.hasComponent(MotionComponent):
+            m = entity.getComponent(MotionComponent)
             if m.velocity is not None:
-                p = entity.getComponent('position')
+                p = entity.getComponent(PositionComponent)
                 p.x += m.velocity.x
                 p.y += m.velocity.y
 

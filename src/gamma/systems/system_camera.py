@@ -5,15 +5,20 @@ from ..core.colours import *
 class CameraSystem(System):
 
     def init(self):
-        self.key = 'camera'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['camera']
+        from ..components.component_camera import CameraComponent
+        self.requiredComponents = [CameraComponent]
 
     def updateEntity(self, entity, scene):
 
+        from ..components.component_camera import CameraComponent
+        from ..components.component_position import PositionComponent
+        from ..components.component_trauma import TraumaComponent
+
         # set clipping rectangle
-        cameraComponent = entity.getComponent('camera')
+        cameraComponent = entity.getComponent(CameraComponent)
         cameraRect = cameraComponent.rect
 
         # update camera if tracking an entity
@@ -24,7 +29,7 @@ class CameraSystem(System):
             currentX = cameraComponent.sceneX
             currentY = cameraComponent.sceneY
 
-            trackedEntityPosition = trackedEntity.getComponent('position')
+            trackedEntityPosition = trackedEntity.getComponent(PositionComponent)
 
             targetX = trackedEntityPosition.rect.x + trackedEntityPosition.rect.w/2
             targetY = trackedEntityPosition.rect.y + trackedEntityPosition.rect.h/2
@@ -37,8 +42,8 @@ class CameraSystem(System):
 
         angle = 0
         # add camera shake
-        if entity.getComponent('trauma') is not None:
-            tc = entity.getComponent('trauma')
+        if entity.hasComponent(TraumaComponent):
+            tc = entity.getComponent(TraumaComponent)
             offsetX += (tc.traumaLevel ** 3) * (random.random()*2-1) * 20 * cameraComponent.zoomLevel
             offsetY += (tc.traumaLevel ** 3) * (random.random()*2-1) * 20 * cameraComponent.zoomLevel
             angle += (tc.traumaLevel ** 3) * (random.random()*2-1) * 30 * cameraComponent.zoomLevel

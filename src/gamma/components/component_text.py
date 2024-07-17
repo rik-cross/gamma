@@ -40,8 +40,6 @@ class TextComponent(Component):
         
     ):
 
-        self.key = 'text'
-
         # store component attributes
         
         self.text = text

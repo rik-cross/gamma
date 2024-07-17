@@ -64,7 +64,7 @@ class GameScene(gamma.Scene):
 
         # create score text
         self.scoreText = gamma.Text(
-            self.getEntitiesByTag('player')[0].getComponent('score').score,
+            self.getEntitiesByTag('player')[0].getComponent(ScoreComponent).score,
             25, 15,
             font=gamma.resourceManager.getFont('large')
         )

@@ -3,7 +3,6 @@ from ..core.component import Component
 class BattleComponent(Component):
 
     def __init__(self):
-        self.key = 'battle'
         self.hitboxes = {}
         self.hurtboxes = {}
 

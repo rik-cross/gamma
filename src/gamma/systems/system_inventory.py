@@ -3,15 +3,15 @@ from ..core.system import *
 class InventorySystem(System):
 
     def init(self):
-        self.key = 'inventory'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['inventory']
+        from ..components.component_inventory import InventoryComponent
+        self.requiredComponents = [InventoryComponent]
 
     def updateEntity(self, entity, scene):
         pass
-        #inv = entity.getComponent('inventory')
-        #inv.update()
         
     def drawEntity(self, entity, scene):
-        entity.getComponent('inventory').draw(scene)
+        from ..components.component_inventory import InventoryComponent
+        entity.getComponent(InventoryComponent).draw(scene)

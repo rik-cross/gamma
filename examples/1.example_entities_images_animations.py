@@ -50,7 +50,7 @@ playerEntity = gamma.Entity(
 cameraEntity = gamma.Entity(
     gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE)
 )
-cameraEntity.getComponent('camera').setPosition(300, 200)
+cameraEntity.getComponent(gamma.CameraComponent).setPosition(300, 200)
 
 #
 # add entities to scene
@@ -59,6 +59,8 @@ cameraEntity.getComponent('camera').setPosition(300, 200)
 mainScene.entities.append(heartEntity)
 mainScene.entities.append(playerEntity)
 mainScene.entities.append(cameraEntity)
+
+#heartEntity.getComponent(gamma.TagsComponent).add('heart')
 
 #
 # add scene to the gamma and start

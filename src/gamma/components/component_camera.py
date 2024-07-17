@@ -19,8 +19,6 @@ class CameraComponent(Component):
     
     ):
         
-        self.key = 'camera'
-        
         self.rect = pygame.Rect(x, y, w, h)
         self.bgColour = bgColour
         
@@ -104,7 +102,8 @@ class CameraComponent(Component):
         self.entityToTrack = entity
     
     def goToEntity(self, entity):
+        from ..components.component_position import PositionComponent
         self.entityToTrack = None
-        pos = entity.getComponent('position')
+        pos = entity.getComponent(PositionComponent)
         self.sceneX = pos.rect.x + (pos.rect.w / 2)
         self.sceneY = pos.rect.y + (pos.rect.h / 2)

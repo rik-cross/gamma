@@ -4,14 +4,14 @@ class SystemManager:
     def __init__(self):
         self.systems = []
     
-    def __str__(self):
-        keyString = ''
-        for s in self.systems:
-            if s.key is not None:
-                keyString += str(self.systems.index(s)) + ': ' + s.key + ' '
-            else:
-                keyString += str(self.systems.index(s)) + ': unknown '
-        return keyString
+    #def __str__(self):
+    #    keyString = ''
+    #    for s in self.systems:
+    #        if s.key is not None:
+    #            keyString += str(self.systems.index(s)) + ': ' + s.key + ' '
+    #        else:
+    #            keyString += str(self.systems.index(s)) + ': unknown '
+    #    return keyString
 
     def addSystem(self, system, *otherSystems):
         self.systems.append(system)

@@ -40,10 +40,10 @@ playerAnimation = gamma.Sprite(
 
 # player controls = enter to add trauma
 def playerControls(player):
-    if gamma.inputManager.isPressed(player.getComponent('input').b1):
+    if gamma.inputManager.isPressed(player.getComponent(gamma.InputComponent).b1):
         pass
         # add some trauma
-        player.getComponent('trauma').traumaLevel += 0.4
+        player.getComponent(gamma.TraumaComponent).traumaLevel += 0.4
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 100, 45, 51),

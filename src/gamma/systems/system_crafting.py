@@ -3,15 +3,18 @@ from ..core.system import *
 class CraftingSystem(System):
 
     def init(self):
-        self.key = 'crafting'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['crafting', 'inventory']
+        from ..components.component_crafting import CraftingComponent
+        from ..components.component_inventory import InventoryComponent
+        self.requiredComponents = [CraftingComponent, InventoryComponent]
 
     def updateEntity(self, entity, scene):
-        
-        inv = entity.getComponent('crafting')
+        from ..components.component_crafting import CraftingComponent
+        inv = entity.getComponent(CraftingComponent)
         inv.update()
         
     def drawEntity(self, entity, scene):
-        entity.getComponent('crafting').draw(scene)
+        from ..components.component_crafting import CraftingComponent
+        entity.getComponent(CraftingComponent).draw(scene)

@@ -79,10 +79,10 @@ mainScene.map.mapImages = [
 
 # player controls
 def playerControls(player):
-    if gamma.inputManager.isDown(player.getComponent('input').left):
-        player.getComponent('position').rect.x -= 2
-    if gamma.inputManager.isDown(player.getComponent('input').right):
-        player.getComponent('position').rect.x += 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).left):
+        player.getComponent(gamma.PositionComponent).rect.x -= 2
+    if gamma.inputManager.isDown(player.getComponent(gamma.InputComponent).right):
+        player.getComponent(gamma.PositionComponent).rect.x += 2
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(150, 64-51, 45, 51),

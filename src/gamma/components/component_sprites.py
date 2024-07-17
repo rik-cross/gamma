@@ -1,7 +1,8 @@
-class SpritesComponent:
+from ..core.component import Component
+
+class SpritesComponent(Component):
 
     def __init__(self, key=None, sprite=None):
-        self.key = 'sprites'
         self.current = None
         self.spriteList = {}
         self.alpha = 255

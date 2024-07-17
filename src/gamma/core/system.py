@@ -20,14 +20,17 @@ class System():
     # checks that a system is only processing the entities that
     # meet the requirements of the system
     def _checkRequirements(self, entity):
-        if len(self.requiredComponents) == 0:
+        from ..components.component_tags import TagsComponent
+        if len(self.requiredComponents) == 0 and len(self.requiredTags) == 0:
             return True
-        return entity.hasComponent(*self.requiredComponents) and entity.getComponent('tags').has(*self.requiredTags)
+        return entity.hasComponent(*self.requiredComponents) and entity.getComponent(TagsComponent).has(*self.requiredTags)
 
     # runs update() and updateEntity() method on all
     # systems that meet the system requirements
     def _update(self, scene):
         
+        from ..components.component_tags import TagsComponent
+
         self.update(scene)
         for entity in scene.entities:
             if self._checkRequirements(entity):

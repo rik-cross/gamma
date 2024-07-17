@@ -1,9 +1,9 @@
 from ..gamma import inputManager
+from ..core.component import Component
 
-class TriggersComponent:
+class TriggersComponent(Component):
 
     def __init__(self, trigger=None):
-        self.key = 'triggers'
         # a list of Interaction objects
         self.triggerList = []
         # add trigger, if one specified
@@ -28,14 +28,15 @@ class Trigger:
     # and returns True if either a button press isn't required
     # or the corresponding button has been pressed
     def checkPress(self, entity):
+        from ..components.component_input import InputComponent
         # if no button press required
         if self.buttonPress is None:
             return True
         # if no input component
-        if not entity.hasComponent('input'):
+        if not entity.hasComponent(InputComponent):
             return True
         # if corresponding button is pressed
-        i = entity.getComponent('input')
+        i = entity.getComponent(InputComponent)
         b = getattr(i, self.buttonPress)
         if b is not None and inputManager.isDown(b):
             return True

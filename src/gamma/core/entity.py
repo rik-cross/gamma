@@ -1,6 +1,3 @@
-from ..components.component_tags import TagsComponent
-from ..components.component_sprites import SpritesComponent
-
 class Entity:
     
     # class-level ID, used to create new entities
@@ -19,9 +16,8 @@ class Entity:
         # deletion flag
         self.delete = False
 
-        # create component dictionary
-        # format = {componentKey : component}
-        self.components = {}
+        # create component list
+        self.components = []
 
         self._addDefaultComponents()
 
@@ -41,10 +37,10 @@ class Entity:
 
     # add entity default components
     def _addDefaultComponents(self):
-        if not self.hasComponent('sprites'):
-            self.addComponent(SpritesComponent())
-        if not self.hasComponent('tags'):
-            self.addComponent(TagsComponent())
+        from ..components.component_tags import TagsComponent
+        from ..components.component_sprites import SpritesComponent
+        self.addComponent(SpritesComponent())
+        self.addComponent(TagsComponent())
 
     # set entity state
     def setState(self, state):
@@ -52,13 +48,13 @@ class Entity:
 
     # removes all components from the entity
     def clear(self):
-        self.components = {}
+        self.components = []
         self._addDefaultComponents()
     
     # used to reset an entity to an initial state
     def reset(self):
         # defer to each component reset() method
-        for c in self.components.values():
+        for c in self.components:
             c.reset()
         self.state = 'default'
     
@@ -66,28 +62,28 @@ class Entity:
     def destroy(self):
         self.delete = True
 
-    # returns true is entity has all passed component keys
-    def hasComponent(self, componentKey, *otherComponentKeys):
-        for c in [componentKey] + list(otherComponentKeys):
-            if c not in self.components.keys():
-                return False
-        return True
-    
-    # uses the passed key to return a component
-    def getComponent(self, componentKey):
-        if componentKey not in self.components.keys():
-            return None
-        return self.components[componentKey]
+    # returns true if entity has a component of all included types
+    def hasComponent(self, componentType, *otherComponentTypes):
+        return set([componentType] + list(otherComponentTypes)).issubset(set([type(c) for c in self.components]))
+
+    # uses the passed type to return a component
+    def getComponent(self, componentType):
+        for c in self.components:
+            if type(c) == componentType:
+                return c
+        return None
 
     #adds a component to the entity component list
     def addComponent(self, component):
-        if component.key is not None:
-            self.components[component.key] = component
+        if self.hasComponent(type(component)):
+            self.removeComponent(type(component))
+        self.components.append(component)
     
     # removes the specified component
-    def removeComponent(self, componentKey):
-        if componentKey in self.components.keys():
-            self.components.pop(componentKey)
+    def removeComponent(self, componentType, *otherComponentTypes):
+        for c in self.components:
+            if type(c) in [componentType] + list(otherComponentTypes):
+                self.components.remove(c)
     
     # perform an action after a set number of frames
     def after(self, frames, action):

@@ -30,8 +30,6 @@ class CraftingComponent(Component):
         craft = None
     
     ):
-        
-        self.key = 'crafting'
 
         self.x = x
         self.y = y
@@ -70,6 +68,8 @@ class CraftingComponent(Component):
 
     def update(self):
         
+        from ..components.component_inventory import InventoryComponent
+
         # controls
 
         # left
@@ -84,7 +84,7 @@ class CraftingComponent(Component):
             canCraft = True
             craftRecipe = self.items[self.selected]
             itemToCraft = craftRecipe.output
-            inv = self.entity.getComponent('inventory')
+            inv = self.entity.getComponent(InventoryComponent)
             
             for inp in craftRecipe.inputs:
                 if not inv.has(inp[0], inp[1]):
@@ -98,6 +98,8 @@ class CraftingComponent(Component):
 
     def buildImages(self):
 
+        from ..components.component_sprites import SpritesComponent
+
         self.images = {}
         
         # for all filled slots
@@ -106,28 +108,29 @@ class CraftingComponent(Component):
 
                 # create output entity
                 ent = entityFactory.create(self.items[i].output, 0, 0)
-                igs = ent.getComponent('sprites')
-                if len(igs.animationList) > 0:
+                igs = ent.getComponent(SpritesComponent)
+                if len(igs.spriteList) > 0:
                     # get first key
-                    key = list(igs.animationList.keys())[0]
-                    ig = igs.animationList[key]
-                    img = ig.imageList[0]
+                    key = list(igs.spriteList.keys())[0]
+                    ig = igs.spriteList[key]
+                    img = ig.textureList[0]
                     self.images[self.items[i].output] = img
                 
                 # create input entities
                 for inp in self.items[i].inputs:
-                    #print(inp[0], inp[1])
                     ent = entityFactory.create(inp[0], 0, 0)
-                    igs = ent.getComponent('sprites')
-                    if len(igs.animationList) > 0:
+                    igs = ent.getComponent(SpritesComponent)
+                    if len(igs.spriteList) > 0:
                         # get first key
-                        key = list(igs.animationList.keys())[0]
-                        ig = igs.animationList[key]
-                        img = ig.imageList[0]
+                        key = list(igs.spriteList.keys())[0]
+                        ig = igs.spriteList[key]
+                        img = ig.textureList[0]
                         self.images[inp[0]] = img
 
     def draw(self, scene):
         
+        from ..components.component_inventory import InventoryComponent
+
         # draw slots
         for i in range(self.slots):
 
@@ -206,7 +209,7 @@ class CraftingComponent(Component):
                 h = ((self.slot_size)-self.imagePadding*2)
                 w = floor(w / percentageResize)
 
-            if self.entity.getComponent('inventory').has(inp[0], inp[1]):
+            if self.entity.getComponent(InventoryComponent).has(inp[0], inp[1]):
                 aa=255
             else:
                 aa=100

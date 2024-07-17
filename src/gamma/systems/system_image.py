@@ -4,17 +4,22 @@ from ..renderables.image import Image
 class ImageSystem(System):
 
     def init(self):
-        self.key = 'image'
+        pass
 
     def setRequirements(self):
-        self.requiredComponents = ['sprites', 'position']
+        from ..components.component_sprites import SpritesComponent
+        from ..components.component_position import PositionComponent
+        self.requiredComponents = [SpritesComponent, PositionComponent]
     
     def drawEntity(self, entity, scene):
 
-        # get the Sprite to draw
-        componentSprites = entity.getComponent('sprites')
-        sprite = componentSprites.getCurrentSprite()
+        from ..components.component_sprites import SpritesComponent
+        from ..components.component_position import PositionComponent
+        from ..components.component_tags import TagsComponent
 
+        # get the Sprite to draw
+        componentSprites = entity.getComponent(SpritesComponent)
+        sprite = componentSprites.getCurrentSprite()
         # get the current image in the Sprite
         if sprite is not None:
 
@@ -23,7 +28,7 @@ class ImageSystem(System):
             # send the image to the renderer
             if texture is not None:
 
-                componentPosition = entity.getComponent('position')
+                componentPosition = entity.getComponent(PositionComponent)
 
                 #
                 # calculate angle and flip, based on rotation style

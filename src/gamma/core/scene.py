@@ -249,9 +249,10 @@ class Scene:
                 self.deleteEntity(e)
 
     def getEntitiesByTag(self, tag, *otherTags):
+        from ..components.component_tags import TagsComponent
         entityList = []
         for e in self.entities:
-            if e.getComponent('tags').has(tag, *otherTags):
+            if e.getComponent(TagsComponent).has(tag, *otherTags):
                 entityList.append(e)
         return entityList
 
@@ -261,10 +262,10 @@ class Scene:
                 return e
         return None
     
-    def getEntitiesWithComponent(self, *componentKeys):
+    def getEntitiesWithComponent(self, *componentTypes):
         entityList = []
         for e in self.entities:
-            if e.hasComponent(*componentKeys):
+            if e.hasComponent(*componentTypes):
                 entityList.append(e)
         return entityList
     
