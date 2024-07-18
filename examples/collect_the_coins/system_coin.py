@@ -1,5 +1,6 @@
 import gamma
 from random import randint
+from factory_coin import newCoin
 
 # system to ensure that there are always 2 coins in the game
 class CoinSystem(gamma.System):
@@ -14,7 +15,7 @@ class CoinSystem(gamma.System):
             
             # use the function stored in the entity factory to create a new coin
             # at a random position on the scene
-            newCoin = gamma.entityFactory.create('coin', randint(-280, 280), randint(-180, 180))
+            newCoinEntity = newCoin(randint(-280, 280), randint(-180, 180))
             
             # add the new coin to the scene
-            scene.addEntity(newCoin)
+            scene.addEntity(newCoinEntity)

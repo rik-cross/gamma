@@ -1,5 +1,6 @@
 import gamma
 from trigger_coin import CoinTrigger
+from assets import textureCoin0, textureCoin1, textureCoin2, textureCoin3, textureCoin4, textureCoin5
 
 # function to create new coins, at the given coordinates
 def newCoin(x, y):
@@ -16,12 +17,7 @@ def newCoin(x, y):
         # create a new coin animation (an image group consisting of 6 frames)
         gamma.SpritesComponent('default', gamma.Sprite(
             # animation contains 6 frames
-            gamma.resourceManager.getTexture('coin0'),
-            gamma.resourceManager.getTexture('coin1'),
-            gamma.resourceManager.getTexture('coin2'),
-            gamma.resourceManager.getTexture('coin3'),
-            gamma.resourceManager.getTexture('coin4'),
-            gamma.resourceManager.getTexture('coin5'),
+            textureCoin0, textureCoin1, textureCoin2, textureCoin3, textureCoin4, textureCoin5,
             # delay between animation frames (i.e. animation speed)
             delay=6
         )),

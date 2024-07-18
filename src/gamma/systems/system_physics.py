@@ -3,11 +3,8 @@ from ..core.system import *
 class PhysicsSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_position import PositionComponent
-        self.requiredComponents = [PositionComponent]
+        self.setRequiredComponents(PositionComponent)
     
     def updateEntity(self, entity, scene):
 

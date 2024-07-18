@@ -4,12 +4,9 @@ from ..renderables.image import Image
 class ImageSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_sprites import SpritesComponent
         from ..components.component_position import PositionComponent
-        self.requiredComponents = [SpritesComponent, PositionComponent]
+        self.setRequiredComponents(SpritesComponent, PositionComponent)
     
     def drawEntity(self, entity, scene):
 

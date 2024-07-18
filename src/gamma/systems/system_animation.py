@@ -4,13 +4,9 @@ from ..core.colours import *
 class AnimationSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_sprites import SpritesComponent
         from ..components.component_position import PositionComponent
-        self.requiredComponents = [SpritesComponent, PositionComponent]
-        self.requiredTags = []
+        self.setRequiredComponents(SpritesComponent, PositionComponent)
     
     def updateEntity(self, entity, scene):
         from ..components.component_sprites import SpritesComponent

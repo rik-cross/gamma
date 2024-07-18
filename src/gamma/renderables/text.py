@@ -1,7 +1,7 @@
-from ..gamma import resourceManager
 from ..core.renderable import Renderable
 from ..core.colours import WHITE
 from ..utils.utils_draw import blit_alpha
+from ..core.assets import fontDefaultMedium
 
 class Text(Renderable):
 
@@ -14,7 +14,7 @@ class Text(Renderable):
         hAlign='left', vAlign='top',
         colour=WHITE,
         alpha=255,
-        font=resourceManager.getFont('munro24'),
+        font=fontDefaultMedium,
         underline=False,
         z=1,
         xParallax=False, yParallax=False

@@ -1,6 +1,7 @@
 import gamma
 from scene_info import InfoScene
 from scene_game import GameScene
+from assets import textureCoin0
 
 class MenuScene(gamma.Scene):
     
@@ -31,7 +32,7 @@ class MenuScene(gamma.Scene):
             gamma.Text('Collect the coins',
                 gamma.windowSize.w/2, 30,
                 hAlign='center',
-                font=gamma.resourceManager.getFont('large')
+                font=gamma.fontDefaultLarge
             )
         )
 
@@ -55,7 +56,7 @@ class MenuScene(gamma.Scene):
 
         # coin
         self.renderer.add(
-            gamma.Image(gamma.resourceManager.getTexture('coin0'),
+            gamma.Image(textureCoin0,
                 gamma.windowSize.w/2, 225,
                 hAlign='center', vAlign='middle',
                 w=23*4, h=23*4

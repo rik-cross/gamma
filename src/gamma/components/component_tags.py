@@ -20,8 +20,8 @@ class TagsComponent(Component):
                 self.tags.remove(t)
     
     # returns True if entity has all provided tags
-    def has(self, *tags):
-        for t in tags:
+    def has(self, tag, *moreTags):
+        for t in [tag] + list(moreTags):
             if t not in self.tags:
                 return False
         return True

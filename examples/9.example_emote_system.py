@@ -11,8 +11,8 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vita_00.png'))
-gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
+texturePlayer = gamma.createTexture(os.path.join('images', 'player', 'vita_00.png'))
+textureHeart = gamma.createTexture(os.path.join('images', 'heart.png'))
 
 #
 # create a player entity
@@ -20,9 +20,9 @@ gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
-    gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('player'))),
+    gamma.SpritesComponent('default', gamma.Sprite(texturePlayer)),
     # add a text component to the player entity
-    gamma.EmoteComponent(gamma.resourceManager.getTexture('heart'))
+    gamma.EmoteComponent(textureHeart)
 )
 
 #

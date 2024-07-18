@@ -1,5 +1,5 @@
 from math import floor
-from ..gamma import resourceManager, inputManager, entityFactory, sceneManager
+from ..gamma import inputManager, entityFactory, sceneManager
 from ..core.component import Component
 from ..core.colours import *
 from ..renderables.rectangle import Rectangle

@@ -11,12 +11,12 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
+textureHeart = gamma.createTexture(os.path.join('images', 'heart.png'))
 
-gamma.resourceManager.addTexture('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
-gamma.resourceManager.addTexture('player_idle_2', os.path.join('images', 'player', 'vita_01.png'))
-gamma.resourceManager.addTexture('player_idle_3', os.path.join('images', 'player', 'vita_02.png'))
-gamma.resourceManager.addTexture('player_idle_4', os.path.join('images', 'player', 'vita_03.png'))
+texturePlayer1 = gamma.createTexture(os.path.join('images', 'player', 'vita_00.png'))
+texturePlayer2 = gamma.createTexture(os.path.join('images', 'player', 'vita_01.png'))
+texturePlayer3 = gamma.createTexture(os.path.join('images', 'player', 'vita_02.png'))
+texturePlayer4 = gamma.createTexture(os.path.join('images', 'player', 'vita_03.png'))
 
 #
 # create a heart entity
@@ -24,7 +24,7 @@ gamma.resourceManager.addTexture('player_idle_4', os.path.join('images', 'player
 
 heartEntity = gamma.Entity(
     gamma.PositionComponent(100, 200, 27, 30),
-    gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('heart')))
+    gamma.SpritesComponent('default', gamma.Sprite(textureHeart))
 )
 
 #
@@ -32,10 +32,7 @@ heartEntity = gamma.Entity(
 #
 
 playerAnimation = gamma.Sprite(
-        gamma.resourceManager.getTexture('player_idle_1'),
-        gamma.resourceManager.getTexture('player_idle_2'),
-        gamma.resourceManager.getTexture('player_idle_3'),
-        gamma.resourceManager.getTexture('player_idle_4')
+        texturePlayer1, texturePlayer2, texturePlayer3, texturePlayer4
     )
 
 playerEntity = gamma.Entity(

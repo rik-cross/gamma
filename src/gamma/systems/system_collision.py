@@ -4,12 +4,9 @@ from ..core.system import System
 class CollisionSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_position import PositionComponent
         from ..components.component_collider import ColliderComponent
-        self.requiredComponents = [PositionComponent, ColliderComponent]
+        self.setRequiredComponents(PositionComponent, ColliderComponent)
     
     def updateEntity(self, entity, scene):
 

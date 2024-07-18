@@ -63,8 +63,8 @@ class Entity:
         self.delete = True
 
     # returns true if entity has a component of all included types
-    def hasComponent(self, componentType, *otherComponentTypes):
-        return set([componentType] + list(otherComponentTypes)).issubset(set([type(c) for c in self.components]))
+    def hasComponent(self, componentType, *moreComponentTypes):
+        return set([componentType] + list(moreComponentTypes)).issubset(set([type(c) for c in self.components]))
 
     # uses the passed type to return a component
     def getComponent(self, componentType):
@@ -74,15 +74,16 @@ class Entity:
         return None
 
     #adds a component to the entity component list
-    def addComponent(self, component):
-        if self.hasComponent(type(component)):
-            self.removeComponent(type(component))
-        self.components.append(component)
+    def addComponent(self, component, *moreComponents):
+        for c in [component] + list(moreComponents):
+            if self.hasComponent(type(c)):
+                self.removeComponent(type(c))
+            self.components.append(c)
     
     # removes the specified component
-    def removeComponent(self, componentType, *otherComponentTypes):
+    def removeComponent(self, componentType, *moreComponentTypes):
         for c in self.components:
-            if type(c) in [componentType] + list(otherComponentTypes):
+            if type(c) in [componentType] + list(moreComponentTypes):
                 self.components.remove(c)
     
     # perform an action after a set number of frames

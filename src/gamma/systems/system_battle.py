@@ -6,12 +6,9 @@ from ..renderables.rectangle import Rectangle
 class Battleystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_battle import BattleComponent
         from ..components.component_position import PositionComponent
-        self.requiredComponents = [BattleComponent, PositionComponent]
+        self.setRequiredComponents(BattleComponent, PositionComponent)
 
     def updateEntity(self, entity, scene):
         from ..components.component_battle import BattleComponent

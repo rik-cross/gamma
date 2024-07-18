@@ -65,7 +65,6 @@ from .core.sprite import *
 from .managers.manager_sound import *
 from .managers.manager_input import *
 from .managers.manager_scene import *
-from .managers.manager_resource import *
 from .managers.manager_system import *
 from .managers.manager_entity import *
 from .managers.manager_tile import TileManager
@@ -98,3 +97,5 @@ from .core.particle import *
 from .components.component_particle_emitter import *
 
 from .utils.utils_draw import *
+
+from .core.assets import *

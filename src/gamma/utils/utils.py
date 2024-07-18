@@ -2,6 +2,9 @@ import pygame
 from ..components.component_input import InputComponent
 from ..managers.manager_input import controller, keys
 
+def createTexture(URL):
+    return pygame.image.load(URL)
+
 # functions to sort by x, y, or z position
 
 def sortByX(e):

@@ -3,7 +3,6 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 import pygame
 
-from .managers.manager_resource import *
 from .managers.manager_sound import *
 from .managers.manager_input import *
 from .core.entity_factory import *
@@ -29,8 +28,9 @@ from .systems.system_inventory import *
 from .systems.system_crafting import *
 from .systems.system_battle import *
 
-# stores the path of this file
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+from .core.assets import textureGamma
+
+from .globals import ROOT_DIR
 
 def quit():
     global sceneManager
@@ -47,23 +47,9 @@ sceneManager = SceneManager()
 inputManager = InputManager()
 soundManager = SoundManager()
 tileManager = TileManager()
-resourceManager = ResourceManager()
 entityManager = EntityManager()
 
 entityFactory = EntityFactory()
-
-# add font resources
-resourceManager.addFont('munro18', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=18)
-resourceManager.addFont('small', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=18)
-resourceManager.addFont('munro24', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=24)
-resourceManager.addFont('medium', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=24)
-resourceManager.addFont('munro60', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=60)
-resourceManager.addFont('large', os.path.join(ROOT_DIR, 'fonts', 'munro.ttf'), size=60)
-
-# add image resources
-resourceManager.addTexture('gamma', os.path.join(ROOT_DIR, 'images', 'gamma.png'))
-resourceManager.addTexture('tile_outline', os.path.join(ROOT_DIR, 'images', 'tile_outline.png'))
-resourceManager.addTexture('emote', os.path.join(ROOT_DIR, 'images', 'emote_box.png'))
 
 # add tiles
 tileManager.addTile(Tile('none'))
@@ -87,7 +73,7 @@ systemManager.addSystem(
     Battleystem()
 )
 
-def init(size=(1200,800), caption='', icon=resourceManager.getTexture('gamma')):
+def init(size=(1200,800), caption='', icon=textureGamma):
     
     global screen
     global windowSize

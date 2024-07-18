@@ -11,18 +11,17 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addTexture('heart', os.path.join('images', 'heart.png'))
-gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vita_00.png'))
+textureHeart = gamma.createTexture(os.path.join('images', 'heart.png'))
+texturePlayer = gamma.createTexture(os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a heart entity that moves automativcally
 #
 
 heartEntity = gamma.Entity(
-    gamma.PositionComponent(50, 50, 27, 30)
+    gamma.PositionComponent(50, 50, 27, 30),
+    gamma.SpritesComponent('default', gamma.Sprite(textureHeart))
 )
-heartImage = gamma.Sprite(gamma.resourceManager.getTexture('heart'))
-heartEntity.getComponent(gamma.SpritesComponent).add('default', heartImage)
 
 # heart movement = AI
 def heartMovement(heart):
@@ -48,7 +47,7 @@ def playerMovement(player):
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
-    gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('player'))),
+    gamma.SpritesComponent('default', gamma.Sprite(texturePlayer)),
     gamma.InputComponent(up=gamma.keys.w, down=gamma.keys.s, left=gamma.keys.a, right=gamma.keys.d, inputContext=playerMovement)
 )
 
@@ -62,7 +61,7 @@ def cameraMovement(camera):
     if gamma.inputManager.isDown(camera.getComponent(gamma.InputComponent).up):
         camera.getComponent(gamma.CameraComponent).zoomLevel += 0.02
     if gamma.inputManager.isDown(camera.getComponent(gamma.InputComponent).down):
-        camera.getComponent(gamma.CameraComponent).zoomLevel = max(camera.getComponent(gamma.CameraComponent).zoomLevel - 0.02, 0.1)
+        camera.getComponent(gamma.CameraComponent).zoomLevel = max(camera.getComponent('camera').zoomLevel - 0.02, 0.1)
     # pan
     if gamma.inputManager.isDown(camera.getComponent(gamma.InputComponent).left):
         camera.getComponent(gamma.CameraComponent).sceneX -= 2
@@ -87,6 +86,6 @@ mainScene.entities.append(cameraEntity)
 # add scene to the gamma and start
 #
 
-gamma.init((600, 400), caption='Gamma // Image and Animation Example')
+gamma.init((600, 400), caption='Gamma // Input and Movement Example')
 gamma.sceneManager.push(mainScene)
 gamma.run()

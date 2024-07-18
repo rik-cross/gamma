@@ -11,15 +11,15 @@ mainScene = gamma.Scene()
 # add images
 #
 
-gamma.resourceManager.addTexture('tile_grass', os.path.join('images', 'textures/grass.png'))
-gamma.resourceManager.addTexture('tile_water', os.path.join('images', 'textures/water.png'))
+textureTileGrass = gamma.createTexture(os.path.join('images', 'textures/grass.png'))
+textureTileWater = gamma.createTexture(os.path.join('images', 'textures/water.png'))
 
 #
 # add some tiles
 #
 
-gamma.tileManager.addTile(gamma.Tile('grass', gamma.resourceManager.getTexture('tile_grass'), True))
-gamma.tileManager.addTile(gamma.Tile('water', gamma.resourceManager.getTexture('tile_water'), False))
+gamma.tileManager.addTile(gamma.Tile('grass', textureTileGrass, True))
+gamma.tileManager.addTile(gamma.Tile('water', textureTileWater, False))
 
 #
 # create a map and add to scene

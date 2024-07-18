@@ -4,12 +4,9 @@ from ..core.system import *
 class TriggerSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_position import PositionComponent
         from ..components.component_triggers import TriggersComponent
-        self.requiredComponents = [PositionComponent, TriggersComponent]
+        self.setRequiredComponents(PositionComponent, TriggersComponent)
 
     def updateEntity(self, entity, scene):
 

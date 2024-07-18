@@ -4,11 +4,8 @@ from ..core.colours import *
 class TraumaSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_trauma import TraumaComponent
-        self.requiredComponents = [TraumaComponent]
+        self.setRequiredComponents(TraumaComponent)
 
     def updateEntity(self, entity, scene):
         from ..components.component_trauma import TraumaComponent

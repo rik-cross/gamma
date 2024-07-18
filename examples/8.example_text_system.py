@@ -11,7 +11,7 @@ mainScene = gamma.Scene()
 # add some resources
 #
 
-gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vita_00.png'))
+texturePlayer = gamma.createTexture(os.path.join('images', 'player', 'vita_00.png'))
 
 #
 # create a player entity
@@ -19,7 +19,7 @@ gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'vit
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(300, 200, 45, 51, xAnchor='center', yAnchor='middle'),
-    gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('player'))),
+    gamma.SpritesComponent('default', gamma.Sprite(texturePlayer)),
     # add a text component to the player entity
     gamma.TextComponent('Here is some sample text, split over multiple lines.', type='tick', lifetime='timed') 
 )

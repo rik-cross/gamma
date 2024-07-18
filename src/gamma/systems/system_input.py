@@ -4,11 +4,8 @@ from ..core.colours import *
 class InputSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_input import InputComponent
-        self.requiredComponents = [InputComponent]
+        self.setRequiredComponents(InputComponent)
     
     def updateEntity(self, entity, scene):
 

@@ -14,7 +14,7 @@ class GameOverScene(gamma.Scene):
         self.gameOverText = gamma.Text('Game over',
             gamma.windowSize.w/2, gamma.windowSize.h/2,
             hAlign='center', vAlign='middle',
-            font=gamma.resourceManager.getFont('large')
+            font=gamma.fontDefaultLarge
         )
 
         # create text displaying the final player score
@@ -36,5 +36,5 @@ class GameOverScene(gamma.Scene):
 
         # draw back text
         self.renderer.add(
-            gamma.Text('[esc] back', 20, gamma.windowSize.h - 20, vAlign='bottom', font=gamma.resourceManager.getFont('small'))
+            gamma.Text('[esc] back', 20, gamma.windowSize.h - 20, vAlign='bottom', font=gamma.fontDefaultSmall)
         )

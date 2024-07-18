@@ -19,4 +19,4 @@ class InfoScene(gamma.Scene):
         self.renderer.add(gamma.Text('WASD to move the player', 20, 100))
         
         # exit info
-        self.renderer.add(gamma.Text('[esc] back', 20, gamma.windowSize.h - 20, vAlign='bottom', font=gamma.resourceManager.getFont('small')))
+        self.renderer.add(gamma.Text('[esc] back', 20, gamma.windowSize.h - 20, vAlign='bottom', font=gamma.fontDefaultSmall))

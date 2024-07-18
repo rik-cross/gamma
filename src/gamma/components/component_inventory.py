@@ -1,10 +1,11 @@
 from math import floor
-from ..gamma import resourceManager, inputManager, entityFactory, sceneManager
+from ..gamma import inputManager, entityFactory, sceneManager
 from ..core.component import Component
 from ..core.colours import *
 from ..renderables.rectangle import Rectangle
 from ..renderables.text import Text
 from ..renderables.image import Image
+from ..core.assets import fontDefaultSmall
 
 class InventoryComponent(Component):
 
@@ -199,7 +200,7 @@ class InventoryComponent(Component):
                             self.y + self.slot_size - 1,
                             hAlign='right', vAlign='bottom',
                             colour=WHITE,
-                            font=resourceManager.getFont('munro18')
+                            font=fontDefaultSmall
                         )
                     )
         

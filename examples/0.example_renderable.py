@@ -18,7 +18,7 @@ class RenderableScene(gamma.Scene):
             alpha=255,
             hAlign='center',
             vAlign='middle',
-            font=gamma.resourceManager.getFont('large'),
+            font=gamma.fontDefaultLarge,
             underline=True
         )
 

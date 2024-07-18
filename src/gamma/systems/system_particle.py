@@ -3,11 +3,8 @@ from ..core.system import *
 class ParticleSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_particle_emitter import ParticleEmitterComponent
-        self.requiredComponents = [ParticleEmitterComponent]
+        self.setRequiredComponents(ParticleEmitterComponent)
 
     def updateEntity(self, entity, scene):
 

@@ -2,6 +2,7 @@ import gamma
 from component_score import ScoreComponent
 from scene_game_over import GameOverScene
 from input_context_player import playerInputContext
+from assets import texturePlayer
 
 class GameScene(gamma.Scene):
 
@@ -26,7 +27,7 @@ class GameScene(gamma.Scene):
             gamma.PositionComponent(0, 0, 45, 51, z=4, xAnchor='center', yAnchor='middle'),
             
             # add an Sprite (tagged as 'default') to the player, consisting of a single image (i.e. not an animation)
-            gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('player'))),
+            gamma.SpritesComponent('default', gamma.Sprite(texturePlayer)),
             
             # player uses WASD to move
             # the effect of pressing WASD is described in the 'playerInputContext' function
@@ -66,7 +67,7 @@ class GameScene(gamma.Scene):
         self.scoreText = gamma.Text(
             self.getEntitiesByTag('player')[0].getComponent(ScoreComponent).score,
             25, 15,
-            font=gamma.resourceManager.getFont('large')
+            font=gamma.fontDefaultLarge
         )
 
         # create timer text
@@ -74,7 +75,7 @@ class GameScene(gamma.Scene):
             self.timer,
             580, 15,
             hAlign='right',
-            font=gamma.resourceManager.getFont('large')
+            font=gamma.fontDefaultLarge
         )
 
     def draw(self):

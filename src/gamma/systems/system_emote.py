@@ -8,12 +8,9 @@ from ..renderables.image import Image
 class EmoteSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_emote import EmoteComponent
         from ..components.component_position import PositionComponent
-        self.requiredComponents = [EmoteComponent, PositionComponent]
+        self.setRequiredComponents(EmoteComponent, PositionComponent)
     
     def updateEntity(self, entity, scene):
         from ..components.component_emote import EmoteComponent

@@ -5,11 +5,8 @@ from ..core.colours import *
 class CameraSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_camera import CameraComponent
-        self.requiredComponents = [CameraComponent]
+        self.setRequiredComponents(CameraComponent)
 
     def updateEntity(self, entity, scene):
 

@@ -4,19 +4,6 @@ from scene_menu import MenuScene
 from system_coin import CoinSystem
 from factory_coin import newCoin
 
-# add image resources to the resource manager
-
-# Dinosaur player images by Arks: https://arks.itch.io/dino-characters
-gamma.resourceManager.addTexture('player', os.path.join('images', 'player', 'player.png'))
-
-# Coin sprite by DasBilligeAlien: https://opengameart.org/content/rotating-coin-0
-gamma.resourceManager.addTexture('coin0', os.path.join('images', 'coin', 'coin_0.png'))
-gamma.resourceManager.addTexture('coin1', os.path.join('images', 'coin', 'coin_1.png'))
-gamma.resourceManager.addTexture('coin2', os.path.join('images', 'coin', 'coin_2.png'))
-gamma.resourceManager.addTexture('coin3', os.path.join('images', 'coin', 'coin_3.png'))
-gamma.resourceManager.addTexture('coin4', os.path.join('images', 'coin', 'coin_4.png'))
-gamma.resourceManager.addTexture('coin5', os.path.join('images', 'coin', 'coin_5.png'))
-
 # add sound and music to the sound manager
 
 # Music by ArcOfDream: https://arcofdream.itch.io/monolith-ost
@@ -29,9 +16,6 @@ gamma.soundManager.addSound('coin', os.path.join('sounds', 'coin.ogg'))
 # add a custom coin system
 coinSystem = CoinSystem()
 gamma.systemManager.addSystem(coinSystem)
-
-# add a function to the entity factory for creating new coins
-gamma.entityFactory.addEntity('coin', newCoin)
 
 # initialise gamma
 gamma.init(size=(600,400), caption='Collect the coins')

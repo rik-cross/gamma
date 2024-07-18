@@ -3,11 +3,8 @@ from ..core.system import *
 class TextSystem(System):
 
     def init(self):
-        pass
-
-    def setRequirements(self):
         from ..components.component_text import TextComponent
-        self.requiredComponents = [TextComponent]
+        self.setRequiredComponents(TextComponent)
 
     def updateEntity(self, entity, scene):
 

@@ -1,7 +1,7 @@
 import pygame
-from ..gamma import resourceManager
 from ..core.colours import *
 from ..renderables.text import Text
+from ..core.assets import fontDefaultMedium
 
 pygame.font.init()
 
@@ -17,5 +17,5 @@ def blit_alpha(target, source, location, opacity):
     temp.set_alpha(opacity)
     target.blit(temp, location)
 
-def drawText(s, t, x, y, fg=WHITE, alpha=255, hAlign='left', vAlign='top', underline=False, font=resourceManager.getFont('munro24')):
+def drawText(s, t, x, y, fg=WHITE, alpha=255, hAlign='left', vAlign='top', underline=False, font=fontDefaultMedium):
     Text(t, x, y, hAlign, vAlign, fg, alpha, font, underline).draw(s)

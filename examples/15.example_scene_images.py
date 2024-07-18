@@ -5,22 +5,22 @@ import os
 # add images
 #
 
-gamma.resourceManager.addTexture('player_idle_1', os.path.join('images', 'player', 'vita_00.png'))
+texturePlayer = gamma.createTexture(os.path.join('images', 'player', 'vita_00.png'))
 
-gamma.resourceManager.addTexture('tile_grass', os.path.join('images', 'textures/grass.png'))
-gamma.resourceManager.addTexture('tile_dirt', os.path.join('images', 'textures/dirt.png'))
+textureTileGrass = gamma.createTexture(os.path.join('images', 'textures/grass.png'))
+textureTileDirt = gamma.createTexture(os.path.join('images', 'textures/dirt.png'))
 
-gamma.resourceManager.addTexture('back', os.path.join('images', 'layers/back.png'))
-gamma.resourceManager.addTexture('middle', os.path.join('images', 'layers/middle.png'))
-gamma.resourceManager.addTexture('front', os.path.join('images', 'layers/front.png'))
-gamma.resourceManager.addTexture('foreground', os.path.join('images', 'layers/foreground.png'))
+textureBack = gamma.createTexture(os.path.join('images', 'layers/back.png'))
+textureMiddle = gamma.createTexture(os.path.join('images', 'layers/middle.png'))
+textureFront = gamma.createTexture(os.path.join('images', 'layers/front.png'))
+textureForeground = gamma.createTexture(os.path.join('images', 'layers/foreground.png'))
 
 #
 # add some tiles
 #
 
-gamma.tileManager.addTile(gamma.Tile('grass', gamma.resourceManager.getTexture('tile_grass'), True))
-gamma.tileManager.addTile(gamma.Tile('dirt', gamma.resourceManager.getTexture('tile_dirt'), True))
+gamma.tileManager.addTile(gamma.Tile('grass', textureTileGrass, True))
+gamma.tileManager.addTile(gamma.Tile('dirt', textureTileDirt, True))
 
 #
 # create a main scene
@@ -41,21 +41,21 @@ mainScene.map.mapImages = [
 
     # mountains behind
 
-    gamma.Image(gamma.resourceManager.getTexture('back'),
+    gamma.Image(textureBack,
     -100, 64,
     h=200,
     vAlign='bottom',
     z=0.2,
     xParallax=True),
 
-    gamma.Image(gamma.resourceManager.getTexture('middle'),
+    gamma.Image(textureMiddle,
     -100, 64,
     h=200,
     vAlign='bottom',
     z=0.4,
     xParallax=True),
 
-    gamma.Image(gamma.resourceManager.getTexture('front'),
+    gamma.Image(textureFront,
     -100, 64,
     h=200,
     vAlign='bottom',
@@ -64,7 +64,7 @@ mainScene.map.mapImages = [
 
     # tree trunk in front
 
-    gamma.Image(gamma.resourceManager.getTexture('foreground'),
+    gamma.Image(textureForeground,
         600, 250,
         h=500,
         vAlign='bottom',
@@ -86,7 +86,7 @@ def playerControls(player):
 
 playerEntity = gamma.Entity(
     gamma.PositionComponent(150, 64-51, 45, 51),
-    gamma.SpritesComponent('default', gamma.Sprite(gamma.resourceManager.getTexture('player_idle_1'))),
+    gamma.SpritesComponent('default', gamma.Sprite(texturePlayer)),
     gamma.InputComponent(
         left=gamma.keys.a, right=gamma.keys.d,
         up=gamma.keys.w, down=gamma.keys.s,
