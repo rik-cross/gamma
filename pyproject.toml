@@ -7,7 +7,7 @@ packages = ["src/gamma"]
 
 [project]
 name = "pygame-gamma"
-version = "0.4.3"
+version = "0.5"
 authors = [
   { name="Rik Cross", email="rik.j.cross@gmail.com" },
 ]
