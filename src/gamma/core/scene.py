@@ -62,7 +62,6 @@ class Scene:
         self.frame = 0
         self.menu = menu
         self.buttons = []
-        #self.resetEffects()
 
         self.background = background
         self.backgroundAlpha = backgroundAlpha
@@ -71,15 +70,10 @@ class Scene:
 
         self.renderer = Renderer(self)
         
-
         self.init()
 
     def init(self):
         pass
-
-    #def resetEffects(self):
-    #    self.widthPercentage = 100
-    #    self.heightPercentage = 100
 
     def setMenu(self, menu, scene):
         self.menu = menu
@@ -152,10 +146,6 @@ class Scene:
     # TODO
     # pass position, clip rect, alpha, ...
     def _draw(self, position=(0,0), clippingRect=None):
-
-        # calculate the scene size
-        #w = int(windowSize.w / 100 * self.widthPercentage)
-        #h = int(windowSize.h / 100 * self.heightPercentage)
         
         # create the scene surface
         self.surface = pygame.Surface((windowSize.w,windowSize.h), pygame.SRCALPHA)
