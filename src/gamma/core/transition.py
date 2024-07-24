@@ -8,7 +8,7 @@ class Transition:
         self.frameDuration = frameDuration
         self.currentPercentage = 0
         self.replaceScenes = replaceScenes
-        self.resetAllSceneEffects()
+        #self.resetAllSceneEffects()
         self.init()
 
     def init(self):
@@ -31,7 +31,7 @@ class Transition:
 
     def _onComplete(self):
 
-        self.resetAllSceneEffects()
+        #self.resetAllSceneEffects()
 
         if len(self.toScenes) == 0:
             for s in self.fromScenes:

@@ -3,7 +3,7 @@ from ..components.component_input import InputComponent
 from ..managers.manager_input import controller, keys
 
 def createTexture(URL):
-    return pygame.image.load(URL)
+    return pygame.image.load(URL).convert_alpha()
 
 # functions to sort by x, y, or z position
 

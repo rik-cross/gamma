@@ -9,6 +9,10 @@ from ..gamma import screen, systemManager, sceneManager, windowSize
 from ..utils.utils import *
 from ..utils.utils import drawRect
 
+# TODO
+# - create surface once
+# - create updateSceneBwlow()
+
 class Scene:
     
     def __init__(self,
@@ -58,7 +62,7 @@ class Scene:
         self.frame = 0
         self.menu = menu
         self.buttons = []
-        self.resetEffects()
+        #self.resetEffects()
 
         self.background = background
         self.backgroundAlpha = backgroundAlpha
@@ -66,17 +70,16 @@ class Scene:
         self.drawSceneBelow = False
 
         self.renderer = Renderer(self)
+        
 
         self.init()
 
     def init(self):
         pass
 
-    def resetEffects(self):
-        self.widthPercentage = 100
-        self.heightPercentage = 100
-        self.leftPercentage = 0
-        self.topPercentage = 0
+    #def resetEffects(self):
+    #    self.widthPercentage = 100
+    #    self.heightPercentage = 100
 
     def setMenu(self, menu, scene):
         self.menu = menu
@@ -145,15 +148,17 @@ class Scene:
         for e in self.entities:
             if e.delete:
                 self.entities.remove(e)
-        
-    def _draw(self):
+    
+    # TODO
+    # pass position, clip rect, alpha, ...
+    def _draw(self, position=(0,0), clippingRect=None):
 
         # calculate the scene size
-        w = int(windowSize.w / 100 * self.widthPercentage)
-        h = int(windowSize.h / 100 * self.heightPercentage)
+        #w = int(windowSize.w / 100 * self.widthPercentage)
+        #h = int(windowSize.h / 100 * self.heightPercentage)
         
         # create the scene surface
-        self.surface = pygame.Surface((w,h), pygame.SRCALPHA)
+        self.surface = pygame.Surface((windowSize.w,windowSize.h), pygame.SRCALPHA)
         if self.backgroundAlpha < 255:
             self.surface.convert_alpha()
 
@@ -192,10 +197,6 @@ class Scene:
         self.renderer.draw()
         self.renderer.flush()
 
-        # calculate the scene position and transparency
-        x = math.ceil(pygame.display.get_surface().get_size()[0] / 100 * self.leftPercentage)
-        y = math.ceil(pygame.display.get_surface().get_size()[1] / 100 * self.topPercentage)
-
         # draw the cutscene
         if self.cutscene is not None:
             self.cutscene.draw(self)
@@ -211,8 +212,12 @@ class Scene:
         for b in self.buttons:
             b.draw(self.surface)              
 
-        # draw the scene
-        screen.blit(self.surface, (x,y))
+        # draw the (optionally clipped) scene
+        if clippingRect is not None:
+            screen.set_clip(clippingRect)
+        screen.blit(self.surface, position)
+        if clippingRect is not None:
+            screen.set_clip()
 
     def update(self):
         pass

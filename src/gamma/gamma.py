@@ -28,8 +28,6 @@ from .systems.system_inventory import *
 from .systems.system_crafting import *
 from .systems.system_battle import *
 
-from .core.assets import textureGamma
-
 from .globals import ROOT_DIR
 
 def quit():
@@ -41,6 +39,8 @@ pygame.init()
 clock = pygame.time.Clock()
 windowSize = pygame.Rect(0,0,1200,800)
 screen = pygame.display.set_mode((windowSize.w, windowSize.h))
+
+from .core.assets import textureGamma
 
 # create managers
 sceneManager = SceneManager()

@@ -1,12 +1,8 @@
 from ..gamma import sceneManager
 from ..core.transition import Transition
+from ..gamma import windowSize
 
 class TransitionFlyOutLeft(Transition):    
-
-    def update(self):
-
-        for s in self.fromScenes:
-            s.leftPercentage = 0 - self.currentPercentage
 
     def draw(self):
 
@@ -17,4 +13,4 @@ class TransitionFlyOutLeft(Transition):
             self.toScenes[-1]._draw()
         
         for s in self.fromScenes:
-            s._draw()
+            s._draw(position=(windowSize[2] / 100 * self.currentPercentage * -1, 0))
