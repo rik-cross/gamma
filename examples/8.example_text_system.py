@@ -28,12 +28,10 @@ playerEntity = gamma.Entity(
 # create a camera
 #
 
-cameraEntity = gamma.Entity(
-    gamma.CameraComponent(0, 0, 600, 400,
-        bgColour=gamma.BLUE,
-        sceneX=300, sceneY = 150,
-        zoomLevel = 2
-    )
+camera = gamma.Camera(0, 0, 600, 400,
+    bgColour=gamma.BLUE,
+    sceneX=300, sceneY = 150,
+    zoomLevel = 2
 )
 
 #
@@ -41,7 +39,12 @@ cameraEntity = gamma.Entity(
 #
 
 mainScene.entities.append(playerEntity)
-mainScene.entities.append(cameraEntity)
+
+#
+# add camera
+#
+
+mainScene.cameras.append(camera)
 
 #
 # add scene to the gamma and start

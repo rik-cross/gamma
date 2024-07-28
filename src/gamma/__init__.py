@@ -31,7 +31,6 @@ from .core.system import *
 from .utils.utils import *
 
 from .systems.system_animation import *
-from .systems.system_camera import *
 from .systems.system_input import *
 from .systems.system_physics import *
 from .systems.system_trigger import *
@@ -45,7 +44,6 @@ from .systems.system_crafting import *
 from .systems.system_battle import *
 
 from .core.component import *
-from .components.component_camera import *
 from .components.component_collider import *
 from .components.component_sprites import *
 from .components.component_input import *
@@ -59,6 +57,8 @@ from .components.component_inventory import *
 from .components.component_crafting import *
 from .components.component_tags import *
 from .components.component_trauma import *
+
+from .core.camera import *
 
 from .core.sprite import *
 

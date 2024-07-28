@@ -49,7 +49,7 @@ class RenderableScene(gamma.Scene):
         )
 
         self.image = gamma.Image(
-            gamma.resourceManager.getTexture('gamma_icon'),
+            gamma.textureGamma,
             gamma.windowSize.w, 0,
             w=40, h=40,
             hAlign='right'

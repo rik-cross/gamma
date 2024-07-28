@@ -10,12 +10,11 @@ class GameScene(gamma.Scene):
 
         self.background = gamma.CORNFLOWER_BLUE
 
-        # add a camera entity to the scene
+        # add a camera to the scene
         # the same size as the screen, but with a 10px border
-        self.addEntity(gamma.Entity(
-            # the camera entity only contains a single camera component
-            gamma.CameraComponent(10, 10, gamma.windowSize.w-20, gamma.windowSize.h-20, bgColour=gamma.DARK_GREY)
-        ))
+        self.cameras.append(
+            gamma.Camera(10, 10, gamma.windowSize.w-20, gamma.windowSize.h-20, bgColour=gamma.DARK_GREY)
+        )
 
         # create a player entity
         player = gamma.Entity(

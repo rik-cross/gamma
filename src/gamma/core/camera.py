@@ -2,7 +2,7 @@ import pygame
 from ..core.component import Component
 from ..core.colours import *
 
-class CameraComponent(Component):
+class Camera:
 
     def __init__(self,
     

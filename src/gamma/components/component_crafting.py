@@ -5,6 +5,7 @@ from ..core.colours import *
 from ..renderables.rectangle import Rectangle
 from ..renderables.text import Text
 from ..renderables.image import Image
+from ..core.assets import fontDefaultSmall
 
 class CraftingComponent(Component):
 
@@ -224,7 +225,7 @@ class CraftingComponent(Component):
             scene.renderer.add(
                 Text(
                     inp[1], self.x+w/2+2+(w*x), self.y+self.slot_size+h/2+5,
-                    font=resourceManager.getFont('munro18'),
+                    font=fontDefaultSmall,
                     vAlign='bottom', alpha=aa
                 )
             )        

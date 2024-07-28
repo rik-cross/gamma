@@ -14,7 +14,6 @@ from .managers.manager_tile import TileManager
 from .core.tile import Tile
 
 from .systems.system_animation import *
-from .systems.system_camera import *
 from .systems.system_emote import *
 from .systems.system_input import *
 from .systems.system_particle import *
@@ -57,7 +56,6 @@ tileManager.addTile(Tile('none'))
 # add core game systems
 systemManager = SystemManager()
 systemManager.addSystem(
-    CameraSystem(),
     InputSystem(),
     PhysicsSystem(),
     CollisionSystem(),

@@ -68,6 +68,8 @@ class Scene:
 
         self.drawSceneBelow = False
 
+        self.cameras = []
+
         self.renderer = Renderer(self)
         
         self.init()
@@ -142,6 +144,71 @@ class Scene:
         for e in self.entities:
             if e.delete:
                 self.entities.remove(e)
+        
+        #update all cameras
+        for camera in self.cameras:
+
+            #from ..components.component_camera import camera
+            from ..components.component_position import PositionComponent
+            #from ..components.component_trauma import TraumaComponent
+
+            # set clipping rectangle
+            #camera = entity.getComponent(camera)
+            cameraRect = camera.rect
+
+            # update camera if tracking an entity
+            if camera.entityToTrack is not None:
+
+                trackedEntity = camera.entityToTrack
+
+                currentX = camera.sceneX
+                currentY = camera.sceneY
+
+                trackedEntityPosition = trackedEntity.getComponent(PositionComponent)
+
+                targetX = trackedEntityPosition.rect.x + trackedEntityPosition.rect.w/2
+                targetY = trackedEntityPosition.rect.y + trackedEntityPosition.rect.h/2
+
+                camera._updateWorldPosition((currentX * 0.95) + (targetX * 0.05), (currentY * 0.95) + (targetY * 0.05), self)
+
+            # calculate offsets
+            offsetX = cameraRect.x + cameraRect.w/2 - (camera.sceneX * camera.zoomLevel)
+            offsetY = cameraRect.y + cameraRect.h/2 - (camera.sceneY * camera.zoomLevel)
+
+            # TODO
+            angle = 0
+            # add camera shake
+            #if entity.hasComponent(TraumaComponent):
+            #    tc = entity.getComponent(TraumaComponent)
+            #    offsetX += (tc.traumaLevel ** 3) * (random.random()*2-1) * 20 * camera.zoomLevel
+            #    offsetY += (tc.traumaLevel ** 3) * (random.random()*2-1) * 20 * camera.zoomLevel
+            #    angle += (tc.traumaLevel ** 3) * (random.random()*2-1) * 30 * camera.zoomLevel
+
+            # update zoom
+            camera._z = camera.zoomLevel
+            if camera.zoomPerFrame != 0:
+                camera.zoomLevel += camera.zoomPerFrame
+                if abs(camera.zoomLevel - camera.targetZoom) < 0.01 :
+                    camera.zoomPerFrame = 0
+        
+            # update position
+
+            # x
+            camera._x = offsetX
+            if camera.movementPerFrameX != 0:
+                camera.sceneX += camera.movementPerFrameX
+                if abs(camera.sceneX - camera.targetX) < 0.1 :
+                    camera.movementPerFrameX = 0
+
+            # y
+            camera._y = offsetY
+            if camera.movementPerFrameY != 0:
+                camera.sceneY += camera.movementPerFrameY
+                if abs(camera.sceneY - camera.targetY) < 0.1 :
+                    camera.movementPerFrameY = 0
+
+
+
     
     # TODO
     # pass position, clip rect, alpha, ...

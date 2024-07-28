@@ -33,16 +33,14 @@ mainScene.map.setTile(3,3,'water')
 # create a camera
 #
 
-sceneCameraEntity = gamma.Entity(
-    gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.DARK_GREY)
-)
-sceneCameraEntity.getComponent(gamma.CameraComponent).setPosition(300, 200)
+sceneCamera = gamma.Camera(0, 0, 600, 400, bgColour=gamma.DARK_GREY)
+sceneCamera.setPosition(300, 200)
 
 #
 # add camera to scene
 #
 
-mainScene.entities.append(sceneCameraEntity)
+mainScene.cameras.append(sceneCamera)
 
 #
 # add scene to the gamma and start

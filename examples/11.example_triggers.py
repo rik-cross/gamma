@@ -27,20 +27,20 @@ heartEntity.getComponent(gamma.SpritesComponent).add('default', heartImage)
 # create a trigger subclass for focusing on the heart
 class HeartFocusTrigger(gamma.Trigger):
     def onCollisionEnter(self, entity, otherEntity):
-        otherEntity.getComponent(gamma.CameraComponent).trackEntity(entity)
+        camera.trackEntity(entity)
     def onCollide(self, entity, otherEntity):
         pass
     def onCollisionExit(self, entity, otherEntity):
-        otherEntity.getComponent(gamma.CameraComponent).trackEntity(otherEntity)
+        camera.trackEntity(otherEntity)
 
 # create a trigger subclass for zooming in on the heart
 class HeartZoomTrigger(gamma.Trigger):
     def onCollisionEnter(self, entity, otherEntity):
-        otherEntity.getComponent(gamma.CameraComponent).setZoom(4, duration=60)
+        camera.setZoom(4, duration=60)
     def onCollide(self, entity, otherEntity):
         pass
     def onCollisionExit(self, entity, otherEntity):
-        otherEntity.getComponent(gamma.CameraComponent).setZoom(1, duration=60)
+        camera.setZoom(1, duration=60)
 
 # add triggers
 heartEntity.addComponent(gamma.TriggersComponent())
@@ -66,12 +66,12 @@ playerEntity = gamma.Entity(
     gamma.InputComponent(left=gamma.keys.left, right=gamma.keys.right, inputContext=playerControls)
 )
 
-# add a camera to the player
-playerEntity.addComponent(gamma.CameraComponent(
+# create a camera
+camera = gamma.Camera(
     0, 0, 600, 400,
     bgColour = gamma.BLUE,
     entityToTrack=playerEntity
-))
+)
 
 #
 # add entities to scene
@@ -79,6 +79,12 @@ playerEntity.addComponent(gamma.CameraComponent(
 
 mainScene.entities.append(playerEntity)
 mainScene.entities.append(heartEntity)
+
+#
+# add camera
+#
+
+mainScene.cameras.append(camera)
 
 #
 # add scene to the gamma and start

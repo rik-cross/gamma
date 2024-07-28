@@ -24,20 +24,19 @@ class Renderer:
 
     def draw(self):
 
-        from ..components.component_camera import CameraComponent
-
         #
         # WORLD RENDERING
         # draw all renderable objects, for all cameras
         #
 
         # iterate over all cameras
-        entitiesWithCamera = self.scene.getEntitiesWithComponent(CameraComponent)
+        #entitiesWithCamera = self.scene.getEntitiesWithComponent(CameraComponent)
 
-        for e in entitiesWithCamera:
+        #for e in entitiesWithCamera:
+        for camera in self.scene.cameras:
 
             # get the camera component
-            camera = e.getComponent(CameraComponent)
+            #camera = e.getComponent(CameraComponent)
                 
             # set clipping rectangle
             cameraRect = camera.rect

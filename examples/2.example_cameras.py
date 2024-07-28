@@ -46,26 +46,20 @@ playerEntity = gamma.Entity(
 
 # scene camera
 
-sceneCameraEntity = gamma.Entity(
-    gamma.CameraComponent(0, 0, 400, 400, bgColour=gamma.BLUE)
-)
-sceneCameraEntity.getComponent(gamma.CameraComponent).setPosition(200, 200)
+sceneCamera = gamma.Camera(0, 0, 400, 400, bgColour=gamma.BLUE)
+sceneCamera.setPosition(200, 200)
 
 # heart camera
 
-heartCameraEntity = gamma.Entity(
-    gamma.CameraComponent(400, 0, 200, 200, bgColour=gamma.RED)
-)
-heartCameraEntity.getComponent(gamma.CameraComponent).goToEntity(heartEntity)
-heartCameraEntity.getComponent(gamma.CameraComponent).setZoom(5, duration=300)
+heartCamera = gamma.Camera(400, 0, 200, 200, bgColour=gamma.RED)
+heartCamera.goToEntity(heartEntity)
+heartCamera.setZoom(5, duration=300)
 
 # player camera
 
-playerCameraEntity = gamma.Entity(
-    gamma.CameraComponent(400, 200, 200, 200,bgColour=gamma.GREEN)
-)
-playerCameraEntity.getComponent(gamma.CameraComponent).trackEntity(playerEntity)
-playerCameraEntity.getComponent(gamma.CameraComponent).setZoom(3)
+playerCamera = gamma.Camera(400, 200, 200, 200,bgColour=gamma.GREEN)
+playerCamera.trackEntity(playerEntity)
+playerCamera.setZoom(3)
 
 #
 # add entities to scene
@@ -78,9 +72,13 @@ mainScene.entities.append(playerEntity)
 
 # cameras
 
-mainScene.entities.append(sceneCameraEntity)
-mainScene.entities.append(heartCameraEntity)
-mainScene.entities.append(playerCameraEntity)
+#mainScene.entities.append(sceneCameraEntity)
+#mainScene.entities.append(heartCameraEntity)
+#mainScene.entities.append(playerCameraEntity)
+
+mainScene.cameras.append(sceneCamera)
+mainScene.cameras.append(playerCamera)
+mainScene.cameras.append(heartCamera)
 
 #
 # add scene to the gamma and start

@@ -95,15 +95,13 @@ playerEntity = gamma.Entity(
     gamma.ColliderComponent(0,0,10,10)
 )
 
-# add a camera to the player
+# create a camera
 
-playerEntity.addComponent(
-    gamma.CameraComponent(
-        0, 0, 600, 400,
-        bgColour = gamma.BLUE,
-        entityToTrack=playerEntity,
-        clampToMap=False
-    )
+camera = gamma.Camera(
+    0, 0, 600, 400,
+    bgColour = gamma.BLUE,
+    entityToTrack=playerEntity,
+    clampToMap=False
 )
 
 #
@@ -111,6 +109,12 @@ playerEntity.addComponent(
 #
 
 mainScene.entities.append(playerEntity)
+
+#
+# add camera
+#
+
+mainScene.cameras.append(camera)
 
 #
 # add scene to the gamma and start

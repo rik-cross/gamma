@@ -44,10 +44,8 @@ playerEntity = gamma.Entity(
 # create a camera
 #
 
-cameraEntity = gamma.Entity(
-    gamma.CameraComponent(0, 0, 600, 400, bgColour=gamma.BLUE)
-)
-cameraEntity.getComponent(gamma.CameraComponent).setPosition(300, 200)
+camera = gamma.Camera(0, 0, 600, 400, bgColour=gamma.BLUE)
+camera.setPosition(300, 200)
 
 #
 # add entities to scene
@@ -55,7 +53,7 @@ cameraEntity.getComponent(gamma.CameraComponent).setPosition(300, 200)
 
 mainScene.entities.append(heartEntity)
 mainScene.entities.append(playerEntity)
-mainScene.entities.append(cameraEntity)
+mainScene.cameras.append(camera)
 
 #heartEntity.getComponent(gamma.TagsComponent).add('heart')
 

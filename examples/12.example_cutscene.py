@@ -40,20 +40,20 @@ playerEntity = gamma.Entity(
     gamma.SpritesComponent('default', playerAnimation)
 )
 
-# add a camera to the player
-playerEntity.addComponent(gamma.CameraComponent(
+# create a camera
+camera = gamma.Camera(
     0, 0, 600, 400,
     bgColour = gamma.BLUE,
     entityToTrack = playerEntity
-))
+)
 
 cutscene = gamma.Cutscene()
 cutscene.actionList = [
-    lambda: playerEntity.getComponent(gamma.CameraComponent).setZoom(3, duration=60),
+    lambda: camera.setZoom(3, duration=60),
     lambda: mainScene.cutscene.setDelay(120),
     lambda: playerEntity.addComponent(gamma.TextComponent('Hello! How are you?', lifetime='timed', type='tick', final_display_time=120)),
     lambda: mainScene.cutscene.setDelay(300),
-    lambda: playerEntity.getComponent(gamma.CameraComponent).setZoom(1, duration=60),
+    lambda: camera.setZoom(1, duration=60),
     lambda: mainScene.cutscene.setDelay(60)
 ]
 
@@ -71,6 +71,12 @@ playerEntity.addComponent(gamma.InputComponent(b1=gamma.keys.enter, inputContext
 #
 
 mainScene.entities.append(playerEntity)
+
+#
+# add a camera
+#
+
+mainScene.cameras.append(camera)
 
 #
 # add scene to the gamma and start
