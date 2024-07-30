@@ -25,7 +25,9 @@ class Scene:
         map=None,
         entities=None,
         velocityForces = None,
-        accelerationForces = None
+        accelerationForces = None,
+
+        data = None
     
     ):
         
@@ -66,11 +68,21 @@ class Scene:
         self.background = background
         self.backgroundAlpha = backgroundAlpha
 
+        self.updateSceneBelow = False
         self.drawSceneBelow = False
 
         self.cameras = []
 
+        # create the scene surface
+        self.surface = pygame.Surface((windowSize.w,windowSize.h), pygame.SRCALPHA)
+        self.surface.convert_alpha()
+
         self.renderer = Renderer(self)
+
+        if data is None:
+            self.data = {}
+        else:
+            self.data = data
         
         self.init()
 
@@ -108,7 +120,7 @@ class Scene:
     
         # update systems
         for sys in systemManager.systems:
-                sys._update(self)
+            sys._update(self)
 
         # update cutscene
         if self.cutscene is not None:
@@ -206,17 +218,19 @@ class Scene:
                 camera.sceneY += camera.movementPerFrameY
                 if abs(camera.sceneY - camera.targetY) < 0.1 :
                     camera.movementPerFrameY = 0
+            
+        # update scene below if required
+        if self.updateSceneBelow:
+            sceneManager.getSceneBelow(self)._update()
 
-
-
-    
     # TODO
     # pass position, clip rect, alpha, ...
     def _draw(self, position=(0,0), clippingRect=None):
-        
-        # create the scene surface
-        self.surface = pygame.Surface((windowSize.w,windowSize.h), pygame.SRCALPHA)
-        if self.backgroundAlpha < 255:
+
+        # ** BUG **
+        # scene is set before window size is changed
+        if pygame.Surface.get_width(self.surface) > windowSize[2] or pygame.Surface.get_height(self.surface) > windowSize[3]:
+            self.surface = pygame.Surface((windowSize[2], windowSize[3]))
             self.surface.convert_alpha()
 
         # draw background (colour or image)

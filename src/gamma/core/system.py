@@ -59,6 +59,7 @@ class System():
     # runs draw() and drawEntity() method on all
     # systems that meet the system requirements
     def _draw(self, scene):
+        
         for entity in scene.entities:
             if self._checkRequirements(entity):
                 self.drawEntity(entity, scene)

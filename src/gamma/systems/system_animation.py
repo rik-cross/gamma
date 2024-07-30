@@ -12,6 +12,10 @@ class AnimationSystem(System):
         from ..components.component_sprites import SpritesComponent
         ig = entity.getComponent(SpritesComponent)
 
+        #from ..components.component_tags import TagsComponent
+        #tc = entity.getComponent(TagsComponent)
+        #print(tc.tags, scene.frame)
+
         # check that Sprites state matches global entity state
         # (making sure to reset the 'old' Sprite before updating)
         if ig.current != entity.state:

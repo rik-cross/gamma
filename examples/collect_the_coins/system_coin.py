@@ -1,11 +1,17 @@
 import gamma
 from random import randint
 from factory_coin import newCoin
+from scene_game import GameScene
 
 # system to ensure that there are always 2 coins in the game
 class CoinSystem(gamma.System):
 
     def update(self, scene):
+
+        # only update the coin system in the game scene
+        
+        if type(scene) is not GameScene:
+            return
 
         # get the number of coin entities in the scene
         num = len(scene.getEntitiesByTag('coin'))

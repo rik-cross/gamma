@@ -3,7 +3,7 @@ import gamma
 # create a player input context
 # linking input to actions
 def playerInputContext(player):
-
+        
     # store some components, just to make the code easier to read!
     inputComponent = player.getComponent(gamma.InputComponent)
     positionComponent = player.getComponent(gamma.PositionComponent)

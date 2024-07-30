@@ -59,8 +59,8 @@ class GameScene(gamma.Scene):
         self.timer = 15 - (self.frame // 60)
         # end the game when the timer reaches 0
         if self.timer == 0:
-            # show gameOver scene as overlay
-            gamma.sceneManager.push(GameOverScene(entities=self.getEntitiesByTag('player')))
+            # show gameOver scene as overlay, passing the score as data
+            gamma.sceneManager.push(GameOverScene(data={'score' : self.getEntitiesByTag('player')[0].getComponent(ScoreComponent).score}))
 
         # create score text
         self.scoreText = gamma.Text(
