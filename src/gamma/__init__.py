@@ -99,3 +99,5 @@ from .components.component_particle_emitter import *
 from .utils.utils_draw import *
 
 from .core.assets import *
+
+from .utils.easing_functions import *

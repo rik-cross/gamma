@@ -21,7 +21,7 @@ class TransitionBlack(Transition):
 
         # fade overlay
         overlay = pygame.Surface((windowSize.w, windowSize.h))
-        alpha = int(abs((255 - ((255/50)*self.currentPercentage))))
+        alpha = int(abs((255 - ((255/50)*self.animationPercentage))))
         overlay.set_alpha(255 - alpha)
         overlay.fill(BLACK)
         screen.blit(overlay, (0,0))

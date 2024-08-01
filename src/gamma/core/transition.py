@@ -1,13 +1,19 @@
 from ..gamma import sceneManager
+from ..utils.easing_functions import easeLinear
 
 class Transition:
 
-    def __init__(self, fromScenes, toScenes, frameDuration=60, replaceScenes=False):
+    def __init__(self, fromScenes, toScenes, frameDuration=60, replaceScenes=False, easingFunction = None):
         self.fromScenes = fromScenes
         self.toScenes = toScenes
         self.frameDuration = frameDuration
         self.currentPercentage = 0
+        self.animationPercentage = 0
         self.replaceScenes = replaceScenes
+        if easingFunction is None:
+            self.easingFunction = easeLinear
+        else:
+            self.easingFunction = easingFunction
         self.init()
 
     def init(self):
@@ -32,6 +38,7 @@ class Transition:
     def _update(self):
 
         self.currentPercentage = min(100, self.currentPercentage+(100/self.frameDuration))
+        self.animationPercentage = self.easingFunction(self.currentPercentage)
 
         # update the top of the new scenes,
         # if there is one

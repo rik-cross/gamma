@@ -14,67 +14,11 @@ gamma.entityManager.addEntity(playerEntity)
 # create some functions to attach to the menu buttons
 #
 
-def pushSecond():
-    #gamma.sceneManager.push(secondScene)
-    gamma.sceneManager.setTransition(gamma.TransitionNone([firstScene],[secondScene]))
+def changeToSecondScene(transitionType=gamma.TransitionNone, easingFunction=None):
+    gamma.sceneManager.setTransition(transitionType([firstScene],[secondScene], easingFunction=easingFunction))
 
-def blackTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionBlack([firstScene],[secondScene]))
-
-def wipeLeftTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionWipeLeft([firstScene],[secondScene]))
-
-def wipeRightTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionWipeRight([firstScene],[secondScene]))
-
-def flyOutLeftTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionFlyOutLeft([firstScene],[secondScene]))
-
-def flyOutRightTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionFlyOutRight([firstScene],[secondScene]))
-
-def flyInLeftTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionFlyInLeft([firstScene],[secondScene]))
-
-def flyInRightTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionFlyInRight([firstScene],[secondScene]))
-
-def moveLeftTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionMoveLeft([firstScene],[secondScene]))
-
-def moveRightTransitionSecond():
-    gamma.sceneManager.setTransition(gamma.TransitionMoveRight([firstScene],[secondScene]))
-
-def popScene():
-    #gamma.sceneManager.pop()
-    gamma.sceneManager.setTransition(gamma.TransitionNone([secondScene],[]))
-
-def blackTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionBlack([secondScene],[]))
-
-def wipeLeftTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionWipeLeft([secondScene],[]))
-
-def wipeRightTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionWipeRight([secondScene],[]))
-
-def flyOutLeftTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionFlyOutLeft([secondScene],[]))
-
-def flyOutRightTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionFlyOutRight([secondScene],[]))
-
-def flyInLeftTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionFlyInLeft([secondScene],[]))
-
-def flyInRightTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionFlyInRight([secondScene],[]))
-
-def moveLeftTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionMoveLeft([secondScene],[]))
-
-def moveRightTransitionFirst():
-    gamma.sceneManager.setTransition(gamma.TransitionMoveRight([secondScene],[]))
+def changeToFirstScene(transitionType=gamma.TransitionNone, easingFunction=None):
+    gamma.sceneManager.setTransition(transitionType([secondScene],[], easingFunction=easingFunction))
 
 #
 # create scenes
@@ -88,17 +32,17 @@ class FirstScene(gamma.Scene):
 
         self.setMenu(gamma.Menu(300,70,
             [
-                gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(pushSecond)),
-                gamma.UITextMenuItem('Black transition', actionListener=gamma.ActionListener(blackTransitionSecond)),
-                gamma.UITextMenuItem('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionSecond)),
-                gamma.UITextMenuItem('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionSecond)),
-                gamma.UITextMenuItem('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionSecond)),
-                gamma.UITextMenuItem('Fly out right transition', actionListener=gamma.ActionListener(flyOutRightTransitionSecond)),
-                gamma.UITextMenuItem('Fly in left transition', actionListener=gamma.ActionListener(flyInLeftTransitionSecond)),
-                gamma.UITextMenuItem('Fly in right transition', actionListener=gamma.ActionListener(flyInRightTransitionSecond)),
-                gamma.UITextMenuItem('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionSecond)),
-                gamma.UITextMenuItem('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionSecond)),
-                gamma.UITextMenuItem('Quit', actionListener=gamma.ActionListener(popScene))
+                gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(changeToSecondScene)),
+                gamma.UITextMenuItem('Black transition', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionBlack)),
+                gamma.UITextMenuItem('Wipe left transition', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionWipeLeft)),
+                gamma.UITextMenuItem('Wipe right transition', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionWipeRight)),
+                gamma.UITextMenuItem('Fly out left transition', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionFlyOutLeft)),
+                gamma.UITextMenuItem('Fly out right transition', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionFlyOutRight)),
+                gamma.UITextMenuItem('Fly in left transition (with bounce)', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionFlyInLeft, gamma.easeOutBounce)),
+                gamma.UITextMenuItem('Fly in right transition (with bounce)', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionFlyInRight, gamma.easeOutBounce)),
+                gamma.UITextMenuItem('Move left transition', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionMoveLeft)),
+                gamma.UITextMenuItem('Move right transition', actionListener=gamma.ActionListener(changeToSecondScene, gamma.TransitionMoveRight)),
+                gamma.UITextMenuItem('Quit', actionListener=gamma.ActionListener(gamma.quit))
             ]
         , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
 
@@ -113,16 +57,17 @@ class SecondScene(gamma.Scene):
 
         self.setMenu(gamma.Menu(300,70,
             [
-                gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(popScene)),
-                gamma.UITextMenuItem('Black transition', actionListener=gamma.ActionListener(blackTransitionFirst)),
-                gamma.UITextMenuItem('Wipe left transition', actionListener=gamma.ActionListener(wipeLeftTransitionFirst)),
-                gamma.UITextMenuItem('Wipe right transition', actionListener=gamma.ActionListener(wipeRightTransitionFirst)),
-                gamma.UITextMenuItem('Fly out left transition', actionListener=gamma.ActionListener(flyOutLeftTransitionFirst)),
-                gamma.UITextMenuItem('Fly out right transition', actionListener=gamma.ActionListener(flyOutRightTransitionFirst)),
-                gamma.UITextMenuItem('Fly in left transition', actionListener=gamma.ActionListener(flyInLeftTransitionFirst)),
-                gamma.UITextMenuItem('Fly in right transition', actionListener=gamma.ActionListener(flyInRightTransitionFirst)),
-                gamma.UITextMenuItem('Move left transition', actionListener=gamma.ActionListener(moveLeftTransitionFirst)),
-                gamma.UITextMenuItem('Move right transition', actionListener=gamma.ActionListener(moveRightTransitionFirst))
+                gamma.UITextMenuItem('No transition', actionListener=gamma.ActionListener(changeToFirstScene)),
+                gamma.UITextMenuItem('Black transition', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionBlack)),
+                gamma.UITextMenuItem('Wipe left transition', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionWipeLeft)),
+                gamma.UITextMenuItem('Wipe right transition', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionWipeRight)),
+                gamma.UITextMenuItem('Fly out left transition', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionFlyOutLeft)),
+                gamma.UITextMenuItem('Fly out right transition', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionFlyOutRight)),
+                gamma.UITextMenuItem('Fly in left transition (with bounce)', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionFlyInLeft, gamma.easeOutBounce)),
+                gamma.UITextMenuItem('Fly in right transition (with bounce)', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionFlyInRight, gamma.easeOutBounce)),
+                gamma.UITextMenuItem('Move left transition', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionMoveLeft)),
+                gamma.UITextMenuItem('Move right transition', actionListener=gamma.ActionListener(changeToFirstScene, gamma.TransitionMoveRight)),
+                gamma.UITextMenuItem('Quit', actionListener=gamma.ActionListener(gamma.quit))
             ]
         , spacing=25, entities=gamma.entityManager.getEntitiesByTag('player')), self)
     

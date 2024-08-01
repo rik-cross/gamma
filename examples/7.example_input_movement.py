@@ -1,9 +1,6 @@
 import gamma
 import os
 
-import gamma.input
-import gamma.input.keyboard
-
 #
 # create a main scene
 #

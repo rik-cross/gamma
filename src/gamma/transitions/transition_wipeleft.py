@@ -10,6 +10,6 @@ class TransitionWipeLeft(Transition):
 
         if len(self.toScenes) == 0:
             if len(sceneManager.scenes) > len(self.fromScenes):
-                sceneManager.scenes[-2 - (len(self.fromScenes)-1)]._draw(clippingRect=(0, 0, windowSize[2] / 100 * self.currentPercentage, windowSize[3]))
+                sceneManager.scenes[-2 - (len(self.fromScenes)-1)]._draw(clippingRect=(0, 0, windowSize[2] / 100 * self.animationPercentage, windowSize[3]))
         else:
-            self.toScenes[-1]._draw(clippingRect=(0, 0, windowSize[2] / 100 * self.currentPercentage, windowSize[3]))
+            self.toScenes[-1]._draw(clippingRect=(0, 0, windowSize[2] / 100 * self.animationPercentage, windowSize[3]))

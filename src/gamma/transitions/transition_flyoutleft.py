@@ -13,4 +13,4 @@ class TransitionFlyOutLeft(Transition):
             self.toScenes[-1]._draw()
         
         for s in self.fromScenes:
-            s._draw(position=(windowSize[2] / 100 * self.currentPercentage * -1, 0))
+            s._draw(position=(windowSize[2] / 100 * self.animationPercentage * -1, 0))
